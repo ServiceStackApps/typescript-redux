@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="default.htm" />
+    <Content Include="src\example01\default.htm" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
