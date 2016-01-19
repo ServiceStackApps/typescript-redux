@@ -27,5 +27,8 @@
   },
   "github:jspm/nodelibs-util@0.1.0": {
     "util": "npm:util@^0.10.3"
+  },
+  "npm:react-dom@0.14.6": {
+    "react": "npm:react@^0.14.6"
   }
 }

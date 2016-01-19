@@ -9,6 +9,7 @@ System.config({
 
   map: {
     "react": "npm:react@0.14.6",
+    "react-dom": "npm:react-dom@0.14.6",
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },
@@ -29,6 +30,9 @@ System.config({
     },
     "npm:process@0.11.2": {
       "assert": "github:jspm/nodelibs-assert@0.1.0"
+    },
+    "npm:react-dom@0.14.6": {
+      "react": "npm:react@0.14.6"
     },
     "npm:react@0.14.6": {
       "fbjs": "npm:fbjs@0.6.1",
