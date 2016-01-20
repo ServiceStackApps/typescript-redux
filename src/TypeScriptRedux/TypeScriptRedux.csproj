@@ -74,6 +74,7 @@
     <Content Include="src\example03\default.htm" />
     <Content Include="src\example04\default.htm" />
     <Content Include="src\example05\default.htm" />
+    <Content Include="src\example06\default.htm" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -90,6 +91,8 @@
     <TypeScriptCompile Include="src\example04\Counter.tsx" />
     <TypeScriptCompile Include="src\example05\app.tsx" />
     <TypeScriptCompile Include="src\example05\Counter.tsx" />
+    <TypeScriptCompile Include="src\example06\app.tsx" />
+    <TypeScriptCompile Include="src\example06\Counter.tsx" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
