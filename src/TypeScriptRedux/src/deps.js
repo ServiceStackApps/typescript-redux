@@ -5,15 +5,15 @@ System.register(['react', 'react-dom'], function(exports_1) {
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
-    var React, ReactDOM;
-    var Deps, Run;
+    var React, react_dom_1;
+    var Deps, ignore;
     return {
         setters:[
             function (React_1) {
                 React = React_1;
             },
-            function (ReactDOM_1) {
-                ReactDOM = ReactDOM_1;
+            function (react_dom_1_1) {
+                react_dom_1 = react_dom_1_1;
             }],
         execute: function() {
             Deps = (function (_super) {
@@ -22,13 +22,11 @@ System.register(['react', 'react-dom'], function(exports_1) {
                     _super.apply(this, arguments);
                 }
                 Deps.prototype.render = function () {
-                    return (React.createElement("div", null, "Hello, World!"));
+                    return React.createElement("div", null, "Hello, World!");
                 };
                 return Deps;
             })(React.Component);
-            Run = function () {
-                ReactDOM.render(React.createElement(Deps, null), document.getElementById("content"));
-            };
+            ignore = function () { return react_dom_1.render(React.createElement(Deps, null), document.body); };
         }
     }
 });
