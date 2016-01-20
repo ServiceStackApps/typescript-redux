@@ -1,0 +1,27 @@
+MultipleErrors: C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.0.6/src/components/connect.js:12:3: Unexpected token ...
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.0.6/src/components/connect.js:13:16: Unexpected token ,
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.0.6/src/components/connect.js:13:3: Unexpected token ...
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.0.6/src/components/connect.js:14:3: Unexpected token ...
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.0.6/src/components/connect.js:14:6: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.0.6/src/components/connect.js:133:51: Unexpected token :
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.0.6/src/components/connect.js:133:52: Unexpected token :
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.0.6/src/components/connect.js:133:53: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.0.6/src/components/connect.js:133:70: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.0.6/src/components/connect.js:133:70: Unexpected token )
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.0.6/src/components/connect.js:238:13: Unexpected token ...
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.0.6/src/components/connect.js:238:16: Unexpected token this
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.0.6/src/components/connect.js:239:16: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.0.6/src/components/connect.js:239:16: Unexpected token :
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.0.6/src/components/connect.js:239:18: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.0.6/src/components/connect.js:240:12: Unexpected token )
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.0.6/src/components/connect.js:241:16: Unexpected token {
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.0.6/src/components/connect.js:242:11: Unexpected token this
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.0.6/src/components/connect.js:242:15: Unexpected token .
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.0.6/src/components/connect.js:247:16: Unexpected token this
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.0.6/src/components/connect.js:247:20: Unexpected token .
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.0.6/src/components/connect.js:247:21: Unexpected token renderedElement
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.0.6/src/components/connect.js:279:1: Unexpected token }
+
+MultipleErrors: C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.0.6/src/utils/wrapActionCreators.js:1:1: Unexpected reserved word import
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.0.6/src/utils/wrapActionCreators.js:1:8: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.0.6/src/utils/wrapActionCreators.js:1:36: Semi-colon expected
