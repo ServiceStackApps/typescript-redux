@@ -28,24 +28,25 @@ System.register(['react', './ColorPicker', './core'], function(exports_1) {
             ShapeMaker = (function (_super) {
                 __extends(ShapeMaker, _super);
                 function ShapeMaker(props, context) {
+                    var _this = this;
                     _super.call(this, props, context);
+                    this.handleTop = function (e) {
+                        var top = parseInt(e.target.value);
+                        if (!isNaN(top))
+                            _this.setState({ top: top });
+                    };
+                    this.handleLeft = function (e) {
+                        var left = parseInt(e.target.value);
+                        if (!isNaN(left))
+                            _this.setState({ left: left });
+                    };
                     this.state = { top: props.top, left: props.left };
                 }
                 ShapeMaker.prototype.render = function () {
                     var _this = this;
                     var width = this.props.width, height = this.props.height, background = this.props.color;
                     var color = ColorPicker_1.isDark(background) ? '#fff' : '#000';
-                    return (React.createElement("div", null, React.createElement("p", null, React.createElement("label", null, "size: "), React.createElement("b", null, height, "x", width)), React.createElement("div", {"style": { height: height, width: width, background: background, color: color, lineHeight: height + "px", margin: "auto" }}, "(", this.state.top, ",", this.state.left, ")"), React.createElement("div", null, React.createElement("p", null, React.createElement("label", null, "position: "), React.createElement("input", {"style": { width: 30 }, "defaultValue": this.props.top, "onChange": function (e) { return _this.handleTop(e); }}), React.createElement("span", null, ","), React.createElement("input", {"style": { width: 30 }, "defaultValue": this.props.left, "onChange": function (e) { return _this.handleLeft(e); }})), React.createElement("button", {"onClick": function (e) { return _this.props.addShape(background, height, width, _this.state.top, _this.state.left); }}, "Add Shape"))));
-                };
-                ShapeMaker.prototype.handleTop = function (e) {
-                    var top = parseInt(e.target.value);
-                    if (!isNaN(top))
-                        this.setState({ top: top });
-                };
-                ShapeMaker.prototype.handleLeft = function (e) {
-                    var left = parseInt(e.target.value);
-                    if (!isNaN(left))
-                        this.setState({ left: left });
+                    return (React.createElement("div", null, React.createElement("p", null, React.createElement("label", null, "size: "), React.createElement("b", null, height, "x", width)), React.createElement("div", {"style": { height: height, width: width, background: background, color: color, lineHeight: height + "px", margin: "auto" }}, "(", this.state.top, ",", this.state.left, ")"), React.createElement("div", null, React.createElement("p", null, React.createElement("label", null, "position: "), React.createElement("input", {"style": { width: 30 }, "defaultValue": this.props.top, "onChange": this.handleTop}), React.createElement("span", null, ","), React.createElement("input", {"style": { width: 30 }, "defaultValue": this.props.left, "onChange": this.handleLeft})), React.createElement("button", {"onClick": function (e) { return _this.props.addShape(background, height, width, _this.state.top, _this.state.left); }}, "Add Shape"))));
                 };
                 ShapeMaker = __decorate([
                     core_1.reduxify(function (state) { return ({
@@ -63,7 +64,16 @@ System.register(['react', './ColorPicker', './core'], function(exports_1) {
             ShapeViewer = (function (_super) {
                 __extends(ShapeViewer, _super);
                 function ShapeViewer(props, context) {
+                    var _this = this;
                     _super.call(this, props, context);
+                    this.handleDragInit = function (e) {
+                        var el = e.target;
+                        while (el.nodeName !== 'DIV')
+                            el = el.parentNode; //don't select text SPAN node
+                        var top = parseInt(el.style.top) || 0;
+                        var left = parseInt(el.style.left) || 0;
+                        _this.setState({ isDragging: true, orig: { x: e.pageX - left, y: e.pageY - top } });
+                    };
                     this.state = { isDragging: false };
                 }
                 ShapeViewer.prototype.render = function () {
@@ -72,15 +82,7 @@ System.register(['react', './ColorPicker', './core'], function(exports_1) {
                         position: "absolute", top: s.top, left: s.left, color: ColorPicker_1.isDark(s.color) ? '#fff' : '#000',
                         background: s.color, width: s.width, height: s.height,
                         lineHeight: s.height + 'px', textAlign: "center",
-                        cursor: 'move' }, "onMouseDown": function (e) { return _this.handleDragInit(e); }, "onMouseUp": function (e) { return _this.setState({ isDragging: false }); }, "onMouseOut": function (e) { return _this.setState({ isDragging: false }); }, "onMouseMove": function (e) { return _this.handleDrag(s.id, s.height, s.width, e); }}, "(", s.top, ",", s.left, ")")); })));
-                };
-                ShapeViewer.prototype.handleDragInit = function (e) {
-                    var el = e.target;
-                    while (el.nodeName !== 'DIV')
-                        el = el.parentNode; //don't select text SPAN node
-                    var top = parseInt(el.style.top) || 0;
-                    var left = parseInt(el.style.left) || 0;
-                    this.setState({ isDragging: true, orig: { x: e.pageX - left, y: e.pageY - top } });
+                        cursor: 'move' }, "onMouseDown": _this.handleDragInit, "onMouseUp": function (e) { return _this.setState({ isDragging: false }); }, "onMouseOut": function (e) { return _this.setState({ isDragging: false }); }, "onMouseMove": function (e) { return _this.handleDrag(s.id, s.height, s.width, e); }}, "(", s.top, ",", s.left, ")")); })));
                 };
                 ShapeViewer.prototype.handleDrag = function (id, height, width, e) {
                     if (this.state.isDragging) {

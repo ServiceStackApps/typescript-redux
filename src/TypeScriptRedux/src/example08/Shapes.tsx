@@ -37,9 +37,9 @@ export class ShapeMaker extends React.Component<any, any> {
                 <div>
                     <p>
                         <label>position: </label>
-                        <input style={{ width: 30 }} defaultValue={this.props.top} onChange={e => this.handleTop(e) } />
+                        <input style={{ width: 30 }} defaultValue={this.props.top} onChange={this.handleTop} />
                         <span>,</span>
-                        <input style={{ width: 30 }} defaultValue={this.props.left} onChange={e => this.handleLeft(e) } />
+                        <input style={{ width: 30 }} defaultValue={this.props.left} onChange={this.handleLeft} />
                     </p>
 
                     <button onClick={e => this.props.addShape(background, height, width, this.state.top, this.state.left) }>
@@ -50,13 +50,13 @@ export class ShapeMaker extends React.Component<any, any> {
         );
     }
 
-    handleTop(e) {
+    handleTop = (e) => {
         var top = parseInt(e.target.value);
         if (!isNaN(top))
             this.setState({ top });
     }
 
-    handleLeft(e) {
+    handleLeft = (e) => {
         var left = parseInt(e.target.value);
         if (!isNaN(left))
             this.setState({ left });
@@ -84,7 +84,7 @@ export class ShapeViewer extends React.Component<any, any> {
                         background: s.color, width: s.width, height: s.height,
                         lineHeight: s.height + 'px', textAlign: "center",
                         cursor: 'move' }}
-                        onMouseDown={e => this.handleDragInit(e) }
+                        onMouseDown={this.handleDragInit}
                         onMouseUp={e => this.setState({ isDragging: false }) }
                         onMouseOut={e => this.setState({ isDragging: false }) }
                         onMouseMove={e => this.handleDrag(s.id, s.height, s.width, e) }>
@@ -95,7 +95,7 @@ export class ShapeViewer extends React.Component<any, any> {
         );
     }
 
-    handleDragInit(e) {
+    handleDragInit = (e) => {
         var el = e.target as HTMLElement;
         while (el.nodeName !== 'DIV')
             el = el.parentNode as HTMLElement; //don't select text SPAN node

@@ -85,7 +85,7 @@ class ActionPlayer extends React.Component<any, any> {
 )
 class ColorWrapper extends React.Component<any,any> {
     render() {
-        return <ColorPicker color={this.props.color} onChange={c => this.props.setColor(c)} />;
+        return <ColorPicker color={this.props.color} onChange={this.props.setColor} />;
     }
 }
 

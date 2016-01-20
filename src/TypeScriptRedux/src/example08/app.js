@@ -100,8 +100,7 @@ System.register(['react', 'react-dom', 'redux', 'react-redux', './reducers', './
                     _super.apply(this, arguments);
                 }
                 ColorWrapper.prototype.render = function () {
-                    var _this = this;
-                    return React.createElement(ColorPicker_1.ColorPicker, {"color": this.props.color, "onChange": function (c) { return _this.props.setColor(c); }});
+                    return React.createElement(ColorPicker_1.ColorPicker, {"color": this.props.color, "onChange": this.props.setColor});
                 };
                 ColorWrapper = __decorate([
                     core_1.reduxify(function (state) { return ({ color: state.color }); }, function (dispatch) { return ({ setColor: function (color) { return dispatch({ type: 'COLOR_CHANGE', color: color }); } }); })

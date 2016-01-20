@@ -16,15 +16,15 @@ System.register(['react'], function(exports_1) {
             NumberPicker = (function (_super) {
                 __extends(NumberPicker, _super);
                 function NumberPicker() {
+                    var _this = this;
                     _super.apply(this, arguments);
+                    this.handleChange = function (event) {
+                        var e = event.target;
+                        _this.props.onChange(parseInt(e.value));
+                    };
                 }
                 NumberPicker.prototype.render = function () {
-                    var _this = this;
-                    return (React.createElement("p", null, React.createElement("input", {"type": "range", "value": this.props.value.toString(), "min": "0", "max": "255", "onChange": function (e) { return _this.handleChange(e); }}), React.createElement("label", null, " ", this.props.name, ": "), React.createElement("b", null, this.props.value)));
-                };
-                NumberPicker.prototype.handleChange = function (event) {
-                    var e = event.target;
-                    this.props.onChange(parseInt(e.value));
+                    return (React.createElement("p", null, React.createElement("input", {"type": "range", "value": this.props.value.toString(), "min": "0", "max": "255", "onChange": this.handleChange}), React.createElement("label", null, " ", this.props.name, ": "), React.createElement("b", null, this.props.value)));
                 };
                 return NumberPicker;
             })(React.Component);
@@ -32,26 +32,26 @@ System.register(['react'], function(exports_1) {
             ColorPicker = (function (_super) {
                 __extends(ColorPicker, _super);
                 function ColorPicker() {
+                    var _this = this;
                     _super.apply(this, arguments);
+                    this.updateRed = function (n) {
+                        var rgb = hexToRgb(_this.props.color);
+                        _this.changeColor(rgbToHex(n, rgb.g, rgb.b));
+                    };
+                    this.updateGreen = function (n) {
+                        var rgb = hexToRgb(_this.props.color);
+                        _this.changeColor(rgbToHex(rgb.r, n, rgb.b));
+                    };
+                    this.updateBlue = function (n) {
+                        var rgb = hexToRgb(_this.props.color);
+                        _this.changeColor(rgbToHex(rgb.r, rgb.g, n));
+                    };
                 }
                 ColorPicker.prototype.render = function () {
-                    var _this = this;
                     var color = this.props.color;
                     var rgb = hexToRgb(color);
                     var textColor = isDark(color) ? '#fff' : '#000';
-                    return (React.createElement("div", null, React.createElement(NumberPicker, {"name": "Red", "value": rgb.r, "onChange": function (n) { return _this.updateRed(n); }}), React.createElement(NumberPicker, {"name": "Green", "value": rgb.g, "onChange": function (n) { return _this.updateGreen(n); }}), React.createElement(NumberPicker, {"name": "Blue", "value": rgb.b, "onChange": function (n) { return _this.updateBlue(n); }}), React.createElement("div", {"style": { background: color, width: 200, height: 40, lineHeight: "40px", textAlign: "center", color: textColor }}, color)));
-                };
-                ColorPicker.prototype.updateRed = function (n) {
-                    var rgb = hexToRgb(this.props.color);
-                    this.changeColor(rgbToHex(n, rgb.g, rgb.b));
-                };
-                ColorPicker.prototype.updateGreen = function (n) {
-                    var rgb = hexToRgb(this.props.color);
-                    this.changeColor(rgbToHex(rgb.r, n, rgb.b));
-                };
-                ColorPicker.prototype.updateBlue = function (n) {
-                    var rgb = hexToRgb(this.props.color);
-                    this.changeColor(rgbToHex(rgb.r, rgb.g, n));
+                    return (React.createElement("div", null, React.createElement(NumberPicker, {"name": "Red", "value": rgb.r, "onChange": this.updateRed}), React.createElement(NumberPicker, {"name": "Green", "value": rgb.g, "onChange": this.updateGreen}), React.createElement(NumberPicker, {"name": "Blue", "value": rgb.b, "onChange": this.updateBlue}), React.createElement("div", {"style": { background: color, width: 200, height: 40, lineHeight: "40px", textAlign: "center", color: textColor }}, color)));
                 };
                 ColorPicker.prototype.changeColor = function (color) {
                     this.props.onChange(color);
