@@ -30,5 +30,8 @@
   },
   "npm:react-dom@0.14.6": {
     "react": "npm:react@^0.14.6"
+  },
+  "npm:redux@3.0.5": {
+    "process": "github:jspm/nodelibs-process@^0.1.0"
   }
 }
