@@ -1,633 +1,173 @@
-System.registerDynamic("npm:react@0.14.6/lib/ReactServerBatchingStrategy", [], true, function($__require, exports, module) {
+"bundle";
+System.registerDynamic("npm:react-dom@0.14.6/index", ["npm:react@0.14.6/lib/ReactDOM"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var ReactServerBatchingStrategy = {
-    isBatchingUpdates: false,
-    batchedUpdates: function(callback) {}
-  };
-  module.exports = ReactServerBatchingStrategy;
+  module.exports = $__require('npm:react@0.14.6/lib/ReactDOM');
   global.define = __define;
   return module.exports;
 });
 
-System.registerDynamic("npm:react@0.14.6/lib/ReactServerRenderingTransaction", ["npm:react@0.14.6/lib/PooledClass", "npm:react@0.14.6/lib/CallbackQueue", "npm:react@0.14.6/lib/Transaction", "npm:react@0.14.6/lib/Object.assign", "npm:fbjs@0.6.1/lib/emptyFunction"], true, function($__require, exports, module) {
+System.registerDynamic("npm:react-dom@0.14.6", ["npm:react-dom@0.14.6/index"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = $__require('npm:react-dom@0.14.6/index');
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react-redux@4.0.6/lib/components/Provider", ["npm:react@0.14.6", "npm:react-redux@4.0.6/lib/utils/storeShape"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var PooledClass = $__require('npm:react@0.14.6/lib/PooledClass');
-  var CallbackQueue = $__require('npm:react@0.14.6/lib/CallbackQueue');
-  var Transaction = $__require('npm:react@0.14.6/lib/Transaction');
-  var assign = $__require('npm:react@0.14.6/lib/Object.assign');
-  var emptyFunction = $__require('npm:fbjs@0.6.1/lib/emptyFunction');
-  var ON_DOM_READY_QUEUEING = {
-    initialize: function() {
-      this.reactMountReady.reset();
-    },
-    close: emptyFunction
-  };
-  var TRANSACTION_WRAPPERS = [ON_DOM_READY_QUEUEING];
-  function ReactServerRenderingTransaction(renderToStaticMarkup) {
-    this.reinitializeTransaction();
-    this.renderToStaticMarkup = renderToStaticMarkup;
-    this.reactMountReady = CallbackQueue.getPooled(null);
-    this.useCreateElement = false;
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
   }
-  var Mixin = {
-    getTransactionWrappers: function() {
-      return TRANSACTION_WRAPPERS;
-    },
-    getReactMountReady: function() {
-      return this.reactMountReady;
-    },
-    destructor: function() {
-      CallbackQueue.release(this.reactMountReady);
-      this.reactMountReady = null;
+  function _possibleConstructorReturn(self, call) {
+    if (!self) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
-  };
-  assign(ReactServerRenderingTransaction.prototype, Transaction.Mixin, Mixin);
-  PooledClass.addPoolingTo(ReactServerRenderingTransaction);
-  module.exports = ReactServerRenderingTransaction;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/ReactServerRendering", ["npm:react@0.14.6/lib/ReactDefaultBatchingStrategy", "npm:react@0.14.6/lib/ReactElement", "npm:react@0.14.6/lib/ReactInstanceHandles", "npm:react@0.14.6/lib/ReactMarkupChecksum", "npm:react@0.14.6/lib/ReactServerBatchingStrategy", "npm:react@0.14.6/lib/ReactServerRenderingTransaction", "npm:react@0.14.6/lib/ReactUpdates", "npm:fbjs@0.6.1/lib/emptyObject", "npm:react@0.14.6/lib/instantiateReactComponent", "npm:fbjs@0.6.1/lib/invariant", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    var ReactDefaultBatchingStrategy = $__require('npm:react@0.14.6/lib/ReactDefaultBatchingStrategy');
-    var ReactElement = $__require('npm:react@0.14.6/lib/ReactElement');
-    var ReactInstanceHandles = $__require('npm:react@0.14.6/lib/ReactInstanceHandles');
-    var ReactMarkupChecksum = $__require('npm:react@0.14.6/lib/ReactMarkupChecksum');
-    var ReactServerBatchingStrategy = $__require('npm:react@0.14.6/lib/ReactServerBatchingStrategy');
-    var ReactServerRenderingTransaction = $__require('npm:react@0.14.6/lib/ReactServerRenderingTransaction');
-    var ReactUpdates = $__require('npm:react@0.14.6/lib/ReactUpdates');
-    var emptyObject = $__require('npm:fbjs@0.6.1/lib/emptyObject');
-    var instantiateReactComponent = $__require('npm:react@0.14.6/lib/instantiateReactComponent');
-    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
-    function renderToString(element) {
-      !ReactElement.isValidElement(element) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'renderToString(): You must pass a valid ReactElement.') : invariant(false) : undefined;
-      var transaction;
-      try {
-        ReactUpdates.injection.injectBatchingStrategy(ReactServerBatchingStrategy);
-        var id = ReactInstanceHandles.createReactRootID();
-        transaction = ReactServerRenderingTransaction.getPooled(false);
-        return transaction.perform(function() {
-          var componentInstance = instantiateReactComponent(element, null);
-          var markup = componentInstance.mountComponent(id, transaction, emptyObject);
-          return ReactMarkupChecksum.addChecksumToMarkup(markup);
-        }, null);
-      } finally {
-        ReactServerRenderingTransaction.release(transaction);
-        ReactUpdates.injection.injectBatchingStrategy(ReactDefaultBatchingStrategy);
-      }
+    return call && (typeof call === "object" || typeof call === "function") ? call : self;
+  }
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
     }
-    function renderToStaticMarkup(element) {
-      !ReactElement.isValidElement(element) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'renderToStaticMarkup(): You must pass a valid ReactElement.') : invariant(false) : undefined;
-      var transaction;
-      try {
-        ReactUpdates.injection.injectBatchingStrategy(ReactServerBatchingStrategy);
-        var id = ReactInstanceHandles.createReactRootID();
-        transaction = ReactServerRenderingTransaction.getPooled(true);
-        return transaction.perform(function() {
-          var componentInstance = instantiateReactComponent(element, null);
-          return componentInstance.mountComponent(id, transaction, emptyObject);
-        }, null);
-      } finally {
-        ReactServerRenderingTransaction.release(transaction);
-        ReactUpdates.injection.injectBatchingStrategy(ReactDefaultBatchingStrategy);
-      }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+        value: subClass,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }});
+    if (superClass)
+      Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+  }
+  var _require = $__require('npm:react@0.14.6');
+  var Component = _require.Component;
+  var PropTypes = _require.PropTypes;
+  var Children = _require.Children;
+  var storeShape = $__require('npm:react-redux@4.0.6/lib/utils/storeShape');
+  var didWarnAboutReceivingStore = false;
+  function warnAboutReceivingStore() {
+    if (didWarnAboutReceivingStore) {
+      return;
     }
-    module.exports = {
-      renderToString: renderToString,
-      renderToStaticMarkup: renderToStaticMarkup
+    didWarnAboutReceivingStore = true;
+    console.error('<Provider> does not support changing `store` on the fly. ' + 'It is most likely that you see this error because you updated to ' + 'Redux 2.x and React Redux 2.x which no longer hot reload reducers ' + 'automatically. See https://github.com/rackt/react-redux/releases/' + 'tag/v2.0.0 for the migration instructions.');
+  }
+  var Provider = (function(_Component) {
+    _inherits(Provider, _Component);
+    Provider.prototype.getChildContext = function getChildContext() {
+      return {store: this.store};
     };
-  })($__require('github:jspm/nodelibs-process@0.1.2'));
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/ReactDOMServer", ["npm:react@0.14.6/lib/ReactDefaultInjection", "npm:react@0.14.6/lib/ReactServerRendering", "npm:react@0.14.6/lib/ReactVersion"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var ReactDefaultInjection = $__require('npm:react@0.14.6/lib/ReactDefaultInjection');
-  var ReactServerRendering = $__require('npm:react@0.14.6/lib/ReactServerRendering');
-  var ReactVersion = $__require('npm:react@0.14.6/lib/ReactVersion');
-  ReactDefaultInjection.inject();
-  var ReactDOMServer = {
-    renderToString: ReactServerRendering.renderToString,
-    renderToStaticMarkup: ReactServerRendering.renderToStaticMarkup,
-    version: ReactVersion
+    function Provider(props, context) {
+      _classCallCheck(this, Provider);
+      var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
+      _this.store = props.store;
+      return _this;
+    }
+    Provider.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+      var store = this.store;
+      var nextStore = nextProps.store;
+      if (store !== nextStore) {
+        warnAboutReceivingStore();
+      }
+    };
+    Provider.prototype.render = function render() {
+      var children = this.props.children;
+      return Children.only(children);
+    };
+    return Provider;
+  })(Component);
+  Provider.propTypes = {
+    store: storeShape.isRequired,
+    children: PropTypes.element.isRequired
   };
-  module.exports = ReactDOMServer;
+  Provider.childContextTypes = {store: storeShape.isRequired};
+  module.exports = Provider;
   global.define = __define;
   return module.exports;
 });
 
-System.registerDynamic("npm:fbjs@0.6.1/lib/mapObject", [], true, function($__require, exports, module) {
+System.registerDynamic("npm:react@0.14.6/lib/renderSubtreeIntoContainer", ["npm:react@0.14.6/lib/ReactMount"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var hasOwnProperty = Object.prototype.hasOwnProperty;
-  function mapObject(object, callback, context) {
-    if (!object) {
-      return null;
-    }
-    var result = {};
-    for (var name in object) {
-      if (hasOwnProperty.call(object, name)) {
-        result[name] = callback.call(context, object[name], name, object);
-      }
-    }
-    return result;
-  }
-  module.exports = mapObject;
+  var ReactMount = $__require('npm:react@0.14.6/lib/ReactMount');
+  module.exports = ReactMount.renderSubtreeIntoContainer;
   global.define = __define;
   return module.exports;
 });
 
-System.registerDynamic("npm:react@0.14.6/lib/ReactDOMFactories", ["npm:react@0.14.6/lib/ReactElement", "npm:react@0.14.6/lib/ReactElementValidator", "npm:fbjs@0.6.1/lib/mapObject", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+System.registerDynamic("npm:react@0.14.6/lib/ReactDOM", ["npm:react@0.14.6/lib/ReactCurrentOwner", "npm:react@0.14.6/lib/ReactDOMTextComponent", "npm:react@0.14.6/lib/ReactDefaultInjection", "npm:react@0.14.6/lib/ReactInstanceHandles", "npm:react@0.14.6/lib/ReactMount", "npm:react@0.14.6/lib/ReactPerf", "npm:react@0.14.6/lib/ReactReconciler", "npm:react@0.14.6/lib/ReactUpdates", "npm:react@0.14.6/lib/ReactVersion", "npm:react@0.14.6/lib/findDOMNode", "npm:react@0.14.6/lib/renderSubtreeIntoContainer", "npm:fbjs@0.6.1/lib/warning", "npm:fbjs@0.6.1/lib/ExecutionEnvironment", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var ReactElement = $__require('npm:react@0.14.6/lib/ReactElement');
-    var ReactElementValidator = $__require('npm:react@0.14.6/lib/ReactElementValidator');
-    var mapObject = $__require('npm:fbjs@0.6.1/lib/mapObject');
-    function createDOMFactory(tag) {
-      if (process.env.NODE_ENV !== 'production') {
-        return ReactElementValidator.createFactory(tag);
-      }
-      return ReactElement.createFactory(tag);
-    }
-    var ReactDOMFactories = mapObject({
-      a: 'a',
-      abbr: 'abbr',
-      address: 'address',
-      area: 'area',
-      article: 'article',
-      aside: 'aside',
-      audio: 'audio',
-      b: 'b',
-      base: 'base',
-      bdi: 'bdi',
-      bdo: 'bdo',
-      big: 'big',
-      blockquote: 'blockquote',
-      body: 'body',
-      br: 'br',
-      button: 'button',
-      canvas: 'canvas',
-      caption: 'caption',
-      cite: 'cite',
-      code: 'code',
-      col: 'col',
-      colgroup: 'colgroup',
-      data: 'data',
-      datalist: 'datalist',
-      dd: 'dd',
-      del: 'del',
-      details: 'details',
-      dfn: 'dfn',
-      dialog: 'dialog',
-      div: 'div',
-      dl: 'dl',
-      dt: 'dt',
-      em: 'em',
-      embed: 'embed',
-      fieldset: 'fieldset',
-      figcaption: 'figcaption',
-      figure: 'figure',
-      footer: 'footer',
-      form: 'form',
-      h1: 'h1',
-      h2: 'h2',
-      h3: 'h3',
-      h4: 'h4',
-      h5: 'h5',
-      h6: 'h6',
-      head: 'head',
-      header: 'header',
-      hgroup: 'hgroup',
-      hr: 'hr',
-      html: 'html',
-      i: 'i',
-      iframe: 'iframe',
-      img: 'img',
-      input: 'input',
-      ins: 'ins',
-      kbd: 'kbd',
-      keygen: 'keygen',
-      label: 'label',
-      legend: 'legend',
-      li: 'li',
-      link: 'link',
-      main: 'main',
-      map: 'map',
-      mark: 'mark',
-      menu: 'menu',
-      menuitem: 'menuitem',
-      meta: 'meta',
-      meter: 'meter',
-      nav: 'nav',
-      noscript: 'noscript',
-      object: 'object',
-      ol: 'ol',
-      optgroup: 'optgroup',
-      option: 'option',
-      output: 'output',
-      p: 'p',
-      param: 'param',
-      picture: 'picture',
-      pre: 'pre',
-      progress: 'progress',
-      q: 'q',
-      rp: 'rp',
-      rt: 'rt',
-      ruby: 'ruby',
-      s: 's',
-      samp: 'samp',
-      script: 'script',
-      section: 'section',
-      select: 'select',
-      small: 'small',
-      source: 'source',
-      span: 'span',
-      strong: 'strong',
-      style: 'style',
-      sub: 'sub',
-      summary: 'summary',
-      sup: 'sup',
-      table: 'table',
-      tbody: 'tbody',
-      td: 'td',
-      textarea: 'textarea',
-      tfoot: 'tfoot',
-      th: 'th',
-      thead: 'thead',
-      time: 'time',
-      title: 'title',
-      tr: 'tr',
-      track: 'track',
-      u: 'u',
-      ul: 'ul',
-      'var': 'var',
-      video: 'video',
-      wbr: 'wbr',
-      circle: 'circle',
-      clipPath: 'clipPath',
-      defs: 'defs',
-      ellipse: 'ellipse',
-      g: 'g',
-      image: 'image',
-      line: 'line',
-      linearGradient: 'linearGradient',
-      mask: 'mask',
-      path: 'path',
-      pattern: 'pattern',
-      polygon: 'polygon',
-      polyline: 'polyline',
-      radialGradient: 'radialGradient',
-      rect: 'rect',
-      stop: 'stop',
-      svg: 'svg',
-      text: 'text',
-      tspan: 'tspan'
-    }, createDOMFactory);
-    module.exports = ReactDOMFactories;
-  })($__require('github:jspm/nodelibs-process@0.1.2'));
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/ReactElementValidator", ["npm:react@0.14.6/lib/ReactElement", "npm:react@0.14.6/lib/ReactPropTypeLocations", "npm:react@0.14.6/lib/ReactPropTypeLocationNames", "npm:react@0.14.6/lib/ReactCurrentOwner", "npm:react@0.14.6/lib/canDefineProperty", "npm:react@0.14.6/lib/getIteratorFn", "npm:fbjs@0.6.1/lib/invariant", "npm:fbjs@0.6.1/lib/warning", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    var ReactElement = $__require('npm:react@0.14.6/lib/ReactElement');
-    var ReactPropTypeLocations = $__require('npm:react@0.14.6/lib/ReactPropTypeLocations');
-    var ReactPropTypeLocationNames = $__require('npm:react@0.14.6/lib/ReactPropTypeLocationNames');
     var ReactCurrentOwner = $__require('npm:react@0.14.6/lib/ReactCurrentOwner');
-    var canDefineProperty = $__require('npm:react@0.14.6/lib/canDefineProperty');
-    var getIteratorFn = $__require('npm:react@0.14.6/lib/getIteratorFn');
-    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
-    var warning = $__require('npm:fbjs@0.6.1/lib/warning');
-    function getDeclarationErrorAddendum() {
-      if (ReactCurrentOwner.current) {
-        var name = ReactCurrentOwner.current.getName();
-        if (name) {
-          return ' Check the render method of `' + name + '`.';
-        }
-      }
-      return '';
-    }
-    var ownerHasKeyUseWarning = {};
-    var loggedTypeFailures = {};
-    function validateExplicitKey(element, parentType) {
-      if (!element._store || element._store.validated || element.key != null) {
-        return;
-      }
-      element._store.validated = true;
-      var addenda = getAddendaForKeyUse('uniqueKey', element, parentType);
-      if (addenda === null) {
-        return;
-      }
-      process.env.NODE_ENV !== 'production' ? warning(false, 'Each child in an array or iterator should have a unique "key" prop.' + '%s%s%s', addenda.parentOrOwner || '', addenda.childOwner || '', addenda.url || '') : undefined;
-    }
-    function getAddendaForKeyUse(messageType, element, parentType) {
-      var addendum = getDeclarationErrorAddendum();
-      if (!addendum) {
-        var parentName = typeof parentType === 'string' ? parentType : parentType.displayName || parentType.name;
-        if (parentName) {
-          addendum = ' Check the top-level render call using <' + parentName + '>.';
-        }
-      }
-      var memoizer = ownerHasKeyUseWarning[messageType] || (ownerHasKeyUseWarning[messageType] = {});
-      if (memoizer[addendum]) {
-        return null;
-      }
-      memoizer[addendum] = true;
-      var addenda = {
-        parentOrOwner: addendum,
-        url: ' See https://fb.me/react-warning-keys for more information.',
-        childOwner: null
-      };
-      if (element && element._owner && element._owner !== ReactCurrentOwner.current) {
-        addenda.childOwner = ' It was passed a child from ' + element._owner.getName() + '.';
-      }
-      return addenda;
-    }
-    function validateChildKeys(node, parentType) {
-      if (typeof node !== 'object') {
-        return;
-      }
-      if (Array.isArray(node)) {
-        for (var i = 0; i < node.length; i++) {
-          var child = node[i];
-          if (ReactElement.isValidElement(child)) {
-            validateExplicitKey(child, parentType);
-          }
-        }
-      } else if (ReactElement.isValidElement(node)) {
-        if (node._store) {
-          node._store.validated = true;
-        }
-      } else if (node) {
-        var iteratorFn = getIteratorFn(node);
-        if (iteratorFn) {
-          if (iteratorFn !== node.entries) {
-            var iterator = iteratorFn.call(node);
-            var step;
-            while (!(step = iterator.next()).done) {
-              if (ReactElement.isValidElement(step.value)) {
-                validateExplicitKey(step.value, parentType);
-              }
-            }
-          }
-        }
-      }
-    }
-    function checkPropTypes(componentName, propTypes, props, location) {
-      for (var propName in propTypes) {
-        if (propTypes.hasOwnProperty(propName)) {
-          var error;
-          try {
-            !(typeof propTypes[propName] === 'function') ? process.env.NODE_ENV !== 'production' ? invariant(false, '%s: %s type `%s` is invalid; it must be a function, usually from ' + 'React.PropTypes.', componentName || 'React class', ReactPropTypeLocationNames[location], propName) : invariant(false) : undefined;
-            error = propTypes[propName](props, propName, componentName, location);
-          } catch (ex) {
-            error = ex;
-          }
-          process.env.NODE_ENV !== 'production' ? warning(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', ReactPropTypeLocationNames[location], propName, typeof error) : undefined;
-          if (error instanceof Error && !(error.message in loggedTypeFailures)) {
-            loggedTypeFailures[error.message] = true;
-            var addendum = getDeclarationErrorAddendum();
-            process.env.NODE_ENV !== 'production' ? warning(false, 'Failed propType: %s%s', error.message, addendum) : undefined;
-          }
-        }
-      }
-    }
-    function validatePropTypes(element) {
-      var componentClass = element.type;
-      if (typeof componentClass !== 'function') {
-        return;
-      }
-      var name = componentClass.displayName || componentClass.name;
-      if (componentClass.propTypes) {
-        checkPropTypes(name, componentClass.propTypes, element.props, ReactPropTypeLocations.prop);
-      }
-      if (typeof componentClass.getDefaultProps === 'function') {
-        process.env.NODE_ENV !== 'production' ? warning(componentClass.getDefaultProps.isReactClassApproved, 'getDefaultProps is only used on classic React.createClass ' + 'definitions. Use a static property named `defaultProps` instead.') : undefined;
-      }
-    }
-    var ReactElementValidator = {
-      createElement: function(type, props, children) {
-        var validType = typeof type === 'string' || typeof type === 'function';
-        process.env.NODE_ENV !== 'production' ? warning(validType, 'React.createElement: type should not be null, undefined, boolean, or ' + 'number. It should be a string (for DOM elements) or a ReactClass ' + '(for composite components).%s', getDeclarationErrorAddendum()) : undefined;
-        var element = ReactElement.createElement.apply(this, arguments);
-        if (element == null) {
-          return element;
-        }
-        if (validType) {
-          for (var i = 2; i < arguments.length; i++) {
-            validateChildKeys(arguments[i], type);
-          }
-        }
-        validatePropTypes(element);
-        return element;
-      },
-      createFactory: function(type) {
-        var validatedFactory = ReactElementValidator.createElement.bind(null, type);
-        validatedFactory.type = type;
-        if (process.env.NODE_ENV !== 'production') {
-          if (canDefineProperty) {
-            Object.defineProperty(validatedFactory, 'type', {
-              enumerable: false,
-              get: function() {
-                process.env.NODE_ENV !== 'production' ? warning(false, 'Factory.type is deprecated. Access the class directly ' + 'before passing it to createFactory.') : undefined;
-                Object.defineProperty(this, 'type', {value: type});
-                return type;
-              }
-            });
-          }
-        }
-        return validatedFactory;
-      },
-      cloneElement: function(element, props, children) {
-        var newElement = ReactElement.cloneElement.apply(this, arguments);
-        for (var i = 2; i < arguments.length; i++) {
-          validateChildKeys(arguments[i], newElement.type);
-        }
-        validatePropTypes(newElement);
-        return newElement;
-      }
-    };
-    module.exports = ReactElementValidator;
-  })($__require('github:jspm/nodelibs-process@0.1.2'));
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/onlyChild", ["npm:react@0.14.6/lib/ReactElement", "npm:fbjs@0.6.1/lib/invariant", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    var ReactElement = $__require('npm:react@0.14.6/lib/ReactElement');
-    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
-    function onlyChild(children) {
-      !ReactElement.isValidElement(children) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'onlyChild must be passed a children with exactly one child.') : invariant(false) : undefined;
-      return children;
-    }
-    module.exports = onlyChild;
-  })($__require('github:jspm/nodelibs-process@0.1.2'));
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/ReactIsomorphic", ["npm:react@0.14.6/lib/ReactChildren", "npm:react@0.14.6/lib/ReactComponent", "npm:react@0.14.6/lib/ReactClass", "npm:react@0.14.6/lib/ReactDOMFactories", "npm:react@0.14.6/lib/ReactElement", "npm:react@0.14.6/lib/ReactElementValidator", "npm:react@0.14.6/lib/ReactPropTypes", "npm:react@0.14.6/lib/ReactVersion", "npm:react@0.14.6/lib/Object.assign", "npm:react@0.14.6/lib/onlyChild", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    var ReactChildren = $__require('npm:react@0.14.6/lib/ReactChildren');
-    var ReactComponent = $__require('npm:react@0.14.6/lib/ReactComponent');
-    var ReactClass = $__require('npm:react@0.14.6/lib/ReactClass');
-    var ReactDOMFactories = $__require('npm:react@0.14.6/lib/ReactDOMFactories');
-    var ReactElement = $__require('npm:react@0.14.6/lib/ReactElement');
-    var ReactElementValidator = $__require('npm:react@0.14.6/lib/ReactElementValidator');
-    var ReactPropTypes = $__require('npm:react@0.14.6/lib/ReactPropTypes');
+    var ReactDOMTextComponent = $__require('npm:react@0.14.6/lib/ReactDOMTextComponent');
+    var ReactDefaultInjection = $__require('npm:react@0.14.6/lib/ReactDefaultInjection');
+    var ReactInstanceHandles = $__require('npm:react@0.14.6/lib/ReactInstanceHandles');
+    var ReactMount = $__require('npm:react@0.14.6/lib/ReactMount');
+    var ReactPerf = $__require('npm:react@0.14.6/lib/ReactPerf');
+    var ReactReconciler = $__require('npm:react@0.14.6/lib/ReactReconciler');
+    var ReactUpdates = $__require('npm:react@0.14.6/lib/ReactUpdates');
     var ReactVersion = $__require('npm:react@0.14.6/lib/ReactVersion');
-    var assign = $__require('npm:react@0.14.6/lib/Object.assign');
-    var onlyChild = $__require('npm:react@0.14.6/lib/onlyChild');
-    var createElement = ReactElement.createElement;
-    var createFactory = ReactElement.createFactory;
-    var cloneElement = ReactElement.cloneElement;
-    if (process.env.NODE_ENV !== 'production') {
-      createElement = ReactElementValidator.createElement;
-      createFactory = ReactElementValidator.createFactory;
-      cloneElement = ReactElementValidator.cloneElement;
-    }
+    var findDOMNode = $__require('npm:react@0.14.6/lib/findDOMNode');
+    var renderSubtreeIntoContainer = $__require('npm:react@0.14.6/lib/renderSubtreeIntoContainer');
+    var warning = $__require('npm:fbjs@0.6.1/lib/warning');
+    ReactDefaultInjection.inject();
+    var render = ReactPerf.measure('React', 'render', ReactMount.render);
     var React = {
-      Children: {
-        map: ReactChildren.map,
-        forEach: ReactChildren.forEach,
-        count: ReactChildren.count,
-        toArray: ReactChildren.toArray,
-        only: onlyChild
-      },
-      Component: ReactComponent,
-      createElement: createElement,
-      cloneElement: cloneElement,
-      isValidElement: ReactElement.isValidElement,
-      PropTypes: ReactPropTypes,
-      createClass: ReactClass.createClass,
-      createFactory: createFactory,
-      createMixin: function(mixin) {
-        return mixin;
-      },
-      DOM: ReactDOMFactories,
+      findDOMNode: findDOMNode,
+      render: render,
+      unmountComponentAtNode: ReactMount.unmountComponentAtNode,
       version: ReactVersion,
-      __spread: assign
+      unstable_batchedUpdates: ReactUpdates.batchedUpdates,
+      unstable_renderSubtreeIntoContainer: renderSubtreeIntoContainer
     };
+    if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== 'undefined' && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.inject === 'function') {
+      __REACT_DEVTOOLS_GLOBAL_HOOK__.inject({
+        CurrentOwner: ReactCurrentOwner,
+        InstanceHandles: ReactInstanceHandles,
+        Mount: ReactMount,
+        Reconciler: ReactReconciler,
+        TextComponent: ReactDOMTextComponent
+      });
+    }
+    if (process.env.NODE_ENV !== 'production') {
+      var ExecutionEnvironment = $__require('npm:fbjs@0.6.1/lib/ExecutionEnvironment');
+      if (ExecutionEnvironment.canUseDOM && window.top === window.self) {
+        if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ === 'undefined') {
+          if (navigator.userAgent.indexOf('Chrome') > -1 && navigator.userAgent.indexOf('Edge') === -1 || navigator.userAgent.indexOf('Firefox') > -1) {
+            console.debug('Download the React DevTools for a better development experience: ' + 'https://fb.me/react-devtools');
+          }
+        }
+        var ieCompatibilityMode = document.documentMode && document.documentMode < 8;
+        process.env.NODE_ENV !== 'production' ? warning(!ieCompatibilityMode, 'Internet Explorer is running in compatibility mode; please add the ' + 'following tag to your HTML to prevent this from happening: ' + '<meta http-equiv="X-UA-Compatible" content="IE=edge" />') : undefined;
+        var expectedFeatures = [Array.isArray, Array.prototype.every, Array.prototype.forEach, Array.prototype.indexOf, Array.prototype.map, Date.now, Function.prototype.bind, Object.keys, String.prototype.split, String.prototype.trim, Object.create, Object.freeze];
+        for (var i = 0; i < expectedFeatures.length; i++) {
+          if (!expectedFeatures[i]) {
+            console.error('One or more ES5 shim/shams expected by React are not available: ' + 'https://fb.me/react-warning-polyfills');
+            break;
+          }
+        }
+      }
+    }
     module.exports = React;
   })($__require('github:jspm/nodelibs-process@0.1.2'));
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/deprecated", ["npm:react@0.14.6/lib/Object.assign", "npm:fbjs@0.6.1/lib/warning", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    var assign = $__require('npm:react@0.14.6/lib/Object.assign');
-    var warning = $__require('npm:fbjs@0.6.1/lib/warning');
-    function deprecated(fnName, newModule, newPackage, ctx, fn) {
-      var warned = false;
-      if (process.env.NODE_ENV !== 'production') {
-        var newFn = function() {
-          process.env.NODE_ENV !== 'production' ? warning(warned, 'React.%s is deprecated. Please use %s.%s from require' + '(\'%s\') ' + 'instead.', fnName, newModule, fnName, newPackage) : undefined;
-          warned = true;
-          return fn.apply(ctx, arguments);
-        };
-        return assign(newFn, fn);
-      }
-      return fn;
-    }
-    module.exports = deprecated;
-  })($__require('github:jspm/nodelibs-process@0.1.2'));
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/React", ["npm:react@0.14.6/lib/ReactDOM", "npm:react@0.14.6/lib/ReactDOMServer", "npm:react@0.14.6/lib/ReactIsomorphic", "npm:react@0.14.6/lib/Object.assign", "npm:react@0.14.6/lib/deprecated"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var ReactDOM = $__require('npm:react@0.14.6/lib/ReactDOM');
-  var ReactDOMServer = $__require('npm:react@0.14.6/lib/ReactDOMServer');
-  var ReactIsomorphic = $__require('npm:react@0.14.6/lib/ReactIsomorphic');
-  var assign = $__require('npm:react@0.14.6/lib/Object.assign');
-  var deprecated = $__require('npm:react@0.14.6/lib/deprecated');
-  var React = {};
-  assign(React, ReactIsomorphic);
-  assign(React, {
-    findDOMNode: deprecated('findDOMNode', 'ReactDOM', 'react-dom', ReactDOM, ReactDOM.findDOMNode),
-    render: deprecated('render', 'ReactDOM', 'react-dom', ReactDOM, ReactDOM.render),
-    unmountComponentAtNode: deprecated('unmountComponentAtNode', 'ReactDOM', 'react-dom', ReactDOM, ReactDOM.unmountComponentAtNode),
-    renderToString: deprecated('renderToString', 'ReactDOMServer', 'react-dom/server', ReactDOMServer, ReactDOMServer.renderToString),
-    renderToStaticMarkup: deprecated('renderToStaticMarkup', 'ReactDOMServer', 'react-dom/server', ReactDOMServer, ReactDOMServer.renderToStaticMarkup)
-  });
-  React.__SECRET_DOM_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactDOM;
-  React.__SECRET_DOM_SERVER_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactDOMServer;
-  module.exports = React;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/react", ["npm:react@0.14.6/lib/React"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = $__require('npm:react@0.14.6/lib/React');
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6", ["npm:react@0.14.6/react"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = $__require('npm:react@0.14.6/react');
   global.define = __define;
   return module.exports;
 });
@@ -1437,47 +977,40 @@ System.registerDynamic("npm:react@0.14.6/lib/ReactBrowserComponentMixin", ["npm:
   return module.exports;
 });
 
-System.registerDynamic("npm:react@0.14.6/lib/ReactDefaultBatchingStrategy", ["npm:react@0.14.6/lib/ReactUpdates", "npm:react@0.14.6/lib/Transaction", "npm:react@0.14.6/lib/Object.assign", "npm:fbjs@0.6.1/lib/emptyFunction"], true, function($__require, exports, module) {
-  "use strict";
+System.registerDynamic("npm:react@0.14.6/lib/findDOMNode", ["npm:react@0.14.6/lib/ReactCurrentOwner", "npm:react@0.14.6/lib/ReactInstanceMap", "npm:react@0.14.6/lib/ReactMount", "npm:fbjs@0.6.1/lib/invariant", "npm:fbjs@0.6.1/lib/warning", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var ReactUpdates = $__require('npm:react@0.14.6/lib/ReactUpdates');
-  var Transaction = $__require('npm:react@0.14.6/lib/Transaction');
-  var assign = $__require('npm:react@0.14.6/lib/Object.assign');
-  var emptyFunction = $__require('npm:fbjs@0.6.1/lib/emptyFunction');
-  var RESET_BATCHED_UPDATES = {
-    initialize: emptyFunction,
-    close: function() {
-      ReactDefaultBatchingStrategy.isBatchingUpdates = false;
-    }
-  };
-  var FLUSH_BATCHED_UPDATES = {
-    initialize: emptyFunction,
-    close: ReactUpdates.flushBatchedUpdates.bind(ReactUpdates)
-  };
-  var TRANSACTION_WRAPPERS = [FLUSH_BATCHED_UPDATES, RESET_BATCHED_UPDATES];
-  function ReactDefaultBatchingStrategyTransaction() {
-    this.reinitializeTransaction();
-  }
-  assign(ReactDefaultBatchingStrategyTransaction.prototype, Transaction.Mixin, {getTransactionWrappers: function() {
-      return TRANSACTION_WRAPPERS;
-    }});
-  var transaction = new ReactDefaultBatchingStrategyTransaction();
-  var ReactDefaultBatchingStrategy = {
-    isBatchingUpdates: false,
-    batchedUpdates: function(callback, a, b, c, d, e) {
-      var alreadyBatchingUpdates = ReactDefaultBatchingStrategy.isBatchingUpdates;
-      ReactDefaultBatchingStrategy.isBatchingUpdates = true;
-      if (alreadyBatchingUpdates) {
-        callback(a, b, c, d, e);
-      } else {
-        transaction.perform(callback, null, a, b, c, d, e);
+  (function(process) {
+    'use strict';
+    var ReactCurrentOwner = $__require('npm:react@0.14.6/lib/ReactCurrentOwner');
+    var ReactInstanceMap = $__require('npm:react@0.14.6/lib/ReactInstanceMap');
+    var ReactMount = $__require('npm:react@0.14.6/lib/ReactMount');
+    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
+    var warning = $__require('npm:fbjs@0.6.1/lib/warning');
+    function findDOMNode(componentOrElement) {
+      if (process.env.NODE_ENV !== 'production') {
+        var owner = ReactCurrentOwner.current;
+        if (owner !== null) {
+          process.env.NODE_ENV !== 'production' ? warning(owner._warnedAboutRefsInRender, '%s is accessing getDOMNode or findDOMNode inside its render(). ' + 'render() should be a pure function of props and state. It should ' + 'never access something that requires stale data from the previous ' + 'render, such as refs. Move this logic to componentDidMount and ' + 'componentDidUpdate instead.', owner.getName() || 'A component') : undefined;
+          owner._warnedAboutRefsInRender = true;
+        }
       }
+      if (componentOrElement == null) {
+        return null;
+      }
+      if (componentOrElement.nodeType === 1) {
+        return componentOrElement;
+      }
+      if (ReactInstanceMap.has(componentOrElement)) {
+        return ReactMount.getNodeFromInstance(componentOrElement);
+      }
+      !(componentOrElement.render == null || typeof componentOrElement.render !== 'function') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'findDOMNode was called on an unmounted component.') : invariant(false) : undefined;
+      !false ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Element appears to be neither ReactComponent nor DOMNode (keys: %s)', Object.keys(componentOrElement)) : invariant(false) : undefined;
     }
-  };
-  module.exports = ReactDefaultBatchingStrategy;
+    module.exports = findDOMNode;
+  })($__require('github:jspm/nodelibs-process@0.1.2'));
   global.define = __define;
   return module.exports;
 });
@@ -1970,116 +1503,6 @@ System.registerDynamic("npm:react@0.14.6/lib/ReactDOMInput", ["npm:react@0.14.6/
   return module.exports;
 });
 
-System.registerDynamic("npm:react@0.14.6/lib/ReactChildren", ["npm:react@0.14.6/lib/PooledClass", "npm:react@0.14.6/lib/ReactElement", "npm:fbjs@0.6.1/lib/emptyFunction", "npm:react@0.14.6/lib/traverseAllChildren"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var PooledClass = $__require('npm:react@0.14.6/lib/PooledClass');
-  var ReactElement = $__require('npm:react@0.14.6/lib/ReactElement');
-  var emptyFunction = $__require('npm:fbjs@0.6.1/lib/emptyFunction');
-  var traverseAllChildren = $__require('npm:react@0.14.6/lib/traverseAllChildren');
-  var twoArgumentPooler = PooledClass.twoArgumentPooler;
-  var fourArgumentPooler = PooledClass.fourArgumentPooler;
-  var userProvidedKeyEscapeRegex = /\/(?!\/)/g;
-  function escapeUserProvidedKey(text) {
-    return ('' + text).replace(userProvidedKeyEscapeRegex, '//');
-  }
-  function ForEachBookKeeping(forEachFunction, forEachContext) {
-    this.func = forEachFunction;
-    this.context = forEachContext;
-    this.count = 0;
-  }
-  ForEachBookKeeping.prototype.destructor = function() {
-    this.func = null;
-    this.context = null;
-    this.count = 0;
-  };
-  PooledClass.addPoolingTo(ForEachBookKeeping, twoArgumentPooler);
-  function forEachSingleChild(bookKeeping, child, name) {
-    var func = bookKeeping.func;
-    var context = bookKeeping.context;
-    func.call(context, child, bookKeeping.count++);
-  }
-  function forEachChildren(children, forEachFunc, forEachContext) {
-    if (children == null) {
-      return children;
-    }
-    var traverseContext = ForEachBookKeeping.getPooled(forEachFunc, forEachContext);
-    traverseAllChildren(children, forEachSingleChild, traverseContext);
-    ForEachBookKeeping.release(traverseContext);
-  }
-  function MapBookKeeping(mapResult, keyPrefix, mapFunction, mapContext) {
-    this.result = mapResult;
-    this.keyPrefix = keyPrefix;
-    this.func = mapFunction;
-    this.context = mapContext;
-    this.count = 0;
-  }
-  MapBookKeeping.prototype.destructor = function() {
-    this.result = null;
-    this.keyPrefix = null;
-    this.func = null;
-    this.context = null;
-    this.count = 0;
-  };
-  PooledClass.addPoolingTo(MapBookKeeping, fourArgumentPooler);
-  function mapSingleChildIntoContext(bookKeeping, child, childKey) {
-    var result = bookKeeping.result;
-    var keyPrefix = bookKeeping.keyPrefix;
-    var func = bookKeeping.func;
-    var context = bookKeeping.context;
-    var mappedChild = func.call(context, child, bookKeeping.count++);
-    if (Array.isArray(mappedChild)) {
-      mapIntoWithKeyPrefixInternal(mappedChild, result, childKey, emptyFunction.thatReturnsArgument);
-    } else if (mappedChild != null) {
-      if (ReactElement.isValidElement(mappedChild)) {
-        mappedChild = ReactElement.cloneAndReplaceKey(mappedChild, keyPrefix + (mappedChild !== child ? escapeUserProvidedKey(mappedChild.key || '') + '/' : '') + childKey);
-      }
-      result.push(mappedChild);
-    }
-  }
-  function mapIntoWithKeyPrefixInternal(children, array, prefix, func, context) {
-    var escapedPrefix = '';
-    if (prefix != null) {
-      escapedPrefix = escapeUserProvidedKey(prefix) + '/';
-    }
-    var traverseContext = MapBookKeeping.getPooled(array, escapedPrefix, func, context);
-    traverseAllChildren(children, mapSingleChildIntoContext, traverseContext);
-    MapBookKeeping.release(traverseContext);
-  }
-  function mapChildren(children, func, context) {
-    if (children == null) {
-      return children;
-    }
-    var result = [];
-    mapIntoWithKeyPrefixInternal(children, result, null, func, context);
-    return result;
-  }
-  function forEachSingleChildDummy(traverseContext, child, name) {
-    return null;
-  }
-  function countChildren(children, context) {
-    return traverseAllChildren(children, forEachSingleChildDummy, null);
-  }
-  function toArray(children) {
-    var result = [];
-    mapIntoWithKeyPrefixInternal(children, result, null, emptyFunction.thatReturnsArgument);
-    return result;
-  }
-  var ReactChildren = {
-    forEach: forEachChildren,
-    map: mapChildren,
-    mapIntoWithKeyPrefixInternal: mapIntoWithKeyPrefixInternal,
-    count: countChildren,
-    toArray: toArray
-  };
-  module.exports = ReactChildren;
-  global.define = __define;
-  return module.exports;
-});
-
 System.registerDynamic("npm:react@0.14.6/lib/ReactDOMOption", ["npm:react@0.14.6/lib/ReactChildren", "npm:react@0.14.6/lib/ReactDOMSelect", "npm:react@0.14.6/lib/Object.assign", "npm:fbjs@0.6.1/lib/warning", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
   ;
   var global = this,
@@ -2271,272 +1694,6 @@ System.registerDynamic("npm:react@0.14.6/lib/ReactDOMSelect", ["npm:react@0.14.6
     }
     module.exports = ReactDOMSelect;
   })($__require('github:jspm/nodelibs-process@0.1.2'));
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/ReactPropTypes", ["npm:react@0.14.6/lib/ReactElement", "npm:react@0.14.6/lib/ReactPropTypeLocationNames", "npm:fbjs@0.6.1/lib/emptyFunction", "npm:react@0.14.6/lib/getIteratorFn"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var ReactElement = $__require('npm:react@0.14.6/lib/ReactElement');
-  var ReactPropTypeLocationNames = $__require('npm:react@0.14.6/lib/ReactPropTypeLocationNames');
-  var emptyFunction = $__require('npm:fbjs@0.6.1/lib/emptyFunction');
-  var getIteratorFn = $__require('npm:react@0.14.6/lib/getIteratorFn');
-  var ANONYMOUS = '<<anonymous>>';
-  var ReactPropTypes = {
-    array: createPrimitiveTypeChecker('array'),
-    bool: createPrimitiveTypeChecker('boolean'),
-    func: createPrimitiveTypeChecker('function'),
-    number: createPrimitiveTypeChecker('number'),
-    object: createPrimitiveTypeChecker('object'),
-    string: createPrimitiveTypeChecker('string'),
-    any: createAnyTypeChecker(),
-    arrayOf: createArrayOfTypeChecker,
-    element: createElementTypeChecker(),
-    instanceOf: createInstanceTypeChecker,
-    node: createNodeChecker(),
-    objectOf: createObjectOfTypeChecker,
-    oneOf: createEnumTypeChecker,
-    oneOfType: createUnionTypeChecker,
-    shape: createShapeTypeChecker
-  };
-  function createChainableTypeChecker(validate) {
-    function checkType(isRequired, props, propName, componentName, location, propFullName) {
-      componentName = componentName || ANONYMOUS;
-      propFullName = propFullName || propName;
-      if (props[propName] == null) {
-        var locationName = ReactPropTypeLocationNames[location];
-        if (isRequired) {
-          return new Error('Required ' + locationName + ' `' + propFullName + '` was not specified in ' + ('`' + componentName + '`.'));
-        }
-        return null;
-      } else {
-        return validate(props, propName, componentName, location, propFullName);
-      }
-    }
-    var chainedCheckType = checkType.bind(null, false);
-    chainedCheckType.isRequired = checkType.bind(null, true);
-    return chainedCheckType;
-  }
-  function createPrimitiveTypeChecker(expectedType) {
-    function validate(props, propName, componentName, location, propFullName) {
-      var propValue = props[propName];
-      var propType = getPropType(propValue);
-      if (propType !== expectedType) {
-        var locationName = ReactPropTypeLocationNames[location];
-        var preciseType = getPreciseType(propValue);
-        return new Error('Invalid ' + locationName + ' `' + propFullName + '` of type ' + ('`' + preciseType + '` supplied to `' + componentName + '`, expected ') + ('`' + expectedType + '`.'));
-      }
-      return null;
-    }
-    return createChainableTypeChecker(validate);
-  }
-  function createAnyTypeChecker() {
-    return createChainableTypeChecker(emptyFunction.thatReturns(null));
-  }
-  function createArrayOfTypeChecker(typeChecker) {
-    function validate(props, propName, componentName, location, propFullName) {
-      var propValue = props[propName];
-      if (!Array.isArray(propValue)) {
-        var locationName = ReactPropTypeLocationNames[location];
-        var propType = getPropType(propValue);
-        return new Error('Invalid ' + locationName + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an array.'));
-      }
-      for (var i = 0; i < propValue.length; i++) {
-        var error = typeChecker(propValue, i, componentName, location, propFullName + '[' + i + ']');
-        if (error instanceof Error) {
-          return error;
-        }
-      }
-      return null;
-    }
-    return createChainableTypeChecker(validate);
-  }
-  function createElementTypeChecker() {
-    function validate(props, propName, componentName, location, propFullName) {
-      if (!ReactElement.isValidElement(props[propName])) {
-        var locationName = ReactPropTypeLocationNames[location];
-        return new Error('Invalid ' + locationName + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`, expected a single ReactElement.'));
-      }
-      return null;
-    }
-    return createChainableTypeChecker(validate);
-  }
-  function createInstanceTypeChecker(expectedClass) {
-    function validate(props, propName, componentName, location, propFullName) {
-      if (!(props[propName] instanceof expectedClass)) {
-        var locationName = ReactPropTypeLocationNames[location];
-        var expectedClassName = expectedClass.name || ANONYMOUS;
-        var actualClassName = getClassName(props[propName]);
-        return new Error('Invalid ' + locationName + ' `' + propFullName + '` of type ' + ('`' + actualClassName + '` supplied to `' + componentName + '`, expected ') + ('instance of `' + expectedClassName + '`.'));
-      }
-      return null;
-    }
-    return createChainableTypeChecker(validate);
-  }
-  function createEnumTypeChecker(expectedValues) {
-    if (!Array.isArray(expectedValues)) {
-      return createChainableTypeChecker(function() {
-        return new Error('Invalid argument supplied to oneOf, expected an instance of array.');
-      });
-    }
-    function validate(props, propName, componentName, location, propFullName) {
-      var propValue = props[propName];
-      for (var i = 0; i < expectedValues.length; i++) {
-        if (propValue === expectedValues[i]) {
-          return null;
-        }
-      }
-      var locationName = ReactPropTypeLocationNames[location];
-      var valuesString = JSON.stringify(expectedValues);
-      return new Error('Invalid ' + locationName + ' `' + propFullName + '` of value `' + propValue + '` ' + ('supplied to `' + componentName + '`, expected one of ' + valuesString + '.'));
-    }
-    return createChainableTypeChecker(validate);
-  }
-  function createObjectOfTypeChecker(typeChecker) {
-    function validate(props, propName, componentName, location, propFullName) {
-      var propValue = props[propName];
-      var propType = getPropType(propValue);
-      if (propType !== 'object') {
-        var locationName = ReactPropTypeLocationNames[location];
-        return new Error('Invalid ' + locationName + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an object.'));
-      }
-      for (var key in propValue) {
-        if (propValue.hasOwnProperty(key)) {
-          var error = typeChecker(propValue, key, componentName, location, propFullName + '.' + key);
-          if (error instanceof Error) {
-            return error;
-          }
-        }
-      }
-      return null;
-    }
-    return createChainableTypeChecker(validate);
-  }
-  function createUnionTypeChecker(arrayOfTypeCheckers) {
-    if (!Array.isArray(arrayOfTypeCheckers)) {
-      return createChainableTypeChecker(function() {
-        return new Error('Invalid argument supplied to oneOfType, expected an instance of array.');
-      });
-    }
-    function validate(props, propName, componentName, location, propFullName) {
-      for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
-        var checker = arrayOfTypeCheckers[i];
-        if (checker(props, propName, componentName, location, propFullName) == null) {
-          return null;
-        }
-      }
-      var locationName = ReactPropTypeLocationNames[location];
-      return new Error('Invalid ' + locationName + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`.'));
-    }
-    return createChainableTypeChecker(validate);
-  }
-  function createNodeChecker() {
-    function validate(props, propName, componentName, location, propFullName) {
-      if (!isNode(props[propName])) {
-        var locationName = ReactPropTypeLocationNames[location];
-        return new Error('Invalid ' + locationName + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`, expected a ReactNode.'));
-      }
-      return null;
-    }
-    return createChainableTypeChecker(validate);
-  }
-  function createShapeTypeChecker(shapeTypes) {
-    function validate(props, propName, componentName, location, propFullName) {
-      var propValue = props[propName];
-      var propType = getPropType(propValue);
-      if (propType !== 'object') {
-        var locationName = ReactPropTypeLocationNames[location];
-        return new Error('Invalid ' + locationName + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
-      }
-      for (var key in shapeTypes) {
-        var checker = shapeTypes[key];
-        if (!checker) {
-          continue;
-        }
-        var error = checker(propValue, key, componentName, location, propFullName + '.' + key);
-        if (error) {
-          return error;
-        }
-      }
-      return null;
-    }
-    return createChainableTypeChecker(validate);
-  }
-  function isNode(propValue) {
-    switch (typeof propValue) {
-      case 'number':
-      case 'string':
-      case 'undefined':
-        return true;
-      case 'boolean':
-        return !propValue;
-      case 'object':
-        if (Array.isArray(propValue)) {
-          return propValue.every(isNode);
-        }
-        if (propValue === null || ReactElement.isValidElement(propValue)) {
-          return true;
-        }
-        var iteratorFn = getIteratorFn(propValue);
-        if (iteratorFn) {
-          var iterator = iteratorFn.call(propValue);
-          var step;
-          if (iteratorFn !== propValue.entries) {
-            while (!(step = iterator.next()).done) {
-              if (!isNode(step.value)) {
-                return false;
-              }
-            }
-          } else {
-            while (!(step = iterator.next()).done) {
-              var entry = step.value;
-              if (entry) {
-                if (!isNode(entry[1])) {
-                  return false;
-                }
-              }
-            }
-          }
-        } else {
-          return false;
-        }
-        return true;
-      default:
-        return false;
-    }
-  }
-  function getPropType(propValue) {
-    var propType = typeof propValue;
-    if (Array.isArray(propValue)) {
-      return 'array';
-    }
-    if (propValue instanceof RegExp) {
-      return 'object';
-    }
-    return propType;
-  }
-  function getPreciseType(propValue) {
-    var propType = getPropType(propValue);
-    if (propType === 'object') {
-      if (propValue instanceof Date) {
-        return 'date';
-      } else if (propValue instanceof RegExp) {
-        return 'regexp';
-      }
-    }
-    return propType;
-  }
-  function getClassName(propValue) {
-    if (!propValue.constructor || !propValue.constructor.name) {
-      return '<<anonymous>>';
-    }
-    return propValue.constructor.name;
-  }
-  module.exports = ReactPropTypes;
   global.define = __define;
   return module.exports;
 });
@@ -2787,139 +1944,6 @@ System.registerDynamic("npm:react@0.14.6/lib/ReactChildReconciler", ["npm:react@
       }
     };
     module.exports = ReactChildReconciler;
-  })($__require('github:jspm/nodelibs-process@0.1.2'));
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/getIteratorFn", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
-  var FAUX_ITERATOR_SYMBOL = '@@iterator';
-  function getIteratorFn(maybeIterable) {
-    var iteratorFn = maybeIterable && (ITERATOR_SYMBOL && maybeIterable[ITERATOR_SYMBOL] || maybeIterable[FAUX_ITERATOR_SYMBOL]);
-    if (typeof iteratorFn === 'function') {
-      return iteratorFn;
-    }
-  }
-  module.exports = getIteratorFn;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/traverseAllChildren", ["npm:react@0.14.6/lib/ReactCurrentOwner", "npm:react@0.14.6/lib/ReactElement", "npm:react@0.14.6/lib/ReactInstanceHandles", "npm:react@0.14.6/lib/getIteratorFn", "npm:fbjs@0.6.1/lib/invariant", "npm:fbjs@0.6.1/lib/warning", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    var ReactCurrentOwner = $__require('npm:react@0.14.6/lib/ReactCurrentOwner');
-    var ReactElement = $__require('npm:react@0.14.6/lib/ReactElement');
-    var ReactInstanceHandles = $__require('npm:react@0.14.6/lib/ReactInstanceHandles');
-    var getIteratorFn = $__require('npm:react@0.14.6/lib/getIteratorFn');
-    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
-    var warning = $__require('npm:fbjs@0.6.1/lib/warning');
-    var SEPARATOR = ReactInstanceHandles.SEPARATOR;
-    var SUBSEPARATOR = ':';
-    var userProvidedKeyEscaperLookup = {
-      '=': '=0',
-      '.': '=1',
-      ':': '=2'
-    };
-    var userProvidedKeyEscapeRegex = /[=.:]/g;
-    var didWarnAboutMaps = false;
-    function userProvidedKeyEscaper(match) {
-      return userProvidedKeyEscaperLookup[match];
-    }
-    function getComponentKey(component, index) {
-      if (component && component.key != null) {
-        return wrapUserProvidedKey(component.key);
-      }
-      return index.toString(36);
-    }
-    function escapeUserProvidedKey(text) {
-      return ('' + text).replace(userProvidedKeyEscapeRegex, userProvidedKeyEscaper);
-    }
-    function wrapUserProvidedKey(key) {
-      return '$' + escapeUserProvidedKey(key);
-    }
-    function traverseAllChildrenImpl(children, nameSoFar, callback, traverseContext) {
-      var type = typeof children;
-      if (type === 'undefined' || type === 'boolean') {
-        children = null;
-      }
-      if (children === null || type === 'string' || type === 'number' || ReactElement.isValidElement(children)) {
-        callback(traverseContext, children, nameSoFar === '' ? SEPARATOR + getComponentKey(children, 0) : nameSoFar);
-        return 1;
-      }
-      var child;
-      var nextName;
-      var subtreeCount = 0;
-      var nextNamePrefix = nameSoFar === '' ? SEPARATOR : nameSoFar + SUBSEPARATOR;
-      if (Array.isArray(children)) {
-        for (var i = 0; i < children.length; i++) {
-          child = children[i];
-          nextName = nextNamePrefix + getComponentKey(child, i);
-          subtreeCount += traverseAllChildrenImpl(child, nextName, callback, traverseContext);
-        }
-      } else {
-        var iteratorFn = getIteratorFn(children);
-        if (iteratorFn) {
-          var iterator = iteratorFn.call(children);
-          var step;
-          if (iteratorFn !== children.entries) {
-            var ii = 0;
-            while (!(step = iterator.next()).done) {
-              child = step.value;
-              nextName = nextNamePrefix + getComponentKey(child, ii++);
-              subtreeCount += traverseAllChildrenImpl(child, nextName, callback, traverseContext);
-            }
-          } else {
-            if (process.env.NODE_ENV !== 'production') {
-              process.env.NODE_ENV !== 'production' ? warning(didWarnAboutMaps, 'Using Maps as children is not yet fully supported. It is an ' + 'experimental feature that might be removed. Convert it to a ' + 'sequence / iterable of keyed ReactElements instead.') : undefined;
-              didWarnAboutMaps = true;
-            }
-            while (!(step = iterator.next()).done) {
-              var entry = step.value;
-              if (entry) {
-                child = entry[1];
-                nextName = nextNamePrefix + wrapUserProvidedKey(entry[0]) + SUBSEPARATOR + getComponentKey(child, 0);
-                subtreeCount += traverseAllChildrenImpl(child, nextName, callback, traverseContext);
-              }
-            }
-          }
-        } else if (type === 'object') {
-          var addendum = '';
-          if (process.env.NODE_ENV !== 'production') {
-            addendum = ' If you meant to render a collection of children, use an array ' + 'instead or wrap the object using createFragment(object) from the ' + 'React add-ons.';
-            if (children._isReactElement) {
-              addendum = ' It looks like you\'re using an element created by a different ' + 'version of React. Make sure to use only one copy of React.';
-            }
-            if (ReactCurrentOwner.current) {
-              var name = ReactCurrentOwner.current.getName();
-              if (name) {
-                addendum += ' Check the render method of `' + name + '`.';
-              }
-            }
-          }
-          var childrenString = String(children);
-          !false ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Objects are not valid as a React child (found: %s).%s', childrenString === '[object Object]' ? 'object with keys {' + Object.keys(children).join(', ') + '}' : childrenString, addendum) : invariant(false) : undefined;
-        }
-      }
-      return subtreeCount;
-    }
-    function traverseAllChildren(children, callback, traverseContext) {
-      if (children == null) {
-        return 0;
-      }
-      return traverseAllChildrenImpl(children, '', callback, traverseContext);
-    }
-    module.exports = traverseAllChildren;
   })($__require('github:jspm/nodelibs-process@0.1.2'));
   global.define = __define;
   return module.exports;
@@ -4781,446 +3805,6 @@ System.registerDynamic("npm:react@0.14.6/lib/ReactEventListener", ["npm:fbjs@0.6
   return module.exports;
 });
 
-System.registerDynamic("npm:react@0.14.6/lib/ReactComponent", ["npm:react@0.14.6/lib/ReactNoopUpdateQueue", "npm:react@0.14.6/lib/canDefineProperty", "npm:fbjs@0.6.1/lib/emptyObject", "npm:fbjs@0.6.1/lib/invariant", "npm:fbjs@0.6.1/lib/warning", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    var ReactNoopUpdateQueue = $__require('npm:react@0.14.6/lib/ReactNoopUpdateQueue');
-    var canDefineProperty = $__require('npm:react@0.14.6/lib/canDefineProperty');
-    var emptyObject = $__require('npm:fbjs@0.6.1/lib/emptyObject');
-    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
-    var warning = $__require('npm:fbjs@0.6.1/lib/warning');
-    function ReactComponent(props, context, updater) {
-      this.props = props;
-      this.context = context;
-      this.refs = emptyObject;
-      this.updater = updater || ReactNoopUpdateQueue;
-    }
-    ReactComponent.prototype.isReactComponent = {};
-    ReactComponent.prototype.setState = function(partialState, callback) {
-      !(typeof partialState === 'object' || typeof partialState === 'function' || partialState == null) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'setState(...): takes an object of state variables to update or a ' + 'function which returns an object of state variables.') : invariant(false) : undefined;
-      if (process.env.NODE_ENV !== 'production') {
-        process.env.NODE_ENV !== 'production' ? warning(partialState != null, 'setState(...): You passed an undefined or null state object; ' + 'instead, use forceUpdate().') : undefined;
-      }
-      this.updater.enqueueSetState(this, partialState);
-      if (callback) {
-        this.updater.enqueueCallback(this, callback);
-      }
-    };
-    ReactComponent.prototype.forceUpdate = function(callback) {
-      this.updater.enqueueForceUpdate(this);
-      if (callback) {
-        this.updater.enqueueCallback(this, callback);
-      }
-    };
-    if (process.env.NODE_ENV !== 'production') {
-      var deprecatedAPIs = {
-        getDOMNode: ['getDOMNode', 'Use ReactDOM.findDOMNode(component) instead.'],
-        isMounted: ['isMounted', 'Instead, make sure to clean up subscriptions and pending requests in ' + 'componentWillUnmount to prevent memory leaks.'],
-        replaceProps: ['replaceProps', 'Instead, call render again at the top level.'],
-        replaceState: ['replaceState', 'Refactor your code to use setState instead (see ' + 'https://github.com/facebook/react/issues/3236).'],
-        setProps: ['setProps', 'Instead, call render again at the top level.']
-      };
-      var defineDeprecationWarning = function(methodName, info) {
-        if (canDefineProperty) {
-          Object.defineProperty(ReactComponent.prototype, methodName, {get: function() {
-              process.env.NODE_ENV !== 'production' ? warning(false, '%s(...) is deprecated in plain JavaScript React classes. %s', info[0], info[1]) : undefined;
-              return undefined;
-            }});
-        }
-      };
-      for (var fnName in deprecatedAPIs) {
-        if (deprecatedAPIs.hasOwnProperty(fnName)) {
-          defineDeprecationWarning(fnName, deprecatedAPIs[fnName]);
-        }
-      }
-    }
-    module.exports = ReactComponent;
-  })($__require('github:jspm/nodelibs-process@0.1.2'));
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/ReactNoopUpdateQueue", ["npm:fbjs@0.6.1/lib/warning", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    var warning = $__require('npm:fbjs@0.6.1/lib/warning');
-    function warnTDZ(publicInstance, callerName) {
-      if (process.env.NODE_ENV !== 'production') {
-        process.env.NODE_ENV !== 'production' ? warning(false, '%s(...): Can only update a mounted or mounting component. ' + 'This usually means you called %s() on an unmounted component. ' + 'This is a no-op. Please check the code for the %s component.', callerName, callerName, publicInstance.constructor && publicInstance.constructor.displayName || '') : undefined;
-      }
-    }
-    var ReactNoopUpdateQueue = {
-      isMounted: function(publicInstance) {
-        return false;
-      },
-      enqueueCallback: function(publicInstance, callback) {},
-      enqueueForceUpdate: function(publicInstance) {
-        warnTDZ(publicInstance, 'forceUpdate');
-      },
-      enqueueReplaceState: function(publicInstance, completeState) {
-        warnTDZ(publicInstance, 'replaceState');
-      },
-      enqueueSetState: function(publicInstance, partialState) {
-        warnTDZ(publicInstance, 'setState');
-      },
-      enqueueSetProps: function(publicInstance, partialProps) {
-        warnTDZ(publicInstance, 'setProps');
-      },
-      enqueueReplaceProps: function(publicInstance, props) {
-        warnTDZ(publicInstance, 'replaceProps');
-      }
-    };
-    module.exports = ReactNoopUpdateQueue;
-  })($__require('github:jspm/nodelibs-process@0.1.2'));
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/ReactClass", ["npm:react@0.14.6/lib/ReactComponent", "npm:react@0.14.6/lib/ReactElement", "npm:react@0.14.6/lib/ReactPropTypeLocations", "npm:react@0.14.6/lib/ReactPropTypeLocationNames", "npm:react@0.14.6/lib/ReactNoopUpdateQueue", "npm:react@0.14.6/lib/Object.assign", "npm:fbjs@0.6.1/lib/emptyObject", "npm:fbjs@0.6.1/lib/invariant", "npm:fbjs@0.6.1/lib/keyMirror", "npm:fbjs@0.6.1/lib/keyOf", "npm:fbjs@0.6.1/lib/warning", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    var ReactComponent = $__require('npm:react@0.14.6/lib/ReactComponent');
-    var ReactElement = $__require('npm:react@0.14.6/lib/ReactElement');
-    var ReactPropTypeLocations = $__require('npm:react@0.14.6/lib/ReactPropTypeLocations');
-    var ReactPropTypeLocationNames = $__require('npm:react@0.14.6/lib/ReactPropTypeLocationNames');
-    var ReactNoopUpdateQueue = $__require('npm:react@0.14.6/lib/ReactNoopUpdateQueue');
-    var assign = $__require('npm:react@0.14.6/lib/Object.assign');
-    var emptyObject = $__require('npm:fbjs@0.6.1/lib/emptyObject');
-    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
-    var keyMirror = $__require('npm:fbjs@0.6.1/lib/keyMirror');
-    var keyOf = $__require('npm:fbjs@0.6.1/lib/keyOf');
-    var warning = $__require('npm:fbjs@0.6.1/lib/warning');
-    var MIXINS_KEY = keyOf({mixins: null});
-    var SpecPolicy = keyMirror({
-      DEFINE_ONCE: null,
-      DEFINE_MANY: null,
-      OVERRIDE_BASE: null,
-      DEFINE_MANY_MERGED: null
-    });
-    var injectedMixins = [];
-    var warnedSetProps = false;
-    function warnSetProps() {
-      if (!warnedSetProps) {
-        warnedSetProps = true;
-        process.env.NODE_ENV !== 'production' ? warning(false, 'setProps(...) and replaceProps(...) are deprecated. ' + 'Instead, call render again at the top level.') : undefined;
-      }
-    }
-    var ReactClassInterface = {
-      mixins: SpecPolicy.DEFINE_MANY,
-      statics: SpecPolicy.DEFINE_MANY,
-      propTypes: SpecPolicy.DEFINE_MANY,
-      contextTypes: SpecPolicy.DEFINE_MANY,
-      childContextTypes: SpecPolicy.DEFINE_MANY,
-      getDefaultProps: SpecPolicy.DEFINE_MANY_MERGED,
-      getInitialState: SpecPolicy.DEFINE_MANY_MERGED,
-      getChildContext: SpecPolicy.DEFINE_MANY_MERGED,
-      render: SpecPolicy.DEFINE_ONCE,
-      componentWillMount: SpecPolicy.DEFINE_MANY,
-      componentDidMount: SpecPolicy.DEFINE_MANY,
-      componentWillReceiveProps: SpecPolicy.DEFINE_MANY,
-      shouldComponentUpdate: SpecPolicy.DEFINE_ONCE,
-      componentWillUpdate: SpecPolicy.DEFINE_MANY,
-      componentDidUpdate: SpecPolicy.DEFINE_MANY,
-      componentWillUnmount: SpecPolicy.DEFINE_MANY,
-      updateComponent: SpecPolicy.OVERRIDE_BASE
-    };
-    var RESERVED_SPEC_KEYS = {
-      displayName: function(Constructor, displayName) {
-        Constructor.displayName = displayName;
-      },
-      mixins: function(Constructor, mixins) {
-        if (mixins) {
-          for (var i = 0; i < mixins.length; i++) {
-            mixSpecIntoComponent(Constructor, mixins[i]);
-          }
-        }
-      },
-      childContextTypes: function(Constructor, childContextTypes) {
-        if (process.env.NODE_ENV !== 'production') {
-          validateTypeDef(Constructor, childContextTypes, ReactPropTypeLocations.childContext);
-        }
-        Constructor.childContextTypes = assign({}, Constructor.childContextTypes, childContextTypes);
-      },
-      contextTypes: function(Constructor, contextTypes) {
-        if (process.env.NODE_ENV !== 'production') {
-          validateTypeDef(Constructor, contextTypes, ReactPropTypeLocations.context);
-        }
-        Constructor.contextTypes = assign({}, Constructor.contextTypes, contextTypes);
-      },
-      getDefaultProps: function(Constructor, getDefaultProps) {
-        if (Constructor.getDefaultProps) {
-          Constructor.getDefaultProps = createMergedResultFunction(Constructor.getDefaultProps, getDefaultProps);
-        } else {
-          Constructor.getDefaultProps = getDefaultProps;
-        }
-      },
-      propTypes: function(Constructor, propTypes) {
-        if (process.env.NODE_ENV !== 'production') {
-          validateTypeDef(Constructor, propTypes, ReactPropTypeLocations.prop);
-        }
-        Constructor.propTypes = assign({}, Constructor.propTypes, propTypes);
-      },
-      statics: function(Constructor, statics) {
-        mixStaticSpecIntoComponent(Constructor, statics);
-      },
-      autobind: function() {}
-    };
-    function validateTypeDef(Constructor, typeDef, location) {
-      for (var propName in typeDef) {
-        if (typeDef.hasOwnProperty(propName)) {
-          process.env.NODE_ENV !== 'production' ? warning(typeof typeDef[propName] === 'function', '%s: %s type `%s` is invalid; it must be a function, usually from ' + 'React.PropTypes.', Constructor.displayName || 'ReactClass', ReactPropTypeLocationNames[location], propName) : undefined;
-        }
-      }
-    }
-    function validateMethodOverride(proto, name) {
-      var specPolicy = ReactClassInterface.hasOwnProperty(name) ? ReactClassInterface[name] : null;
-      if (ReactClassMixin.hasOwnProperty(name)) {
-        !(specPolicy === SpecPolicy.OVERRIDE_BASE) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactClassInterface: You are attempting to override ' + '`%s` from your class specification. Ensure that your method names ' + 'do not overlap with React methods.', name) : invariant(false) : undefined;
-      }
-      if (proto.hasOwnProperty(name)) {
-        !(specPolicy === SpecPolicy.DEFINE_MANY || specPolicy === SpecPolicy.DEFINE_MANY_MERGED) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactClassInterface: You are attempting to define ' + '`%s` on your component more than once. This conflict may be due ' + 'to a mixin.', name) : invariant(false) : undefined;
-      }
-    }
-    function mixSpecIntoComponent(Constructor, spec) {
-      if (!spec) {
-        return;
-      }
-      !(typeof spec !== 'function') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactClass: You\'re attempting to ' + 'use a component class as a mixin. Instead, just use a regular object.') : invariant(false) : undefined;
-      !!ReactElement.isValidElement(spec) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactClass: You\'re attempting to ' + 'use a component as a mixin. Instead, just use a regular object.') : invariant(false) : undefined;
-      var proto = Constructor.prototype;
-      if (spec.hasOwnProperty(MIXINS_KEY)) {
-        RESERVED_SPEC_KEYS.mixins(Constructor, spec.mixins);
-      }
-      for (var name in spec) {
-        if (!spec.hasOwnProperty(name)) {
-          continue;
-        }
-        if (name === MIXINS_KEY) {
-          continue;
-        }
-        var property = spec[name];
-        validateMethodOverride(proto, name);
-        if (RESERVED_SPEC_KEYS.hasOwnProperty(name)) {
-          RESERVED_SPEC_KEYS[name](Constructor, property);
-        } else {
-          var isReactClassMethod = ReactClassInterface.hasOwnProperty(name);
-          var isAlreadyDefined = proto.hasOwnProperty(name);
-          var isFunction = typeof property === 'function';
-          var shouldAutoBind = isFunction && !isReactClassMethod && !isAlreadyDefined && spec.autobind !== false;
-          if (shouldAutoBind) {
-            if (!proto.__reactAutoBindMap) {
-              proto.__reactAutoBindMap = {};
-            }
-            proto.__reactAutoBindMap[name] = property;
-            proto[name] = property;
-          } else {
-            if (isAlreadyDefined) {
-              var specPolicy = ReactClassInterface[name];
-              !(isReactClassMethod && (specPolicy === SpecPolicy.DEFINE_MANY_MERGED || specPolicy === SpecPolicy.DEFINE_MANY)) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactClass: Unexpected spec policy %s for key %s ' + 'when mixing in component specs.', specPolicy, name) : invariant(false) : undefined;
-              if (specPolicy === SpecPolicy.DEFINE_MANY_MERGED) {
-                proto[name] = createMergedResultFunction(proto[name], property);
-              } else if (specPolicy === SpecPolicy.DEFINE_MANY) {
-                proto[name] = createChainedFunction(proto[name], property);
-              }
-            } else {
-              proto[name] = property;
-              if (process.env.NODE_ENV !== 'production') {
-                if (typeof property === 'function' && spec.displayName) {
-                  proto[name].displayName = spec.displayName + '_' + name;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-    function mixStaticSpecIntoComponent(Constructor, statics) {
-      if (!statics) {
-        return;
-      }
-      for (var name in statics) {
-        var property = statics[name];
-        if (!statics.hasOwnProperty(name)) {
-          continue;
-        }
-        var isReserved = (name in RESERVED_SPEC_KEYS);
-        !!isReserved ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactClass: You are attempting to define a reserved ' + 'property, `%s`, that shouldn\'t be on the "statics" key. Define it ' + 'as an instance property instead; it will still be accessible on the ' + 'constructor.', name) : invariant(false) : undefined;
-        var isInherited = (name in Constructor);
-        !!isInherited ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactClass: You are attempting to define ' + '`%s` on your component more than once. This conflict may be ' + 'due to a mixin.', name) : invariant(false) : undefined;
-        Constructor[name] = property;
-      }
-    }
-    function mergeIntoWithNoDuplicateKeys(one, two) {
-      !(one && two && typeof one === 'object' && typeof two === 'object') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'mergeIntoWithNoDuplicateKeys(): Cannot merge non-objects.') : invariant(false) : undefined;
-      for (var key in two) {
-        if (two.hasOwnProperty(key)) {
-          !(one[key] === undefined) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'mergeIntoWithNoDuplicateKeys(): ' + 'Tried to merge two objects with the same key: `%s`. This conflict ' + 'may be due to a mixin; in particular, this may be caused by two ' + 'getInitialState() or getDefaultProps() methods returning objects ' + 'with clashing keys.', key) : invariant(false) : undefined;
-          one[key] = two[key];
-        }
-      }
-      return one;
-    }
-    function createMergedResultFunction(one, two) {
-      return function mergedResult() {
-        var a = one.apply(this, arguments);
-        var b = two.apply(this, arguments);
-        if (a == null) {
-          return b;
-        } else if (b == null) {
-          return a;
-        }
-        var c = {};
-        mergeIntoWithNoDuplicateKeys(c, a);
-        mergeIntoWithNoDuplicateKeys(c, b);
-        return c;
-      };
-    }
-    function createChainedFunction(one, two) {
-      return function chainedFunction() {
-        one.apply(this, arguments);
-        two.apply(this, arguments);
-      };
-    }
-    function bindAutoBindMethod(component, method) {
-      var boundMethod = method.bind(component);
-      if (process.env.NODE_ENV !== 'production') {
-        boundMethod.__reactBoundContext = component;
-        boundMethod.__reactBoundMethod = method;
-        boundMethod.__reactBoundArguments = null;
-        var componentName = component.constructor.displayName;
-        var _bind = boundMethod.bind;
-        boundMethod.bind = function(newThis) {
-          for (var _len = arguments.length,
-              args = Array(_len > 1 ? _len - 1 : 0),
-              _key = 1; _key < _len; _key++) {
-            args[_key - 1] = arguments[_key];
-          }
-          if (newThis !== component && newThis !== null) {
-            process.env.NODE_ENV !== 'production' ? warning(false, 'bind(): React component methods may only be bound to the ' + 'component instance. See %s', componentName) : undefined;
-          } else if (!args.length) {
-            process.env.NODE_ENV !== 'production' ? warning(false, 'bind(): You are binding a component method to the component. ' + 'React does this for you automatically in a high-performance ' + 'way, so you can safely remove this call. See %s', componentName) : undefined;
-            return boundMethod;
-          }
-          var reboundMethod = _bind.apply(boundMethod, arguments);
-          reboundMethod.__reactBoundContext = component;
-          reboundMethod.__reactBoundMethod = method;
-          reboundMethod.__reactBoundArguments = args;
-          return reboundMethod;
-        };
-      }
-      return boundMethod;
-    }
-    function bindAutoBindMethods(component) {
-      for (var autoBindKey in component.__reactAutoBindMap) {
-        if (component.__reactAutoBindMap.hasOwnProperty(autoBindKey)) {
-          var method = component.__reactAutoBindMap[autoBindKey];
-          component[autoBindKey] = bindAutoBindMethod(component, method);
-        }
-      }
-    }
-    var ReactClassMixin = {
-      replaceState: function(newState, callback) {
-        this.updater.enqueueReplaceState(this, newState);
-        if (callback) {
-          this.updater.enqueueCallback(this, callback);
-        }
-      },
-      isMounted: function() {
-        return this.updater.isMounted(this);
-      },
-      setProps: function(partialProps, callback) {
-        if (process.env.NODE_ENV !== 'production') {
-          warnSetProps();
-        }
-        this.updater.enqueueSetProps(this, partialProps);
-        if (callback) {
-          this.updater.enqueueCallback(this, callback);
-        }
-      },
-      replaceProps: function(newProps, callback) {
-        if (process.env.NODE_ENV !== 'production') {
-          warnSetProps();
-        }
-        this.updater.enqueueReplaceProps(this, newProps);
-        if (callback) {
-          this.updater.enqueueCallback(this, callback);
-        }
-      }
-    };
-    var ReactClassComponent = function() {};
-    assign(ReactClassComponent.prototype, ReactComponent.prototype, ReactClassMixin);
-    var ReactClass = {
-      createClass: function(spec) {
-        var Constructor = function(props, context, updater) {
-          if (process.env.NODE_ENV !== 'production') {
-            process.env.NODE_ENV !== 'production' ? warning(this instanceof Constructor, 'Something is calling a React component directly. Use a factory or ' + 'JSX instead. See: https://fb.me/react-legacyfactory') : undefined;
-          }
-          if (this.__reactAutoBindMap) {
-            bindAutoBindMethods(this);
-          }
-          this.props = props;
-          this.context = context;
-          this.refs = emptyObject;
-          this.updater = updater || ReactNoopUpdateQueue;
-          this.state = null;
-          var initialState = this.getInitialState ? this.getInitialState() : null;
-          if (process.env.NODE_ENV !== 'production') {
-            if (typeof initialState === 'undefined' && this.getInitialState._isMockFunction) {
-              initialState = null;
-            }
-          }
-          !(typeof initialState === 'object' && !Array.isArray(initialState)) ? process.env.NODE_ENV !== 'production' ? invariant(false, '%s.getInitialState(): must return an object or null', Constructor.displayName || 'ReactCompositeComponent') : invariant(false) : undefined;
-          this.state = initialState;
-        };
-        Constructor.prototype = new ReactClassComponent();
-        Constructor.prototype.constructor = Constructor;
-        injectedMixins.forEach(mixSpecIntoComponent.bind(null, Constructor));
-        mixSpecIntoComponent(Constructor, spec);
-        if (Constructor.getDefaultProps) {
-          Constructor.defaultProps = Constructor.getDefaultProps();
-        }
-        if (process.env.NODE_ENV !== 'production') {
-          if (Constructor.getDefaultProps) {
-            Constructor.getDefaultProps.isReactClassApproved = {};
-          }
-          if (Constructor.prototype.getInitialState) {
-            Constructor.prototype.getInitialState.isReactClassApproved = {};
-          }
-        }
-        !Constructor.prototype.render ? process.env.NODE_ENV !== 'production' ? invariant(false, 'createClass(...): Class specification must implement a `render` method.') : invariant(false) : undefined;
-        if (process.env.NODE_ENV !== 'production') {
-          process.env.NODE_ENV !== 'production' ? warning(!Constructor.prototype.componentShouldUpdate, '%s has a method called ' + 'componentShouldUpdate(). Did you mean shouldComponentUpdate()? ' + 'The name is phrased as a question because the function is ' + 'expected to return a value.', spec.displayName || 'A component') : undefined;
-          process.env.NODE_ENV !== 'production' ? warning(!Constructor.prototype.componentWillRecieveProps, '%s has a method called ' + 'componentWillRecieveProps(). Did you mean componentWillReceiveProps()?', spec.displayName || 'A component') : undefined;
-        }
-        for (var methodName in ReactClassInterface) {
-          if (!Constructor.prototype[methodName]) {
-            Constructor.prototype[methodName] = null;
-          }
-        }
-        return Constructor;
-      },
-      injection: {injectMixin: function(mixin) {
-          injectedMixins.push(mixin);
-        }}
-    };
-    module.exports = ReactClass;
-  })($__require('github:jspm/nodelibs-process@0.1.2'));
-  global.define = __define;
-  return module.exports;
-});
-
 System.registerDynamic("npm:react@0.14.6/lib/ReactInjection", ["npm:react@0.14.6/lib/DOMProperty", "npm:react@0.14.6/lib/EventPluginHub", "npm:react@0.14.6/lib/ReactComponentEnvironment", "npm:react@0.14.6/lib/ReactClass", "npm:react@0.14.6/lib/ReactEmptyComponent", "npm:react@0.14.6/lib/ReactBrowserEventEmitter", "npm:react@0.14.6/lib/ReactNativeComponent", "npm:react@0.14.6/lib/ReactPerf", "npm:react@0.14.6/lib/ReactRootIndex", "npm:react@0.14.6/lib/ReactUpdates"], true, function($__require, exports, module) {
   "use strict";
   ;
@@ -6435,27 +5019,6 @@ System.registerDynamic("npm:react@0.14.6/lib/getEventCharCode", [], true, functi
   return module.exports;
 });
 
-System.registerDynamic("npm:fbjs@0.6.1/lib/keyOf", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var keyOf = function(oneKeyObj) {
-    var key;
-    for (key in oneKeyObj) {
-      if (!oneKeyObj.hasOwnProperty(key)) {
-        continue;
-      }
-      return key;
-    }
-    return null;
-  };
-  module.exports = keyOf;
-  global.define = __define;
-  return module.exports;
-});
-
 System.registerDynamic("npm:react@0.14.6/lib/SimpleEventPlugin", ["npm:react@0.14.6/lib/EventConstants", "npm:fbjs@0.6.1/lib/EventListener", "npm:react@0.14.6/lib/EventPropagators", "npm:react@0.14.6/lib/ReactMount", "npm:react@0.14.6/lib/SyntheticClipboardEvent", "npm:react@0.14.6/lib/SyntheticEvent", "npm:react@0.14.6/lib/SyntheticFocusEvent", "npm:react@0.14.6/lib/SyntheticKeyboardEvent", "npm:react@0.14.6/lib/SyntheticMouseEvent", "npm:react@0.14.6/lib/SyntheticDragEvent", "npm:react@0.14.6/lib/SyntheticTouchEvent", "npm:react@0.14.6/lib/SyntheticUIEvent", "npm:react@0.14.6/lib/SyntheticWheelEvent", "npm:fbjs@0.6.1/lib/emptyFunction", "npm:react@0.14.6/lib/getEventCharCode", "npm:fbjs@0.6.1/lib/invariant", "npm:fbjs@0.6.1/lib/keyOf", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
   ;
   var global = this,
@@ -7165,360 +5728,6 @@ System.registerDynamic("npm:react@0.14.6/lib/ReactDefaultPerfAnalysis", ["npm:re
     getTotalTime: getTotalTime
   };
   module.exports = ReactDefaultPerfAnalysis;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:fbjs@0.6.1/lib/performance", ["npm:fbjs@0.6.1/lib/ExecutionEnvironment"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var ExecutionEnvironment = $__require('npm:fbjs@0.6.1/lib/ExecutionEnvironment');
-  var performance;
-  if (ExecutionEnvironment.canUseDOM) {
-    performance = window.performance || window.msPerformance || window.webkitPerformance;
-  }
-  module.exports = performance || {};
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:fbjs@0.6.1/lib/performanceNow", ["npm:fbjs@0.6.1/lib/performance"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var performance = $__require('npm:fbjs@0.6.1/lib/performance');
-  var performanceNow;
-  if (performance.now) {
-    performanceNow = function() {
-      return performance.now();
-    };
-  } else {
-    performanceNow = function() {
-      return Date.now();
-    };
-  }
-  module.exports = performanceNow;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/ReactDefaultPerf", ["npm:react@0.14.6/lib/DOMProperty", "npm:react@0.14.6/lib/ReactDefaultPerfAnalysis", "npm:react@0.14.6/lib/ReactMount", "npm:react@0.14.6/lib/ReactPerf", "npm:fbjs@0.6.1/lib/performanceNow"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var DOMProperty = $__require('npm:react@0.14.6/lib/DOMProperty');
-  var ReactDefaultPerfAnalysis = $__require('npm:react@0.14.6/lib/ReactDefaultPerfAnalysis');
-  var ReactMount = $__require('npm:react@0.14.6/lib/ReactMount');
-  var ReactPerf = $__require('npm:react@0.14.6/lib/ReactPerf');
-  var performanceNow = $__require('npm:fbjs@0.6.1/lib/performanceNow');
-  function roundFloat(val) {
-    return Math.floor(val * 100) / 100;
-  }
-  function addValue(obj, key, val) {
-    obj[key] = (obj[key] || 0) + val;
-  }
-  var ReactDefaultPerf = {
-    _allMeasurements: [],
-    _mountStack: [0],
-    _injected: false,
-    start: function() {
-      if (!ReactDefaultPerf._injected) {
-        ReactPerf.injection.injectMeasure(ReactDefaultPerf.measure);
-      }
-      ReactDefaultPerf._allMeasurements.length = 0;
-      ReactPerf.enableMeasure = true;
-    },
-    stop: function() {
-      ReactPerf.enableMeasure = false;
-    },
-    getLastMeasurements: function() {
-      return ReactDefaultPerf._allMeasurements;
-    },
-    printExclusive: function(measurements) {
-      measurements = measurements || ReactDefaultPerf._allMeasurements;
-      var summary = ReactDefaultPerfAnalysis.getExclusiveSummary(measurements);
-      console.table(summary.map(function(item) {
-        return {
-          'Component class name': item.componentName,
-          'Total inclusive time (ms)': roundFloat(item.inclusive),
-          'Exclusive mount time (ms)': roundFloat(item.exclusive),
-          'Exclusive render time (ms)': roundFloat(item.render),
-          'Mount time per instance (ms)': roundFloat(item.exclusive / item.count),
-          'Render time per instance (ms)': roundFloat(item.render / item.count),
-          'Instances': item.count
-        };
-      }));
-    },
-    printInclusive: function(measurements) {
-      measurements = measurements || ReactDefaultPerf._allMeasurements;
-      var summary = ReactDefaultPerfAnalysis.getInclusiveSummary(measurements);
-      console.table(summary.map(function(item) {
-        return {
-          'Owner > component': item.componentName,
-          'Inclusive time (ms)': roundFloat(item.time),
-          'Instances': item.count
-        };
-      }));
-      console.log('Total time:', ReactDefaultPerfAnalysis.getTotalTime(measurements).toFixed(2) + ' ms');
-    },
-    getMeasurementsSummaryMap: function(measurements) {
-      var summary = ReactDefaultPerfAnalysis.getInclusiveSummary(measurements, true);
-      return summary.map(function(item) {
-        return {
-          'Owner > component': item.componentName,
-          'Wasted time (ms)': item.time,
-          'Instances': item.count
-        };
-      });
-    },
-    printWasted: function(measurements) {
-      measurements = measurements || ReactDefaultPerf._allMeasurements;
-      console.table(ReactDefaultPerf.getMeasurementsSummaryMap(measurements));
-      console.log('Total time:', ReactDefaultPerfAnalysis.getTotalTime(measurements).toFixed(2) + ' ms');
-    },
-    printDOM: function(measurements) {
-      measurements = measurements || ReactDefaultPerf._allMeasurements;
-      var summary = ReactDefaultPerfAnalysis.getDOMSummary(measurements);
-      console.table(summary.map(function(item) {
-        var result = {};
-        result[DOMProperty.ID_ATTRIBUTE_NAME] = item.id;
-        result.type = item.type;
-        result.args = JSON.stringify(item.args);
-        return result;
-      }));
-      console.log('Total time:', ReactDefaultPerfAnalysis.getTotalTime(measurements).toFixed(2) + ' ms');
-    },
-    _recordWrite: function(id, fnName, totalTime, args) {
-      var writes = ReactDefaultPerf._allMeasurements[ReactDefaultPerf._allMeasurements.length - 1].writes;
-      writes[id] = writes[id] || [];
-      writes[id].push({
-        type: fnName,
-        time: totalTime,
-        args: args
-      });
-    },
-    measure: function(moduleName, fnName, func) {
-      return function() {
-        for (var _len = arguments.length,
-            args = Array(_len),
-            _key = 0; _key < _len; _key++) {
-          args[_key] = arguments[_key];
-        }
-        var totalTime;
-        var rv;
-        var start;
-        if (fnName === '_renderNewRootComponent' || fnName === 'flushBatchedUpdates') {
-          ReactDefaultPerf._allMeasurements.push({
-            exclusive: {},
-            inclusive: {},
-            render: {},
-            counts: {},
-            writes: {},
-            displayNames: {},
-            totalTime: 0,
-            created: {}
-          });
-          start = performanceNow();
-          rv = func.apply(this, args);
-          ReactDefaultPerf._allMeasurements[ReactDefaultPerf._allMeasurements.length - 1].totalTime = performanceNow() - start;
-          return rv;
-        } else if (fnName === '_mountImageIntoNode' || moduleName === 'ReactBrowserEventEmitter' || moduleName === 'ReactDOMIDOperations' || moduleName === 'CSSPropertyOperations' || moduleName === 'DOMChildrenOperations' || moduleName === 'DOMPropertyOperations') {
-          start = performanceNow();
-          rv = func.apply(this, args);
-          totalTime = performanceNow() - start;
-          if (fnName === '_mountImageIntoNode') {
-            var mountID = ReactMount.getID(args[1]);
-            ReactDefaultPerf._recordWrite(mountID, fnName, totalTime, args[0]);
-          } else if (fnName === 'dangerouslyProcessChildrenUpdates') {
-            args[0].forEach(function(update) {
-              var writeArgs = {};
-              if (update.fromIndex !== null) {
-                writeArgs.fromIndex = update.fromIndex;
-              }
-              if (update.toIndex !== null) {
-                writeArgs.toIndex = update.toIndex;
-              }
-              if (update.textContent !== null) {
-                writeArgs.textContent = update.textContent;
-              }
-              if (update.markupIndex !== null) {
-                writeArgs.markup = args[1][update.markupIndex];
-              }
-              ReactDefaultPerf._recordWrite(update.parentID, update.type, totalTime, writeArgs);
-            });
-          } else {
-            var id = args[0];
-            if (typeof id === 'object') {
-              id = ReactMount.getID(args[0]);
-            }
-            ReactDefaultPerf._recordWrite(id, fnName, totalTime, Array.prototype.slice.call(args, 1));
-          }
-          return rv;
-        } else if (moduleName === 'ReactCompositeComponent' && (fnName === 'mountComponent' || fnName === 'updateComponent' || fnName === '_renderValidatedComponent')) {
-          if (this._currentElement.type === ReactMount.TopLevelWrapper) {
-            return func.apply(this, args);
-          }
-          var rootNodeID = fnName === 'mountComponent' ? args[0] : this._rootNodeID;
-          var isRender = fnName === '_renderValidatedComponent';
-          var isMount = fnName === 'mountComponent';
-          var mountStack = ReactDefaultPerf._mountStack;
-          var entry = ReactDefaultPerf._allMeasurements[ReactDefaultPerf._allMeasurements.length - 1];
-          if (isRender) {
-            addValue(entry.counts, rootNodeID, 1);
-          } else if (isMount) {
-            entry.created[rootNodeID] = true;
-            mountStack.push(0);
-          }
-          start = performanceNow();
-          rv = func.apply(this, args);
-          totalTime = performanceNow() - start;
-          if (isRender) {
-            addValue(entry.render, rootNodeID, totalTime);
-          } else if (isMount) {
-            var subMountTime = mountStack.pop();
-            mountStack[mountStack.length - 1] += totalTime;
-            addValue(entry.exclusive, rootNodeID, totalTime - subMountTime);
-            addValue(entry.inclusive, rootNodeID, totalTime);
-          } else {
-            addValue(entry.inclusive, rootNodeID, totalTime);
-          }
-          entry.displayNames[rootNodeID] = {
-            current: this.getName(),
-            owner: this._currentElement._owner ? this._currentElement._owner.getName() : '<root>'
-          };
-          return rv;
-        } else {
-          return func.apply(this, args);
-        }
-      };
-    }
-  };
-  module.exports = ReactDefaultPerf;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/ReactDefaultInjection", ["npm:react@0.14.6/lib/BeforeInputEventPlugin", "npm:react@0.14.6/lib/ChangeEventPlugin", "npm:react@0.14.6/lib/ClientReactRootIndex", "npm:react@0.14.6/lib/DefaultEventPluginOrder", "npm:react@0.14.6/lib/EnterLeaveEventPlugin", "npm:fbjs@0.6.1/lib/ExecutionEnvironment", "npm:react@0.14.6/lib/HTMLDOMPropertyConfig", "npm:react@0.14.6/lib/ReactBrowserComponentMixin", "npm:react@0.14.6/lib/ReactComponentBrowserEnvironment", "npm:react@0.14.6/lib/ReactDefaultBatchingStrategy", "npm:react@0.14.6/lib/ReactDOMComponent", "npm:react@0.14.6/lib/ReactDOMTextComponent", "npm:react@0.14.6/lib/ReactEventListener", "npm:react@0.14.6/lib/ReactInjection", "npm:react@0.14.6/lib/ReactInstanceHandles", "npm:react@0.14.6/lib/ReactMount", "npm:react@0.14.6/lib/ReactReconcileTransaction", "npm:react@0.14.6/lib/SelectEventPlugin", "npm:react@0.14.6/lib/ServerReactRootIndex", "npm:react@0.14.6/lib/SimpleEventPlugin", "npm:react@0.14.6/lib/SVGDOMPropertyConfig", "npm:react@0.14.6/lib/ReactDefaultPerf", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    var BeforeInputEventPlugin = $__require('npm:react@0.14.6/lib/BeforeInputEventPlugin');
-    var ChangeEventPlugin = $__require('npm:react@0.14.6/lib/ChangeEventPlugin');
-    var ClientReactRootIndex = $__require('npm:react@0.14.6/lib/ClientReactRootIndex');
-    var DefaultEventPluginOrder = $__require('npm:react@0.14.6/lib/DefaultEventPluginOrder');
-    var EnterLeaveEventPlugin = $__require('npm:react@0.14.6/lib/EnterLeaveEventPlugin');
-    var ExecutionEnvironment = $__require('npm:fbjs@0.6.1/lib/ExecutionEnvironment');
-    var HTMLDOMPropertyConfig = $__require('npm:react@0.14.6/lib/HTMLDOMPropertyConfig');
-    var ReactBrowserComponentMixin = $__require('npm:react@0.14.6/lib/ReactBrowserComponentMixin');
-    var ReactComponentBrowserEnvironment = $__require('npm:react@0.14.6/lib/ReactComponentBrowserEnvironment');
-    var ReactDefaultBatchingStrategy = $__require('npm:react@0.14.6/lib/ReactDefaultBatchingStrategy');
-    var ReactDOMComponent = $__require('npm:react@0.14.6/lib/ReactDOMComponent');
-    var ReactDOMTextComponent = $__require('npm:react@0.14.6/lib/ReactDOMTextComponent');
-    var ReactEventListener = $__require('npm:react@0.14.6/lib/ReactEventListener');
-    var ReactInjection = $__require('npm:react@0.14.6/lib/ReactInjection');
-    var ReactInstanceHandles = $__require('npm:react@0.14.6/lib/ReactInstanceHandles');
-    var ReactMount = $__require('npm:react@0.14.6/lib/ReactMount');
-    var ReactReconcileTransaction = $__require('npm:react@0.14.6/lib/ReactReconcileTransaction');
-    var SelectEventPlugin = $__require('npm:react@0.14.6/lib/SelectEventPlugin');
-    var ServerReactRootIndex = $__require('npm:react@0.14.6/lib/ServerReactRootIndex');
-    var SimpleEventPlugin = $__require('npm:react@0.14.6/lib/SimpleEventPlugin');
-    var SVGDOMPropertyConfig = $__require('npm:react@0.14.6/lib/SVGDOMPropertyConfig');
-    var alreadyInjected = false;
-    function inject() {
-      if (alreadyInjected) {
-        return;
-      }
-      alreadyInjected = true;
-      ReactInjection.EventEmitter.injectReactEventListener(ReactEventListener);
-      ReactInjection.EventPluginHub.injectEventPluginOrder(DefaultEventPluginOrder);
-      ReactInjection.EventPluginHub.injectInstanceHandle(ReactInstanceHandles);
-      ReactInjection.EventPluginHub.injectMount(ReactMount);
-      ReactInjection.EventPluginHub.injectEventPluginsByName({
-        SimpleEventPlugin: SimpleEventPlugin,
-        EnterLeaveEventPlugin: EnterLeaveEventPlugin,
-        ChangeEventPlugin: ChangeEventPlugin,
-        SelectEventPlugin: SelectEventPlugin,
-        BeforeInputEventPlugin: BeforeInputEventPlugin
-      });
-      ReactInjection.NativeComponent.injectGenericComponentClass(ReactDOMComponent);
-      ReactInjection.NativeComponent.injectTextComponentClass(ReactDOMTextComponent);
-      ReactInjection.Class.injectMixin(ReactBrowserComponentMixin);
-      ReactInjection.DOMProperty.injectDOMPropertyConfig(HTMLDOMPropertyConfig);
-      ReactInjection.DOMProperty.injectDOMPropertyConfig(SVGDOMPropertyConfig);
-      ReactInjection.EmptyComponent.injectEmptyComponent('noscript');
-      ReactInjection.Updates.injectReconcileTransaction(ReactReconcileTransaction);
-      ReactInjection.Updates.injectBatchingStrategy(ReactDefaultBatchingStrategy);
-      ReactInjection.RootIndex.injectCreateReactRootIndex(ExecutionEnvironment.canUseDOM ? ClientReactRootIndex.createReactRootIndex : ServerReactRootIndex.createReactRootIndex);
-      ReactInjection.Component.injectEnvironment(ReactComponentBrowserEnvironment);
-      if (process.env.NODE_ENV !== 'production') {
-        var url = ExecutionEnvironment.canUseDOM && window.location.href || '';
-        if (/[?&]react_perf\b/.test(url)) {
-          var ReactDefaultPerf = $__require('npm:react@0.14.6/lib/ReactDefaultPerf');
-          ReactDefaultPerf.start();
-        }
-      }
-    }
-    module.exports = {inject: inject};
-  })($__require('github:jspm/nodelibs-process@0.1.2'));
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/ReactVersion", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  module.exports = '0.14.6';
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/findDOMNode", ["npm:react@0.14.6/lib/ReactCurrentOwner", "npm:react@0.14.6/lib/ReactInstanceMap", "npm:react@0.14.6/lib/ReactMount", "npm:fbjs@0.6.1/lib/invariant", "npm:fbjs@0.6.1/lib/warning", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    var ReactCurrentOwner = $__require('npm:react@0.14.6/lib/ReactCurrentOwner');
-    var ReactInstanceMap = $__require('npm:react@0.14.6/lib/ReactInstanceMap');
-    var ReactMount = $__require('npm:react@0.14.6/lib/ReactMount');
-    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
-    var warning = $__require('npm:fbjs@0.6.1/lib/warning');
-    function findDOMNode(componentOrElement) {
-      if (process.env.NODE_ENV !== 'production') {
-        var owner = ReactCurrentOwner.current;
-        if (owner !== null) {
-          process.env.NODE_ENV !== 'production' ? warning(owner._warnedAboutRefsInRender, '%s is accessing getDOMNode or findDOMNode inside its render(). ' + 'render() should be a pure function of props and state. It should ' + 'never access something that requires stale data from the previous ' + 'render, such as refs. Move this logic to componentDidMount and ' + 'componentDidUpdate instead.', owner.getName() || 'A component') : undefined;
-          owner._warnedAboutRefsInRender = true;
-        }
-      }
-      if (componentOrElement == null) {
-        return null;
-      }
-      if (componentOrElement.nodeType === 1) {
-        return componentOrElement;
-      }
-      if (ReactInstanceMap.has(componentOrElement)) {
-        return ReactMount.getNodeFromInstance(componentOrElement);
-      }
-      !(componentOrElement.render == null || typeof componentOrElement.render !== 'function') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'findDOMNode was called on an unmounted component.') : invariant(false) : undefined;
-      !false ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Element appears to be neither ReactComponent nor DOMNode (keys: %s)', Object.keys(componentOrElement)) : invariant(false) : undefined;
-    }
-    module.exports = findDOMNode;
-  })($__require('github:jspm/nodelibs-process@0.1.2'));
   global.define = __define;
   return module.exports;
 });
@@ -8462,209 +6671,6 @@ System.registerDynamic("npm:react@0.14.6/lib/ReactDOMFeatureFlags", [], true, fu
   return module.exports;
 });
 
-System.registerDynamic("npm:react@0.14.6/lib/ReactRootIndex", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var ReactRootIndexInjection = {injectCreateReactRootIndex: function(_createReactRootIndex) {
-      ReactRootIndex.createReactRootIndex = _createReactRootIndex;
-    }};
-  var ReactRootIndex = {
-    createReactRootIndex: null,
-    injection: ReactRootIndexInjection
-  };
-  module.exports = ReactRootIndex;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/ReactInstanceHandles", ["npm:react@0.14.6/lib/ReactRootIndex", "npm:fbjs@0.6.1/lib/invariant", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    var ReactRootIndex = $__require('npm:react@0.14.6/lib/ReactRootIndex');
-    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
-    var SEPARATOR = '.';
-    var SEPARATOR_LENGTH = SEPARATOR.length;
-    var MAX_TREE_DEPTH = 10000;
-    function getReactRootIDString(index) {
-      return SEPARATOR + index.toString(36);
-    }
-    function isBoundary(id, index) {
-      return id.charAt(index) === SEPARATOR || index === id.length;
-    }
-    function isValidID(id) {
-      return id === '' || id.charAt(0) === SEPARATOR && id.charAt(id.length - 1) !== SEPARATOR;
-    }
-    function isAncestorIDOf(ancestorID, descendantID) {
-      return descendantID.indexOf(ancestorID) === 0 && isBoundary(descendantID, ancestorID.length);
-    }
-    function getParentID(id) {
-      return id ? id.substr(0, id.lastIndexOf(SEPARATOR)) : '';
-    }
-    function getNextDescendantID(ancestorID, destinationID) {
-      !(isValidID(ancestorID) && isValidID(destinationID)) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'getNextDescendantID(%s, %s): Received an invalid React DOM ID.', ancestorID, destinationID) : invariant(false) : undefined;
-      !isAncestorIDOf(ancestorID, destinationID) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'getNextDescendantID(...): React has made an invalid assumption about ' + 'the DOM hierarchy. Expected `%s` to be an ancestor of `%s`.', ancestorID, destinationID) : invariant(false) : undefined;
-      if (ancestorID === destinationID) {
-        return ancestorID;
-      }
-      var start = ancestorID.length + SEPARATOR_LENGTH;
-      var i;
-      for (i = start; i < destinationID.length; i++) {
-        if (isBoundary(destinationID, i)) {
-          break;
-        }
-      }
-      return destinationID.substr(0, i);
-    }
-    function getFirstCommonAncestorID(oneID, twoID) {
-      var minLength = Math.min(oneID.length, twoID.length);
-      if (minLength === 0) {
-        return '';
-      }
-      var lastCommonMarkerIndex = 0;
-      for (var i = 0; i <= minLength; i++) {
-        if (isBoundary(oneID, i) && isBoundary(twoID, i)) {
-          lastCommonMarkerIndex = i;
-        } else if (oneID.charAt(i) !== twoID.charAt(i)) {
-          break;
-        }
-      }
-      var longestCommonID = oneID.substr(0, lastCommonMarkerIndex);
-      !isValidID(longestCommonID) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'getFirstCommonAncestorID(%s, %s): Expected a valid React DOM ID: %s', oneID, twoID, longestCommonID) : invariant(false) : undefined;
-      return longestCommonID;
-    }
-    function traverseParentPath(start, stop, cb, arg, skipFirst, skipLast) {
-      start = start || '';
-      stop = stop || '';
-      !(start !== stop) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'traverseParentPath(...): Cannot traverse from and to the same ID, `%s`.', start) : invariant(false) : undefined;
-      var traverseUp = isAncestorIDOf(stop, start);
-      !(traverseUp || isAncestorIDOf(start, stop)) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'traverseParentPath(%s, %s, ...): Cannot traverse from two IDs that do ' + 'not have a parent path.', start, stop) : invariant(false) : undefined;
-      var depth = 0;
-      var traverse = traverseUp ? getParentID : getNextDescendantID;
-      for (var id = start; ; id = traverse(id, stop)) {
-        var ret;
-        if ((!skipFirst || id !== start) && (!skipLast || id !== stop)) {
-          ret = cb(id, traverseUp, arg);
-        }
-        if (ret === false || id === stop) {
-          break;
-        }
-        !(depth++ < MAX_TREE_DEPTH) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'traverseParentPath(%s, %s, ...): Detected an infinite loop while ' + 'traversing the React DOM ID tree. This may be due to malformed IDs: %s', start, stop, id) : invariant(false) : undefined;
-      }
-    }
-    var ReactInstanceHandles = {
-      createReactRootID: function() {
-        return getReactRootIDString(ReactRootIndex.createReactRootIndex());
-      },
-      createReactID: function(rootID, name) {
-        return rootID + name;
-      },
-      getReactRootIDFromNodeID: function(id) {
-        if (id && id.charAt(0) === SEPARATOR && id.length > 1) {
-          var index = id.indexOf(SEPARATOR, 1);
-          return index > -1 ? id.substr(0, index) : id;
-        }
-        return null;
-      },
-      traverseEnterLeave: function(leaveID, enterID, cb, upArg, downArg) {
-        var ancestorID = getFirstCommonAncestorID(leaveID, enterID);
-        if (ancestorID !== leaveID) {
-          traverseParentPath(leaveID, ancestorID, cb, upArg, false, true);
-        }
-        if (ancestorID !== enterID) {
-          traverseParentPath(ancestorID, enterID, cb, downArg, true, false);
-        }
-      },
-      traverseTwoPhase: function(targetID, cb, arg) {
-        if (targetID) {
-          traverseParentPath('', targetID, cb, arg, true, false);
-          traverseParentPath(targetID, '', cb, arg, false, true);
-        }
-      },
-      traverseTwoPhaseSkipTarget: function(targetID, cb, arg) {
-        if (targetID) {
-          traverseParentPath('', targetID, cb, arg, true, true);
-          traverseParentPath(targetID, '', cb, arg, true, true);
-        }
-      },
-      traverseAncestors: function(targetID, cb, arg) {
-        traverseParentPath('', targetID, cb, arg, true, false);
-      },
-      getFirstCommonAncestorID: getFirstCommonAncestorID,
-      _getNextDescendantID: getNextDescendantID,
-      isAncestorIDOf: isAncestorIDOf,
-      SEPARATOR: SEPARATOR
-    };
-    module.exports = ReactInstanceHandles;
-  })($__require('github:jspm/nodelibs-process@0.1.2'));
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/adler32", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var MOD = 65521;
-  function adler32(data) {
-    var a = 1;
-    var b = 0;
-    var i = 0;
-    var l = data.length;
-    var m = l & ~0x3;
-    while (i < m) {
-      for (; i < Math.min(i + 4096, m); i += 4) {
-        b += (a += data.charCodeAt(i)) + (a += data.charCodeAt(i + 1)) + (a += data.charCodeAt(i + 2)) + (a += data.charCodeAt(i + 3));
-      }
-      a %= MOD;
-      b %= MOD;
-    }
-    for (; i < l; i++) {
-      b += a += data.charCodeAt(i);
-    }
-    a %= MOD;
-    b %= MOD;
-    return a | b << 16;
-  }
-  module.exports = adler32;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/ReactMarkupChecksum", ["npm:react@0.14.6/lib/adler32"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var adler32 = $__require('npm:react@0.14.6/lib/adler32');
-  var TAG_END = /\/?>/;
-  var ReactMarkupChecksum = {
-    CHECKSUM_ATTR_NAME: 'data-react-checksum',
-    addChecksumToMarkup: function(markup) {
-      var checksum = adler32(markup);
-      return markup.replace(TAG_END, ' ' + ReactMarkupChecksum.CHECKSUM_ATTR_NAME + '="' + checksum + '"$&');
-    },
-    canReuseMarkup: function(markup, element) {
-      var existingChecksum = element.getAttribute(ReactMarkupChecksum.CHECKSUM_ATTR_NAME);
-      existingChecksum = existingChecksum && parseInt(existingChecksum, 10);
-      var markupChecksum = adler32(markup);
-      return markupChecksum === existingChecksum;
-    }
-  };
-  module.exports = ReactMarkupChecksum;
-  global.define = __define;
-  return module.exports;
-});
-
 System.registerDynamic("npm:fbjs@0.6.1/lib/isNode", [], true, function($__require, exports, module) {
   "use strict";
   ;
@@ -8732,1626 +6738,6 @@ System.registerDynamic("npm:fbjs@0.6.1/lib/containsNode", ["npm:fbjs@0.6.1/lib/i
   return module.exports;
 });
 
-System.registerDynamic("npm:react@0.14.6/lib/ReactComponentEnvironment", ["npm:fbjs@0.6.1/lib/invariant", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
-    var injected = false;
-    var ReactComponentEnvironment = {
-      unmountIDFromEnvironment: null,
-      replaceNodeWithMarkupByID: null,
-      processChildrenUpdates: null,
-      injection: {injectEnvironment: function(environment) {
-          !!injected ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactCompositeComponent: injectEnvironment() can only be called once.') : invariant(false) : undefined;
-          ReactComponentEnvironment.unmountIDFromEnvironment = environment.unmountIDFromEnvironment;
-          ReactComponentEnvironment.replaceNodeWithMarkupByID = environment.replaceNodeWithMarkupByID;
-          ReactComponentEnvironment.processChildrenUpdates = environment.processChildrenUpdates;
-          injected = true;
-        }}
-    };
-    module.exports = ReactComponentEnvironment;
-  })($__require('github:jspm/nodelibs-process@0.1.2'));
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:fbjs@0.6.1/lib/keyMirror", ["npm:fbjs@0.6.1/lib/invariant", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
-    var keyMirror = function(obj) {
-      var ret = {};
-      var key;
-      !(obj instanceof Object && !Array.isArray(obj)) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'keyMirror(...): Argument must be an object.') : invariant(false) : undefined;
-      for (key in obj) {
-        if (!obj.hasOwnProperty(key)) {
-          continue;
-        }
-        ret[key] = key;
-      }
-      return ret;
-    };
-    module.exports = keyMirror;
-  })($__require('github:jspm/nodelibs-process@0.1.2'));
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/ReactPropTypeLocations", ["npm:fbjs@0.6.1/lib/keyMirror"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var keyMirror = $__require('npm:fbjs@0.6.1/lib/keyMirror');
-  var ReactPropTypeLocations = keyMirror({
-    prop: null,
-    context: null,
-    childContext: null
-  });
-  module.exports = ReactPropTypeLocations;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/ReactPropTypeLocationNames", ["github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    var ReactPropTypeLocationNames = {};
-    if (process.env.NODE_ENV !== 'production') {
-      ReactPropTypeLocationNames = {
-        prop: 'prop',
-        context: 'context',
-        childContext: 'child context'
-      };
-    }
-    module.exports = ReactPropTypeLocationNames;
-  })($__require('github:jspm/nodelibs-process@0.1.2'));
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/ReactInstanceMap", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var ReactInstanceMap = {
-    remove: function(key) {
-      key._reactInternalInstance = undefined;
-    },
-    get: function(key) {
-      return key._reactInternalInstance;
-    },
-    has: function(key) {
-      return key._reactInternalInstance !== undefined;
-    },
-    set: function(key, value) {
-      key._reactInternalInstance = value;
-    }
-  };
-  module.exports = ReactInstanceMap;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/CallbackQueue", ["npm:react@0.14.6/lib/PooledClass", "npm:react@0.14.6/lib/Object.assign", "npm:fbjs@0.6.1/lib/invariant", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    var PooledClass = $__require('npm:react@0.14.6/lib/PooledClass');
-    var assign = $__require('npm:react@0.14.6/lib/Object.assign');
-    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
-    function CallbackQueue() {
-      this._callbacks = null;
-      this._contexts = null;
-    }
-    assign(CallbackQueue.prototype, {
-      enqueue: function(callback, context) {
-        this._callbacks = this._callbacks || [];
-        this._contexts = this._contexts || [];
-        this._callbacks.push(callback);
-        this._contexts.push(context);
-      },
-      notifyAll: function() {
-        var callbacks = this._callbacks;
-        var contexts = this._contexts;
-        if (callbacks) {
-          !(callbacks.length === contexts.length) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Mismatched list of contexts in callback queue') : invariant(false) : undefined;
-          this._callbacks = null;
-          this._contexts = null;
-          for (var i = 0; i < callbacks.length; i++) {
-            callbacks[i].call(contexts[i]);
-          }
-          callbacks.length = 0;
-          contexts.length = 0;
-        }
-      },
-      reset: function() {
-        this._callbacks = null;
-        this._contexts = null;
-      },
-      destructor: function() {
-        this.reset();
-      }
-    });
-    PooledClass.addPoolingTo(CallbackQueue);
-    module.exports = CallbackQueue;
-  })($__require('github:jspm/nodelibs-process@0.1.2'));
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/PooledClass", ["npm:fbjs@0.6.1/lib/invariant", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
-    var oneArgumentPooler = function(copyFieldsFrom) {
-      var Klass = this;
-      if (Klass.instancePool.length) {
-        var instance = Klass.instancePool.pop();
-        Klass.call(instance, copyFieldsFrom);
-        return instance;
-      } else {
-        return new Klass(copyFieldsFrom);
-      }
-    };
-    var twoArgumentPooler = function(a1, a2) {
-      var Klass = this;
-      if (Klass.instancePool.length) {
-        var instance = Klass.instancePool.pop();
-        Klass.call(instance, a1, a2);
-        return instance;
-      } else {
-        return new Klass(a1, a2);
-      }
-    };
-    var threeArgumentPooler = function(a1, a2, a3) {
-      var Klass = this;
-      if (Klass.instancePool.length) {
-        var instance = Klass.instancePool.pop();
-        Klass.call(instance, a1, a2, a3);
-        return instance;
-      } else {
-        return new Klass(a1, a2, a3);
-      }
-    };
-    var fourArgumentPooler = function(a1, a2, a3, a4) {
-      var Klass = this;
-      if (Klass.instancePool.length) {
-        var instance = Klass.instancePool.pop();
-        Klass.call(instance, a1, a2, a3, a4);
-        return instance;
-      } else {
-        return new Klass(a1, a2, a3, a4);
-      }
-    };
-    var fiveArgumentPooler = function(a1, a2, a3, a4, a5) {
-      var Klass = this;
-      if (Klass.instancePool.length) {
-        var instance = Klass.instancePool.pop();
-        Klass.call(instance, a1, a2, a3, a4, a5);
-        return instance;
-      } else {
-        return new Klass(a1, a2, a3, a4, a5);
-      }
-    };
-    var standardReleaser = function(instance) {
-      var Klass = this;
-      !(instance instanceof Klass) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Trying to release an instance into a pool of a different type.') : invariant(false) : undefined;
-      instance.destructor();
-      if (Klass.instancePool.length < Klass.poolSize) {
-        Klass.instancePool.push(instance);
-      }
-    };
-    var DEFAULT_POOL_SIZE = 10;
-    var DEFAULT_POOLER = oneArgumentPooler;
-    var addPoolingTo = function(CopyConstructor, pooler) {
-      var NewKlass = CopyConstructor;
-      NewKlass.instancePool = [];
-      NewKlass.getPooled = pooler || DEFAULT_POOLER;
-      if (!NewKlass.poolSize) {
-        NewKlass.poolSize = DEFAULT_POOL_SIZE;
-      }
-      NewKlass.release = standardReleaser;
-      return NewKlass;
-    };
-    var PooledClass = {
-      addPoolingTo: addPoolingTo,
-      oneArgumentPooler: oneArgumentPooler,
-      twoArgumentPooler: twoArgumentPooler,
-      threeArgumentPooler: threeArgumentPooler,
-      fourArgumentPooler: fourArgumentPooler,
-      fiveArgumentPooler: fiveArgumentPooler
-    };
-    module.exports = PooledClass;
-  })($__require('github:jspm/nodelibs-process@0.1.2'));
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/ReactPerf", ["github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    var ReactPerf = {
-      enableMeasure: false,
-      storedMeasure: _noMeasure,
-      measureMethods: function(object, objectName, methodNames) {
-        if (process.env.NODE_ENV !== 'production') {
-          for (var key in methodNames) {
-            if (!methodNames.hasOwnProperty(key)) {
-              continue;
-            }
-            object[key] = ReactPerf.measure(objectName, methodNames[key], object[key]);
-          }
-        }
-      },
-      measure: function(objName, fnName, func) {
-        if (process.env.NODE_ENV !== 'production') {
-          var measuredFunc = null;
-          var wrapper = function() {
-            if (ReactPerf.enableMeasure) {
-              if (!measuredFunc) {
-                measuredFunc = ReactPerf.storedMeasure(objName, fnName, func);
-              }
-              return measuredFunc.apply(this, arguments);
-            }
-            return func.apply(this, arguments);
-          };
-          wrapper.displayName = objName + '_' + fnName;
-          return wrapper;
-        }
-        return func;
-      },
-      injection: {injectMeasure: function(measure) {
-          ReactPerf.storedMeasure = measure;
-        }}
-    };
-    function _noMeasure(objName, fnName, func) {
-      return func;
-    }
-    module.exports = ReactPerf;
-  })($__require('github:jspm/nodelibs-process@0.1.2'));
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/Transaction", ["npm:fbjs@0.6.1/lib/invariant", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
-    var Mixin = {
-      reinitializeTransaction: function() {
-        this.transactionWrappers = this.getTransactionWrappers();
-        if (this.wrapperInitData) {
-          this.wrapperInitData.length = 0;
-        } else {
-          this.wrapperInitData = [];
-        }
-        this._isInTransaction = false;
-      },
-      _isInTransaction: false,
-      getTransactionWrappers: null,
-      isInTransaction: function() {
-        return !!this._isInTransaction;
-      },
-      perform: function(method, scope, a, b, c, d, e, f) {
-        !!this.isInTransaction() ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Transaction.perform(...): Cannot initialize a transaction when there ' + 'is already an outstanding transaction.') : invariant(false) : undefined;
-        var errorThrown;
-        var ret;
-        try {
-          this._isInTransaction = true;
-          errorThrown = true;
-          this.initializeAll(0);
-          ret = method.call(scope, a, b, c, d, e, f);
-          errorThrown = false;
-        } finally {
-          try {
-            if (errorThrown) {
-              try {
-                this.closeAll(0);
-              } catch (err) {}
-            } else {
-              this.closeAll(0);
-            }
-          } finally {
-            this._isInTransaction = false;
-          }
-        }
-        return ret;
-      },
-      initializeAll: function(startIndex) {
-        var transactionWrappers = this.transactionWrappers;
-        for (var i = startIndex; i < transactionWrappers.length; i++) {
-          var wrapper = transactionWrappers[i];
-          try {
-            this.wrapperInitData[i] = Transaction.OBSERVED_ERROR;
-            this.wrapperInitData[i] = wrapper.initialize ? wrapper.initialize.call(this) : null;
-          } finally {
-            if (this.wrapperInitData[i] === Transaction.OBSERVED_ERROR) {
-              try {
-                this.initializeAll(i + 1);
-              } catch (err) {}
-            }
-          }
-        }
-      },
-      closeAll: function(startIndex) {
-        !this.isInTransaction() ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Transaction.closeAll(): Cannot close transaction when none are open.') : invariant(false) : undefined;
-        var transactionWrappers = this.transactionWrappers;
-        for (var i = startIndex; i < transactionWrappers.length; i++) {
-          var wrapper = transactionWrappers[i];
-          var initData = this.wrapperInitData[i];
-          var errorThrown;
-          try {
-            errorThrown = true;
-            if (initData !== Transaction.OBSERVED_ERROR && wrapper.close) {
-              wrapper.close.call(this, initData);
-            }
-            errorThrown = false;
-          } finally {
-            if (errorThrown) {
-              try {
-                this.closeAll(i + 1);
-              } catch (e) {}
-            }
-          }
-        }
-        this.wrapperInitData.length = 0;
-      }
-    };
-    var Transaction = {
-      Mixin: Mixin,
-      OBSERVED_ERROR: {}
-    };
-    module.exports = Transaction;
-  })($__require('github:jspm/nodelibs-process@0.1.2'));
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/ReactUpdates", ["npm:react@0.14.6/lib/CallbackQueue", "npm:react@0.14.6/lib/PooledClass", "npm:react@0.14.6/lib/ReactPerf", "npm:react@0.14.6/lib/ReactReconciler", "npm:react@0.14.6/lib/Transaction", "npm:react@0.14.6/lib/Object.assign", "npm:fbjs@0.6.1/lib/invariant", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    var CallbackQueue = $__require('npm:react@0.14.6/lib/CallbackQueue');
-    var PooledClass = $__require('npm:react@0.14.6/lib/PooledClass');
-    var ReactPerf = $__require('npm:react@0.14.6/lib/ReactPerf');
-    var ReactReconciler = $__require('npm:react@0.14.6/lib/ReactReconciler');
-    var Transaction = $__require('npm:react@0.14.6/lib/Transaction');
-    var assign = $__require('npm:react@0.14.6/lib/Object.assign');
-    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
-    var dirtyComponents = [];
-    var asapCallbackQueue = CallbackQueue.getPooled();
-    var asapEnqueued = false;
-    var batchingStrategy = null;
-    function ensureInjected() {
-      !(ReactUpdates.ReactReconcileTransaction && batchingStrategy) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactUpdates: must inject a reconcile transaction class and batching ' + 'strategy') : invariant(false) : undefined;
-    }
-    var NESTED_UPDATES = {
-      initialize: function() {
-        this.dirtyComponentsLength = dirtyComponents.length;
-      },
-      close: function() {
-        if (this.dirtyComponentsLength !== dirtyComponents.length) {
-          dirtyComponents.splice(0, this.dirtyComponentsLength);
-          flushBatchedUpdates();
-        } else {
-          dirtyComponents.length = 0;
-        }
-      }
-    };
-    var UPDATE_QUEUEING = {
-      initialize: function() {
-        this.callbackQueue.reset();
-      },
-      close: function() {
-        this.callbackQueue.notifyAll();
-      }
-    };
-    var TRANSACTION_WRAPPERS = [NESTED_UPDATES, UPDATE_QUEUEING];
-    function ReactUpdatesFlushTransaction() {
-      this.reinitializeTransaction();
-      this.dirtyComponentsLength = null;
-      this.callbackQueue = CallbackQueue.getPooled();
-      this.reconcileTransaction = ReactUpdates.ReactReconcileTransaction.getPooled(false);
-    }
-    assign(ReactUpdatesFlushTransaction.prototype, Transaction.Mixin, {
-      getTransactionWrappers: function() {
-        return TRANSACTION_WRAPPERS;
-      },
-      destructor: function() {
-        this.dirtyComponentsLength = null;
-        CallbackQueue.release(this.callbackQueue);
-        this.callbackQueue = null;
-        ReactUpdates.ReactReconcileTransaction.release(this.reconcileTransaction);
-        this.reconcileTransaction = null;
-      },
-      perform: function(method, scope, a) {
-        return Transaction.Mixin.perform.call(this, this.reconcileTransaction.perform, this.reconcileTransaction, method, scope, a);
-      }
-    });
-    PooledClass.addPoolingTo(ReactUpdatesFlushTransaction);
-    function batchedUpdates(callback, a, b, c, d, e) {
-      ensureInjected();
-      batchingStrategy.batchedUpdates(callback, a, b, c, d, e);
-    }
-    function mountOrderComparator(c1, c2) {
-      return c1._mountOrder - c2._mountOrder;
-    }
-    function runBatchedUpdates(transaction) {
-      var len = transaction.dirtyComponentsLength;
-      !(len === dirtyComponents.length) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Expected flush transaction\'s stored dirty-components length (%s) to ' + 'match dirty-components array length (%s).', len, dirtyComponents.length) : invariant(false) : undefined;
-      dirtyComponents.sort(mountOrderComparator);
-      for (var i = 0; i < len; i++) {
-        var component = dirtyComponents[i];
-        var callbacks = component._pendingCallbacks;
-        component._pendingCallbacks = null;
-        ReactReconciler.performUpdateIfNecessary(component, transaction.reconcileTransaction);
-        if (callbacks) {
-          for (var j = 0; j < callbacks.length; j++) {
-            transaction.callbackQueue.enqueue(callbacks[j], component.getPublicInstance());
-          }
-        }
-      }
-    }
-    var flushBatchedUpdates = function() {
-      while (dirtyComponents.length || asapEnqueued) {
-        if (dirtyComponents.length) {
-          var transaction = ReactUpdatesFlushTransaction.getPooled();
-          transaction.perform(runBatchedUpdates, null, transaction);
-          ReactUpdatesFlushTransaction.release(transaction);
-        }
-        if (asapEnqueued) {
-          asapEnqueued = false;
-          var queue = asapCallbackQueue;
-          asapCallbackQueue = CallbackQueue.getPooled();
-          queue.notifyAll();
-          CallbackQueue.release(queue);
-        }
-      }
-    };
-    flushBatchedUpdates = ReactPerf.measure('ReactUpdates', 'flushBatchedUpdates', flushBatchedUpdates);
-    function enqueueUpdate(component) {
-      ensureInjected();
-      if (!batchingStrategy.isBatchingUpdates) {
-        batchingStrategy.batchedUpdates(enqueueUpdate, component);
-        return;
-      }
-      dirtyComponents.push(component);
-    }
-    function asap(callback, context) {
-      !batchingStrategy.isBatchingUpdates ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactUpdates.asap: Can\'t enqueue an asap callback in a context where' + 'updates are not being batched.') : invariant(false) : undefined;
-      asapCallbackQueue.enqueue(callback, context);
-      asapEnqueued = true;
-    }
-    var ReactUpdatesInjection = {
-      injectReconcileTransaction: function(ReconcileTransaction) {
-        !ReconcileTransaction ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactUpdates: must provide a reconcile transaction class') : invariant(false) : undefined;
-        ReactUpdates.ReactReconcileTransaction = ReconcileTransaction;
-      },
-      injectBatchingStrategy: function(_batchingStrategy) {
-        !_batchingStrategy ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactUpdates: must provide a batching strategy') : invariant(false) : undefined;
-        !(typeof _batchingStrategy.batchedUpdates === 'function') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactUpdates: must provide a batchedUpdates() function') : invariant(false) : undefined;
-        !(typeof _batchingStrategy.isBatchingUpdates === 'boolean') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactUpdates: must provide an isBatchingUpdates boolean attribute') : invariant(false) : undefined;
-        batchingStrategy = _batchingStrategy;
-      }
-    };
-    var ReactUpdates = {
-      ReactReconcileTransaction: null,
-      batchedUpdates: batchedUpdates,
-      enqueueUpdate: enqueueUpdate,
-      flushBatchedUpdates: flushBatchedUpdates,
-      injection: ReactUpdatesInjection,
-      asap: asap
-    };
-    module.exports = ReactUpdates;
-  })($__require('github:jspm/nodelibs-process@0.1.2'));
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/ReactUpdateQueue", ["npm:react@0.14.6/lib/ReactCurrentOwner", "npm:react@0.14.6/lib/ReactElement", "npm:react@0.14.6/lib/ReactInstanceMap", "npm:react@0.14.6/lib/ReactUpdates", "npm:react@0.14.6/lib/Object.assign", "npm:fbjs@0.6.1/lib/invariant", "npm:fbjs@0.6.1/lib/warning", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    var ReactCurrentOwner = $__require('npm:react@0.14.6/lib/ReactCurrentOwner');
-    var ReactElement = $__require('npm:react@0.14.6/lib/ReactElement');
-    var ReactInstanceMap = $__require('npm:react@0.14.6/lib/ReactInstanceMap');
-    var ReactUpdates = $__require('npm:react@0.14.6/lib/ReactUpdates');
-    var assign = $__require('npm:react@0.14.6/lib/Object.assign');
-    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
-    var warning = $__require('npm:fbjs@0.6.1/lib/warning');
-    function enqueueUpdate(internalInstance) {
-      ReactUpdates.enqueueUpdate(internalInstance);
-    }
-    function getInternalInstanceReadyForUpdate(publicInstance, callerName) {
-      var internalInstance = ReactInstanceMap.get(publicInstance);
-      if (!internalInstance) {
-        if (process.env.NODE_ENV !== 'production') {
-          process.env.NODE_ENV !== 'production' ? warning(!callerName, '%s(...): Can only update a mounted or mounting component. ' + 'This usually means you called %s() on an unmounted component. ' + 'This is a no-op. Please check the code for the %s component.', callerName, callerName, publicInstance.constructor.displayName) : undefined;
-        }
-        return null;
-      }
-      if (process.env.NODE_ENV !== 'production') {
-        process.env.NODE_ENV !== 'production' ? warning(ReactCurrentOwner.current == null, '%s(...): Cannot update during an existing state transition ' + '(such as within `render`). Render methods should be a pure function ' + 'of props and state.', callerName) : undefined;
-      }
-      return internalInstance;
-    }
-    var ReactUpdateQueue = {
-      isMounted: function(publicInstance) {
-        if (process.env.NODE_ENV !== 'production') {
-          var owner = ReactCurrentOwner.current;
-          if (owner !== null) {
-            process.env.NODE_ENV !== 'production' ? warning(owner._warnedAboutRefsInRender, '%s is accessing isMounted inside its render() function. ' + 'render() should be a pure function of props and state. It should ' + 'never access something that requires stale data from the previous ' + 'render, such as refs. Move this logic to componentDidMount and ' + 'componentDidUpdate instead.', owner.getName() || 'A component') : undefined;
-            owner._warnedAboutRefsInRender = true;
-          }
-        }
-        var internalInstance = ReactInstanceMap.get(publicInstance);
-        if (internalInstance) {
-          return !!internalInstance._renderedComponent;
-        } else {
-          return false;
-        }
-      },
-      enqueueCallback: function(publicInstance, callback) {
-        !(typeof callback === 'function') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'enqueueCallback(...): You called `setProps`, `replaceProps`, ' + '`setState`, `replaceState`, or `forceUpdate` with a callback that ' + 'isn\'t callable.') : invariant(false) : undefined;
-        var internalInstance = getInternalInstanceReadyForUpdate(publicInstance);
-        if (!internalInstance) {
-          return null;
-        }
-        if (internalInstance._pendingCallbacks) {
-          internalInstance._pendingCallbacks.push(callback);
-        } else {
-          internalInstance._pendingCallbacks = [callback];
-        }
-        enqueueUpdate(internalInstance);
-      },
-      enqueueCallbackInternal: function(internalInstance, callback) {
-        !(typeof callback === 'function') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'enqueueCallback(...): You called `setProps`, `replaceProps`, ' + '`setState`, `replaceState`, or `forceUpdate` with a callback that ' + 'isn\'t callable.') : invariant(false) : undefined;
-        if (internalInstance._pendingCallbacks) {
-          internalInstance._pendingCallbacks.push(callback);
-        } else {
-          internalInstance._pendingCallbacks = [callback];
-        }
-        enqueueUpdate(internalInstance);
-      },
-      enqueueForceUpdate: function(publicInstance) {
-        var internalInstance = getInternalInstanceReadyForUpdate(publicInstance, 'forceUpdate');
-        if (!internalInstance) {
-          return;
-        }
-        internalInstance._pendingForceUpdate = true;
-        enqueueUpdate(internalInstance);
-      },
-      enqueueReplaceState: function(publicInstance, completeState) {
-        var internalInstance = getInternalInstanceReadyForUpdate(publicInstance, 'replaceState');
-        if (!internalInstance) {
-          return;
-        }
-        internalInstance._pendingStateQueue = [completeState];
-        internalInstance._pendingReplaceState = true;
-        enqueueUpdate(internalInstance);
-      },
-      enqueueSetState: function(publicInstance, partialState) {
-        var internalInstance = getInternalInstanceReadyForUpdate(publicInstance, 'setState');
-        if (!internalInstance) {
-          return;
-        }
-        var queue = internalInstance._pendingStateQueue || (internalInstance._pendingStateQueue = []);
-        queue.push(partialState);
-        enqueueUpdate(internalInstance);
-      },
-      enqueueSetProps: function(publicInstance, partialProps) {
-        var internalInstance = getInternalInstanceReadyForUpdate(publicInstance, 'setProps');
-        if (!internalInstance) {
-          return;
-        }
-        ReactUpdateQueue.enqueueSetPropsInternal(internalInstance, partialProps);
-      },
-      enqueueSetPropsInternal: function(internalInstance, partialProps) {
-        var topLevelWrapper = internalInstance._topLevelWrapper;
-        !topLevelWrapper ? process.env.NODE_ENV !== 'production' ? invariant(false, 'setProps(...): You called `setProps` on a ' + 'component with a parent. This is an anti-pattern since props will ' + 'get reactively updated when rendered. Instead, change the owner\'s ' + '`render` method to pass the correct value as props to the component ' + 'where it is created.') : invariant(false) : undefined;
-        var wrapElement = topLevelWrapper._pendingElement || topLevelWrapper._currentElement;
-        var element = wrapElement.props;
-        var props = assign({}, element.props, partialProps);
-        topLevelWrapper._pendingElement = ReactElement.cloneAndReplaceProps(wrapElement, ReactElement.cloneAndReplaceProps(element, props));
-        enqueueUpdate(topLevelWrapper);
-      },
-      enqueueReplaceProps: function(publicInstance, props) {
-        var internalInstance = getInternalInstanceReadyForUpdate(publicInstance, 'replaceProps');
-        if (!internalInstance) {
-          return;
-        }
-        ReactUpdateQueue.enqueueReplacePropsInternal(internalInstance, props);
-      },
-      enqueueReplacePropsInternal: function(internalInstance, props) {
-        var topLevelWrapper = internalInstance._topLevelWrapper;
-        !topLevelWrapper ? process.env.NODE_ENV !== 'production' ? invariant(false, 'replaceProps(...): You called `replaceProps` on a ' + 'component with a parent. This is an anti-pattern since props will ' + 'get reactively updated when rendered. Instead, change the owner\'s ' + '`render` method to pass the correct value as props to the component ' + 'where it is created.') : invariant(false) : undefined;
-        var wrapElement = topLevelWrapper._pendingElement || topLevelWrapper._currentElement;
-        var element = wrapElement.props;
-        topLevelWrapper._pendingElement = ReactElement.cloneAndReplaceProps(wrapElement, ReactElement.cloneAndReplaceProps(element, props));
-        enqueueUpdate(topLevelWrapper);
-      },
-      enqueueElementInternal: function(internalInstance, newElement) {
-        internalInstance._pendingElement = newElement;
-        enqueueUpdate(internalInstance);
-      }
-    };
-    module.exports = ReactUpdateQueue;
-  })($__require('github:jspm/nodelibs-process@0.1.2'));
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:fbjs@0.6.1/lib/emptyObject", ["github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    var emptyObject = {};
-    if (process.env.NODE_ENV !== 'production') {
-      Object.freeze(emptyObject);
-    }
-    module.exports = emptyObject;
-  })($__require('github:jspm/nodelibs-process@0.1.2'));
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/ReactCompositeComponent", ["npm:react@0.14.6/lib/ReactComponentEnvironment", "npm:react@0.14.6/lib/ReactCurrentOwner", "npm:react@0.14.6/lib/ReactElement", "npm:react@0.14.6/lib/ReactInstanceMap", "npm:react@0.14.6/lib/ReactPerf", "npm:react@0.14.6/lib/ReactPropTypeLocations", "npm:react@0.14.6/lib/ReactPropTypeLocationNames", "npm:react@0.14.6/lib/ReactReconciler", "npm:react@0.14.6/lib/ReactUpdateQueue", "npm:react@0.14.6/lib/Object.assign", "npm:fbjs@0.6.1/lib/emptyObject", "npm:fbjs@0.6.1/lib/invariant", "npm:react@0.14.6/lib/shouldUpdateReactComponent", "npm:fbjs@0.6.1/lib/warning", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    var ReactComponentEnvironment = $__require('npm:react@0.14.6/lib/ReactComponentEnvironment');
-    var ReactCurrentOwner = $__require('npm:react@0.14.6/lib/ReactCurrentOwner');
-    var ReactElement = $__require('npm:react@0.14.6/lib/ReactElement');
-    var ReactInstanceMap = $__require('npm:react@0.14.6/lib/ReactInstanceMap');
-    var ReactPerf = $__require('npm:react@0.14.6/lib/ReactPerf');
-    var ReactPropTypeLocations = $__require('npm:react@0.14.6/lib/ReactPropTypeLocations');
-    var ReactPropTypeLocationNames = $__require('npm:react@0.14.6/lib/ReactPropTypeLocationNames');
-    var ReactReconciler = $__require('npm:react@0.14.6/lib/ReactReconciler');
-    var ReactUpdateQueue = $__require('npm:react@0.14.6/lib/ReactUpdateQueue');
-    var assign = $__require('npm:react@0.14.6/lib/Object.assign');
-    var emptyObject = $__require('npm:fbjs@0.6.1/lib/emptyObject');
-    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
-    var shouldUpdateReactComponent = $__require('npm:react@0.14.6/lib/shouldUpdateReactComponent');
-    var warning = $__require('npm:fbjs@0.6.1/lib/warning');
-    function getDeclarationErrorAddendum(component) {
-      var owner = component._currentElement._owner || null;
-      if (owner) {
-        var name = owner.getName();
-        if (name) {
-          return ' Check the render method of `' + name + '`.';
-        }
-      }
-      return '';
-    }
-    function StatelessComponent(Component) {}
-    StatelessComponent.prototype.render = function() {
-      var Component = ReactInstanceMap.get(this)._currentElement.type;
-      return Component(this.props, this.context, this.updater);
-    };
-    var nextMountID = 1;
-    var ReactCompositeComponentMixin = {
-      construct: function(element) {
-        this._currentElement = element;
-        this._rootNodeID = null;
-        this._instance = null;
-        this._pendingElement = null;
-        this._pendingStateQueue = null;
-        this._pendingReplaceState = false;
-        this._pendingForceUpdate = false;
-        this._renderedComponent = null;
-        this._context = null;
-        this._mountOrder = 0;
-        this._topLevelWrapper = null;
-        this._pendingCallbacks = null;
-      },
-      mountComponent: function(rootID, transaction, context) {
-        this._context = context;
-        this._mountOrder = nextMountID++;
-        this._rootNodeID = rootID;
-        var publicProps = this._processProps(this._currentElement.props);
-        var publicContext = this._processContext(context);
-        var Component = this._currentElement.type;
-        var inst;
-        var renderedElement;
-        var canInstantiate = ('prototype' in Component);
-        if (canInstantiate) {
-          if (process.env.NODE_ENV !== 'production') {
-            ReactCurrentOwner.current = this;
-            try {
-              inst = new Component(publicProps, publicContext, ReactUpdateQueue);
-            } finally {
-              ReactCurrentOwner.current = null;
-            }
-          } else {
-            inst = new Component(publicProps, publicContext, ReactUpdateQueue);
-          }
-        }
-        if (!canInstantiate || inst === null || inst === false || ReactElement.isValidElement(inst)) {
-          renderedElement = inst;
-          inst = new StatelessComponent(Component);
-        }
-        if (process.env.NODE_ENV !== 'production') {
-          if (inst.render == null) {
-            process.env.NODE_ENV !== 'production' ? warning(false, '%s(...): No `render` method found on the returned component ' + 'instance: you may have forgotten to define `render`, returned ' + 'null/false from a stateless component, or tried to render an ' + 'element whose type is a function that isn\'t a React component.', Component.displayName || Component.name || 'Component') : undefined;
-          } else {
-            process.env.NODE_ENV !== 'production' ? warning(Component.prototype && Component.prototype.isReactComponent || !canInstantiate || !(inst instanceof Component), '%s(...): React component classes must extend React.Component.', Component.displayName || Component.name || 'Component') : undefined;
-          }
-        }
-        inst.props = publicProps;
-        inst.context = publicContext;
-        inst.refs = emptyObject;
-        inst.updater = ReactUpdateQueue;
-        this._instance = inst;
-        ReactInstanceMap.set(inst, this);
-        if (process.env.NODE_ENV !== 'production') {
-          process.env.NODE_ENV !== 'production' ? warning(!inst.getInitialState || inst.getInitialState.isReactClassApproved, 'getInitialState was defined on %s, a plain JavaScript class. ' + 'This is only supported for classes created using React.createClass. ' + 'Did you mean to define a state property instead?', this.getName() || 'a component') : undefined;
-          process.env.NODE_ENV !== 'production' ? warning(!inst.getDefaultProps || inst.getDefaultProps.isReactClassApproved, 'getDefaultProps was defined on %s, a plain JavaScript class. ' + 'This is only supported for classes created using React.createClass. ' + 'Use a static property to define defaultProps instead.', this.getName() || 'a component') : undefined;
-          process.env.NODE_ENV !== 'production' ? warning(!inst.propTypes, 'propTypes was defined as an instance property on %s. Use a static ' + 'property to define propTypes instead.', this.getName() || 'a component') : undefined;
-          process.env.NODE_ENV !== 'production' ? warning(!inst.contextTypes, 'contextTypes was defined as an instance property on %s. Use a ' + 'static property to define contextTypes instead.', this.getName() || 'a component') : undefined;
-          process.env.NODE_ENV !== 'production' ? warning(typeof inst.componentShouldUpdate !== 'function', '%s has a method called ' + 'componentShouldUpdate(). Did you mean shouldComponentUpdate()? ' + 'The name is phrased as a question because the function is ' + 'expected to return a value.', this.getName() || 'A component') : undefined;
-          process.env.NODE_ENV !== 'production' ? warning(typeof inst.componentDidUnmount !== 'function', '%s has a method called ' + 'componentDidUnmount(). But there is no such lifecycle method. ' + 'Did you mean componentWillUnmount()?', this.getName() || 'A component') : undefined;
-          process.env.NODE_ENV !== 'production' ? warning(typeof inst.componentWillRecieveProps !== 'function', '%s has a method called ' + 'componentWillRecieveProps(). Did you mean componentWillReceiveProps()?', this.getName() || 'A component') : undefined;
-        }
-        var initialState = inst.state;
-        if (initialState === undefined) {
-          inst.state = initialState = null;
-        }
-        !(typeof initialState === 'object' && !Array.isArray(initialState)) ? process.env.NODE_ENV !== 'production' ? invariant(false, '%s.state: must be set to an object or null', this.getName() || 'ReactCompositeComponent') : invariant(false) : undefined;
-        this._pendingStateQueue = null;
-        this._pendingReplaceState = false;
-        this._pendingForceUpdate = false;
-        if (inst.componentWillMount) {
-          inst.componentWillMount();
-          if (this._pendingStateQueue) {
-            inst.state = this._processPendingState(inst.props, inst.context);
-          }
-        }
-        if (renderedElement === undefined) {
-          renderedElement = this._renderValidatedComponent();
-        }
-        this._renderedComponent = this._instantiateReactComponent(renderedElement);
-        var markup = ReactReconciler.mountComponent(this._renderedComponent, rootID, transaction, this._processChildContext(context));
-        if (inst.componentDidMount) {
-          transaction.getReactMountReady().enqueue(inst.componentDidMount, inst);
-        }
-        return markup;
-      },
-      unmountComponent: function() {
-        var inst = this._instance;
-        if (inst.componentWillUnmount) {
-          inst.componentWillUnmount();
-        }
-        ReactReconciler.unmountComponent(this._renderedComponent);
-        this._renderedComponent = null;
-        this._instance = null;
-        this._pendingStateQueue = null;
-        this._pendingReplaceState = false;
-        this._pendingForceUpdate = false;
-        this._pendingCallbacks = null;
-        this._pendingElement = null;
-        this._context = null;
-        this._rootNodeID = null;
-        this._topLevelWrapper = null;
-        ReactInstanceMap.remove(inst);
-      },
-      _maskContext: function(context) {
-        var maskedContext = null;
-        var Component = this._currentElement.type;
-        var contextTypes = Component.contextTypes;
-        if (!contextTypes) {
-          return emptyObject;
-        }
-        maskedContext = {};
-        for (var contextName in contextTypes) {
-          maskedContext[contextName] = context[contextName];
-        }
-        return maskedContext;
-      },
-      _processContext: function(context) {
-        var maskedContext = this._maskContext(context);
-        if (process.env.NODE_ENV !== 'production') {
-          var Component = this._currentElement.type;
-          if (Component.contextTypes) {
-            this._checkPropTypes(Component.contextTypes, maskedContext, ReactPropTypeLocations.context);
-          }
-        }
-        return maskedContext;
-      },
-      _processChildContext: function(currentContext) {
-        var Component = this._currentElement.type;
-        var inst = this._instance;
-        var childContext = inst.getChildContext && inst.getChildContext();
-        if (childContext) {
-          !(typeof Component.childContextTypes === 'object') ? process.env.NODE_ENV !== 'production' ? invariant(false, '%s.getChildContext(): childContextTypes must be defined in order to ' + 'use getChildContext().', this.getName() || 'ReactCompositeComponent') : invariant(false) : undefined;
-          if (process.env.NODE_ENV !== 'production') {
-            this._checkPropTypes(Component.childContextTypes, childContext, ReactPropTypeLocations.childContext);
-          }
-          for (var name in childContext) {
-            !(name in Component.childContextTypes) ? process.env.NODE_ENV !== 'production' ? invariant(false, '%s.getChildContext(): key "%s" is not defined in childContextTypes.', this.getName() || 'ReactCompositeComponent', name) : invariant(false) : undefined;
-          }
-          return assign({}, currentContext, childContext);
-        }
-        return currentContext;
-      },
-      _processProps: function(newProps) {
-        if (process.env.NODE_ENV !== 'production') {
-          var Component = this._currentElement.type;
-          if (Component.propTypes) {
-            this._checkPropTypes(Component.propTypes, newProps, ReactPropTypeLocations.prop);
-          }
-        }
-        return newProps;
-      },
-      _checkPropTypes: function(propTypes, props, location) {
-        var componentName = this.getName();
-        for (var propName in propTypes) {
-          if (propTypes.hasOwnProperty(propName)) {
-            var error;
-            try {
-              !(typeof propTypes[propName] === 'function') ? process.env.NODE_ENV !== 'production' ? invariant(false, '%s: %s type `%s` is invalid; it must be a function, usually ' + 'from React.PropTypes.', componentName || 'React class', ReactPropTypeLocationNames[location], propName) : invariant(false) : undefined;
-              error = propTypes[propName](props, propName, componentName, location);
-            } catch (ex) {
-              error = ex;
-            }
-            if (error instanceof Error) {
-              var addendum = getDeclarationErrorAddendum(this);
-              if (location === ReactPropTypeLocations.prop) {
-                process.env.NODE_ENV !== 'production' ? warning(false, 'Failed Composite propType: %s%s', error.message, addendum) : undefined;
-              } else {
-                process.env.NODE_ENV !== 'production' ? warning(false, 'Failed Context Types: %s%s', error.message, addendum) : undefined;
-              }
-            }
-          }
-        }
-      },
-      receiveComponent: function(nextElement, transaction, nextContext) {
-        var prevElement = this._currentElement;
-        var prevContext = this._context;
-        this._pendingElement = null;
-        this.updateComponent(transaction, prevElement, nextElement, prevContext, nextContext);
-      },
-      performUpdateIfNecessary: function(transaction) {
-        if (this._pendingElement != null) {
-          ReactReconciler.receiveComponent(this, this._pendingElement || this._currentElement, transaction, this._context);
-        }
-        if (this._pendingStateQueue !== null || this._pendingForceUpdate) {
-          this.updateComponent(transaction, this._currentElement, this._currentElement, this._context, this._context);
-        }
-      },
-      updateComponent: function(transaction, prevParentElement, nextParentElement, prevUnmaskedContext, nextUnmaskedContext) {
-        var inst = this._instance;
-        var nextContext = this._context === nextUnmaskedContext ? inst.context : this._processContext(nextUnmaskedContext);
-        var nextProps;
-        if (prevParentElement === nextParentElement) {
-          nextProps = nextParentElement.props;
-        } else {
-          nextProps = this._processProps(nextParentElement.props);
-          if (inst.componentWillReceiveProps) {
-            inst.componentWillReceiveProps(nextProps, nextContext);
-          }
-        }
-        var nextState = this._processPendingState(nextProps, nextContext);
-        var shouldUpdate = this._pendingForceUpdate || !inst.shouldComponentUpdate || inst.shouldComponentUpdate(nextProps, nextState, nextContext);
-        if (process.env.NODE_ENV !== 'production') {
-          process.env.NODE_ENV !== 'production' ? warning(typeof shouldUpdate !== 'undefined', '%s.shouldComponentUpdate(): Returned undefined instead of a ' + 'boolean value. Make sure to return true or false.', this.getName() || 'ReactCompositeComponent') : undefined;
-        }
-        if (shouldUpdate) {
-          this._pendingForceUpdate = false;
-          this._performComponentUpdate(nextParentElement, nextProps, nextState, nextContext, transaction, nextUnmaskedContext);
-        } else {
-          this._currentElement = nextParentElement;
-          this._context = nextUnmaskedContext;
-          inst.props = nextProps;
-          inst.state = nextState;
-          inst.context = nextContext;
-        }
-      },
-      _processPendingState: function(props, context) {
-        var inst = this._instance;
-        var queue = this._pendingStateQueue;
-        var replace = this._pendingReplaceState;
-        this._pendingReplaceState = false;
-        this._pendingStateQueue = null;
-        if (!queue) {
-          return inst.state;
-        }
-        if (replace && queue.length === 1) {
-          return queue[0];
-        }
-        var nextState = assign({}, replace ? queue[0] : inst.state);
-        for (var i = replace ? 1 : 0; i < queue.length; i++) {
-          var partial = queue[i];
-          assign(nextState, typeof partial === 'function' ? partial.call(inst, nextState, props, context) : partial);
-        }
-        return nextState;
-      },
-      _performComponentUpdate: function(nextElement, nextProps, nextState, nextContext, transaction, unmaskedContext) {
-        var inst = this._instance;
-        var hasComponentDidUpdate = Boolean(inst.componentDidUpdate);
-        var prevProps;
-        var prevState;
-        var prevContext;
-        if (hasComponentDidUpdate) {
-          prevProps = inst.props;
-          prevState = inst.state;
-          prevContext = inst.context;
-        }
-        if (inst.componentWillUpdate) {
-          inst.componentWillUpdate(nextProps, nextState, nextContext);
-        }
-        this._currentElement = nextElement;
-        this._context = unmaskedContext;
-        inst.props = nextProps;
-        inst.state = nextState;
-        inst.context = nextContext;
-        this._updateRenderedComponent(transaction, unmaskedContext);
-        if (hasComponentDidUpdate) {
-          transaction.getReactMountReady().enqueue(inst.componentDidUpdate.bind(inst, prevProps, prevState, prevContext), inst);
-        }
-      },
-      _updateRenderedComponent: function(transaction, context) {
-        var prevComponentInstance = this._renderedComponent;
-        var prevRenderedElement = prevComponentInstance._currentElement;
-        var nextRenderedElement = this._renderValidatedComponent();
-        if (shouldUpdateReactComponent(prevRenderedElement, nextRenderedElement)) {
-          ReactReconciler.receiveComponent(prevComponentInstance, nextRenderedElement, transaction, this._processChildContext(context));
-        } else {
-          var thisID = this._rootNodeID;
-          var prevComponentID = prevComponentInstance._rootNodeID;
-          ReactReconciler.unmountComponent(prevComponentInstance);
-          this._renderedComponent = this._instantiateReactComponent(nextRenderedElement);
-          var nextMarkup = ReactReconciler.mountComponent(this._renderedComponent, thisID, transaction, this._processChildContext(context));
-          this._replaceNodeWithMarkupByID(prevComponentID, nextMarkup);
-        }
-      },
-      _replaceNodeWithMarkupByID: function(prevComponentID, nextMarkup) {
-        ReactComponentEnvironment.replaceNodeWithMarkupByID(prevComponentID, nextMarkup);
-      },
-      _renderValidatedComponentWithoutOwnerOrContext: function() {
-        var inst = this._instance;
-        var renderedComponent = inst.render();
-        if (process.env.NODE_ENV !== 'production') {
-          if (typeof renderedComponent === 'undefined' && inst.render._isMockFunction) {
-            renderedComponent = null;
-          }
-        }
-        return renderedComponent;
-      },
-      _renderValidatedComponent: function() {
-        var renderedComponent;
-        ReactCurrentOwner.current = this;
-        try {
-          renderedComponent = this._renderValidatedComponentWithoutOwnerOrContext();
-        } finally {
-          ReactCurrentOwner.current = null;
-        }
-        !(renderedComponent === null || renderedComponent === false || ReactElement.isValidElement(renderedComponent)) ? process.env.NODE_ENV !== 'production' ? invariant(false, '%s.render(): A valid ReactComponent must be returned. You may have ' + 'returned undefined, an array or some other invalid object.', this.getName() || 'ReactCompositeComponent') : invariant(false) : undefined;
-        return renderedComponent;
-      },
-      attachRef: function(ref, component) {
-        var inst = this.getPublicInstance();
-        !(inst != null) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Stateless function components cannot have refs.') : invariant(false) : undefined;
-        var publicComponentInstance = component.getPublicInstance();
-        if (process.env.NODE_ENV !== 'production') {
-          var componentName = component && component.getName ? component.getName() : 'a component';
-          process.env.NODE_ENV !== 'production' ? warning(publicComponentInstance != null, 'Stateless function components cannot be given refs ' + '(See ref "%s" in %s created by %s). ' + 'Attempts to access this ref will fail.', ref, componentName, this.getName()) : undefined;
-        }
-        var refs = inst.refs === emptyObject ? inst.refs = {} : inst.refs;
-        refs[ref] = publicComponentInstance;
-      },
-      detachRef: function(ref) {
-        var refs = this.getPublicInstance().refs;
-        delete refs[ref];
-      },
-      getName: function() {
-        var type = this._currentElement.type;
-        var constructor = this._instance && this._instance.constructor;
-        return type.displayName || constructor && constructor.displayName || type.name || constructor && constructor.name || null;
-      },
-      getPublicInstance: function() {
-        var inst = this._instance;
-        if (inst instanceof StatelessComponent) {
-          return null;
-        }
-        return inst;
-      },
-      _instantiateReactComponent: null
-    };
-    ReactPerf.measureMethods(ReactCompositeComponentMixin, 'ReactCompositeComponent', {
-      mountComponent: 'mountComponent',
-      updateComponent: 'updateComponent',
-      _renderValidatedComponent: '_renderValidatedComponent'
-    });
-    var ReactCompositeComponent = {Mixin: ReactCompositeComponentMixin};
-    module.exports = ReactCompositeComponent;
-  })($__require('github:jspm/nodelibs-process@0.1.2'));
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/ReactCurrentOwner", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var ReactCurrentOwner = {current: null};
-  module.exports = ReactCurrentOwner;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/canDefineProperty", ["github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    var canDefineProperty = false;
-    if (process.env.NODE_ENV !== 'production') {
-      try {
-        Object.defineProperty({}, 'x', {get: function() {}});
-        canDefineProperty = true;
-      } catch (x) {}
-    }
-    module.exports = canDefineProperty;
-  })($__require('github:jspm/nodelibs-process@0.1.2'));
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/ReactElement", ["npm:react@0.14.6/lib/ReactCurrentOwner", "npm:react@0.14.6/lib/Object.assign", "npm:react@0.14.6/lib/canDefineProperty", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    var ReactCurrentOwner = $__require('npm:react@0.14.6/lib/ReactCurrentOwner');
-    var assign = $__require('npm:react@0.14.6/lib/Object.assign');
-    var canDefineProperty = $__require('npm:react@0.14.6/lib/canDefineProperty');
-    var REACT_ELEMENT_TYPE = typeof Symbol === 'function' && Symbol['for'] && Symbol['for']('react.element') || 0xeac7;
-    var RESERVED_PROPS = {
-      key: true,
-      ref: true,
-      __self: true,
-      __source: true
-    };
-    var ReactElement = function(type, key, ref, self, source, owner, props) {
-      var element = {
-        $$typeof: REACT_ELEMENT_TYPE,
-        type: type,
-        key: key,
-        ref: ref,
-        props: props,
-        _owner: owner
-      };
-      if (process.env.NODE_ENV !== 'production') {
-        element._store = {};
-        if (canDefineProperty) {
-          Object.defineProperty(element._store, 'validated', {
-            configurable: false,
-            enumerable: false,
-            writable: true,
-            value: false
-          });
-          Object.defineProperty(element, '_self', {
-            configurable: false,
-            enumerable: false,
-            writable: false,
-            value: self
-          });
-          Object.defineProperty(element, '_source', {
-            configurable: false,
-            enumerable: false,
-            writable: false,
-            value: source
-          });
-        } else {
-          element._store.validated = false;
-          element._self = self;
-          element._source = source;
-        }
-        Object.freeze(element.props);
-        Object.freeze(element);
-      }
-      return element;
-    };
-    ReactElement.createElement = function(type, config, children) {
-      var propName;
-      var props = {};
-      var key = null;
-      var ref = null;
-      var self = null;
-      var source = null;
-      if (config != null) {
-        ref = config.ref === undefined ? null : config.ref;
-        key = config.key === undefined ? null : '' + config.key;
-        self = config.__self === undefined ? null : config.__self;
-        source = config.__source === undefined ? null : config.__source;
-        for (propName in config) {
-          if (config.hasOwnProperty(propName) && !RESERVED_PROPS.hasOwnProperty(propName)) {
-            props[propName] = config[propName];
-          }
-        }
-      }
-      var childrenLength = arguments.length - 2;
-      if (childrenLength === 1) {
-        props.children = children;
-      } else if (childrenLength > 1) {
-        var childArray = Array(childrenLength);
-        for (var i = 0; i < childrenLength; i++) {
-          childArray[i] = arguments[i + 2];
-        }
-        props.children = childArray;
-      }
-      if (type && type.defaultProps) {
-        var defaultProps = type.defaultProps;
-        for (propName in defaultProps) {
-          if (typeof props[propName] === 'undefined') {
-            props[propName] = defaultProps[propName];
-          }
-        }
-      }
-      return ReactElement(type, key, ref, self, source, ReactCurrentOwner.current, props);
-    };
-    ReactElement.createFactory = function(type) {
-      var factory = ReactElement.createElement.bind(null, type);
-      factory.type = type;
-      return factory;
-    };
-    ReactElement.cloneAndReplaceKey = function(oldElement, newKey) {
-      var newElement = ReactElement(oldElement.type, newKey, oldElement.ref, oldElement._self, oldElement._source, oldElement._owner, oldElement.props);
-      return newElement;
-    };
-    ReactElement.cloneAndReplaceProps = function(oldElement, newProps) {
-      var newElement = ReactElement(oldElement.type, oldElement.key, oldElement.ref, oldElement._self, oldElement._source, oldElement._owner, newProps);
-      if (process.env.NODE_ENV !== 'production') {
-        newElement._store.validated = oldElement._store.validated;
-      }
-      return newElement;
-    };
-    ReactElement.cloneElement = function(element, config, children) {
-      var propName;
-      var props = assign({}, element.props);
-      var key = element.key;
-      var ref = element.ref;
-      var self = element._self;
-      var source = element._source;
-      var owner = element._owner;
-      if (config != null) {
-        if (config.ref !== undefined) {
-          ref = config.ref;
-          owner = ReactCurrentOwner.current;
-        }
-        if (config.key !== undefined) {
-          key = '' + config.key;
-        }
-        for (propName in config) {
-          if (config.hasOwnProperty(propName) && !RESERVED_PROPS.hasOwnProperty(propName)) {
-            props[propName] = config[propName];
-          }
-        }
-      }
-      var childrenLength = arguments.length - 2;
-      if (childrenLength === 1) {
-        props.children = children;
-      } else if (childrenLength > 1) {
-        var childArray = Array(childrenLength);
-        for (var i = 0; i < childrenLength; i++) {
-          childArray[i] = arguments[i + 2];
-        }
-        props.children = childArray;
-      }
-      return ReactElement(element.type, key, ref, self, source, owner, props);
-    };
-    ReactElement.isValidElement = function(object) {
-      return typeof object === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
-    };
-    module.exports = ReactElement;
-  })($__require('github:jspm/nodelibs-process@0.1.2'));
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/ReactEmptyComponentRegistry", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var nullComponentIDsRegistry = {};
-  function isNullComponentID(id) {
-    return !!nullComponentIDsRegistry[id];
-  }
-  function registerNullComponentID(id) {
-    nullComponentIDsRegistry[id] = true;
-  }
-  function deregisterNullComponentID(id) {
-    delete nullComponentIDsRegistry[id];
-  }
-  var ReactEmptyComponentRegistry = {
-    isNullComponentID: isNullComponentID,
-    registerNullComponentID: registerNullComponentID,
-    deregisterNullComponentID: deregisterNullComponentID
-  };
-  module.exports = ReactEmptyComponentRegistry;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/ReactOwner", ["npm:fbjs@0.6.1/lib/invariant", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
-    var ReactOwner = {
-      isValidOwner: function(object) {
-        return !!(object && typeof object.attachRef === 'function' && typeof object.detachRef === 'function');
-      },
-      addComponentAsRefTo: function(component, ref, owner) {
-        !ReactOwner.isValidOwner(owner) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'addComponentAsRefTo(...): Only a ReactOwner can have refs. You might ' + 'be adding a ref to a component that was not created inside a component\'s ' + '`render` method, or you have multiple copies of React loaded ' + '(details: https://fb.me/react-refs-must-have-owner).') : invariant(false) : undefined;
-        owner.attachRef(ref, component);
-      },
-      removeComponentAsRefFrom: function(component, ref, owner) {
-        !ReactOwner.isValidOwner(owner) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'removeComponentAsRefFrom(...): Only a ReactOwner can have refs. You might ' + 'be removing a ref to a component that was not created inside a component\'s ' + '`render` method, or you have multiple copies of React loaded ' + '(details: https://fb.me/react-refs-must-have-owner).') : invariant(false) : undefined;
-        if (owner.getPublicInstance().refs[ref] === component.getPublicInstance()) {
-          owner.detachRef(ref);
-        }
-      }
-    };
-    module.exports = ReactOwner;
-  })($__require('github:jspm/nodelibs-process@0.1.2'));
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/ReactRef", ["npm:react@0.14.6/lib/ReactOwner", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    var ReactOwner = $__require('npm:react@0.14.6/lib/ReactOwner');
-    var ReactRef = {};
-    function attachRef(ref, component, owner) {
-      if (typeof ref === 'function') {
-        ref(component.getPublicInstance());
-      } else {
-        ReactOwner.addComponentAsRefTo(component, ref, owner);
-      }
-    }
-    function detachRef(ref, component, owner) {
-      if (typeof ref === 'function') {
-        ref(null);
-      } else {
-        ReactOwner.removeComponentAsRefFrom(component, ref, owner);
-      }
-    }
-    ReactRef.attachRefs = function(instance, element) {
-      if (element === null || element === false) {
-        return;
-      }
-      var ref = element.ref;
-      if (ref != null) {
-        attachRef(ref, instance, element._owner);
-      }
-    };
-    ReactRef.shouldUpdateRefs = function(prevElement, nextElement) {
-      var prevEmpty = prevElement === null || prevElement === false;
-      var nextEmpty = nextElement === null || nextElement === false;
-      return (prevEmpty || nextEmpty || nextElement._owner !== prevElement._owner || nextElement.ref !== prevElement.ref);
-    };
-    ReactRef.detachRefs = function(instance, element) {
-      if (element === null || element === false) {
-        return;
-      }
-      var ref = element.ref;
-      if (ref != null) {
-        detachRef(ref, instance, element._owner);
-      }
-    };
-    module.exports = ReactRef;
-  })($__require('github:jspm/nodelibs-process@0.1.2'));
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/ReactReconciler", ["npm:react@0.14.6/lib/ReactRef"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var ReactRef = $__require('npm:react@0.14.6/lib/ReactRef');
-  function attachRefs() {
-    ReactRef.attachRefs(this, this._currentElement);
-  }
-  var ReactReconciler = {
-    mountComponent: function(internalInstance, rootID, transaction, context) {
-      var markup = internalInstance.mountComponent(rootID, transaction, context);
-      if (internalInstance._currentElement && internalInstance._currentElement.ref != null) {
-        transaction.getReactMountReady().enqueue(attachRefs, internalInstance);
-      }
-      return markup;
-    },
-    unmountComponent: function(internalInstance) {
-      ReactRef.detachRefs(internalInstance, internalInstance._currentElement);
-      internalInstance.unmountComponent();
-    },
-    receiveComponent: function(internalInstance, nextElement, transaction, context) {
-      var prevElement = internalInstance._currentElement;
-      if (nextElement === prevElement && context === internalInstance._context) {
-        return;
-      }
-      var refsChanged = ReactRef.shouldUpdateRefs(prevElement, nextElement);
-      if (refsChanged) {
-        ReactRef.detachRefs(internalInstance, prevElement);
-      }
-      internalInstance.receiveComponent(nextElement, transaction, context);
-      if (refsChanged && internalInstance._currentElement && internalInstance._currentElement.ref != null) {
-        transaction.getReactMountReady().enqueue(attachRefs, internalInstance);
-      }
-    },
-    performUpdateIfNecessary: function(internalInstance, transaction) {
-      internalInstance.performUpdateIfNecessary(transaction);
-    }
-  };
-  module.exports = ReactReconciler;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/ReactEmptyComponent", ["npm:react@0.14.6/lib/ReactElement", "npm:react@0.14.6/lib/ReactEmptyComponentRegistry", "npm:react@0.14.6/lib/ReactReconciler", "npm:react@0.14.6/lib/Object.assign"], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  var ReactElement = $__require('npm:react@0.14.6/lib/ReactElement');
-  var ReactEmptyComponentRegistry = $__require('npm:react@0.14.6/lib/ReactEmptyComponentRegistry');
-  var ReactReconciler = $__require('npm:react@0.14.6/lib/ReactReconciler');
-  var assign = $__require('npm:react@0.14.6/lib/Object.assign');
-  var placeholderElement;
-  var ReactEmptyComponentInjection = {injectEmptyComponent: function(component) {
-      placeholderElement = ReactElement.createElement(component);
-    }};
-  var ReactEmptyComponent = function(instantiate) {
-    this._currentElement = null;
-    this._rootNodeID = null;
-    this._renderedComponent = instantiate(placeholderElement);
-  };
-  assign(ReactEmptyComponent.prototype, {
-    construct: function(element) {},
-    mountComponent: function(rootID, transaction, context) {
-      ReactEmptyComponentRegistry.registerNullComponentID(rootID);
-      this._rootNodeID = rootID;
-      return ReactReconciler.mountComponent(this._renderedComponent, rootID, transaction, context);
-    },
-    receiveComponent: function() {},
-    unmountComponent: function(rootID, transaction, context) {
-      ReactReconciler.unmountComponent(this._renderedComponent);
-      ReactEmptyComponentRegistry.deregisterNullComponentID(this._rootNodeID);
-      this._rootNodeID = null;
-      this._renderedComponent = null;
-    }
-  });
-  ReactEmptyComponent.injection = ReactEmptyComponentInjection;
-  module.exports = ReactEmptyComponent;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/ReactNativeComponent", ["npm:react@0.14.6/lib/Object.assign", "npm:fbjs@0.6.1/lib/invariant", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    var assign = $__require('npm:react@0.14.6/lib/Object.assign');
-    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
-    var autoGenerateWrapperClass = null;
-    var genericComponentClass = null;
-    var tagToComponentClass = {};
-    var textComponentClass = null;
-    var ReactNativeComponentInjection = {
-      injectGenericComponentClass: function(componentClass) {
-        genericComponentClass = componentClass;
-      },
-      injectTextComponentClass: function(componentClass) {
-        textComponentClass = componentClass;
-      },
-      injectComponentClasses: function(componentClasses) {
-        assign(tagToComponentClass, componentClasses);
-      }
-    };
-    function getComponentClassForElement(element) {
-      if (typeof element.type === 'function') {
-        return element.type;
-      }
-      var tag = element.type;
-      var componentClass = tagToComponentClass[tag];
-      if (componentClass == null) {
-        tagToComponentClass[tag] = componentClass = autoGenerateWrapperClass(tag);
-      }
-      return componentClass;
-    }
-    function createInternalComponent(element) {
-      !genericComponentClass ? process.env.NODE_ENV !== 'production' ? invariant(false, 'There is no registered component for the tag %s', element.type) : invariant(false) : undefined;
-      return new genericComponentClass(element.type, element.props);
-    }
-    function createInstanceForText(text) {
-      return new textComponentClass(text);
-    }
-    function isTextComponent(component) {
-      return component instanceof textComponentClass;
-    }
-    var ReactNativeComponent = {
-      getComponentClassForElement: getComponentClassForElement,
-      createInternalComponent: createInternalComponent,
-      createInstanceForText: createInstanceForText,
-      isTextComponent: isTextComponent,
-      injection: ReactNativeComponentInjection
-    };
-    module.exports = ReactNativeComponent;
-  })($__require('github:jspm/nodelibs-process@0.1.2'));
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/instantiateReactComponent", ["npm:react@0.14.6/lib/ReactCompositeComponent", "npm:react@0.14.6/lib/ReactEmptyComponent", "npm:react@0.14.6/lib/ReactNativeComponent", "npm:react@0.14.6/lib/Object.assign", "npm:fbjs@0.6.1/lib/invariant", "npm:fbjs@0.6.1/lib/warning", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    var ReactCompositeComponent = $__require('npm:react@0.14.6/lib/ReactCompositeComponent');
-    var ReactEmptyComponent = $__require('npm:react@0.14.6/lib/ReactEmptyComponent');
-    var ReactNativeComponent = $__require('npm:react@0.14.6/lib/ReactNativeComponent');
-    var assign = $__require('npm:react@0.14.6/lib/Object.assign');
-    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
-    var warning = $__require('npm:fbjs@0.6.1/lib/warning');
-    var ReactCompositeComponentWrapper = function() {};
-    assign(ReactCompositeComponentWrapper.prototype, ReactCompositeComponent.Mixin, {_instantiateReactComponent: instantiateReactComponent});
-    function getDeclarationErrorAddendum(owner) {
-      if (owner) {
-        var name = owner.getName();
-        if (name) {
-          return ' Check the render method of `' + name + '`.';
-        }
-      }
-      return '';
-    }
-    function isInternalComponentType(type) {
-      return typeof type === 'function' && typeof type.prototype !== 'undefined' && typeof type.prototype.mountComponent === 'function' && typeof type.prototype.receiveComponent === 'function';
-    }
-    function instantiateReactComponent(node) {
-      var instance;
-      if (node === null || node === false) {
-        instance = new ReactEmptyComponent(instantiateReactComponent);
-      } else if (typeof node === 'object') {
-        var element = node;
-        !(element && (typeof element.type === 'function' || typeof element.type === 'string')) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Element type is invalid: expected a string (for built-in components) ' + 'or a class/function (for composite components) but got: %s.%s', element.type == null ? element.type : typeof element.type, getDeclarationErrorAddendum(element._owner)) : invariant(false) : undefined;
-        if (typeof element.type === 'string') {
-          instance = ReactNativeComponent.createInternalComponent(element);
-        } else if (isInternalComponentType(element.type)) {
-          instance = new element.type(element);
-        } else {
-          instance = new ReactCompositeComponentWrapper();
-        }
-      } else if (typeof node === 'string' || typeof node === 'number') {
-        instance = ReactNativeComponent.createInstanceForText(node);
-      } else {
-        !false ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Encountered invalid React node of type %s', typeof node) : invariant(false) : undefined;
-      }
-      if (process.env.NODE_ENV !== 'production') {
-        process.env.NODE_ENV !== 'production' ? warning(typeof instance.construct === 'function' && typeof instance.mountComponent === 'function' && typeof instance.receiveComponent === 'function' && typeof instance.unmountComponent === 'function', 'Only React Components can be mounted.') : undefined;
-      }
-      instance.construct(node);
-      instance._mountIndex = 0;
-      instance._mountImage = null;
-      if (process.env.NODE_ENV !== 'production') {
-        instance._isOwnerNecessary = false;
-        instance._warnedAboutRefsInRender = false;
-      }
-      if (process.env.NODE_ENV !== 'production') {
-        if (Object.preventExtensions) {
-          Object.preventExtensions(instance);
-        }
-      }
-      return instance;
-    }
-    module.exports = instantiateReactComponent;
-  })($__require('github:jspm/nodelibs-process@0.1.2'));
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:fbjs@0.6.1/lib/invariant", ["github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  (function(process) {
-    'use strict';
-    function invariant(condition, format, a, b, c, d, e, f) {
-      if (process.env.NODE_ENV !== 'production') {
-        if (format === undefined) {
-          throw new Error('invariant requires an error message argument');
-        }
-      }
-      if (!condition) {
-        var error;
-        if (format === undefined) {
-          error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
-        } else {
-          var args = [a, b, c, d, e, f];
-          var argIndex = 0;
-          error = new Error(format.replace(/%s/g, function() {
-            return args[argIndex++];
-          }));
-          error.name = 'Invariant Violation';
-        }
-        error.framesToPop = 1;
-        throw error;
-      }
-    }
-    module.exports = invariant;
-  })($__require('github:jspm/nodelibs-process@0.1.2'));
-  global.define = __define;
-  return module.exports;
-});
-
 System.registerDynamic("npm:react@0.14.6/lib/setInnerHTML", ["npm:fbjs@0.6.1/lib/ExecutionEnvironment", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
   ;
   var global = this,
@@ -10396,63 +6782,6 @@ System.registerDynamic("npm:react@0.14.6/lib/setInnerHTML", ["npm:fbjs@0.6.1/lib
     }
     module.exports = setInnerHTML;
   })($__require('github:jspm/nodelibs-process@0.1.2'));
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/shouldUpdateReactComponent", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  function shouldUpdateReactComponent(prevElement, nextElement) {
-    var prevEmpty = prevElement === null || prevElement === false;
-    var nextEmpty = nextElement === null || nextElement === false;
-    if (prevEmpty || nextEmpty) {
-      return prevEmpty === nextEmpty;
-    }
-    var prevType = typeof prevElement;
-    var nextType = typeof nextElement;
-    if (prevType === 'string' || prevType === 'number') {
-      return nextType === 'string' || nextType === 'number';
-    } else {
-      return nextType === 'object' && prevElement.type === nextElement.type && prevElement.key === nextElement.key;
-    }
-    return false;
-  }
-  module.exports = shouldUpdateReactComponent;
-  global.define = __define;
-  return module.exports;
-});
-
-System.registerDynamic("npm:react@0.14.6/lib/Object.assign", [], true, function($__require, exports, module) {
-  "use strict";
-  ;
-  var global = this,
-      __define = global.define;
-  global.define = undefined;
-  function assign(target, sources) {
-    if (target == null) {
-      throw new TypeError('Object.assign target cannot be null or undefined');
-    }
-    var to = Object(target);
-    var hasOwnProperty = Object.prototype.hasOwnProperty;
-    for (var nextIndex = 1; nextIndex < arguments.length; nextIndex++) {
-      var nextSource = arguments[nextIndex];
-      if (nextSource == null) {
-        continue;
-      }
-      var from = Object(nextSource);
-      for (var key in from) {
-        if (hasOwnProperty.call(from, key)) {
-          to[key] = from[key];
-        }
-      }
-    }
-    return to;
-  }
-  module.exports = assign;
   global.define = __define;
   return module.exports;
 });
@@ -11147,14 +7476,3791 @@ System.registerDynamic("npm:react@0.14.6/lib/ReactMount", ["npm:react@0.14.6/lib
   return module.exports;
 });
 
-System.registerDynamic("npm:react@0.14.6/lib/renderSubtreeIntoContainer", ["npm:react@0.14.6/lib/ReactMount"], true, function($__require, exports, module) {
+System.registerDynamic("npm:fbjs@0.6.1/lib/ExecutionEnvironment", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
+  var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+  var ExecutionEnvironment = {
+    canUseDOM: canUseDOM,
+    canUseWorkers: typeof Worker !== 'undefined',
+    canUseEventListeners: canUseDOM && !!(window.addEventListener || window.attachEvent),
+    canUseViewport: canUseDOM && !!window.screen,
+    isInWorker: !canUseDOM
+  };
+  module.exports = ExecutionEnvironment;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:fbjs@0.6.1/lib/performance", ["npm:fbjs@0.6.1/lib/ExecutionEnvironment"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var ExecutionEnvironment = $__require('npm:fbjs@0.6.1/lib/ExecutionEnvironment');
+  var performance;
+  if (ExecutionEnvironment.canUseDOM) {
+    performance = window.performance || window.msPerformance || window.webkitPerformance;
+  }
+  module.exports = performance || {};
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:fbjs@0.6.1/lib/performanceNow", ["npm:fbjs@0.6.1/lib/performance"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var performance = $__require('npm:fbjs@0.6.1/lib/performance');
+  var performanceNow;
+  if (performance.now) {
+    performanceNow = function() {
+      return performance.now();
+    };
+  } else {
+    performanceNow = function() {
+      return Date.now();
+    };
+  }
+  module.exports = performanceNow;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactDefaultPerf", ["npm:react@0.14.6/lib/DOMProperty", "npm:react@0.14.6/lib/ReactDefaultPerfAnalysis", "npm:react@0.14.6/lib/ReactMount", "npm:react@0.14.6/lib/ReactPerf", "npm:fbjs@0.6.1/lib/performanceNow"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var DOMProperty = $__require('npm:react@0.14.6/lib/DOMProperty');
+  var ReactDefaultPerfAnalysis = $__require('npm:react@0.14.6/lib/ReactDefaultPerfAnalysis');
   var ReactMount = $__require('npm:react@0.14.6/lib/ReactMount');
-  module.exports = ReactMount.renderSubtreeIntoContainer;
+  var ReactPerf = $__require('npm:react@0.14.6/lib/ReactPerf');
+  var performanceNow = $__require('npm:fbjs@0.6.1/lib/performanceNow');
+  function roundFloat(val) {
+    return Math.floor(val * 100) / 100;
+  }
+  function addValue(obj, key, val) {
+    obj[key] = (obj[key] || 0) + val;
+  }
+  var ReactDefaultPerf = {
+    _allMeasurements: [],
+    _mountStack: [0],
+    _injected: false,
+    start: function() {
+      if (!ReactDefaultPerf._injected) {
+        ReactPerf.injection.injectMeasure(ReactDefaultPerf.measure);
+      }
+      ReactDefaultPerf._allMeasurements.length = 0;
+      ReactPerf.enableMeasure = true;
+    },
+    stop: function() {
+      ReactPerf.enableMeasure = false;
+    },
+    getLastMeasurements: function() {
+      return ReactDefaultPerf._allMeasurements;
+    },
+    printExclusive: function(measurements) {
+      measurements = measurements || ReactDefaultPerf._allMeasurements;
+      var summary = ReactDefaultPerfAnalysis.getExclusiveSummary(measurements);
+      console.table(summary.map(function(item) {
+        return {
+          'Component class name': item.componentName,
+          'Total inclusive time (ms)': roundFloat(item.inclusive),
+          'Exclusive mount time (ms)': roundFloat(item.exclusive),
+          'Exclusive render time (ms)': roundFloat(item.render),
+          'Mount time per instance (ms)': roundFloat(item.exclusive / item.count),
+          'Render time per instance (ms)': roundFloat(item.render / item.count),
+          'Instances': item.count
+        };
+      }));
+    },
+    printInclusive: function(measurements) {
+      measurements = measurements || ReactDefaultPerf._allMeasurements;
+      var summary = ReactDefaultPerfAnalysis.getInclusiveSummary(measurements);
+      console.table(summary.map(function(item) {
+        return {
+          'Owner > component': item.componentName,
+          'Inclusive time (ms)': roundFloat(item.time),
+          'Instances': item.count
+        };
+      }));
+      console.log('Total time:', ReactDefaultPerfAnalysis.getTotalTime(measurements).toFixed(2) + ' ms');
+    },
+    getMeasurementsSummaryMap: function(measurements) {
+      var summary = ReactDefaultPerfAnalysis.getInclusiveSummary(measurements, true);
+      return summary.map(function(item) {
+        return {
+          'Owner > component': item.componentName,
+          'Wasted time (ms)': item.time,
+          'Instances': item.count
+        };
+      });
+    },
+    printWasted: function(measurements) {
+      measurements = measurements || ReactDefaultPerf._allMeasurements;
+      console.table(ReactDefaultPerf.getMeasurementsSummaryMap(measurements));
+      console.log('Total time:', ReactDefaultPerfAnalysis.getTotalTime(measurements).toFixed(2) + ' ms');
+    },
+    printDOM: function(measurements) {
+      measurements = measurements || ReactDefaultPerf._allMeasurements;
+      var summary = ReactDefaultPerfAnalysis.getDOMSummary(measurements);
+      console.table(summary.map(function(item) {
+        var result = {};
+        result[DOMProperty.ID_ATTRIBUTE_NAME] = item.id;
+        result.type = item.type;
+        result.args = JSON.stringify(item.args);
+        return result;
+      }));
+      console.log('Total time:', ReactDefaultPerfAnalysis.getTotalTime(measurements).toFixed(2) + ' ms');
+    },
+    _recordWrite: function(id, fnName, totalTime, args) {
+      var writes = ReactDefaultPerf._allMeasurements[ReactDefaultPerf._allMeasurements.length - 1].writes;
+      writes[id] = writes[id] || [];
+      writes[id].push({
+        type: fnName,
+        time: totalTime,
+        args: args
+      });
+    },
+    measure: function(moduleName, fnName, func) {
+      return function() {
+        for (var _len = arguments.length,
+            args = Array(_len),
+            _key = 0; _key < _len; _key++) {
+          args[_key] = arguments[_key];
+        }
+        var totalTime;
+        var rv;
+        var start;
+        if (fnName === '_renderNewRootComponent' || fnName === 'flushBatchedUpdates') {
+          ReactDefaultPerf._allMeasurements.push({
+            exclusive: {},
+            inclusive: {},
+            render: {},
+            counts: {},
+            writes: {},
+            displayNames: {},
+            totalTime: 0,
+            created: {}
+          });
+          start = performanceNow();
+          rv = func.apply(this, args);
+          ReactDefaultPerf._allMeasurements[ReactDefaultPerf._allMeasurements.length - 1].totalTime = performanceNow() - start;
+          return rv;
+        } else if (fnName === '_mountImageIntoNode' || moduleName === 'ReactBrowserEventEmitter' || moduleName === 'ReactDOMIDOperations' || moduleName === 'CSSPropertyOperations' || moduleName === 'DOMChildrenOperations' || moduleName === 'DOMPropertyOperations') {
+          start = performanceNow();
+          rv = func.apply(this, args);
+          totalTime = performanceNow() - start;
+          if (fnName === '_mountImageIntoNode') {
+            var mountID = ReactMount.getID(args[1]);
+            ReactDefaultPerf._recordWrite(mountID, fnName, totalTime, args[0]);
+          } else if (fnName === 'dangerouslyProcessChildrenUpdates') {
+            args[0].forEach(function(update) {
+              var writeArgs = {};
+              if (update.fromIndex !== null) {
+                writeArgs.fromIndex = update.fromIndex;
+              }
+              if (update.toIndex !== null) {
+                writeArgs.toIndex = update.toIndex;
+              }
+              if (update.textContent !== null) {
+                writeArgs.textContent = update.textContent;
+              }
+              if (update.markupIndex !== null) {
+                writeArgs.markup = args[1][update.markupIndex];
+              }
+              ReactDefaultPerf._recordWrite(update.parentID, update.type, totalTime, writeArgs);
+            });
+          } else {
+            var id = args[0];
+            if (typeof id === 'object') {
+              id = ReactMount.getID(args[0]);
+            }
+            ReactDefaultPerf._recordWrite(id, fnName, totalTime, Array.prototype.slice.call(args, 1));
+          }
+          return rv;
+        } else if (moduleName === 'ReactCompositeComponent' && (fnName === 'mountComponent' || fnName === 'updateComponent' || fnName === '_renderValidatedComponent')) {
+          if (this._currentElement.type === ReactMount.TopLevelWrapper) {
+            return func.apply(this, args);
+          }
+          var rootNodeID = fnName === 'mountComponent' ? args[0] : this._rootNodeID;
+          var isRender = fnName === '_renderValidatedComponent';
+          var isMount = fnName === 'mountComponent';
+          var mountStack = ReactDefaultPerf._mountStack;
+          var entry = ReactDefaultPerf._allMeasurements[ReactDefaultPerf._allMeasurements.length - 1];
+          if (isRender) {
+            addValue(entry.counts, rootNodeID, 1);
+          } else if (isMount) {
+            entry.created[rootNodeID] = true;
+            mountStack.push(0);
+          }
+          start = performanceNow();
+          rv = func.apply(this, args);
+          totalTime = performanceNow() - start;
+          if (isRender) {
+            addValue(entry.render, rootNodeID, totalTime);
+          } else if (isMount) {
+            var subMountTime = mountStack.pop();
+            mountStack[mountStack.length - 1] += totalTime;
+            addValue(entry.exclusive, rootNodeID, totalTime - subMountTime);
+            addValue(entry.inclusive, rootNodeID, totalTime);
+          } else {
+            addValue(entry.inclusive, rootNodeID, totalTime);
+          }
+          entry.displayNames[rootNodeID] = {
+            current: this.getName(),
+            owner: this._currentElement._owner ? this._currentElement._owner.getName() : '<root>'
+          };
+          return rv;
+        } else {
+          return func.apply(this, args);
+        }
+      };
+    }
+  };
+  module.exports = ReactDefaultPerf;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactDefaultInjection", ["npm:react@0.14.6/lib/BeforeInputEventPlugin", "npm:react@0.14.6/lib/ChangeEventPlugin", "npm:react@0.14.6/lib/ClientReactRootIndex", "npm:react@0.14.6/lib/DefaultEventPluginOrder", "npm:react@0.14.6/lib/EnterLeaveEventPlugin", "npm:fbjs@0.6.1/lib/ExecutionEnvironment", "npm:react@0.14.6/lib/HTMLDOMPropertyConfig", "npm:react@0.14.6/lib/ReactBrowserComponentMixin", "npm:react@0.14.6/lib/ReactComponentBrowserEnvironment", "npm:react@0.14.6/lib/ReactDefaultBatchingStrategy", "npm:react@0.14.6/lib/ReactDOMComponent", "npm:react@0.14.6/lib/ReactDOMTextComponent", "npm:react@0.14.6/lib/ReactEventListener", "npm:react@0.14.6/lib/ReactInjection", "npm:react@0.14.6/lib/ReactInstanceHandles", "npm:react@0.14.6/lib/ReactMount", "npm:react@0.14.6/lib/ReactReconcileTransaction", "npm:react@0.14.6/lib/SelectEventPlugin", "npm:react@0.14.6/lib/ServerReactRootIndex", "npm:react@0.14.6/lib/SimpleEventPlugin", "npm:react@0.14.6/lib/SVGDOMPropertyConfig", "npm:react@0.14.6/lib/ReactDefaultPerf", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var BeforeInputEventPlugin = $__require('npm:react@0.14.6/lib/BeforeInputEventPlugin');
+    var ChangeEventPlugin = $__require('npm:react@0.14.6/lib/ChangeEventPlugin');
+    var ClientReactRootIndex = $__require('npm:react@0.14.6/lib/ClientReactRootIndex');
+    var DefaultEventPluginOrder = $__require('npm:react@0.14.6/lib/DefaultEventPluginOrder');
+    var EnterLeaveEventPlugin = $__require('npm:react@0.14.6/lib/EnterLeaveEventPlugin');
+    var ExecutionEnvironment = $__require('npm:fbjs@0.6.1/lib/ExecutionEnvironment');
+    var HTMLDOMPropertyConfig = $__require('npm:react@0.14.6/lib/HTMLDOMPropertyConfig');
+    var ReactBrowserComponentMixin = $__require('npm:react@0.14.6/lib/ReactBrowserComponentMixin');
+    var ReactComponentBrowserEnvironment = $__require('npm:react@0.14.6/lib/ReactComponentBrowserEnvironment');
+    var ReactDefaultBatchingStrategy = $__require('npm:react@0.14.6/lib/ReactDefaultBatchingStrategy');
+    var ReactDOMComponent = $__require('npm:react@0.14.6/lib/ReactDOMComponent');
+    var ReactDOMTextComponent = $__require('npm:react@0.14.6/lib/ReactDOMTextComponent');
+    var ReactEventListener = $__require('npm:react@0.14.6/lib/ReactEventListener');
+    var ReactInjection = $__require('npm:react@0.14.6/lib/ReactInjection');
+    var ReactInstanceHandles = $__require('npm:react@0.14.6/lib/ReactInstanceHandles');
+    var ReactMount = $__require('npm:react@0.14.6/lib/ReactMount');
+    var ReactReconcileTransaction = $__require('npm:react@0.14.6/lib/ReactReconcileTransaction');
+    var SelectEventPlugin = $__require('npm:react@0.14.6/lib/SelectEventPlugin');
+    var ServerReactRootIndex = $__require('npm:react@0.14.6/lib/ServerReactRootIndex');
+    var SimpleEventPlugin = $__require('npm:react@0.14.6/lib/SimpleEventPlugin');
+    var SVGDOMPropertyConfig = $__require('npm:react@0.14.6/lib/SVGDOMPropertyConfig');
+    var alreadyInjected = false;
+    function inject() {
+      if (alreadyInjected) {
+        return;
+      }
+      alreadyInjected = true;
+      ReactInjection.EventEmitter.injectReactEventListener(ReactEventListener);
+      ReactInjection.EventPluginHub.injectEventPluginOrder(DefaultEventPluginOrder);
+      ReactInjection.EventPluginHub.injectInstanceHandle(ReactInstanceHandles);
+      ReactInjection.EventPluginHub.injectMount(ReactMount);
+      ReactInjection.EventPluginHub.injectEventPluginsByName({
+        SimpleEventPlugin: SimpleEventPlugin,
+        EnterLeaveEventPlugin: EnterLeaveEventPlugin,
+        ChangeEventPlugin: ChangeEventPlugin,
+        SelectEventPlugin: SelectEventPlugin,
+        BeforeInputEventPlugin: BeforeInputEventPlugin
+      });
+      ReactInjection.NativeComponent.injectGenericComponentClass(ReactDOMComponent);
+      ReactInjection.NativeComponent.injectTextComponentClass(ReactDOMTextComponent);
+      ReactInjection.Class.injectMixin(ReactBrowserComponentMixin);
+      ReactInjection.DOMProperty.injectDOMPropertyConfig(HTMLDOMPropertyConfig);
+      ReactInjection.DOMProperty.injectDOMPropertyConfig(SVGDOMPropertyConfig);
+      ReactInjection.EmptyComponent.injectEmptyComponent('noscript');
+      ReactInjection.Updates.injectReconcileTransaction(ReactReconcileTransaction);
+      ReactInjection.Updates.injectBatchingStrategy(ReactDefaultBatchingStrategy);
+      ReactInjection.RootIndex.injectCreateReactRootIndex(ExecutionEnvironment.canUseDOM ? ClientReactRootIndex.createReactRootIndex : ServerReactRootIndex.createReactRootIndex);
+      ReactInjection.Component.injectEnvironment(ReactComponentBrowserEnvironment);
+      if (process.env.NODE_ENV !== 'production') {
+        var url = ExecutionEnvironment.canUseDOM && window.location.href || '';
+        if (/[?&]react_perf\b/.test(url)) {
+          var ReactDefaultPerf = $__require('npm:react@0.14.6/lib/ReactDefaultPerf');
+          ReactDefaultPerf.start();
+        }
+      }
+    }
+    module.exports = {inject: inject};
+  })($__require('github:jspm/nodelibs-process@0.1.2'));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactDefaultBatchingStrategy", ["npm:react@0.14.6/lib/ReactUpdates", "npm:react@0.14.6/lib/Transaction", "npm:react@0.14.6/lib/Object.assign", "npm:fbjs@0.6.1/lib/emptyFunction"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var ReactUpdates = $__require('npm:react@0.14.6/lib/ReactUpdates');
+  var Transaction = $__require('npm:react@0.14.6/lib/Transaction');
+  var assign = $__require('npm:react@0.14.6/lib/Object.assign');
+  var emptyFunction = $__require('npm:fbjs@0.6.1/lib/emptyFunction');
+  var RESET_BATCHED_UPDATES = {
+    initialize: emptyFunction,
+    close: function() {
+      ReactDefaultBatchingStrategy.isBatchingUpdates = false;
+    }
+  };
+  var FLUSH_BATCHED_UPDATES = {
+    initialize: emptyFunction,
+    close: ReactUpdates.flushBatchedUpdates.bind(ReactUpdates)
+  };
+  var TRANSACTION_WRAPPERS = [FLUSH_BATCHED_UPDATES, RESET_BATCHED_UPDATES];
+  function ReactDefaultBatchingStrategyTransaction() {
+    this.reinitializeTransaction();
+  }
+  assign(ReactDefaultBatchingStrategyTransaction.prototype, Transaction.Mixin, {getTransactionWrappers: function() {
+      return TRANSACTION_WRAPPERS;
+    }});
+  var transaction = new ReactDefaultBatchingStrategyTransaction();
+  var ReactDefaultBatchingStrategy = {
+    isBatchingUpdates: false,
+    batchedUpdates: function(callback, a, b, c, d, e) {
+      var alreadyBatchingUpdates = ReactDefaultBatchingStrategy.isBatchingUpdates;
+      ReactDefaultBatchingStrategy.isBatchingUpdates = true;
+      if (alreadyBatchingUpdates) {
+        callback(a, b, c, d, e);
+      } else {
+        transaction.perform(callback, null, a, b, c, d, e);
+      }
+    }
+  };
+  module.exports = ReactDefaultBatchingStrategy;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/adler32", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var MOD = 65521;
+  function adler32(data) {
+    var a = 1;
+    var b = 0;
+    var i = 0;
+    var l = data.length;
+    var m = l & ~0x3;
+    while (i < m) {
+      for (; i < Math.min(i + 4096, m); i += 4) {
+        b += (a += data.charCodeAt(i)) + (a += data.charCodeAt(i + 1)) + (a += data.charCodeAt(i + 2)) + (a += data.charCodeAt(i + 3));
+      }
+      a %= MOD;
+      b %= MOD;
+    }
+    for (; i < l; i++) {
+      b += a += data.charCodeAt(i);
+    }
+    a %= MOD;
+    b %= MOD;
+    return a | b << 16;
+  }
+  module.exports = adler32;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactMarkupChecksum", ["npm:react@0.14.6/lib/adler32"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var adler32 = $__require('npm:react@0.14.6/lib/adler32');
+  var TAG_END = /\/?>/;
+  var ReactMarkupChecksum = {
+    CHECKSUM_ATTR_NAME: 'data-react-checksum',
+    addChecksumToMarkup: function(markup) {
+      var checksum = adler32(markup);
+      return markup.replace(TAG_END, ' ' + ReactMarkupChecksum.CHECKSUM_ATTR_NAME + '="' + checksum + '"$&');
+    },
+    canReuseMarkup: function(markup, element) {
+      var existingChecksum = element.getAttribute(ReactMarkupChecksum.CHECKSUM_ATTR_NAME);
+      existingChecksum = existingChecksum && parseInt(existingChecksum, 10);
+      var markupChecksum = adler32(markup);
+      return markupChecksum === existingChecksum;
+    }
+  };
+  module.exports = ReactMarkupChecksum;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactServerBatchingStrategy", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var ReactServerBatchingStrategy = {
+    isBatchingUpdates: false,
+    batchedUpdates: function(callback) {}
+  };
+  module.exports = ReactServerBatchingStrategy;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactServerRenderingTransaction", ["npm:react@0.14.6/lib/PooledClass", "npm:react@0.14.6/lib/CallbackQueue", "npm:react@0.14.6/lib/Transaction", "npm:react@0.14.6/lib/Object.assign", "npm:fbjs@0.6.1/lib/emptyFunction"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var PooledClass = $__require('npm:react@0.14.6/lib/PooledClass');
+  var CallbackQueue = $__require('npm:react@0.14.6/lib/CallbackQueue');
+  var Transaction = $__require('npm:react@0.14.6/lib/Transaction');
+  var assign = $__require('npm:react@0.14.6/lib/Object.assign');
+  var emptyFunction = $__require('npm:fbjs@0.6.1/lib/emptyFunction');
+  var ON_DOM_READY_QUEUEING = {
+    initialize: function() {
+      this.reactMountReady.reset();
+    },
+    close: emptyFunction
+  };
+  var TRANSACTION_WRAPPERS = [ON_DOM_READY_QUEUEING];
+  function ReactServerRenderingTransaction(renderToStaticMarkup) {
+    this.reinitializeTransaction();
+    this.renderToStaticMarkup = renderToStaticMarkup;
+    this.reactMountReady = CallbackQueue.getPooled(null);
+    this.useCreateElement = false;
+  }
+  var Mixin = {
+    getTransactionWrappers: function() {
+      return TRANSACTION_WRAPPERS;
+    },
+    getReactMountReady: function() {
+      return this.reactMountReady;
+    },
+    destructor: function() {
+      CallbackQueue.release(this.reactMountReady);
+      this.reactMountReady = null;
+    }
+  };
+  assign(ReactServerRenderingTransaction.prototype, Transaction.Mixin, Mixin);
+  PooledClass.addPoolingTo(ReactServerRenderingTransaction);
+  module.exports = ReactServerRenderingTransaction;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactComponentEnvironment", ["npm:fbjs@0.6.1/lib/invariant", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
+    var injected = false;
+    var ReactComponentEnvironment = {
+      unmountIDFromEnvironment: null,
+      replaceNodeWithMarkupByID: null,
+      processChildrenUpdates: null,
+      injection: {injectEnvironment: function(environment) {
+          !!injected ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactCompositeComponent: injectEnvironment() can only be called once.') : invariant(false) : undefined;
+          ReactComponentEnvironment.unmountIDFromEnvironment = environment.unmountIDFromEnvironment;
+          ReactComponentEnvironment.replaceNodeWithMarkupByID = environment.replaceNodeWithMarkupByID;
+          ReactComponentEnvironment.processChildrenUpdates = environment.processChildrenUpdates;
+          injected = true;
+        }}
+    };
+    module.exports = ReactComponentEnvironment;
+  })($__require('github:jspm/nodelibs-process@0.1.2'));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactInstanceMap", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var ReactInstanceMap = {
+    remove: function(key) {
+      key._reactInternalInstance = undefined;
+    },
+    get: function(key) {
+      return key._reactInternalInstance;
+    },
+    has: function(key) {
+      return key._reactInternalInstance !== undefined;
+    },
+    set: function(key, value) {
+      key._reactInternalInstance = value;
+    }
+  };
+  module.exports = ReactInstanceMap;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/CallbackQueue", ["npm:react@0.14.6/lib/PooledClass", "npm:react@0.14.6/lib/Object.assign", "npm:fbjs@0.6.1/lib/invariant", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var PooledClass = $__require('npm:react@0.14.6/lib/PooledClass');
+    var assign = $__require('npm:react@0.14.6/lib/Object.assign');
+    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
+    function CallbackQueue() {
+      this._callbacks = null;
+      this._contexts = null;
+    }
+    assign(CallbackQueue.prototype, {
+      enqueue: function(callback, context) {
+        this._callbacks = this._callbacks || [];
+        this._contexts = this._contexts || [];
+        this._callbacks.push(callback);
+        this._contexts.push(context);
+      },
+      notifyAll: function() {
+        var callbacks = this._callbacks;
+        var contexts = this._contexts;
+        if (callbacks) {
+          !(callbacks.length === contexts.length) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Mismatched list of contexts in callback queue') : invariant(false) : undefined;
+          this._callbacks = null;
+          this._contexts = null;
+          for (var i = 0; i < callbacks.length; i++) {
+            callbacks[i].call(contexts[i]);
+          }
+          callbacks.length = 0;
+          contexts.length = 0;
+        }
+      },
+      reset: function() {
+        this._callbacks = null;
+        this._contexts = null;
+      },
+      destructor: function() {
+        this.reset();
+      }
+    });
+    PooledClass.addPoolingTo(CallbackQueue);
+    module.exports = CallbackQueue;
+  })($__require('github:jspm/nodelibs-process@0.1.2'));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactPerf", ["github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var ReactPerf = {
+      enableMeasure: false,
+      storedMeasure: _noMeasure,
+      measureMethods: function(object, objectName, methodNames) {
+        if (process.env.NODE_ENV !== 'production') {
+          for (var key in methodNames) {
+            if (!methodNames.hasOwnProperty(key)) {
+              continue;
+            }
+            object[key] = ReactPerf.measure(objectName, methodNames[key], object[key]);
+          }
+        }
+      },
+      measure: function(objName, fnName, func) {
+        if (process.env.NODE_ENV !== 'production') {
+          var measuredFunc = null;
+          var wrapper = function() {
+            if (ReactPerf.enableMeasure) {
+              if (!measuredFunc) {
+                measuredFunc = ReactPerf.storedMeasure(objName, fnName, func);
+              }
+              return measuredFunc.apply(this, arguments);
+            }
+            return func.apply(this, arguments);
+          };
+          wrapper.displayName = objName + '_' + fnName;
+          return wrapper;
+        }
+        return func;
+      },
+      injection: {injectMeasure: function(measure) {
+          ReactPerf.storedMeasure = measure;
+        }}
+    };
+    function _noMeasure(objName, fnName, func) {
+      return func;
+    }
+    module.exports = ReactPerf;
+  })($__require('github:jspm/nodelibs-process@0.1.2'));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/Transaction", ["npm:fbjs@0.6.1/lib/invariant", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
+    var Mixin = {
+      reinitializeTransaction: function() {
+        this.transactionWrappers = this.getTransactionWrappers();
+        if (this.wrapperInitData) {
+          this.wrapperInitData.length = 0;
+        } else {
+          this.wrapperInitData = [];
+        }
+        this._isInTransaction = false;
+      },
+      _isInTransaction: false,
+      getTransactionWrappers: null,
+      isInTransaction: function() {
+        return !!this._isInTransaction;
+      },
+      perform: function(method, scope, a, b, c, d, e, f) {
+        !!this.isInTransaction() ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Transaction.perform(...): Cannot initialize a transaction when there ' + 'is already an outstanding transaction.') : invariant(false) : undefined;
+        var errorThrown;
+        var ret;
+        try {
+          this._isInTransaction = true;
+          errorThrown = true;
+          this.initializeAll(0);
+          ret = method.call(scope, a, b, c, d, e, f);
+          errorThrown = false;
+        } finally {
+          try {
+            if (errorThrown) {
+              try {
+                this.closeAll(0);
+              } catch (err) {}
+            } else {
+              this.closeAll(0);
+            }
+          } finally {
+            this._isInTransaction = false;
+          }
+        }
+        return ret;
+      },
+      initializeAll: function(startIndex) {
+        var transactionWrappers = this.transactionWrappers;
+        for (var i = startIndex; i < transactionWrappers.length; i++) {
+          var wrapper = transactionWrappers[i];
+          try {
+            this.wrapperInitData[i] = Transaction.OBSERVED_ERROR;
+            this.wrapperInitData[i] = wrapper.initialize ? wrapper.initialize.call(this) : null;
+          } finally {
+            if (this.wrapperInitData[i] === Transaction.OBSERVED_ERROR) {
+              try {
+                this.initializeAll(i + 1);
+              } catch (err) {}
+            }
+          }
+        }
+      },
+      closeAll: function(startIndex) {
+        !this.isInTransaction() ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Transaction.closeAll(): Cannot close transaction when none are open.') : invariant(false) : undefined;
+        var transactionWrappers = this.transactionWrappers;
+        for (var i = startIndex; i < transactionWrappers.length; i++) {
+          var wrapper = transactionWrappers[i];
+          var initData = this.wrapperInitData[i];
+          var errorThrown;
+          try {
+            errorThrown = true;
+            if (initData !== Transaction.OBSERVED_ERROR && wrapper.close) {
+              wrapper.close.call(this, initData);
+            }
+            errorThrown = false;
+          } finally {
+            if (errorThrown) {
+              try {
+                this.closeAll(i + 1);
+              } catch (e) {}
+            }
+          }
+        }
+        this.wrapperInitData.length = 0;
+      }
+    };
+    var Transaction = {
+      Mixin: Mixin,
+      OBSERVED_ERROR: {}
+    };
+    module.exports = Transaction;
+  })($__require('github:jspm/nodelibs-process@0.1.2'));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactUpdates", ["npm:react@0.14.6/lib/CallbackQueue", "npm:react@0.14.6/lib/PooledClass", "npm:react@0.14.6/lib/ReactPerf", "npm:react@0.14.6/lib/ReactReconciler", "npm:react@0.14.6/lib/Transaction", "npm:react@0.14.6/lib/Object.assign", "npm:fbjs@0.6.1/lib/invariant", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var CallbackQueue = $__require('npm:react@0.14.6/lib/CallbackQueue');
+    var PooledClass = $__require('npm:react@0.14.6/lib/PooledClass');
+    var ReactPerf = $__require('npm:react@0.14.6/lib/ReactPerf');
+    var ReactReconciler = $__require('npm:react@0.14.6/lib/ReactReconciler');
+    var Transaction = $__require('npm:react@0.14.6/lib/Transaction');
+    var assign = $__require('npm:react@0.14.6/lib/Object.assign');
+    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
+    var dirtyComponents = [];
+    var asapCallbackQueue = CallbackQueue.getPooled();
+    var asapEnqueued = false;
+    var batchingStrategy = null;
+    function ensureInjected() {
+      !(ReactUpdates.ReactReconcileTransaction && batchingStrategy) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactUpdates: must inject a reconcile transaction class and batching ' + 'strategy') : invariant(false) : undefined;
+    }
+    var NESTED_UPDATES = {
+      initialize: function() {
+        this.dirtyComponentsLength = dirtyComponents.length;
+      },
+      close: function() {
+        if (this.dirtyComponentsLength !== dirtyComponents.length) {
+          dirtyComponents.splice(0, this.dirtyComponentsLength);
+          flushBatchedUpdates();
+        } else {
+          dirtyComponents.length = 0;
+        }
+      }
+    };
+    var UPDATE_QUEUEING = {
+      initialize: function() {
+        this.callbackQueue.reset();
+      },
+      close: function() {
+        this.callbackQueue.notifyAll();
+      }
+    };
+    var TRANSACTION_WRAPPERS = [NESTED_UPDATES, UPDATE_QUEUEING];
+    function ReactUpdatesFlushTransaction() {
+      this.reinitializeTransaction();
+      this.dirtyComponentsLength = null;
+      this.callbackQueue = CallbackQueue.getPooled();
+      this.reconcileTransaction = ReactUpdates.ReactReconcileTransaction.getPooled(false);
+    }
+    assign(ReactUpdatesFlushTransaction.prototype, Transaction.Mixin, {
+      getTransactionWrappers: function() {
+        return TRANSACTION_WRAPPERS;
+      },
+      destructor: function() {
+        this.dirtyComponentsLength = null;
+        CallbackQueue.release(this.callbackQueue);
+        this.callbackQueue = null;
+        ReactUpdates.ReactReconcileTransaction.release(this.reconcileTransaction);
+        this.reconcileTransaction = null;
+      },
+      perform: function(method, scope, a) {
+        return Transaction.Mixin.perform.call(this, this.reconcileTransaction.perform, this.reconcileTransaction, method, scope, a);
+      }
+    });
+    PooledClass.addPoolingTo(ReactUpdatesFlushTransaction);
+    function batchedUpdates(callback, a, b, c, d, e) {
+      ensureInjected();
+      batchingStrategy.batchedUpdates(callback, a, b, c, d, e);
+    }
+    function mountOrderComparator(c1, c2) {
+      return c1._mountOrder - c2._mountOrder;
+    }
+    function runBatchedUpdates(transaction) {
+      var len = transaction.dirtyComponentsLength;
+      !(len === dirtyComponents.length) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Expected flush transaction\'s stored dirty-components length (%s) to ' + 'match dirty-components array length (%s).', len, dirtyComponents.length) : invariant(false) : undefined;
+      dirtyComponents.sort(mountOrderComparator);
+      for (var i = 0; i < len; i++) {
+        var component = dirtyComponents[i];
+        var callbacks = component._pendingCallbacks;
+        component._pendingCallbacks = null;
+        ReactReconciler.performUpdateIfNecessary(component, transaction.reconcileTransaction);
+        if (callbacks) {
+          for (var j = 0; j < callbacks.length; j++) {
+            transaction.callbackQueue.enqueue(callbacks[j], component.getPublicInstance());
+          }
+        }
+      }
+    }
+    var flushBatchedUpdates = function() {
+      while (dirtyComponents.length || asapEnqueued) {
+        if (dirtyComponents.length) {
+          var transaction = ReactUpdatesFlushTransaction.getPooled();
+          transaction.perform(runBatchedUpdates, null, transaction);
+          ReactUpdatesFlushTransaction.release(transaction);
+        }
+        if (asapEnqueued) {
+          asapEnqueued = false;
+          var queue = asapCallbackQueue;
+          asapCallbackQueue = CallbackQueue.getPooled();
+          queue.notifyAll();
+          CallbackQueue.release(queue);
+        }
+      }
+    };
+    flushBatchedUpdates = ReactPerf.measure('ReactUpdates', 'flushBatchedUpdates', flushBatchedUpdates);
+    function enqueueUpdate(component) {
+      ensureInjected();
+      if (!batchingStrategy.isBatchingUpdates) {
+        batchingStrategy.batchedUpdates(enqueueUpdate, component);
+        return;
+      }
+      dirtyComponents.push(component);
+    }
+    function asap(callback, context) {
+      !batchingStrategy.isBatchingUpdates ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactUpdates.asap: Can\'t enqueue an asap callback in a context where' + 'updates are not being batched.') : invariant(false) : undefined;
+      asapCallbackQueue.enqueue(callback, context);
+      asapEnqueued = true;
+    }
+    var ReactUpdatesInjection = {
+      injectReconcileTransaction: function(ReconcileTransaction) {
+        !ReconcileTransaction ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactUpdates: must provide a reconcile transaction class') : invariant(false) : undefined;
+        ReactUpdates.ReactReconcileTransaction = ReconcileTransaction;
+      },
+      injectBatchingStrategy: function(_batchingStrategy) {
+        !_batchingStrategy ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactUpdates: must provide a batching strategy') : invariant(false) : undefined;
+        !(typeof _batchingStrategy.batchedUpdates === 'function') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactUpdates: must provide a batchedUpdates() function') : invariant(false) : undefined;
+        !(typeof _batchingStrategy.isBatchingUpdates === 'boolean') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactUpdates: must provide an isBatchingUpdates boolean attribute') : invariant(false) : undefined;
+        batchingStrategy = _batchingStrategy;
+      }
+    };
+    var ReactUpdates = {
+      ReactReconcileTransaction: null,
+      batchedUpdates: batchedUpdates,
+      enqueueUpdate: enqueueUpdate,
+      flushBatchedUpdates: flushBatchedUpdates,
+      injection: ReactUpdatesInjection,
+      asap: asap
+    };
+    module.exports = ReactUpdates;
+  })($__require('github:jspm/nodelibs-process@0.1.2'));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactUpdateQueue", ["npm:react@0.14.6/lib/ReactCurrentOwner", "npm:react@0.14.6/lib/ReactElement", "npm:react@0.14.6/lib/ReactInstanceMap", "npm:react@0.14.6/lib/ReactUpdates", "npm:react@0.14.6/lib/Object.assign", "npm:fbjs@0.6.1/lib/invariant", "npm:fbjs@0.6.1/lib/warning", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var ReactCurrentOwner = $__require('npm:react@0.14.6/lib/ReactCurrentOwner');
+    var ReactElement = $__require('npm:react@0.14.6/lib/ReactElement');
+    var ReactInstanceMap = $__require('npm:react@0.14.6/lib/ReactInstanceMap');
+    var ReactUpdates = $__require('npm:react@0.14.6/lib/ReactUpdates');
+    var assign = $__require('npm:react@0.14.6/lib/Object.assign');
+    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
+    var warning = $__require('npm:fbjs@0.6.1/lib/warning');
+    function enqueueUpdate(internalInstance) {
+      ReactUpdates.enqueueUpdate(internalInstance);
+    }
+    function getInternalInstanceReadyForUpdate(publicInstance, callerName) {
+      var internalInstance = ReactInstanceMap.get(publicInstance);
+      if (!internalInstance) {
+        if (process.env.NODE_ENV !== 'production') {
+          process.env.NODE_ENV !== 'production' ? warning(!callerName, '%s(...): Can only update a mounted or mounting component. ' + 'This usually means you called %s() on an unmounted component. ' + 'This is a no-op. Please check the code for the %s component.', callerName, callerName, publicInstance.constructor.displayName) : undefined;
+        }
+        return null;
+      }
+      if (process.env.NODE_ENV !== 'production') {
+        process.env.NODE_ENV !== 'production' ? warning(ReactCurrentOwner.current == null, '%s(...): Cannot update during an existing state transition ' + '(such as within `render`). Render methods should be a pure function ' + 'of props and state.', callerName) : undefined;
+      }
+      return internalInstance;
+    }
+    var ReactUpdateQueue = {
+      isMounted: function(publicInstance) {
+        if (process.env.NODE_ENV !== 'production') {
+          var owner = ReactCurrentOwner.current;
+          if (owner !== null) {
+            process.env.NODE_ENV !== 'production' ? warning(owner._warnedAboutRefsInRender, '%s is accessing isMounted inside its render() function. ' + 'render() should be a pure function of props and state. It should ' + 'never access something that requires stale data from the previous ' + 'render, such as refs. Move this logic to componentDidMount and ' + 'componentDidUpdate instead.', owner.getName() || 'A component') : undefined;
+            owner._warnedAboutRefsInRender = true;
+          }
+        }
+        var internalInstance = ReactInstanceMap.get(publicInstance);
+        if (internalInstance) {
+          return !!internalInstance._renderedComponent;
+        } else {
+          return false;
+        }
+      },
+      enqueueCallback: function(publicInstance, callback) {
+        !(typeof callback === 'function') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'enqueueCallback(...): You called `setProps`, `replaceProps`, ' + '`setState`, `replaceState`, or `forceUpdate` with a callback that ' + 'isn\'t callable.') : invariant(false) : undefined;
+        var internalInstance = getInternalInstanceReadyForUpdate(publicInstance);
+        if (!internalInstance) {
+          return null;
+        }
+        if (internalInstance._pendingCallbacks) {
+          internalInstance._pendingCallbacks.push(callback);
+        } else {
+          internalInstance._pendingCallbacks = [callback];
+        }
+        enqueueUpdate(internalInstance);
+      },
+      enqueueCallbackInternal: function(internalInstance, callback) {
+        !(typeof callback === 'function') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'enqueueCallback(...): You called `setProps`, `replaceProps`, ' + '`setState`, `replaceState`, or `forceUpdate` with a callback that ' + 'isn\'t callable.') : invariant(false) : undefined;
+        if (internalInstance._pendingCallbacks) {
+          internalInstance._pendingCallbacks.push(callback);
+        } else {
+          internalInstance._pendingCallbacks = [callback];
+        }
+        enqueueUpdate(internalInstance);
+      },
+      enqueueForceUpdate: function(publicInstance) {
+        var internalInstance = getInternalInstanceReadyForUpdate(publicInstance, 'forceUpdate');
+        if (!internalInstance) {
+          return;
+        }
+        internalInstance._pendingForceUpdate = true;
+        enqueueUpdate(internalInstance);
+      },
+      enqueueReplaceState: function(publicInstance, completeState) {
+        var internalInstance = getInternalInstanceReadyForUpdate(publicInstance, 'replaceState');
+        if (!internalInstance) {
+          return;
+        }
+        internalInstance._pendingStateQueue = [completeState];
+        internalInstance._pendingReplaceState = true;
+        enqueueUpdate(internalInstance);
+      },
+      enqueueSetState: function(publicInstance, partialState) {
+        var internalInstance = getInternalInstanceReadyForUpdate(publicInstance, 'setState');
+        if (!internalInstance) {
+          return;
+        }
+        var queue = internalInstance._pendingStateQueue || (internalInstance._pendingStateQueue = []);
+        queue.push(partialState);
+        enqueueUpdate(internalInstance);
+      },
+      enqueueSetProps: function(publicInstance, partialProps) {
+        var internalInstance = getInternalInstanceReadyForUpdate(publicInstance, 'setProps');
+        if (!internalInstance) {
+          return;
+        }
+        ReactUpdateQueue.enqueueSetPropsInternal(internalInstance, partialProps);
+      },
+      enqueueSetPropsInternal: function(internalInstance, partialProps) {
+        var topLevelWrapper = internalInstance._topLevelWrapper;
+        !topLevelWrapper ? process.env.NODE_ENV !== 'production' ? invariant(false, 'setProps(...): You called `setProps` on a ' + 'component with a parent. This is an anti-pattern since props will ' + 'get reactively updated when rendered. Instead, change the owner\'s ' + '`render` method to pass the correct value as props to the component ' + 'where it is created.') : invariant(false) : undefined;
+        var wrapElement = topLevelWrapper._pendingElement || topLevelWrapper._currentElement;
+        var element = wrapElement.props;
+        var props = assign({}, element.props, partialProps);
+        topLevelWrapper._pendingElement = ReactElement.cloneAndReplaceProps(wrapElement, ReactElement.cloneAndReplaceProps(element, props));
+        enqueueUpdate(topLevelWrapper);
+      },
+      enqueueReplaceProps: function(publicInstance, props) {
+        var internalInstance = getInternalInstanceReadyForUpdate(publicInstance, 'replaceProps');
+        if (!internalInstance) {
+          return;
+        }
+        ReactUpdateQueue.enqueueReplacePropsInternal(internalInstance, props);
+      },
+      enqueueReplacePropsInternal: function(internalInstance, props) {
+        var topLevelWrapper = internalInstance._topLevelWrapper;
+        !topLevelWrapper ? process.env.NODE_ENV !== 'production' ? invariant(false, 'replaceProps(...): You called `replaceProps` on a ' + 'component with a parent. This is an anti-pattern since props will ' + 'get reactively updated when rendered. Instead, change the owner\'s ' + '`render` method to pass the correct value as props to the component ' + 'where it is created.') : invariant(false) : undefined;
+        var wrapElement = topLevelWrapper._pendingElement || topLevelWrapper._currentElement;
+        var element = wrapElement.props;
+        topLevelWrapper._pendingElement = ReactElement.cloneAndReplaceProps(wrapElement, ReactElement.cloneAndReplaceProps(element, props));
+        enqueueUpdate(topLevelWrapper);
+      },
+      enqueueElementInternal: function(internalInstance, newElement) {
+        internalInstance._pendingElement = newElement;
+        enqueueUpdate(internalInstance);
+      }
+    };
+    module.exports = ReactUpdateQueue;
+  })($__require('github:jspm/nodelibs-process@0.1.2'));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/shouldUpdateReactComponent", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  function shouldUpdateReactComponent(prevElement, nextElement) {
+    var prevEmpty = prevElement === null || prevElement === false;
+    var nextEmpty = nextElement === null || nextElement === false;
+    if (prevEmpty || nextEmpty) {
+      return prevEmpty === nextEmpty;
+    }
+    var prevType = typeof prevElement;
+    var nextType = typeof nextElement;
+    if (prevType === 'string' || prevType === 'number') {
+      return nextType === 'string' || nextType === 'number';
+    } else {
+      return nextType === 'object' && prevElement.type === nextElement.type && prevElement.key === nextElement.key;
+    }
+    return false;
+  }
+  module.exports = shouldUpdateReactComponent;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactCompositeComponent", ["npm:react@0.14.6/lib/ReactComponentEnvironment", "npm:react@0.14.6/lib/ReactCurrentOwner", "npm:react@0.14.6/lib/ReactElement", "npm:react@0.14.6/lib/ReactInstanceMap", "npm:react@0.14.6/lib/ReactPerf", "npm:react@0.14.6/lib/ReactPropTypeLocations", "npm:react@0.14.6/lib/ReactPropTypeLocationNames", "npm:react@0.14.6/lib/ReactReconciler", "npm:react@0.14.6/lib/ReactUpdateQueue", "npm:react@0.14.6/lib/Object.assign", "npm:fbjs@0.6.1/lib/emptyObject", "npm:fbjs@0.6.1/lib/invariant", "npm:react@0.14.6/lib/shouldUpdateReactComponent", "npm:fbjs@0.6.1/lib/warning", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var ReactComponentEnvironment = $__require('npm:react@0.14.6/lib/ReactComponentEnvironment');
+    var ReactCurrentOwner = $__require('npm:react@0.14.6/lib/ReactCurrentOwner');
+    var ReactElement = $__require('npm:react@0.14.6/lib/ReactElement');
+    var ReactInstanceMap = $__require('npm:react@0.14.6/lib/ReactInstanceMap');
+    var ReactPerf = $__require('npm:react@0.14.6/lib/ReactPerf');
+    var ReactPropTypeLocations = $__require('npm:react@0.14.6/lib/ReactPropTypeLocations');
+    var ReactPropTypeLocationNames = $__require('npm:react@0.14.6/lib/ReactPropTypeLocationNames');
+    var ReactReconciler = $__require('npm:react@0.14.6/lib/ReactReconciler');
+    var ReactUpdateQueue = $__require('npm:react@0.14.6/lib/ReactUpdateQueue');
+    var assign = $__require('npm:react@0.14.6/lib/Object.assign');
+    var emptyObject = $__require('npm:fbjs@0.6.1/lib/emptyObject');
+    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
+    var shouldUpdateReactComponent = $__require('npm:react@0.14.6/lib/shouldUpdateReactComponent');
+    var warning = $__require('npm:fbjs@0.6.1/lib/warning');
+    function getDeclarationErrorAddendum(component) {
+      var owner = component._currentElement._owner || null;
+      if (owner) {
+        var name = owner.getName();
+        if (name) {
+          return ' Check the render method of `' + name + '`.';
+        }
+      }
+      return '';
+    }
+    function StatelessComponent(Component) {}
+    StatelessComponent.prototype.render = function() {
+      var Component = ReactInstanceMap.get(this)._currentElement.type;
+      return Component(this.props, this.context, this.updater);
+    };
+    var nextMountID = 1;
+    var ReactCompositeComponentMixin = {
+      construct: function(element) {
+        this._currentElement = element;
+        this._rootNodeID = null;
+        this._instance = null;
+        this._pendingElement = null;
+        this._pendingStateQueue = null;
+        this._pendingReplaceState = false;
+        this._pendingForceUpdate = false;
+        this._renderedComponent = null;
+        this._context = null;
+        this._mountOrder = 0;
+        this._topLevelWrapper = null;
+        this._pendingCallbacks = null;
+      },
+      mountComponent: function(rootID, transaction, context) {
+        this._context = context;
+        this._mountOrder = nextMountID++;
+        this._rootNodeID = rootID;
+        var publicProps = this._processProps(this._currentElement.props);
+        var publicContext = this._processContext(context);
+        var Component = this._currentElement.type;
+        var inst;
+        var renderedElement;
+        var canInstantiate = ('prototype' in Component);
+        if (canInstantiate) {
+          if (process.env.NODE_ENV !== 'production') {
+            ReactCurrentOwner.current = this;
+            try {
+              inst = new Component(publicProps, publicContext, ReactUpdateQueue);
+            } finally {
+              ReactCurrentOwner.current = null;
+            }
+          } else {
+            inst = new Component(publicProps, publicContext, ReactUpdateQueue);
+          }
+        }
+        if (!canInstantiate || inst === null || inst === false || ReactElement.isValidElement(inst)) {
+          renderedElement = inst;
+          inst = new StatelessComponent(Component);
+        }
+        if (process.env.NODE_ENV !== 'production') {
+          if (inst.render == null) {
+            process.env.NODE_ENV !== 'production' ? warning(false, '%s(...): No `render` method found on the returned component ' + 'instance: you may have forgotten to define `render`, returned ' + 'null/false from a stateless component, or tried to render an ' + 'element whose type is a function that isn\'t a React component.', Component.displayName || Component.name || 'Component') : undefined;
+          } else {
+            process.env.NODE_ENV !== 'production' ? warning(Component.prototype && Component.prototype.isReactComponent || !canInstantiate || !(inst instanceof Component), '%s(...): React component classes must extend React.Component.', Component.displayName || Component.name || 'Component') : undefined;
+          }
+        }
+        inst.props = publicProps;
+        inst.context = publicContext;
+        inst.refs = emptyObject;
+        inst.updater = ReactUpdateQueue;
+        this._instance = inst;
+        ReactInstanceMap.set(inst, this);
+        if (process.env.NODE_ENV !== 'production') {
+          process.env.NODE_ENV !== 'production' ? warning(!inst.getInitialState || inst.getInitialState.isReactClassApproved, 'getInitialState was defined on %s, a plain JavaScript class. ' + 'This is only supported for classes created using React.createClass. ' + 'Did you mean to define a state property instead?', this.getName() || 'a component') : undefined;
+          process.env.NODE_ENV !== 'production' ? warning(!inst.getDefaultProps || inst.getDefaultProps.isReactClassApproved, 'getDefaultProps was defined on %s, a plain JavaScript class. ' + 'This is only supported for classes created using React.createClass. ' + 'Use a static property to define defaultProps instead.', this.getName() || 'a component') : undefined;
+          process.env.NODE_ENV !== 'production' ? warning(!inst.propTypes, 'propTypes was defined as an instance property on %s. Use a static ' + 'property to define propTypes instead.', this.getName() || 'a component') : undefined;
+          process.env.NODE_ENV !== 'production' ? warning(!inst.contextTypes, 'contextTypes was defined as an instance property on %s. Use a ' + 'static property to define contextTypes instead.', this.getName() || 'a component') : undefined;
+          process.env.NODE_ENV !== 'production' ? warning(typeof inst.componentShouldUpdate !== 'function', '%s has a method called ' + 'componentShouldUpdate(). Did you mean shouldComponentUpdate()? ' + 'The name is phrased as a question because the function is ' + 'expected to return a value.', this.getName() || 'A component') : undefined;
+          process.env.NODE_ENV !== 'production' ? warning(typeof inst.componentDidUnmount !== 'function', '%s has a method called ' + 'componentDidUnmount(). But there is no such lifecycle method. ' + 'Did you mean componentWillUnmount()?', this.getName() || 'A component') : undefined;
+          process.env.NODE_ENV !== 'production' ? warning(typeof inst.componentWillRecieveProps !== 'function', '%s has a method called ' + 'componentWillRecieveProps(). Did you mean componentWillReceiveProps()?', this.getName() || 'A component') : undefined;
+        }
+        var initialState = inst.state;
+        if (initialState === undefined) {
+          inst.state = initialState = null;
+        }
+        !(typeof initialState === 'object' && !Array.isArray(initialState)) ? process.env.NODE_ENV !== 'production' ? invariant(false, '%s.state: must be set to an object or null', this.getName() || 'ReactCompositeComponent') : invariant(false) : undefined;
+        this._pendingStateQueue = null;
+        this._pendingReplaceState = false;
+        this._pendingForceUpdate = false;
+        if (inst.componentWillMount) {
+          inst.componentWillMount();
+          if (this._pendingStateQueue) {
+            inst.state = this._processPendingState(inst.props, inst.context);
+          }
+        }
+        if (renderedElement === undefined) {
+          renderedElement = this._renderValidatedComponent();
+        }
+        this._renderedComponent = this._instantiateReactComponent(renderedElement);
+        var markup = ReactReconciler.mountComponent(this._renderedComponent, rootID, transaction, this._processChildContext(context));
+        if (inst.componentDidMount) {
+          transaction.getReactMountReady().enqueue(inst.componentDidMount, inst);
+        }
+        return markup;
+      },
+      unmountComponent: function() {
+        var inst = this._instance;
+        if (inst.componentWillUnmount) {
+          inst.componentWillUnmount();
+        }
+        ReactReconciler.unmountComponent(this._renderedComponent);
+        this._renderedComponent = null;
+        this._instance = null;
+        this._pendingStateQueue = null;
+        this._pendingReplaceState = false;
+        this._pendingForceUpdate = false;
+        this._pendingCallbacks = null;
+        this._pendingElement = null;
+        this._context = null;
+        this._rootNodeID = null;
+        this._topLevelWrapper = null;
+        ReactInstanceMap.remove(inst);
+      },
+      _maskContext: function(context) {
+        var maskedContext = null;
+        var Component = this._currentElement.type;
+        var contextTypes = Component.contextTypes;
+        if (!contextTypes) {
+          return emptyObject;
+        }
+        maskedContext = {};
+        for (var contextName in contextTypes) {
+          maskedContext[contextName] = context[contextName];
+        }
+        return maskedContext;
+      },
+      _processContext: function(context) {
+        var maskedContext = this._maskContext(context);
+        if (process.env.NODE_ENV !== 'production') {
+          var Component = this._currentElement.type;
+          if (Component.contextTypes) {
+            this._checkPropTypes(Component.contextTypes, maskedContext, ReactPropTypeLocations.context);
+          }
+        }
+        return maskedContext;
+      },
+      _processChildContext: function(currentContext) {
+        var Component = this._currentElement.type;
+        var inst = this._instance;
+        var childContext = inst.getChildContext && inst.getChildContext();
+        if (childContext) {
+          !(typeof Component.childContextTypes === 'object') ? process.env.NODE_ENV !== 'production' ? invariant(false, '%s.getChildContext(): childContextTypes must be defined in order to ' + 'use getChildContext().', this.getName() || 'ReactCompositeComponent') : invariant(false) : undefined;
+          if (process.env.NODE_ENV !== 'production') {
+            this._checkPropTypes(Component.childContextTypes, childContext, ReactPropTypeLocations.childContext);
+          }
+          for (var name in childContext) {
+            !(name in Component.childContextTypes) ? process.env.NODE_ENV !== 'production' ? invariant(false, '%s.getChildContext(): key "%s" is not defined in childContextTypes.', this.getName() || 'ReactCompositeComponent', name) : invariant(false) : undefined;
+          }
+          return assign({}, currentContext, childContext);
+        }
+        return currentContext;
+      },
+      _processProps: function(newProps) {
+        if (process.env.NODE_ENV !== 'production') {
+          var Component = this._currentElement.type;
+          if (Component.propTypes) {
+            this._checkPropTypes(Component.propTypes, newProps, ReactPropTypeLocations.prop);
+          }
+        }
+        return newProps;
+      },
+      _checkPropTypes: function(propTypes, props, location) {
+        var componentName = this.getName();
+        for (var propName in propTypes) {
+          if (propTypes.hasOwnProperty(propName)) {
+            var error;
+            try {
+              !(typeof propTypes[propName] === 'function') ? process.env.NODE_ENV !== 'production' ? invariant(false, '%s: %s type `%s` is invalid; it must be a function, usually ' + 'from React.PropTypes.', componentName || 'React class', ReactPropTypeLocationNames[location], propName) : invariant(false) : undefined;
+              error = propTypes[propName](props, propName, componentName, location);
+            } catch (ex) {
+              error = ex;
+            }
+            if (error instanceof Error) {
+              var addendum = getDeclarationErrorAddendum(this);
+              if (location === ReactPropTypeLocations.prop) {
+                process.env.NODE_ENV !== 'production' ? warning(false, 'Failed Composite propType: %s%s', error.message, addendum) : undefined;
+              } else {
+                process.env.NODE_ENV !== 'production' ? warning(false, 'Failed Context Types: %s%s', error.message, addendum) : undefined;
+              }
+            }
+          }
+        }
+      },
+      receiveComponent: function(nextElement, transaction, nextContext) {
+        var prevElement = this._currentElement;
+        var prevContext = this._context;
+        this._pendingElement = null;
+        this.updateComponent(transaction, prevElement, nextElement, prevContext, nextContext);
+      },
+      performUpdateIfNecessary: function(transaction) {
+        if (this._pendingElement != null) {
+          ReactReconciler.receiveComponent(this, this._pendingElement || this._currentElement, transaction, this._context);
+        }
+        if (this._pendingStateQueue !== null || this._pendingForceUpdate) {
+          this.updateComponent(transaction, this._currentElement, this._currentElement, this._context, this._context);
+        }
+      },
+      updateComponent: function(transaction, prevParentElement, nextParentElement, prevUnmaskedContext, nextUnmaskedContext) {
+        var inst = this._instance;
+        var nextContext = this._context === nextUnmaskedContext ? inst.context : this._processContext(nextUnmaskedContext);
+        var nextProps;
+        if (prevParentElement === nextParentElement) {
+          nextProps = nextParentElement.props;
+        } else {
+          nextProps = this._processProps(nextParentElement.props);
+          if (inst.componentWillReceiveProps) {
+            inst.componentWillReceiveProps(nextProps, nextContext);
+          }
+        }
+        var nextState = this._processPendingState(nextProps, nextContext);
+        var shouldUpdate = this._pendingForceUpdate || !inst.shouldComponentUpdate || inst.shouldComponentUpdate(nextProps, nextState, nextContext);
+        if (process.env.NODE_ENV !== 'production') {
+          process.env.NODE_ENV !== 'production' ? warning(typeof shouldUpdate !== 'undefined', '%s.shouldComponentUpdate(): Returned undefined instead of a ' + 'boolean value. Make sure to return true or false.', this.getName() || 'ReactCompositeComponent') : undefined;
+        }
+        if (shouldUpdate) {
+          this._pendingForceUpdate = false;
+          this._performComponentUpdate(nextParentElement, nextProps, nextState, nextContext, transaction, nextUnmaskedContext);
+        } else {
+          this._currentElement = nextParentElement;
+          this._context = nextUnmaskedContext;
+          inst.props = nextProps;
+          inst.state = nextState;
+          inst.context = nextContext;
+        }
+      },
+      _processPendingState: function(props, context) {
+        var inst = this._instance;
+        var queue = this._pendingStateQueue;
+        var replace = this._pendingReplaceState;
+        this._pendingReplaceState = false;
+        this._pendingStateQueue = null;
+        if (!queue) {
+          return inst.state;
+        }
+        if (replace && queue.length === 1) {
+          return queue[0];
+        }
+        var nextState = assign({}, replace ? queue[0] : inst.state);
+        for (var i = replace ? 1 : 0; i < queue.length; i++) {
+          var partial = queue[i];
+          assign(nextState, typeof partial === 'function' ? partial.call(inst, nextState, props, context) : partial);
+        }
+        return nextState;
+      },
+      _performComponentUpdate: function(nextElement, nextProps, nextState, nextContext, transaction, unmaskedContext) {
+        var inst = this._instance;
+        var hasComponentDidUpdate = Boolean(inst.componentDidUpdate);
+        var prevProps;
+        var prevState;
+        var prevContext;
+        if (hasComponentDidUpdate) {
+          prevProps = inst.props;
+          prevState = inst.state;
+          prevContext = inst.context;
+        }
+        if (inst.componentWillUpdate) {
+          inst.componentWillUpdate(nextProps, nextState, nextContext);
+        }
+        this._currentElement = nextElement;
+        this._context = unmaskedContext;
+        inst.props = nextProps;
+        inst.state = nextState;
+        inst.context = nextContext;
+        this._updateRenderedComponent(transaction, unmaskedContext);
+        if (hasComponentDidUpdate) {
+          transaction.getReactMountReady().enqueue(inst.componentDidUpdate.bind(inst, prevProps, prevState, prevContext), inst);
+        }
+      },
+      _updateRenderedComponent: function(transaction, context) {
+        var prevComponentInstance = this._renderedComponent;
+        var prevRenderedElement = prevComponentInstance._currentElement;
+        var nextRenderedElement = this._renderValidatedComponent();
+        if (shouldUpdateReactComponent(prevRenderedElement, nextRenderedElement)) {
+          ReactReconciler.receiveComponent(prevComponentInstance, nextRenderedElement, transaction, this._processChildContext(context));
+        } else {
+          var thisID = this._rootNodeID;
+          var prevComponentID = prevComponentInstance._rootNodeID;
+          ReactReconciler.unmountComponent(prevComponentInstance);
+          this._renderedComponent = this._instantiateReactComponent(nextRenderedElement);
+          var nextMarkup = ReactReconciler.mountComponent(this._renderedComponent, thisID, transaction, this._processChildContext(context));
+          this._replaceNodeWithMarkupByID(prevComponentID, nextMarkup);
+        }
+      },
+      _replaceNodeWithMarkupByID: function(prevComponentID, nextMarkup) {
+        ReactComponentEnvironment.replaceNodeWithMarkupByID(prevComponentID, nextMarkup);
+      },
+      _renderValidatedComponentWithoutOwnerOrContext: function() {
+        var inst = this._instance;
+        var renderedComponent = inst.render();
+        if (process.env.NODE_ENV !== 'production') {
+          if (typeof renderedComponent === 'undefined' && inst.render._isMockFunction) {
+            renderedComponent = null;
+          }
+        }
+        return renderedComponent;
+      },
+      _renderValidatedComponent: function() {
+        var renderedComponent;
+        ReactCurrentOwner.current = this;
+        try {
+          renderedComponent = this._renderValidatedComponentWithoutOwnerOrContext();
+        } finally {
+          ReactCurrentOwner.current = null;
+        }
+        !(renderedComponent === null || renderedComponent === false || ReactElement.isValidElement(renderedComponent)) ? process.env.NODE_ENV !== 'production' ? invariant(false, '%s.render(): A valid ReactComponent must be returned. You may have ' + 'returned undefined, an array or some other invalid object.', this.getName() || 'ReactCompositeComponent') : invariant(false) : undefined;
+        return renderedComponent;
+      },
+      attachRef: function(ref, component) {
+        var inst = this.getPublicInstance();
+        !(inst != null) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Stateless function components cannot have refs.') : invariant(false) : undefined;
+        var publicComponentInstance = component.getPublicInstance();
+        if (process.env.NODE_ENV !== 'production') {
+          var componentName = component && component.getName ? component.getName() : 'a component';
+          process.env.NODE_ENV !== 'production' ? warning(publicComponentInstance != null, 'Stateless function components cannot be given refs ' + '(See ref "%s" in %s created by %s). ' + 'Attempts to access this ref will fail.', ref, componentName, this.getName()) : undefined;
+        }
+        var refs = inst.refs === emptyObject ? inst.refs = {} : inst.refs;
+        refs[ref] = publicComponentInstance;
+      },
+      detachRef: function(ref) {
+        var refs = this.getPublicInstance().refs;
+        delete refs[ref];
+      },
+      getName: function() {
+        var type = this._currentElement.type;
+        var constructor = this._instance && this._instance.constructor;
+        return type.displayName || constructor && constructor.displayName || type.name || constructor && constructor.name || null;
+      },
+      getPublicInstance: function() {
+        var inst = this._instance;
+        if (inst instanceof StatelessComponent) {
+          return null;
+        }
+        return inst;
+      },
+      _instantiateReactComponent: null
+    };
+    ReactPerf.measureMethods(ReactCompositeComponentMixin, 'ReactCompositeComponent', {
+      mountComponent: 'mountComponent',
+      updateComponent: 'updateComponent',
+      _renderValidatedComponent: '_renderValidatedComponent'
+    });
+    var ReactCompositeComponent = {Mixin: ReactCompositeComponentMixin};
+    module.exports = ReactCompositeComponent;
+  })($__require('github:jspm/nodelibs-process@0.1.2'));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactEmptyComponentRegistry", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var nullComponentIDsRegistry = {};
+  function isNullComponentID(id) {
+    return !!nullComponentIDsRegistry[id];
+  }
+  function registerNullComponentID(id) {
+    nullComponentIDsRegistry[id] = true;
+  }
+  function deregisterNullComponentID(id) {
+    delete nullComponentIDsRegistry[id];
+  }
+  var ReactEmptyComponentRegistry = {
+    isNullComponentID: isNullComponentID,
+    registerNullComponentID: registerNullComponentID,
+    deregisterNullComponentID: deregisterNullComponentID
+  };
+  module.exports = ReactEmptyComponentRegistry;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactOwner", ["npm:fbjs@0.6.1/lib/invariant", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
+    var ReactOwner = {
+      isValidOwner: function(object) {
+        return !!(object && typeof object.attachRef === 'function' && typeof object.detachRef === 'function');
+      },
+      addComponentAsRefTo: function(component, ref, owner) {
+        !ReactOwner.isValidOwner(owner) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'addComponentAsRefTo(...): Only a ReactOwner can have refs. You might ' + 'be adding a ref to a component that was not created inside a component\'s ' + '`render` method, or you have multiple copies of React loaded ' + '(details: https://fb.me/react-refs-must-have-owner).') : invariant(false) : undefined;
+        owner.attachRef(ref, component);
+      },
+      removeComponentAsRefFrom: function(component, ref, owner) {
+        !ReactOwner.isValidOwner(owner) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'removeComponentAsRefFrom(...): Only a ReactOwner can have refs. You might ' + 'be removing a ref to a component that was not created inside a component\'s ' + '`render` method, or you have multiple copies of React loaded ' + '(details: https://fb.me/react-refs-must-have-owner).') : invariant(false) : undefined;
+        if (owner.getPublicInstance().refs[ref] === component.getPublicInstance()) {
+          owner.detachRef(ref);
+        }
+      }
+    };
+    module.exports = ReactOwner;
+  })($__require('github:jspm/nodelibs-process@0.1.2'));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactRef", ["npm:react@0.14.6/lib/ReactOwner", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var ReactOwner = $__require('npm:react@0.14.6/lib/ReactOwner');
+    var ReactRef = {};
+    function attachRef(ref, component, owner) {
+      if (typeof ref === 'function') {
+        ref(component.getPublicInstance());
+      } else {
+        ReactOwner.addComponentAsRefTo(component, ref, owner);
+      }
+    }
+    function detachRef(ref, component, owner) {
+      if (typeof ref === 'function') {
+        ref(null);
+      } else {
+        ReactOwner.removeComponentAsRefFrom(component, ref, owner);
+      }
+    }
+    ReactRef.attachRefs = function(instance, element) {
+      if (element === null || element === false) {
+        return;
+      }
+      var ref = element.ref;
+      if (ref != null) {
+        attachRef(ref, instance, element._owner);
+      }
+    };
+    ReactRef.shouldUpdateRefs = function(prevElement, nextElement) {
+      var prevEmpty = prevElement === null || prevElement === false;
+      var nextEmpty = nextElement === null || nextElement === false;
+      return (prevEmpty || nextEmpty || nextElement._owner !== prevElement._owner || nextElement.ref !== prevElement.ref);
+    };
+    ReactRef.detachRefs = function(instance, element) {
+      if (element === null || element === false) {
+        return;
+      }
+      var ref = element.ref;
+      if (ref != null) {
+        detachRef(ref, instance, element._owner);
+      }
+    };
+    module.exports = ReactRef;
+  })($__require('github:jspm/nodelibs-process@0.1.2'));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactReconciler", ["npm:react@0.14.6/lib/ReactRef"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var ReactRef = $__require('npm:react@0.14.6/lib/ReactRef');
+  function attachRefs() {
+    ReactRef.attachRefs(this, this._currentElement);
+  }
+  var ReactReconciler = {
+    mountComponent: function(internalInstance, rootID, transaction, context) {
+      var markup = internalInstance.mountComponent(rootID, transaction, context);
+      if (internalInstance._currentElement && internalInstance._currentElement.ref != null) {
+        transaction.getReactMountReady().enqueue(attachRefs, internalInstance);
+      }
+      return markup;
+    },
+    unmountComponent: function(internalInstance) {
+      ReactRef.detachRefs(internalInstance, internalInstance._currentElement);
+      internalInstance.unmountComponent();
+    },
+    receiveComponent: function(internalInstance, nextElement, transaction, context) {
+      var prevElement = internalInstance._currentElement;
+      if (nextElement === prevElement && context === internalInstance._context) {
+        return;
+      }
+      var refsChanged = ReactRef.shouldUpdateRefs(prevElement, nextElement);
+      if (refsChanged) {
+        ReactRef.detachRefs(internalInstance, prevElement);
+      }
+      internalInstance.receiveComponent(nextElement, transaction, context);
+      if (refsChanged && internalInstance._currentElement && internalInstance._currentElement.ref != null) {
+        transaction.getReactMountReady().enqueue(attachRefs, internalInstance);
+      }
+    },
+    performUpdateIfNecessary: function(internalInstance, transaction) {
+      internalInstance.performUpdateIfNecessary(transaction);
+    }
+  };
+  module.exports = ReactReconciler;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactEmptyComponent", ["npm:react@0.14.6/lib/ReactElement", "npm:react@0.14.6/lib/ReactEmptyComponentRegistry", "npm:react@0.14.6/lib/ReactReconciler", "npm:react@0.14.6/lib/Object.assign"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var ReactElement = $__require('npm:react@0.14.6/lib/ReactElement');
+  var ReactEmptyComponentRegistry = $__require('npm:react@0.14.6/lib/ReactEmptyComponentRegistry');
+  var ReactReconciler = $__require('npm:react@0.14.6/lib/ReactReconciler');
+  var assign = $__require('npm:react@0.14.6/lib/Object.assign');
+  var placeholderElement;
+  var ReactEmptyComponentInjection = {injectEmptyComponent: function(component) {
+      placeholderElement = ReactElement.createElement(component);
+    }};
+  var ReactEmptyComponent = function(instantiate) {
+    this._currentElement = null;
+    this._rootNodeID = null;
+    this._renderedComponent = instantiate(placeholderElement);
+  };
+  assign(ReactEmptyComponent.prototype, {
+    construct: function(element) {},
+    mountComponent: function(rootID, transaction, context) {
+      ReactEmptyComponentRegistry.registerNullComponentID(rootID);
+      this._rootNodeID = rootID;
+      return ReactReconciler.mountComponent(this._renderedComponent, rootID, transaction, context);
+    },
+    receiveComponent: function() {},
+    unmountComponent: function(rootID, transaction, context) {
+      ReactReconciler.unmountComponent(this._renderedComponent);
+      ReactEmptyComponentRegistry.deregisterNullComponentID(this._rootNodeID);
+      this._rootNodeID = null;
+      this._renderedComponent = null;
+    }
+  });
+  ReactEmptyComponent.injection = ReactEmptyComponentInjection;
+  module.exports = ReactEmptyComponent;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactNativeComponent", ["npm:react@0.14.6/lib/Object.assign", "npm:fbjs@0.6.1/lib/invariant", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var assign = $__require('npm:react@0.14.6/lib/Object.assign');
+    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
+    var autoGenerateWrapperClass = null;
+    var genericComponentClass = null;
+    var tagToComponentClass = {};
+    var textComponentClass = null;
+    var ReactNativeComponentInjection = {
+      injectGenericComponentClass: function(componentClass) {
+        genericComponentClass = componentClass;
+      },
+      injectTextComponentClass: function(componentClass) {
+        textComponentClass = componentClass;
+      },
+      injectComponentClasses: function(componentClasses) {
+        assign(tagToComponentClass, componentClasses);
+      }
+    };
+    function getComponentClassForElement(element) {
+      if (typeof element.type === 'function') {
+        return element.type;
+      }
+      var tag = element.type;
+      var componentClass = tagToComponentClass[tag];
+      if (componentClass == null) {
+        tagToComponentClass[tag] = componentClass = autoGenerateWrapperClass(tag);
+      }
+      return componentClass;
+    }
+    function createInternalComponent(element) {
+      !genericComponentClass ? process.env.NODE_ENV !== 'production' ? invariant(false, 'There is no registered component for the tag %s', element.type) : invariant(false) : undefined;
+      return new genericComponentClass(element.type, element.props);
+    }
+    function createInstanceForText(text) {
+      return new textComponentClass(text);
+    }
+    function isTextComponent(component) {
+      return component instanceof textComponentClass;
+    }
+    var ReactNativeComponent = {
+      getComponentClassForElement: getComponentClassForElement,
+      createInternalComponent: createInternalComponent,
+      createInstanceForText: createInstanceForText,
+      isTextComponent: isTextComponent,
+      injection: ReactNativeComponentInjection
+    };
+    module.exports = ReactNativeComponent;
+  })($__require('github:jspm/nodelibs-process@0.1.2'));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/instantiateReactComponent", ["npm:react@0.14.6/lib/ReactCompositeComponent", "npm:react@0.14.6/lib/ReactEmptyComponent", "npm:react@0.14.6/lib/ReactNativeComponent", "npm:react@0.14.6/lib/Object.assign", "npm:fbjs@0.6.1/lib/invariant", "npm:fbjs@0.6.1/lib/warning", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var ReactCompositeComponent = $__require('npm:react@0.14.6/lib/ReactCompositeComponent');
+    var ReactEmptyComponent = $__require('npm:react@0.14.6/lib/ReactEmptyComponent');
+    var ReactNativeComponent = $__require('npm:react@0.14.6/lib/ReactNativeComponent');
+    var assign = $__require('npm:react@0.14.6/lib/Object.assign');
+    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
+    var warning = $__require('npm:fbjs@0.6.1/lib/warning');
+    var ReactCompositeComponentWrapper = function() {};
+    assign(ReactCompositeComponentWrapper.prototype, ReactCompositeComponent.Mixin, {_instantiateReactComponent: instantiateReactComponent});
+    function getDeclarationErrorAddendum(owner) {
+      if (owner) {
+        var name = owner.getName();
+        if (name) {
+          return ' Check the render method of `' + name + '`.';
+        }
+      }
+      return '';
+    }
+    function isInternalComponentType(type) {
+      return typeof type === 'function' && typeof type.prototype !== 'undefined' && typeof type.prototype.mountComponent === 'function' && typeof type.prototype.receiveComponent === 'function';
+    }
+    function instantiateReactComponent(node) {
+      var instance;
+      if (node === null || node === false) {
+        instance = new ReactEmptyComponent(instantiateReactComponent);
+      } else if (typeof node === 'object') {
+        var element = node;
+        !(element && (typeof element.type === 'function' || typeof element.type === 'string')) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Element type is invalid: expected a string (for built-in components) ' + 'or a class/function (for composite components) but got: %s.%s', element.type == null ? element.type : typeof element.type, getDeclarationErrorAddendum(element._owner)) : invariant(false) : undefined;
+        if (typeof element.type === 'string') {
+          instance = ReactNativeComponent.createInternalComponent(element);
+        } else if (isInternalComponentType(element.type)) {
+          instance = new element.type(element);
+        } else {
+          instance = new ReactCompositeComponentWrapper();
+        }
+      } else if (typeof node === 'string' || typeof node === 'number') {
+        instance = ReactNativeComponent.createInstanceForText(node);
+      } else {
+        !false ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Encountered invalid React node of type %s', typeof node) : invariant(false) : undefined;
+      }
+      if (process.env.NODE_ENV !== 'production') {
+        process.env.NODE_ENV !== 'production' ? warning(typeof instance.construct === 'function' && typeof instance.mountComponent === 'function' && typeof instance.receiveComponent === 'function' && typeof instance.unmountComponent === 'function', 'Only React Components can be mounted.') : undefined;
+      }
+      instance.construct(node);
+      instance._mountIndex = 0;
+      instance._mountImage = null;
+      if (process.env.NODE_ENV !== 'production') {
+        instance._isOwnerNecessary = false;
+        instance._warnedAboutRefsInRender = false;
+      }
+      if (process.env.NODE_ENV !== 'production') {
+        if (Object.preventExtensions) {
+          Object.preventExtensions(instance);
+        }
+      }
+      return instance;
+    }
+    module.exports = instantiateReactComponent;
+  })($__require('github:jspm/nodelibs-process@0.1.2'));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactServerRendering", ["npm:react@0.14.6/lib/ReactDefaultBatchingStrategy", "npm:react@0.14.6/lib/ReactElement", "npm:react@0.14.6/lib/ReactInstanceHandles", "npm:react@0.14.6/lib/ReactMarkupChecksum", "npm:react@0.14.6/lib/ReactServerBatchingStrategy", "npm:react@0.14.6/lib/ReactServerRenderingTransaction", "npm:react@0.14.6/lib/ReactUpdates", "npm:fbjs@0.6.1/lib/emptyObject", "npm:react@0.14.6/lib/instantiateReactComponent", "npm:fbjs@0.6.1/lib/invariant", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var ReactDefaultBatchingStrategy = $__require('npm:react@0.14.6/lib/ReactDefaultBatchingStrategy');
+    var ReactElement = $__require('npm:react@0.14.6/lib/ReactElement');
+    var ReactInstanceHandles = $__require('npm:react@0.14.6/lib/ReactInstanceHandles');
+    var ReactMarkupChecksum = $__require('npm:react@0.14.6/lib/ReactMarkupChecksum');
+    var ReactServerBatchingStrategy = $__require('npm:react@0.14.6/lib/ReactServerBatchingStrategy');
+    var ReactServerRenderingTransaction = $__require('npm:react@0.14.6/lib/ReactServerRenderingTransaction');
+    var ReactUpdates = $__require('npm:react@0.14.6/lib/ReactUpdates');
+    var emptyObject = $__require('npm:fbjs@0.6.1/lib/emptyObject');
+    var instantiateReactComponent = $__require('npm:react@0.14.6/lib/instantiateReactComponent');
+    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
+    function renderToString(element) {
+      !ReactElement.isValidElement(element) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'renderToString(): You must pass a valid ReactElement.') : invariant(false) : undefined;
+      var transaction;
+      try {
+        ReactUpdates.injection.injectBatchingStrategy(ReactServerBatchingStrategy);
+        var id = ReactInstanceHandles.createReactRootID();
+        transaction = ReactServerRenderingTransaction.getPooled(false);
+        return transaction.perform(function() {
+          var componentInstance = instantiateReactComponent(element, null);
+          var markup = componentInstance.mountComponent(id, transaction, emptyObject);
+          return ReactMarkupChecksum.addChecksumToMarkup(markup);
+        }, null);
+      } finally {
+        ReactServerRenderingTransaction.release(transaction);
+        ReactUpdates.injection.injectBatchingStrategy(ReactDefaultBatchingStrategy);
+      }
+    }
+    function renderToStaticMarkup(element) {
+      !ReactElement.isValidElement(element) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'renderToStaticMarkup(): You must pass a valid ReactElement.') : invariant(false) : undefined;
+      var transaction;
+      try {
+        ReactUpdates.injection.injectBatchingStrategy(ReactServerBatchingStrategy);
+        var id = ReactInstanceHandles.createReactRootID();
+        transaction = ReactServerRenderingTransaction.getPooled(true);
+        return transaction.perform(function() {
+          var componentInstance = instantiateReactComponent(element, null);
+          return componentInstance.mountComponent(id, transaction, emptyObject);
+        }, null);
+      } finally {
+        ReactServerRenderingTransaction.release(transaction);
+        ReactUpdates.injection.injectBatchingStrategy(ReactDefaultBatchingStrategy);
+      }
+    }
+    module.exports = {
+      renderToString: renderToString,
+      renderToStaticMarkup: renderToStaticMarkup
+    };
+  })($__require('github:jspm/nodelibs-process@0.1.2'));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactDOMServer", ["npm:react@0.14.6/lib/ReactDefaultInjection", "npm:react@0.14.6/lib/ReactServerRendering", "npm:react@0.14.6/lib/ReactVersion"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var ReactDefaultInjection = $__require('npm:react@0.14.6/lib/ReactDefaultInjection');
+  var ReactServerRendering = $__require('npm:react@0.14.6/lib/ReactServerRendering');
+  var ReactVersion = $__require('npm:react@0.14.6/lib/ReactVersion');
+  ReactDefaultInjection.inject();
+  var ReactDOMServer = {
+    renderToString: ReactServerRendering.renderToString,
+    renderToStaticMarkup: ReactServerRendering.renderToStaticMarkup,
+    version: ReactVersion
+  };
+  module.exports = ReactDOMServer;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/PooledClass", ["npm:fbjs@0.6.1/lib/invariant", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
+    var oneArgumentPooler = function(copyFieldsFrom) {
+      var Klass = this;
+      if (Klass.instancePool.length) {
+        var instance = Klass.instancePool.pop();
+        Klass.call(instance, copyFieldsFrom);
+        return instance;
+      } else {
+        return new Klass(copyFieldsFrom);
+      }
+    };
+    var twoArgumentPooler = function(a1, a2) {
+      var Klass = this;
+      if (Klass.instancePool.length) {
+        var instance = Klass.instancePool.pop();
+        Klass.call(instance, a1, a2);
+        return instance;
+      } else {
+        return new Klass(a1, a2);
+      }
+    };
+    var threeArgumentPooler = function(a1, a2, a3) {
+      var Klass = this;
+      if (Klass.instancePool.length) {
+        var instance = Klass.instancePool.pop();
+        Klass.call(instance, a1, a2, a3);
+        return instance;
+      } else {
+        return new Klass(a1, a2, a3);
+      }
+    };
+    var fourArgumentPooler = function(a1, a2, a3, a4) {
+      var Klass = this;
+      if (Klass.instancePool.length) {
+        var instance = Klass.instancePool.pop();
+        Klass.call(instance, a1, a2, a3, a4);
+        return instance;
+      } else {
+        return new Klass(a1, a2, a3, a4);
+      }
+    };
+    var fiveArgumentPooler = function(a1, a2, a3, a4, a5) {
+      var Klass = this;
+      if (Klass.instancePool.length) {
+        var instance = Klass.instancePool.pop();
+        Klass.call(instance, a1, a2, a3, a4, a5);
+        return instance;
+      } else {
+        return new Klass(a1, a2, a3, a4, a5);
+      }
+    };
+    var standardReleaser = function(instance) {
+      var Klass = this;
+      !(instance instanceof Klass) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Trying to release an instance into a pool of a different type.') : invariant(false) : undefined;
+      instance.destructor();
+      if (Klass.instancePool.length < Klass.poolSize) {
+        Klass.instancePool.push(instance);
+      }
+    };
+    var DEFAULT_POOL_SIZE = 10;
+    var DEFAULT_POOLER = oneArgumentPooler;
+    var addPoolingTo = function(CopyConstructor, pooler) {
+      var NewKlass = CopyConstructor;
+      NewKlass.instancePool = [];
+      NewKlass.getPooled = pooler || DEFAULT_POOLER;
+      if (!NewKlass.poolSize) {
+        NewKlass.poolSize = DEFAULT_POOL_SIZE;
+      }
+      NewKlass.release = standardReleaser;
+      return NewKlass;
+    };
+    var PooledClass = {
+      addPoolingTo: addPoolingTo,
+      oneArgumentPooler: oneArgumentPooler,
+      twoArgumentPooler: twoArgumentPooler,
+      threeArgumentPooler: threeArgumentPooler,
+      fourArgumentPooler: fourArgumentPooler,
+      fiveArgumentPooler: fiveArgumentPooler
+    };
+    module.exports = PooledClass;
+  })($__require('github:jspm/nodelibs-process@0.1.2'));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactRootIndex", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var ReactRootIndexInjection = {injectCreateReactRootIndex: function(_createReactRootIndex) {
+      ReactRootIndex.createReactRootIndex = _createReactRootIndex;
+    }};
+  var ReactRootIndex = {
+    createReactRootIndex: null,
+    injection: ReactRootIndexInjection
+  };
+  module.exports = ReactRootIndex;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactInstanceHandles", ["npm:react@0.14.6/lib/ReactRootIndex", "npm:fbjs@0.6.1/lib/invariant", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var ReactRootIndex = $__require('npm:react@0.14.6/lib/ReactRootIndex');
+    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
+    var SEPARATOR = '.';
+    var SEPARATOR_LENGTH = SEPARATOR.length;
+    var MAX_TREE_DEPTH = 10000;
+    function getReactRootIDString(index) {
+      return SEPARATOR + index.toString(36);
+    }
+    function isBoundary(id, index) {
+      return id.charAt(index) === SEPARATOR || index === id.length;
+    }
+    function isValidID(id) {
+      return id === '' || id.charAt(0) === SEPARATOR && id.charAt(id.length - 1) !== SEPARATOR;
+    }
+    function isAncestorIDOf(ancestorID, descendantID) {
+      return descendantID.indexOf(ancestorID) === 0 && isBoundary(descendantID, ancestorID.length);
+    }
+    function getParentID(id) {
+      return id ? id.substr(0, id.lastIndexOf(SEPARATOR)) : '';
+    }
+    function getNextDescendantID(ancestorID, destinationID) {
+      !(isValidID(ancestorID) && isValidID(destinationID)) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'getNextDescendantID(%s, %s): Received an invalid React DOM ID.', ancestorID, destinationID) : invariant(false) : undefined;
+      !isAncestorIDOf(ancestorID, destinationID) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'getNextDescendantID(...): React has made an invalid assumption about ' + 'the DOM hierarchy. Expected `%s` to be an ancestor of `%s`.', ancestorID, destinationID) : invariant(false) : undefined;
+      if (ancestorID === destinationID) {
+        return ancestorID;
+      }
+      var start = ancestorID.length + SEPARATOR_LENGTH;
+      var i;
+      for (i = start; i < destinationID.length; i++) {
+        if (isBoundary(destinationID, i)) {
+          break;
+        }
+      }
+      return destinationID.substr(0, i);
+    }
+    function getFirstCommonAncestorID(oneID, twoID) {
+      var minLength = Math.min(oneID.length, twoID.length);
+      if (minLength === 0) {
+        return '';
+      }
+      var lastCommonMarkerIndex = 0;
+      for (var i = 0; i <= minLength; i++) {
+        if (isBoundary(oneID, i) && isBoundary(twoID, i)) {
+          lastCommonMarkerIndex = i;
+        } else if (oneID.charAt(i) !== twoID.charAt(i)) {
+          break;
+        }
+      }
+      var longestCommonID = oneID.substr(0, lastCommonMarkerIndex);
+      !isValidID(longestCommonID) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'getFirstCommonAncestorID(%s, %s): Expected a valid React DOM ID: %s', oneID, twoID, longestCommonID) : invariant(false) : undefined;
+      return longestCommonID;
+    }
+    function traverseParentPath(start, stop, cb, arg, skipFirst, skipLast) {
+      start = start || '';
+      stop = stop || '';
+      !(start !== stop) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'traverseParentPath(...): Cannot traverse from and to the same ID, `%s`.', start) : invariant(false) : undefined;
+      var traverseUp = isAncestorIDOf(stop, start);
+      !(traverseUp || isAncestorIDOf(start, stop)) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'traverseParentPath(%s, %s, ...): Cannot traverse from two IDs that do ' + 'not have a parent path.', start, stop) : invariant(false) : undefined;
+      var depth = 0;
+      var traverse = traverseUp ? getParentID : getNextDescendantID;
+      for (var id = start; ; id = traverse(id, stop)) {
+        var ret;
+        if ((!skipFirst || id !== start) && (!skipLast || id !== stop)) {
+          ret = cb(id, traverseUp, arg);
+        }
+        if (ret === false || id === stop) {
+          break;
+        }
+        !(depth++ < MAX_TREE_DEPTH) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'traverseParentPath(%s, %s, ...): Detected an infinite loop while ' + 'traversing the React DOM ID tree. This may be due to malformed IDs: %s', start, stop, id) : invariant(false) : undefined;
+      }
+    }
+    var ReactInstanceHandles = {
+      createReactRootID: function() {
+        return getReactRootIDString(ReactRootIndex.createReactRootIndex());
+      },
+      createReactID: function(rootID, name) {
+        return rootID + name;
+      },
+      getReactRootIDFromNodeID: function(id) {
+        if (id && id.charAt(0) === SEPARATOR && id.length > 1) {
+          var index = id.indexOf(SEPARATOR, 1);
+          return index > -1 ? id.substr(0, index) : id;
+        }
+        return null;
+      },
+      traverseEnterLeave: function(leaveID, enterID, cb, upArg, downArg) {
+        var ancestorID = getFirstCommonAncestorID(leaveID, enterID);
+        if (ancestorID !== leaveID) {
+          traverseParentPath(leaveID, ancestorID, cb, upArg, false, true);
+        }
+        if (ancestorID !== enterID) {
+          traverseParentPath(ancestorID, enterID, cb, downArg, true, false);
+        }
+      },
+      traverseTwoPhase: function(targetID, cb, arg) {
+        if (targetID) {
+          traverseParentPath('', targetID, cb, arg, true, false);
+          traverseParentPath(targetID, '', cb, arg, false, true);
+        }
+      },
+      traverseTwoPhaseSkipTarget: function(targetID, cb, arg) {
+        if (targetID) {
+          traverseParentPath('', targetID, cb, arg, true, true);
+          traverseParentPath(targetID, '', cb, arg, true, true);
+        }
+      },
+      traverseAncestors: function(targetID, cb, arg) {
+        traverseParentPath('', targetID, cb, arg, true, false);
+      },
+      getFirstCommonAncestorID: getFirstCommonAncestorID,
+      _getNextDescendantID: getNextDescendantID,
+      isAncestorIDOf: isAncestorIDOf,
+      SEPARATOR: SEPARATOR
+    };
+    module.exports = ReactInstanceHandles;
+  })($__require('github:jspm/nodelibs-process@0.1.2'));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/traverseAllChildren", ["npm:react@0.14.6/lib/ReactCurrentOwner", "npm:react@0.14.6/lib/ReactElement", "npm:react@0.14.6/lib/ReactInstanceHandles", "npm:react@0.14.6/lib/getIteratorFn", "npm:fbjs@0.6.1/lib/invariant", "npm:fbjs@0.6.1/lib/warning", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var ReactCurrentOwner = $__require('npm:react@0.14.6/lib/ReactCurrentOwner');
+    var ReactElement = $__require('npm:react@0.14.6/lib/ReactElement');
+    var ReactInstanceHandles = $__require('npm:react@0.14.6/lib/ReactInstanceHandles');
+    var getIteratorFn = $__require('npm:react@0.14.6/lib/getIteratorFn');
+    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
+    var warning = $__require('npm:fbjs@0.6.1/lib/warning');
+    var SEPARATOR = ReactInstanceHandles.SEPARATOR;
+    var SUBSEPARATOR = ':';
+    var userProvidedKeyEscaperLookup = {
+      '=': '=0',
+      '.': '=1',
+      ':': '=2'
+    };
+    var userProvidedKeyEscapeRegex = /[=.:]/g;
+    var didWarnAboutMaps = false;
+    function userProvidedKeyEscaper(match) {
+      return userProvidedKeyEscaperLookup[match];
+    }
+    function getComponentKey(component, index) {
+      if (component && component.key != null) {
+        return wrapUserProvidedKey(component.key);
+      }
+      return index.toString(36);
+    }
+    function escapeUserProvidedKey(text) {
+      return ('' + text).replace(userProvidedKeyEscapeRegex, userProvidedKeyEscaper);
+    }
+    function wrapUserProvidedKey(key) {
+      return '$' + escapeUserProvidedKey(key);
+    }
+    function traverseAllChildrenImpl(children, nameSoFar, callback, traverseContext) {
+      var type = typeof children;
+      if (type === 'undefined' || type === 'boolean') {
+        children = null;
+      }
+      if (children === null || type === 'string' || type === 'number' || ReactElement.isValidElement(children)) {
+        callback(traverseContext, children, nameSoFar === '' ? SEPARATOR + getComponentKey(children, 0) : nameSoFar);
+        return 1;
+      }
+      var child;
+      var nextName;
+      var subtreeCount = 0;
+      var nextNamePrefix = nameSoFar === '' ? SEPARATOR : nameSoFar + SUBSEPARATOR;
+      if (Array.isArray(children)) {
+        for (var i = 0; i < children.length; i++) {
+          child = children[i];
+          nextName = nextNamePrefix + getComponentKey(child, i);
+          subtreeCount += traverseAllChildrenImpl(child, nextName, callback, traverseContext);
+        }
+      } else {
+        var iteratorFn = getIteratorFn(children);
+        if (iteratorFn) {
+          var iterator = iteratorFn.call(children);
+          var step;
+          if (iteratorFn !== children.entries) {
+            var ii = 0;
+            while (!(step = iterator.next()).done) {
+              child = step.value;
+              nextName = nextNamePrefix + getComponentKey(child, ii++);
+              subtreeCount += traverseAllChildrenImpl(child, nextName, callback, traverseContext);
+            }
+          } else {
+            if (process.env.NODE_ENV !== 'production') {
+              process.env.NODE_ENV !== 'production' ? warning(didWarnAboutMaps, 'Using Maps as children is not yet fully supported. It is an ' + 'experimental feature that might be removed. Convert it to a ' + 'sequence / iterable of keyed ReactElements instead.') : undefined;
+              didWarnAboutMaps = true;
+            }
+            while (!(step = iterator.next()).done) {
+              var entry = step.value;
+              if (entry) {
+                child = entry[1];
+                nextName = nextNamePrefix + wrapUserProvidedKey(entry[0]) + SUBSEPARATOR + getComponentKey(child, 0);
+                subtreeCount += traverseAllChildrenImpl(child, nextName, callback, traverseContext);
+              }
+            }
+          }
+        } else if (type === 'object') {
+          var addendum = '';
+          if (process.env.NODE_ENV !== 'production') {
+            addendum = ' If you meant to render a collection of children, use an array ' + 'instead or wrap the object using createFragment(object) from the ' + 'React add-ons.';
+            if (children._isReactElement) {
+              addendum = ' It looks like you\'re using an element created by a different ' + 'version of React. Make sure to use only one copy of React.';
+            }
+            if (ReactCurrentOwner.current) {
+              var name = ReactCurrentOwner.current.getName();
+              if (name) {
+                addendum += ' Check the render method of `' + name + '`.';
+              }
+            }
+          }
+          var childrenString = String(children);
+          !false ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Objects are not valid as a React child (found: %s).%s', childrenString === '[object Object]' ? 'object with keys {' + Object.keys(children).join(', ') + '}' : childrenString, addendum) : invariant(false) : undefined;
+        }
+      }
+      return subtreeCount;
+    }
+    function traverseAllChildren(children, callback, traverseContext) {
+      if (children == null) {
+        return 0;
+      }
+      return traverseAllChildrenImpl(children, '', callback, traverseContext);
+    }
+    module.exports = traverseAllChildren;
+  })($__require('github:jspm/nodelibs-process@0.1.2'));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactChildren", ["npm:react@0.14.6/lib/PooledClass", "npm:react@0.14.6/lib/ReactElement", "npm:fbjs@0.6.1/lib/emptyFunction", "npm:react@0.14.6/lib/traverseAllChildren"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var PooledClass = $__require('npm:react@0.14.6/lib/PooledClass');
+  var ReactElement = $__require('npm:react@0.14.6/lib/ReactElement');
+  var emptyFunction = $__require('npm:fbjs@0.6.1/lib/emptyFunction');
+  var traverseAllChildren = $__require('npm:react@0.14.6/lib/traverseAllChildren');
+  var twoArgumentPooler = PooledClass.twoArgumentPooler;
+  var fourArgumentPooler = PooledClass.fourArgumentPooler;
+  var userProvidedKeyEscapeRegex = /\/(?!\/)/g;
+  function escapeUserProvidedKey(text) {
+    return ('' + text).replace(userProvidedKeyEscapeRegex, '//');
+  }
+  function ForEachBookKeeping(forEachFunction, forEachContext) {
+    this.func = forEachFunction;
+    this.context = forEachContext;
+    this.count = 0;
+  }
+  ForEachBookKeeping.prototype.destructor = function() {
+    this.func = null;
+    this.context = null;
+    this.count = 0;
+  };
+  PooledClass.addPoolingTo(ForEachBookKeeping, twoArgumentPooler);
+  function forEachSingleChild(bookKeeping, child, name) {
+    var func = bookKeeping.func;
+    var context = bookKeeping.context;
+    func.call(context, child, bookKeeping.count++);
+  }
+  function forEachChildren(children, forEachFunc, forEachContext) {
+    if (children == null) {
+      return children;
+    }
+    var traverseContext = ForEachBookKeeping.getPooled(forEachFunc, forEachContext);
+    traverseAllChildren(children, forEachSingleChild, traverseContext);
+    ForEachBookKeeping.release(traverseContext);
+  }
+  function MapBookKeeping(mapResult, keyPrefix, mapFunction, mapContext) {
+    this.result = mapResult;
+    this.keyPrefix = keyPrefix;
+    this.func = mapFunction;
+    this.context = mapContext;
+    this.count = 0;
+  }
+  MapBookKeeping.prototype.destructor = function() {
+    this.result = null;
+    this.keyPrefix = null;
+    this.func = null;
+    this.context = null;
+    this.count = 0;
+  };
+  PooledClass.addPoolingTo(MapBookKeeping, fourArgumentPooler);
+  function mapSingleChildIntoContext(bookKeeping, child, childKey) {
+    var result = bookKeeping.result;
+    var keyPrefix = bookKeeping.keyPrefix;
+    var func = bookKeeping.func;
+    var context = bookKeeping.context;
+    var mappedChild = func.call(context, child, bookKeeping.count++);
+    if (Array.isArray(mappedChild)) {
+      mapIntoWithKeyPrefixInternal(mappedChild, result, childKey, emptyFunction.thatReturnsArgument);
+    } else if (mappedChild != null) {
+      if (ReactElement.isValidElement(mappedChild)) {
+        mappedChild = ReactElement.cloneAndReplaceKey(mappedChild, keyPrefix + (mappedChild !== child ? escapeUserProvidedKey(mappedChild.key || '') + '/' : '') + childKey);
+      }
+      result.push(mappedChild);
+    }
+  }
+  function mapIntoWithKeyPrefixInternal(children, array, prefix, func, context) {
+    var escapedPrefix = '';
+    if (prefix != null) {
+      escapedPrefix = escapeUserProvidedKey(prefix) + '/';
+    }
+    var traverseContext = MapBookKeeping.getPooled(array, escapedPrefix, func, context);
+    traverseAllChildren(children, mapSingleChildIntoContext, traverseContext);
+    MapBookKeeping.release(traverseContext);
+  }
+  function mapChildren(children, func, context) {
+    if (children == null) {
+      return children;
+    }
+    var result = [];
+    mapIntoWithKeyPrefixInternal(children, result, null, func, context);
+    return result;
+  }
+  function forEachSingleChildDummy(traverseContext, child, name) {
+    return null;
+  }
+  function countChildren(children, context) {
+    return traverseAllChildren(children, forEachSingleChildDummy, null);
+  }
+  function toArray(children) {
+    var result = [];
+    mapIntoWithKeyPrefixInternal(children, result, null, emptyFunction.thatReturnsArgument);
+    return result;
+  }
+  var ReactChildren = {
+    forEach: forEachChildren,
+    map: mapChildren,
+    mapIntoWithKeyPrefixInternal: mapIntoWithKeyPrefixInternal,
+    count: countChildren,
+    toArray: toArray
+  };
+  module.exports = ReactChildren;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactComponent", ["npm:react@0.14.6/lib/ReactNoopUpdateQueue", "npm:react@0.14.6/lib/canDefineProperty", "npm:fbjs@0.6.1/lib/emptyObject", "npm:fbjs@0.6.1/lib/invariant", "npm:fbjs@0.6.1/lib/warning", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var ReactNoopUpdateQueue = $__require('npm:react@0.14.6/lib/ReactNoopUpdateQueue');
+    var canDefineProperty = $__require('npm:react@0.14.6/lib/canDefineProperty');
+    var emptyObject = $__require('npm:fbjs@0.6.1/lib/emptyObject');
+    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
+    var warning = $__require('npm:fbjs@0.6.1/lib/warning');
+    function ReactComponent(props, context, updater) {
+      this.props = props;
+      this.context = context;
+      this.refs = emptyObject;
+      this.updater = updater || ReactNoopUpdateQueue;
+    }
+    ReactComponent.prototype.isReactComponent = {};
+    ReactComponent.prototype.setState = function(partialState, callback) {
+      !(typeof partialState === 'object' || typeof partialState === 'function' || partialState == null) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'setState(...): takes an object of state variables to update or a ' + 'function which returns an object of state variables.') : invariant(false) : undefined;
+      if (process.env.NODE_ENV !== 'production') {
+        process.env.NODE_ENV !== 'production' ? warning(partialState != null, 'setState(...): You passed an undefined or null state object; ' + 'instead, use forceUpdate().') : undefined;
+      }
+      this.updater.enqueueSetState(this, partialState);
+      if (callback) {
+        this.updater.enqueueCallback(this, callback);
+      }
+    };
+    ReactComponent.prototype.forceUpdate = function(callback) {
+      this.updater.enqueueForceUpdate(this);
+      if (callback) {
+        this.updater.enqueueCallback(this, callback);
+      }
+    };
+    if (process.env.NODE_ENV !== 'production') {
+      var deprecatedAPIs = {
+        getDOMNode: ['getDOMNode', 'Use ReactDOM.findDOMNode(component) instead.'],
+        isMounted: ['isMounted', 'Instead, make sure to clean up subscriptions and pending requests in ' + 'componentWillUnmount to prevent memory leaks.'],
+        replaceProps: ['replaceProps', 'Instead, call render again at the top level.'],
+        replaceState: ['replaceState', 'Refactor your code to use setState instead (see ' + 'https://github.com/facebook/react/issues/3236).'],
+        setProps: ['setProps', 'Instead, call render again at the top level.']
+      };
+      var defineDeprecationWarning = function(methodName, info) {
+        if (canDefineProperty) {
+          Object.defineProperty(ReactComponent.prototype, methodName, {get: function() {
+              process.env.NODE_ENV !== 'production' ? warning(false, '%s(...) is deprecated in plain JavaScript React classes. %s', info[0], info[1]) : undefined;
+              return undefined;
+            }});
+        }
+      };
+      for (var fnName in deprecatedAPIs) {
+        if (deprecatedAPIs.hasOwnProperty(fnName)) {
+          defineDeprecationWarning(fnName, deprecatedAPIs[fnName]);
+        }
+      }
+    }
+    module.exports = ReactComponent;
+  })($__require('github:jspm/nodelibs-process@0.1.2'));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactNoopUpdateQueue", ["npm:fbjs@0.6.1/lib/warning", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var warning = $__require('npm:fbjs@0.6.1/lib/warning');
+    function warnTDZ(publicInstance, callerName) {
+      if (process.env.NODE_ENV !== 'production') {
+        process.env.NODE_ENV !== 'production' ? warning(false, '%s(...): Can only update a mounted or mounting component. ' + 'This usually means you called %s() on an unmounted component. ' + 'This is a no-op. Please check the code for the %s component.', callerName, callerName, publicInstance.constructor && publicInstance.constructor.displayName || '') : undefined;
+      }
+    }
+    var ReactNoopUpdateQueue = {
+      isMounted: function(publicInstance) {
+        return false;
+      },
+      enqueueCallback: function(publicInstance, callback) {},
+      enqueueForceUpdate: function(publicInstance) {
+        warnTDZ(publicInstance, 'forceUpdate');
+      },
+      enqueueReplaceState: function(publicInstance, completeState) {
+        warnTDZ(publicInstance, 'replaceState');
+      },
+      enqueueSetState: function(publicInstance, partialState) {
+        warnTDZ(publicInstance, 'setState');
+      },
+      enqueueSetProps: function(publicInstance, partialProps) {
+        warnTDZ(publicInstance, 'setProps');
+      },
+      enqueueReplaceProps: function(publicInstance, props) {
+        warnTDZ(publicInstance, 'replaceProps');
+      }
+    };
+    module.exports = ReactNoopUpdateQueue;
+  })($__require('github:jspm/nodelibs-process@0.1.2'));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:fbjs@0.6.1/lib/emptyObject", ["github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var emptyObject = {};
+    if (process.env.NODE_ENV !== 'production') {
+      Object.freeze(emptyObject);
+    }
+    module.exports = emptyObject;
+  })($__require('github:jspm/nodelibs-process@0.1.2'));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:fbjs@0.6.1/lib/keyOf", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var keyOf = function(oneKeyObj) {
+    var key;
+    for (key in oneKeyObj) {
+      if (!oneKeyObj.hasOwnProperty(key)) {
+        continue;
+      }
+      return key;
+    }
+    return null;
+  };
+  module.exports = keyOf;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactClass", ["npm:react@0.14.6/lib/ReactComponent", "npm:react@0.14.6/lib/ReactElement", "npm:react@0.14.6/lib/ReactPropTypeLocations", "npm:react@0.14.6/lib/ReactPropTypeLocationNames", "npm:react@0.14.6/lib/ReactNoopUpdateQueue", "npm:react@0.14.6/lib/Object.assign", "npm:fbjs@0.6.1/lib/emptyObject", "npm:fbjs@0.6.1/lib/invariant", "npm:fbjs@0.6.1/lib/keyMirror", "npm:fbjs@0.6.1/lib/keyOf", "npm:fbjs@0.6.1/lib/warning", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var ReactComponent = $__require('npm:react@0.14.6/lib/ReactComponent');
+    var ReactElement = $__require('npm:react@0.14.6/lib/ReactElement');
+    var ReactPropTypeLocations = $__require('npm:react@0.14.6/lib/ReactPropTypeLocations');
+    var ReactPropTypeLocationNames = $__require('npm:react@0.14.6/lib/ReactPropTypeLocationNames');
+    var ReactNoopUpdateQueue = $__require('npm:react@0.14.6/lib/ReactNoopUpdateQueue');
+    var assign = $__require('npm:react@0.14.6/lib/Object.assign');
+    var emptyObject = $__require('npm:fbjs@0.6.1/lib/emptyObject');
+    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
+    var keyMirror = $__require('npm:fbjs@0.6.1/lib/keyMirror');
+    var keyOf = $__require('npm:fbjs@0.6.1/lib/keyOf');
+    var warning = $__require('npm:fbjs@0.6.1/lib/warning');
+    var MIXINS_KEY = keyOf({mixins: null});
+    var SpecPolicy = keyMirror({
+      DEFINE_ONCE: null,
+      DEFINE_MANY: null,
+      OVERRIDE_BASE: null,
+      DEFINE_MANY_MERGED: null
+    });
+    var injectedMixins = [];
+    var warnedSetProps = false;
+    function warnSetProps() {
+      if (!warnedSetProps) {
+        warnedSetProps = true;
+        process.env.NODE_ENV !== 'production' ? warning(false, 'setProps(...) and replaceProps(...) are deprecated. ' + 'Instead, call render again at the top level.') : undefined;
+      }
+    }
+    var ReactClassInterface = {
+      mixins: SpecPolicy.DEFINE_MANY,
+      statics: SpecPolicy.DEFINE_MANY,
+      propTypes: SpecPolicy.DEFINE_MANY,
+      contextTypes: SpecPolicy.DEFINE_MANY,
+      childContextTypes: SpecPolicy.DEFINE_MANY,
+      getDefaultProps: SpecPolicy.DEFINE_MANY_MERGED,
+      getInitialState: SpecPolicy.DEFINE_MANY_MERGED,
+      getChildContext: SpecPolicy.DEFINE_MANY_MERGED,
+      render: SpecPolicy.DEFINE_ONCE,
+      componentWillMount: SpecPolicy.DEFINE_MANY,
+      componentDidMount: SpecPolicy.DEFINE_MANY,
+      componentWillReceiveProps: SpecPolicy.DEFINE_MANY,
+      shouldComponentUpdate: SpecPolicy.DEFINE_ONCE,
+      componentWillUpdate: SpecPolicy.DEFINE_MANY,
+      componentDidUpdate: SpecPolicy.DEFINE_MANY,
+      componentWillUnmount: SpecPolicy.DEFINE_MANY,
+      updateComponent: SpecPolicy.OVERRIDE_BASE
+    };
+    var RESERVED_SPEC_KEYS = {
+      displayName: function(Constructor, displayName) {
+        Constructor.displayName = displayName;
+      },
+      mixins: function(Constructor, mixins) {
+        if (mixins) {
+          for (var i = 0; i < mixins.length; i++) {
+            mixSpecIntoComponent(Constructor, mixins[i]);
+          }
+        }
+      },
+      childContextTypes: function(Constructor, childContextTypes) {
+        if (process.env.NODE_ENV !== 'production') {
+          validateTypeDef(Constructor, childContextTypes, ReactPropTypeLocations.childContext);
+        }
+        Constructor.childContextTypes = assign({}, Constructor.childContextTypes, childContextTypes);
+      },
+      contextTypes: function(Constructor, contextTypes) {
+        if (process.env.NODE_ENV !== 'production') {
+          validateTypeDef(Constructor, contextTypes, ReactPropTypeLocations.context);
+        }
+        Constructor.contextTypes = assign({}, Constructor.contextTypes, contextTypes);
+      },
+      getDefaultProps: function(Constructor, getDefaultProps) {
+        if (Constructor.getDefaultProps) {
+          Constructor.getDefaultProps = createMergedResultFunction(Constructor.getDefaultProps, getDefaultProps);
+        } else {
+          Constructor.getDefaultProps = getDefaultProps;
+        }
+      },
+      propTypes: function(Constructor, propTypes) {
+        if (process.env.NODE_ENV !== 'production') {
+          validateTypeDef(Constructor, propTypes, ReactPropTypeLocations.prop);
+        }
+        Constructor.propTypes = assign({}, Constructor.propTypes, propTypes);
+      },
+      statics: function(Constructor, statics) {
+        mixStaticSpecIntoComponent(Constructor, statics);
+      },
+      autobind: function() {}
+    };
+    function validateTypeDef(Constructor, typeDef, location) {
+      for (var propName in typeDef) {
+        if (typeDef.hasOwnProperty(propName)) {
+          process.env.NODE_ENV !== 'production' ? warning(typeof typeDef[propName] === 'function', '%s: %s type `%s` is invalid; it must be a function, usually from ' + 'React.PropTypes.', Constructor.displayName || 'ReactClass', ReactPropTypeLocationNames[location], propName) : undefined;
+        }
+      }
+    }
+    function validateMethodOverride(proto, name) {
+      var specPolicy = ReactClassInterface.hasOwnProperty(name) ? ReactClassInterface[name] : null;
+      if (ReactClassMixin.hasOwnProperty(name)) {
+        !(specPolicy === SpecPolicy.OVERRIDE_BASE) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactClassInterface: You are attempting to override ' + '`%s` from your class specification. Ensure that your method names ' + 'do not overlap with React methods.', name) : invariant(false) : undefined;
+      }
+      if (proto.hasOwnProperty(name)) {
+        !(specPolicy === SpecPolicy.DEFINE_MANY || specPolicy === SpecPolicy.DEFINE_MANY_MERGED) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactClassInterface: You are attempting to define ' + '`%s` on your component more than once. This conflict may be due ' + 'to a mixin.', name) : invariant(false) : undefined;
+      }
+    }
+    function mixSpecIntoComponent(Constructor, spec) {
+      if (!spec) {
+        return;
+      }
+      !(typeof spec !== 'function') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactClass: You\'re attempting to ' + 'use a component class as a mixin. Instead, just use a regular object.') : invariant(false) : undefined;
+      !!ReactElement.isValidElement(spec) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactClass: You\'re attempting to ' + 'use a component as a mixin. Instead, just use a regular object.') : invariant(false) : undefined;
+      var proto = Constructor.prototype;
+      if (spec.hasOwnProperty(MIXINS_KEY)) {
+        RESERVED_SPEC_KEYS.mixins(Constructor, spec.mixins);
+      }
+      for (var name in spec) {
+        if (!spec.hasOwnProperty(name)) {
+          continue;
+        }
+        if (name === MIXINS_KEY) {
+          continue;
+        }
+        var property = spec[name];
+        validateMethodOverride(proto, name);
+        if (RESERVED_SPEC_KEYS.hasOwnProperty(name)) {
+          RESERVED_SPEC_KEYS[name](Constructor, property);
+        } else {
+          var isReactClassMethod = ReactClassInterface.hasOwnProperty(name);
+          var isAlreadyDefined = proto.hasOwnProperty(name);
+          var isFunction = typeof property === 'function';
+          var shouldAutoBind = isFunction && !isReactClassMethod && !isAlreadyDefined && spec.autobind !== false;
+          if (shouldAutoBind) {
+            if (!proto.__reactAutoBindMap) {
+              proto.__reactAutoBindMap = {};
+            }
+            proto.__reactAutoBindMap[name] = property;
+            proto[name] = property;
+          } else {
+            if (isAlreadyDefined) {
+              var specPolicy = ReactClassInterface[name];
+              !(isReactClassMethod && (specPolicy === SpecPolicy.DEFINE_MANY_MERGED || specPolicy === SpecPolicy.DEFINE_MANY)) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactClass: Unexpected spec policy %s for key %s ' + 'when mixing in component specs.', specPolicy, name) : invariant(false) : undefined;
+              if (specPolicy === SpecPolicy.DEFINE_MANY_MERGED) {
+                proto[name] = createMergedResultFunction(proto[name], property);
+              } else if (specPolicy === SpecPolicy.DEFINE_MANY) {
+                proto[name] = createChainedFunction(proto[name], property);
+              }
+            } else {
+              proto[name] = property;
+              if (process.env.NODE_ENV !== 'production') {
+                if (typeof property === 'function' && spec.displayName) {
+                  proto[name].displayName = spec.displayName + '_' + name;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    function mixStaticSpecIntoComponent(Constructor, statics) {
+      if (!statics) {
+        return;
+      }
+      for (var name in statics) {
+        var property = statics[name];
+        if (!statics.hasOwnProperty(name)) {
+          continue;
+        }
+        var isReserved = (name in RESERVED_SPEC_KEYS);
+        !!isReserved ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactClass: You are attempting to define a reserved ' + 'property, `%s`, that shouldn\'t be on the "statics" key. Define it ' + 'as an instance property instead; it will still be accessible on the ' + 'constructor.', name) : invariant(false) : undefined;
+        var isInherited = (name in Constructor);
+        !!isInherited ? process.env.NODE_ENV !== 'production' ? invariant(false, 'ReactClass: You are attempting to define ' + '`%s` on your component more than once. This conflict may be ' + 'due to a mixin.', name) : invariant(false) : undefined;
+        Constructor[name] = property;
+      }
+    }
+    function mergeIntoWithNoDuplicateKeys(one, two) {
+      !(one && two && typeof one === 'object' && typeof two === 'object') ? process.env.NODE_ENV !== 'production' ? invariant(false, 'mergeIntoWithNoDuplicateKeys(): Cannot merge non-objects.') : invariant(false) : undefined;
+      for (var key in two) {
+        if (two.hasOwnProperty(key)) {
+          !(one[key] === undefined) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'mergeIntoWithNoDuplicateKeys(): ' + 'Tried to merge two objects with the same key: `%s`. This conflict ' + 'may be due to a mixin; in particular, this may be caused by two ' + 'getInitialState() or getDefaultProps() methods returning objects ' + 'with clashing keys.', key) : invariant(false) : undefined;
+          one[key] = two[key];
+        }
+      }
+      return one;
+    }
+    function createMergedResultFunction(one, two) {
+      return function mergedResult() {
+        var a = one.apply(this, arguments);
+        var b = two.apply(this, arguments);
+        if (a == null) {
+          return b;
+        } else if (b == null) {
+          return a;
+        }
+        var c = {};
+        mergeIntoWithNoDuplicateKeys(c, a);
+        mergeIntoWithNoDuplicateKeys(c, b);
+        return c;
+      };
+    }
+    function createChainedFunction(one, two) {
+      return function chainedFunction() {
+        one.apply(this, arguments);
+        two.apply(this, arguments);
+      };
+    }
+    function bindAutoBindMethod(component, method) {
+      var boundMethod = method.bind(component);
+      if (process.env.NODE_ENV !== 'production') {
+        boundMethod.__reactBoundContext = component;
+        boundMethod.__reactBoundMethod = method;
+        boundMethod.__reactBoundArguments = null;
+        var componentName = component.constructor.displayName;
+        var _bind = boundMethod.bind;
+        boundMethod.bind = function(newThis) {
+          for (var _len = arguments.length,
+              args = Array(_len > 1 ? _len - 1 : 0),
+              _key = 1; _key < _len; _key++) {
+            args[_key - 1] = arguments[_key];
+          }
+          if (newThis !== component && newThis !== null) {
+            process.env.NODE_ENV !== 'production' ? warning(false, 'bind(): React component methods may only be bound to the ' + 'component instance. See %s', componentName) : undefined;
+          } else if (!args.length) {
+            process.env.NODE_ENV !== 'production' ? warning(false, 'bind(): You are binding a component method to the component. ' + 'React does this for you automatically in a high-performance ' + 'way, so you can safely remove this call. See %s', componentName) : undefined;
+            return boundMethod;
+          }
+          var reboundMethod = _bind.apply(boundMethod, arguments);
+          reboundMethod.__reactBoundContext = component;
+          reboundMethod.__reactBoundMethod = method;
+          reboundMethod.__reactBoundArguments = args;
+          return reboundMethod;
+        };
+      }
+      return boundMethod;
+    }
+    function bindAutoBindMethods(component) {
+      for (var autoBindKey in component.__reactAutoBindMap) {
+        if (component.__reactAutoBindMap.hasOwnProperty(autoBindKey)) {
+          var method = component.__reactAutoBindMap[autoBindKey];
+          component[autoBindKey] = bindAutoBindMethod(component, method);
+        }
+      }
+    }
+    var ReactClassMixin = {
+      replaceState: function(newState, callback) {
+        this.updater.enqueueReplaceState(this, newState);
+        if (callback) {
+          this.updater.enqueueCallback(this, callback);
+        }
+      },
+      isMounted: function() {
+        return this.updater.isMounted(this);
+      },
+      setProps: function(partialProps, callback) {
+        if (process.env.NODE_ENV !== 'production') {
+          warnSetProps();
+        }
+        this.updater.enqueueSetProps(this, partialProps);
+        if (callback) {
+          this.updater.enqueueCallback(this, callback);
+        }
+      },
+      replaceProps: function(newProps, callback) {
+        if (process.env.NODE_ENV !== 'production') {
+          warnSetProps();
+        }
+        this.updater.enqueueReplaceProps(this, newProps);
+        if (callback) {
+          this.updater.enqueueCallback(this, callback);
+        }
+      }
+    };
+    var ReactClassComponent = function() {};
+    assign(ReactClassComponent.prototype, ReactComponent.prototype, ReactClassMixin);
+    var ReactClass = {
+      createClass: function(spec) {
+        var Constructor = function(props, context, updater) {
+          if (process.env.NODE_ENV !== 'production') {
+            process.env.NODE_ENV !== 'production' ? warning(this instanceof Constructor, 'Something is calling a React component directly. Use a factory or ' + 'JSX instead. See: https://fb.me/react-legacyfactory') : undefined;
+          }
+          if (this.__reactAutoBindMap) {
+            bindAutoBindMethods(this);
+          }
+          this.props = props;
+          this.context = context;
+          this.refs = emptyObject;
+          this.updater = updater || ReactNoopUpdateQueue;
+          this.state = null;
+          var initialState = this.getInitialState ? this.getInitialState() : null;
+          if (process.env.NODE_ENV !== 'production') {
+            if (typeof initialState === 'undefined' && this.getInitialState._isMockFunction) {
+              initialState = null;
+            }
+          }
+          !(typeof initialState === 'object' && !Array.isArray(initialState)) ? process.env.NODE_ENV !== 'production' ? invariant(false, '%s.getInitialState(): must return an object or null', Constructor.displayName || 'ReactCompositeComponent') : invariant(false) : undefined;
+          this.state = initialState;
+        };
+        Constructor.prototype = new ReactClassComponent();
+        Constructor.prototype.constructor = Constructor;
+        injectedMixins.forEach(mixSpecIntoComponent.bind(null, Constructor));
+        mixSpecIntoComponent(Constructor, spec);
+        if (Constructor.getDefaultProps) {
+          Constructor.defaultProps = Constructor.getDefaultProps();
+        }
+        if (process.env.NODE_ENV !== 'production') {
+          if (Constructor.getDefaultProps) {
+            Constructor.getDefaultProps.isReactClassApproved = {};
+          }
+          if (Constructor.prototype.getInitialState) {
+            Constructor.prototype.getInitialState.isReactClassApproved = {};
+          }
+        }
+        !Constructor.prototype.render ? process.env.NODE_ENV !== 'production' ? invariant(false, 'createClass(...): Class specification must implement a `render` method.') : invariant(false) : undefined;
+        if (process.env.NODE_ENV !== 'production') {
+          process.env.NODE_ENV !== 'production' ? warning(!Constructor.prototype.componentShouldUpdate, '%s has a method called ' + 'componentShouldUpdate(). Did you mean shouldComponentUpdate()? ' + 'The name is phrased as a question because the function is ' + 'expected to return a value.', spec.displayName || 'A component') : undefined;
+          process.env.NODE_ENV !== 'production' ? warning(!Constructor.prototype.componentWillRecieveProps, '%s has a method called ' + 'componentWillRecieveProps(). Did you mean componentWillReceiveProps()?', spec.displayName || 'A component') : undefined;
+        }
+        for (var methodName in ReactClassInterface) {
+          if (!Constructor.prototype[methodName]) {
+            Constructor.prototype[methodName] = null;
+          }
+        }
+        return Constructor;
+      },
+      injection: {injectMixin: function(mixin) {
+          injectedMixins.push(mixin);
+        }}
+    };
+    module.exports = ReactClass;
+  })($__require('github:jspm/nodelibs-process@0.1.2'));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:fbjs@0.6.1/lib/mapObject", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var hasOwnProperty = Object.prototype.hasOwnProperty;
+  function mapObject(object, callback, context) {
+    if (!object) {
+      return null;
+    }
+    var result = {};
+    for (var name in object) {
+      if (hasOwnProperty.call(object, name)) {
+        result[name] = callback.call(context, object[name], name, object);
+      }
+    }
+    return result;
+  }
+  module.exports = mapObject;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactDOMFactories", ["npm:react@0.14.6/lib/ReactElement", "npm:react@0.14.6/lib/ReactElementValidator", "npm:fbjs@0.6.1/lib/mapObject", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var ReactElement = $__require('npm:react@0.14.6/lib/ReactElement');
+    var ReactElementValidator = $__require('npm:react@0.14.6/lib/ReactElementValidator');
+    var mapObject = $__require('npm:fbjs@0.6.1/lib/mapObject');
+    function createDOMFactory(tag) {
+      if (process.env.NODE_ENV !== 'production') {
+        return ReactElementValidator.createFactory(tag);
+      }
+      return ReactElement.createFactory(tag);
+    }
+    var ReactDOMFactories = mapObject({
+      a: 'a',
+      abbr: 'abbr',
+      address: 'address',
+      area: 'area',
+      article: 'article',
+      aside: 'aside',
+      audio: 'audio',
+      b: 'b',
+      base: 'base',
+      bdi: 'bdi',
+      bdo: 'bdo',
+      big: 'big',
+      blockquote: 'blockquote',
+      body: 'body',
+      br: 'br',
+      button: 'button',
+      canvas: 'canvas',
+      caption: 'caption',
+      cite: 'cite',
+      code: 'code',
+      col: 'col',
+      colgroup: 'colgroup',
+      data: 'data',
+      datalist: 'datalist',
+      dd: 'dd',
+      del: 'del',
+      details: 'details',
+      dfn: 'dfn',
+      dialog: 'dialog',
+      div: 'div',
+      dl: 'dl',
+      dt: 'dt',
+      em: 'em',
+      embed: 'embed',
+      fieldset: 'fieldset',
+      figcaption: 'figcaption',
+      figure: 'figure',
+      footer: 'footer',
+      form: 'form',
+      h1: 'h1',
+      h2: 'h2',
+      h3: 'h3',
+      h4: 'h4',
+      h5: 'h5',
+      h6: 'h6',
+      head: 'head',
+      header: 'header',
+      hgroup: 'hgroup',
+      hr: 'hr',
+      html: 'html',
+      i: 'i',
+      iframe: 'iframe',
+      img: 'img',
+      input: 'input',
+      ins: 'ins',
+      kbd: 'kbd',
+      keygen: 'keygen',
+      label: 'label',
+      legend: 'legend',
+      li: 'li',
+      link: 'link',
+      main: 'main',
+      map: 'map',
+      mark: 'mark',
+      menu: 'menu',
+      menuitem: 'menuitem',
+      meta: 'meta',
+      meter: 'meter',
+      nav: 'nav',
+      noscript: 'noscript',
+      object: 'object',
+      ol: 'ol',
+      optgroup: 'optgroup',
+      option: 'option',
+      output: 'output',
+      p: 'p',
+      param: 'param',
+      picture: 'picture',
+      pre: 'pre',
+      progress: 'progress',
+      q: 'q',
+      rp: 'rp',
+      rt: 'rt',
+      ruby: 'ruby',
+      s: 's',
+      samp: 'samp',
+      script: 'script',
+      section: 'section',
+      select: 'select',
+      small: 'small',
+      source: 'source',
+      span: 'span',
+      strong: 'strong',
+      style: 'style',
+      sub: 'sub',
+      summary: 'summary',
+      sup: 'sup',
+      table: 'table',
+      tbody: 'tbody',
+      td: 'td',
+      textarea: 'textarea',
+      tfoot: 'tfoot',
+      th: 'th',
+      thead: 'thead',
+      time: 'time',
+      title: 'title',
+      tr: 'tr',
+      track: 'track',
+      u: 'u',
+      ul: 'ul',
+      'var': 'var',
+      video: 'video',
+      wbr: 'wbr',
+      circle: 'circle',
+      clipPath: 'clipPath',
+      defs: 'defs',
+      ellipse: 'ellipse',
+      g: 'g',
+      image: 'image',
+      line: 'line',
+      linearGradient: 'linearGradient',
+      mask: 'mask',
+      path: 'path',
+      pattern: 'pattern',
+      polygon: 'polygon',
+      polyline: 'polyline',
+      radialGradient: 'radialGradient',
+      rect: 'rect',
+      stop: 'stop',
+      svg: 'svg',
+      text: 'text',
+      tspan: 'tspan'
+    }, createDOMFactory);
+    module.exports = ReactDOMFactories;
+  })($__require('github:jspm/nodelibs-process@0.1.2'));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:fbjs@0.6.1/lib/keyMirror", ["npm:fbjs@0.6.1/lib/invariant", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
+    var keyMirror = function(obj) {
+      var ret = {};
+      var key;
+      !(obj instanceof Object && !Array.isArray(obj)) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'keyMirror(...): Argument must be an object.') : invariant(false) : undefined;
+      for (key in obj) {
+        if (!obj.hasOwnProperty(key)) {
+          continue;
+        }
+        ret[key] = key;
+      }
+      return ret;
+    };
+    module.exports = keyMirror;
+  })($__require('github:jspm/nodelibs-process@0.1.2'));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactPropTypeLocations", ["npm:fbjs@0.6.1/lib/keyMirror"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var keyMirror = $__require('npm:fbjs@0.6.1/lib/keyMirror');
+  var ReactPropTypeLocations = keyMirror({
+    prop: null,
+    context: null,
+    childContext: null
+  });
+  module.exports = ReactPropTypeLocations;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactElementValidator", ["npm:react@0.14.6/lib/ReactElement", "npm:react@0.14.6/lib/ReactPropTypeLocations", "npm:react@0.14.6/lib/ReactPropTypeLocationNames", "npm:react@0.14.6/lib/ReactCurrentOwner", "npm:react@0.14.6/lib/canDefineProperty", "npm:react@0.14.6/lib/getIteratorFn", "npm:fbjs@0.6.1/lib/invariant", "npm:fbjs@0.6.1/lib/warning", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var ReactElement = $__require('npm:react@0.14.6/lib/ReactElement');
+    var ReactPropTypeLocations = $__require('npm:react@0.14.6/lib/ReactPropTypeLocations');
+    var ReactPropTypeLocationNames = $__require('npm:react@0.14.6/lib/ReactPropTypeLocationNames');
+    var ReactCurrentOwner = $__require('npm:react@0.14.6/lib/ReactCurrentOwner');
+    var canDefineProperty = $__require('npm:react@0.14.6/lib/canDefineProperty');
+    var getIteratorFn = $__require('npm:react@0.14.6/lib/getIteratorFn');
+    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
+    var warning = $__require('npm:fbjs@0.6.1/lib/warning');
+    function getDeclarationErrorAddendum() {
+      if (ReactCurrentOwner.current) {
+        var name = ReactCurrentOwner.current.getName();
+        if (name) {
+          return ' Check the render method of `' + name + '`.';
+        }
+      }
+      return '';
+    }
+    var ownerHasKeyUseWarning = {};
+    var loggedTypeFailures = {};
+    function validateExplicitKey(element, parentType) {
+      if (!element._store || element._store.validated || element.key != null) {
+        return;
+      }
+      element._store.validated = true;
+      var addenda = getAddendaForKeyUse('uniqueKey', element, parentType);
+      if (addenda === null) {
+        return;
+      }
+      process.env.NODE_ENV !== 'production' ? warning(false, 'Each child in an array or iterator should have a unique "key" prop.' + '%s%s%s', addenda.parentOrOwner || '', addenda.childOwner || '', addenda.url || '') : undefined;
+    }
+    function getAddendaForKeyUse(messageType, element, parentType) {
+      var addendum = getDeclarationErrorAddendum();
+      if (!addendum) {
+        var parentName = typeof parentType === 'string' ? parentType : parentType.displayName || parentType.name;
+        if (parentName) {
+          addendum = ' Check the top-level render call using <' + parentName + '>.';
+        }
+      }
+      var memoizer = ownerHasKeyUseWarning[messageType] || (ownerHasKeyUseWarning[messageType] = {});
+      if (memoizer[addendum]) {
+        return null;
+      }
+      memoizer[addendum] = true;
+      var addenda = {
+        parentOrOwner: addendum,
+        url: ' See https://fb.me/react-warning-keys for more information.',
+        childOwner: null
+      };
+      if (element && element._owner && element._owner !== ReactCurrentOwner.current) {
+        addenda.childOwner = ' It was passed a child from ' + element._owner.getName() + '.';
+      }
+      return addenda;
+    }
+    function validateChildKeys(node, parentType) {
+      if (typeof node !== 'object') {
+        return;
+      }
+      if (Array.isArray(node)) {
+        for (var i = 0; i < node.length; i++) {
+          var child = node[i];
+          if (ReactElement.isValidElement(child)) {
+            validateExplicitKey(child, parentType);
+          }
+        }
+      } else if (ReactElement.isValidElement(node)) {
+        if (node._store) {
+          node._store.validated = true;
+        }
+      } else if (node) {
+        var iteratorFn = getIteratorFn(node);
+        if (iteratorFn) {
+          if (iteratorFn !== node.entries) {
+            var iterator = iteratorFn.call(node);
+            var step;
+            while (!(step = iterator.next()).done) {
+              if (ReactElement.isValidElement(step.value)) {
+                validateExplicitKey(step.value, parentType);
+              }
+            }
+          }
+        }
+      }
+    }
+    function checkPropTypes(componentName, propTypes, props, location) {
+      for (var propName in propTypes) {
+        if (propTypes.hasOwnProperty(propName)) {
+          var error;
+          try {
+            !(typeof propTypes[propName] === 'function') ? process.env.NODE_ENV !== 'production' ? invariant(false, '%s: %s type `%s` is invalid; it must be a function, usually from ' + 'React.PropTypes.', componentName || 'React class', ReactPropTypeLocationNames[location], propName) : invariant(false) : undefined;
+            error = propTypes[propName](props, propName, componentName, location);
+          } catch (ex) {
+            error = ex;
+          }
+          process.env.NODE_ENV !== 'production' ? warning(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', ReactPropTypeLocationNames[location], propName, typeof error) : undefined;
+          if (error instanceof Error && !(error.message in loggedTypeFailures)) {
+            loggedTypeFailures[error.message] = true;
+            var addendum = getDeclarationErrorAddendum();
+            process.env.NODE_ENV !== 'production' ? warning(false, 'Failed propType: %s%s', error.message, addendum) : undefined;
+          }
+        }
+      }
+    }
+    function validatePropTypes(element) {
+      var componentClass = element.type;
+      if (typeof componentClass !== 'function') {
+        return;
+      }
+      var name = componentClass.displayName || componentClass.name;
+      if (componentClass.propTypes) {
+        checkPropTypes(name, componentClass.propTypes, element.props, ReactPropTypeLocations.prop);
+      }
+      if (typeof componentClass.getDefaultProps === 'function') {
+        process.env.NODE_ENV !== 'production' ? warning(componentClass.getDefaultProps.isReactClassApproved, 'getDefaultProps is only used on classic React.createClass ' + 'definitions. Use a static property named `defaultProps` instead.') : undefined;
+      }
+    }
+    var ReactElementValidator = {
+      createElement: function(type, props, children) {
+        var validType = typeof type === 'string' || typeof type === 'function';
+        process.env.NODE_ENV !== 'production' ? warning(validType, 'React.createElement: type should not be null, undefined, boolean, or ' + 'number. It should be a string (for DOM elements) or a ReactClass ' + '(for composite components).%s', getDeclarationErrorAddendum()) : undefined;
+        var element = ReactElement.createElement.apply(this, arguments);
+        if (element == null) {
+          return element;
+        }
+        if (validType) {
+          for (var i = 2; i < arguments.length; i++) {
+            validateChildKeys(arguments[i], type);
+          }
+        }
+        validatePropTypes(element);
+        return element;
+      },
+      createFactory: function(type) {
+        var validatedFactory = ReactElementValidator.createElement.bind(null, type);
+        validatedFactory.type = type;
+        if (process.env.NODE_ENV !== 'production') {
+          if (canDefineProperty) {
+            Object.defineProperty(validatedFactory, 'type', {
+              enumerable: false,
+              get: function() {
+                process.env.NODE_ENV !== 'production' ? warning(false, 'Factory.type is deprecated. Access the class directly ' + 'before passing it to createFactory.') : undefined;
+                Object.defineProperty(this, 'type', {value: type});
+                return type;
+              }
+            });
+          }
+        }
+        return validatedFactory;
+      },
+      cloneElement: function(element, props, children) {
+        var newElement = ReactElement.cloneElement.apply(this, arguments);
+        for (var i = 2; i < arguments.length; i++) {
+          validateChildKeys(arguments[i], newElement.type);
+        }
+        validatePropTypes(newElement);
+        return newElement;
+      }
+    };
+    module.exports = ReactElementValidator;
+  })($__require('github:jspm/nodelibs-process@0.1.2'));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactPropTypeLocationNames", ["github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var ReactPropTypeLocationNames = {};
+    if (process.env.NODE_ENV !== 'production') {
+      ReactPropTypeLocationNames = {
+        prop: 'prop',
+        context: 'context',
+        childContext: 'child context'
+      };
+    }
+    module.exports = ReactPropTypeLocationNames;
+  })($__require('github:jspm/nodelibs-process@0.1.2'));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/getIteratorFn", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
+  var FAUX_ITERATOR_SYMBOL = '@@iterator';
+  function getIteratorFn(maybeIterable) {
+    var iteratorFn = maybeIterable && (ITERATOR_SYMBOL && maybeIterable[ITERATOR_SYMBOL] || maybeIterable[FAUX_ITERATOR_SYMBOL]);
+    if (typeof iteratorFn === 'function') {
+      return iteratorFn;
+    }
+  }
+  module.exports = getIteratorFn;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactPropTypes", ["npm:react@0.14.6/lib/ReactElement", "npm:react@0.14.6/lib/ReactPropTypeLocationNames", "npm:fbjs@0.6.1/lib/emptyFunction", "npm:react@0.14.6/lib/getIteratorFn"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var ReactElement = $__require('npm:react@0.14.6/lib/ReactElement');
+  var ReactPropTypeLocationNames = $__require('npm:react@0.14.6/lib/ReactPropTypeLocationNames');
+  var emptyFunction = $__require('npm:fbjs@0.6.1/lib/emptyFunction');
+  var getIteratorFn = $__require('npm:react@0.14.6/lib/getIteratorFn');
+  var ANONYMOUS = '<<anonymous>>';
+  var ReactPropTypes = {
+    array: createPrimitiveTypeChecker('array'),
+    bool: createPrimitiveTypeChecker('boolean'),
+    func: createPrimitiveTypeChecker('function'),
+    number: createPrimitiveTypeChecker('number'),
+    object: createPrimitiveTypeChecker('object'),
+    string: createPrimitiveTypeChecker('string'),
+    any: createAnyTypeChecker(),
+    arrayOf: createArrayOfTypeChecker,
+    element: createElementTypeChecker(),
+    instanceOf: createInstanceTypeChecker,
+    node: createNodeChecker(),
+    objectOf: createObjectOfTypeChecker,
+    oneOf: createEnumTypeChecker,
+    oneOfType: createUnionTypeChecker,
+    shape: createShapeTypeChecker
+  };
+  function createChainableTypeChecker(validate) {
+    function checkType(isRequired, props, propName, componentName, location, propFullName) {
+      componentName = componentName || ANONYMOUS;
+      propFullName = propFullName || propName;
+      if (props[propName] == null) {
+        var locationName = ReactPropTypeLocationNames[location];
+        if (isRequired) {
+          return new Error('Required ' + locationName + ' `' + propFullName + '` was not specified in ' + ('`' + componentName + '`.'));
+        }
+        return null;
+      } else {
+        return validate(props, propName, componentName, location, propFullName);
+      }
+    }
+    var chainedCheckType = checkType.bind(null, false);
+    chainedCheckType.isRequired = checkType.bind(null, true);
+    return chainedCheckType;
+  }
+  function createPrimitiveTypeChecker(expectedType) {
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== expectedType) {
+        var locationName = ReactPropTypeLocationNames[location];
+        var preciseType = getPreciseType(propValue);
+        return new Error('Invalid ' + locationName + ' `' + propFullName + '` of type ' + ('`' + preciseType + '` supplied to `' + componentName + '`, expected ') + ('`' + expectedType + '`.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+  function createAnyTypeChecker() {
+    return createChainableTypeChecker(emptyFunction.thatReturns(null));
+  }
+  function createArrayOfTypeChecker(typeChecker) {
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      if (!Array.isArray(propValue)) {
+        var locationName = ReactPropTypeLocationNames[location];
+        var propType = getPropType(propValue);
+        return new Error('Invalid ' + locationName + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an array.'));
+      }
+      for (var i = 0; i < propValue.length; i++) {
+        var error = typeChecker(propValue, i, componentName, location, propFullName + '[' + i + ']');
+        if (error instanceof Error) {
+          return error;
+        }
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+  function createElementTypeChecker() {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (!ReactElement.isValidElement(props[propName])) {
+        var locationName = ReactPropTypeLocationNames[location];
+        return new Error('Invalid ' + locationName + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`, expected a single ReactElement.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+  function createInstanceTypeChecker(expectedClass) {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (!(props[propName] instanceof expectedClass)) {
+        var locationName = ReactPropTypeLocationNames[location];
+        var expectedClassName = expectedClass.name || ANONYMOUS;
+        var actualClassName = getClassName(props[propName]);
+        return new Error('Invalid ' + locationName + ' `' + propFullName + '` of type ' + ('`' + actualClassName + '` supplied to `' + componentName + '`, expected ') + ('instance of `' + expectedClassName + '`.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+  function createEnumTypeChecker(expectedValues) {
+    if (!Array.isArray(expectedValues)) {
+      return createChainableTypeChecker(function() {
+        return new Error('Invalid argument supplied to oneOf, expected an instance of array.');
+      });
+    }
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      for (var i = 0; i < expectedValues.length; i++) {
+        if (propValue === expectedValues[i]) {
+          return null;
+        }
+      }
+      var locationName = ReactPropTypeLocationNames[location];
+      var valuesString = JSON.stringify(expectedValues);
+      return new Error('Invalid ' + locationName + ' `' + propFullName + '` of value `' + propValue + '` ' + ('supplied to `' + componentName + '`, expected one of ' + valuesString + '.'));
+    }
+    return createChainableTypeChecker(validate);
+  }
+  function createObjectOfTypeChecker(typeChecker) {
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== 'object') {
+        var locationName = ReactPropTypeLocationNames[location];
+        return new Error('Invalid ' + locationName + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an object.'));
+      }
+      for (var key in propValue) {
+        if (propValue.hasOwnProperty(key)) {
+          var error = typeChecker(propValue, key, componentName, location, propFullName + '.' + key);
+          if (error instanceof Error) {
+            return error;
+          }
+        }
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+  function createUnionTypeChecker(arrayOfTypeCheckers) {
+    if (!Array.isArray(arrayOfTypeCheckers)) {
+      return createChainableTypeChecker(function() {
+        return new Error('Invalid argument supplied to oneOfType, expected an instance of array.');
+      });
+    }
+    function validate(props, propName, componentName, location, propFullName) {
+      for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
+        var checker = arrayOfTypeCheckers[i];
+        if (checker(props, propName, componentName, location, propFullName) == null) {
+          return null;
+        }
+      }
+      var locationName = ReactPropTypeLocationNames[location];
+      return new Error('Invalid ' + locationName + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`.'));
+    }
+    return createChainableTypeChecker(validate);
+  }
+  function createNodeChecker() {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (!isNode(props[propName])) {
+        var locationName = ReactPropTypeLocationNames[location];
+        return new Error('Invalid ' + locationName + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`, expected a ReactNode.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+  function createShapeTypeChecker(shapeTypes) {
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== 'object') {
+        var locationName = ReactPropTypeLocationNames[location];
+        return new Error('Invalid ' + locationName + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
+      }
+      for (var key in shapeTypes) {
+        var checker = shapeTypes[key];
+        if (!checker) {
+          continue;
+        }
+        var error = checker(propValue, key, componentName, location, propFullName + '.' + key);
+        if (error) {
+          return error;
+        }
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+  function isNode(propValue) {
+    switch (typeof propValue) {
+      case 'number':
+      case 'string':
+      case 'undefined':
+        return true;
+      case 'boolean':
+        return !propValue;
+      case 'object':
+        if (Array.isArray(propValue)) {
+          return propValue.every(isNode);
+        }
+        if (propValue === null || ReactElement.isValidElement(propValue)) {
+          return true;
+        }
+        var iteratorFn = getIteratorFn(propValue);
+        if (iteratorFn) {
+          var iterator = iteratorFn.call(propValue);
+          var step;
+          if (iteratorFn !== propValue.entries) {
+            while (!(step = iterator.next()).done) {
+              if (!isNode(step.value)) {
+                return false;
+              }
+            }
+          } else {
+            while (!(step = iterator.next()).done) {
+              var entry = step.value;
+              if (entry) {
+                if (!isNode(entry[1])) {
+                  return false;
+                }
+              }
+            }
+          }
+        } else {
+          return false;
+        }
+        return true;
+      default:
+        return false;
+    }
+  }
+  function getPropType(propValue) {
+    var propType = typeof propValue;
+    if (Array.isArray(propValue)) {
+      return 'array';
+    }
+    if (propValue instanceof RegExp) {
+      return 'object';
+    }
+    return propType;
+  }
+  function getPreciseType(propValue) {
+    var propType = getPropType(propValue);
+    if (propType === 'object') {
+      if (propValue instanceof Date) {
+        return 'date';
+      } else if (propValue instanceof RegExp) {
+        return 'regexp';
+      }
+    }
+    return propType;
+  }
+  function getClassName(propValue) {
+    if (!propValue.constructor || !propValue.constructor.name) {
+      return '<<anonymous>>';
+    }
+    return propValue.constructor.name;
+  }
+  module.exports = ReactPropTypes;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactVersion", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = '0.14.6';
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactCurrentOwner", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var ReactCurrentOwner = {current: null};
+  module.exports = ReactCurrentOwner;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/canDefineProperty", ["github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var canDefineProperty = false;
+    if (process.env.NODE_ENV !== 'production') {
+      try {
+        Object.defineProperty({}, 'x', {get: function() {}});
+        canDefineProperty = true;
+      } catch (x) {}
+    }
+    module.exports = canDefineProperty;
+  })($__require('github:jspm/nodelibs-process@0.1.2'));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactElement", ["npm:react@0.14.6/lib/ReactCurrentOwner", "npm:react@0.14.6/lib/Object.assign", "npm:react@0.14.6/lib/canDefineProperty", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var ReactCurrentOwner = $__require('npm:react@0.14.6/lib/ReactCurrentOwner');
+    var assign = $__require('npm:react@0.14.6/lib/Object.assign');
+    var canDefineProperty = $__require('npm:react@0.14.6/lib/canDefineProperty');
+    var REACT_ELEMENT_TYPE = typeof Symbol === 'function' && Symbol['for'] && Symbol['for']('react.element') || 0xeac7;
+    var RESERVED_PROPS = {
+      key: true,
+      ref: true,
+      __self: true,
+      __source: true
+    };
+    var ReactElement = function(type, key, ref, self, source, owner, props) {
+      var element = {
+        $$typeof: REACT_ELEMENT_TYPE,
+        type: type,
+        key: key,
+        ref: ref,
+        props: props,
+        _owner: owner
+      };
+      if (process.env.NODE_ENV !== 'production') {
+        element._store = {};
+        if (canDefineProperty) {
+          Object.defineProperty(element._store, 'validated', {
+            configurable: false,
+            enumerable: false,
+            writable: true,
+            value: false
+          });
+          Object.defineProperty(element, '_self', {
+            configurable: false,
+            enumerable: false,
+            writable: false,
+            value: self
+          });
+          Object.defineProperty(element, '_source', {
+            configurable: false,
+            enumerable: false,
+            writable: false,
+            value: source
+          });
+        } else {
+          element._store.validated = false;
+          element._self = self;
+          element._source = source;
+        }
+        Object.freeze(element.props);
+        Object.freeze(element);
+      }
+      return element;
+    };
+    ReactElement.createElement = function(type, config, children) {
+      var propName;
+      var props = {};
+      var key = null;
+      var ref = null;
+      var self = null;
+      var source = null;
+      if (config != null) {
+        ref = config.ref === undefined ? null : config.ref;
+        key = config.key === undefined ? null : '' + config.key;
+        self = config.__self === undefined ? null : config.__self;
+        source = config.__source === undefined ? null : config.__source;
+        for (propName in config) {
+          if (config.hasOwnProperty(propName) && !RESERVED_PROPS.hasOwnProperty(propName)) {
+            props[propName] = config[propName];
+          }
+        }
+      }
+      var childrenLength = arguments.length - 2;
+      if (childrenLength === 1) {
+        props.children = children;
+      } else if (childrenLength > 1) {
+        var childArray = Array(childrenLength);
+        for (var i = 0; i < childrenLength; i++) {
+          childArray[i] = arguments[i + 2];
+        }
+        props.children = childArray;
+      }
+      if (type && type.defaultProps) {
+        var defaultProps = type.defaultProps;
+        for (propName in defaultProps) {
+          if (typeof props[propName] === 'undefined') {
+            props[propName] = defaultProps[propName];
+          }
+        }
+      }
+      return ReactElement(type, key, ref, self, source, ReactCurrentOwner.current, props);
+    };
+    ReactElement.createFactory = function(type) {
+      var factory = ReactElement.createElement.bind(null, type);
+      factory.type = type;
+      return factory;
+    };
+    ReactElement.cloneAndReplaceKey = function(oldElement, newKey) {
+      var newElement = ReactElement(oldElement.type, newKey, oldElement.ref, oldElement._self, oldElement._source, oldElement._owner, oldElement.props);
+      return newElement;
+    };
+    ReactElement.cloneAndReplaceProps = function(oldElement, newProps) {
+      var newElement = ReactElement(oldElement.type, oldElement.key, oldElement.ref, oldElement._self, oldElement._source, oldElement._owner, newProps);
+      if (process.env.NODE_ENV !== 'production') {
+        newElement._store.validated = oldElement._store.validated;
+      }
+      return newElement;
+    };
+    ReactElement.cloneElement = function(element, config, children) {
+      var propName;
+      var props = assign({}, element.props);
+      var key = element.key;
+      var ref = element.ref;
+      var self = element._self;
+      var source = element._source;
+      var owner = element._owner;
+      if (config != null) {
+        if (config.ref !== undefined) {
+          ref = config.ref;
+          owner = ReactCurrentOwner.current;
+        }
+        if (config.key !== undefined) {
+          key = '' + config.key;
+        }
+        for (propName in config) {
+          if (config.hasOwnProperty(propName) && !RESERVED_PROPS.hasOwnProperty(propName)) {
+            props[propName] = config[propName];
+          }
+        }
+      }
+      var childrenLength = arguments.length - 2;
+      if (childrenLength === 1) {
+        props.children = children;
+      } else if (childrenLength > 1) {
+        var childArray = Array(childrenLength);
+        for (var i = 0; i < childrenLength; i++) {
+          childArray[i] = arguments[i + 2];
+        }
+        props.children = childArray;
+      }
+      return ReactElement(element.type, key, ref, self, source, owner, props);
+    };
+    ReactElement.isValidElement = function(object) {
+      return typeof object === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
+    };
+    module.exports = ReactElement;
+  })($__require('github:jspm/nodelibs-process@0.1.2'));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:fbjs@0.6.1/lib/invariant", ["github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    function invariant(condition, format, a, b, c, d, e, f) {
+      if (process.env.NODE_ENV !== 'production') {
+        if (format === undefined) {
+          throw new Error('invariant requires an error message argument');
+        }
+      }
+      if (!condition) {
+        var error;
+        if (format === undefined) {
+          error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
+        } else {
+          var args = [a, b, c, d, e, f];
+          var argIndex = 0;
+          error = new Error(format.replace(/%s/g, function() {
+            return args[argIndex++];
+          }));
+          error.name = 'Invariant Violation';
+        }
+        error.framesToPop = 1;
+        throw error;
+      }
+    }
+    module.exports = invariant;
+  })($__require('github:jspm/nodelibs-process@0.1.2'));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/onlyChild", ["npm:react@0.14.6/lib/ReactElement", "npm:fbjs@0.6.1/lib/invariant", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var ReactElement = $__require('npm:react@0.14.6/lib/ReactElement');
+    var invariant = $__require('npm:fbjs@0.6.1/lib/invariant');
+    function onlyChild(children) {
+      !ReactElement.isValidElement(children) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'onlyChild must be passed a children with exactly one child.') : invariant(false) : undefined;
+      return children;
+    }
+    module.exports = onlyChild;
+  })($__require('github:jspm/nodelibs-process@0.1.2'));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/ReactIsomorphic", ["npm:react@0.14.6/lib/ReactChildren", "npm:react@0.14.6/lib/ReactComponent", "npm:react@0.14.6/lib/ReactClass", "npm:react@0.14.6/lib/ReactDOMFactories", "npm:react@0.14.6/lib/ReactElement", "npm:react@0.14.6/lib/ReactElementValidator", "npm:react@0.14.6/lib/ReactPropTypes", "npm:react@0.14.6/lib/ReactVersion", "npm:react@0.14.6/lib/Object.assign", "npm:react@0.14.6/lib/onlyChild", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var ReactChildren = $__require('npm:react@0.14.6/lib/ReactChildren');
+    var ReactComponent = $__require('npm:react@0.14.6/lib/ReactComponent');
+    var ReactClass = $__require('npm:react@0.14.6/lib/ReactClass');
+    var ReactDOMFactories = $__require('npm:react@0.14.6/lib/ReactDOMFactories');
+    var ReactElement = $__require('npm:react@0.14.6/lib/ReactElement');
+    var ReactElementValidator = $__require('npm:react@0.14.6/lib/ReactElementValidator');
+    var ReactPropTypes = $__require('npm:react@0.14.6/lib/ReactPropTypes');
+    var ReactVersion = $__require('npm:react@0.14.6/lib/ReactVersion');
+    var assign = $__require('npm:react@0.14.6/lib/Object.assign');
+    var onlyChild = $__require('npm:react@0.14.6/lib/onlyChild');
+    var createElement = ReactElement.createElement;
+    var createFactory = ReactElement.createFactory;
+    var cloneElement = ReactElement.cloneElement;
+    if (process.env.NODE_ENV !== 'production') {
+      createElement = ReactElementValidator.createElement;
+      createFactory = ReactElementValidator.createFactory;
+      cloneElement = ReactElementValidator.cloneElement;
+    }
+    var React = {
+      Children: {
+        map: ReactChildren.map,
+        forEach: ReactChildren.forEach,
+        count: ReactChildren.count,
+        toArray: ReactChildren.toArray,
+        only: onlyChild
+      },
+      Component: ReactComponent,
+      createElement: createElement,
+      cloneElement: cloneElement,
+      isValidElement: ReactElement.isValidElement,
+      PropTypes: ReactPropTypes,
+      createClass: ReactClass.createClass,
+      createFactory: createFactory,
+      createMixin: function(mixin) {
+        return mixin;
+      },
+      DOM: ReactDOMFactories,
+      version: ReactVersion,
+      __spread: assign
+    };
+    module.exports = React;
+  })($__require('github:jspm/nodelibs-process@0.1.2'));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/Object.assign", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  function assign(target, sources) {
+    if (target == null) {
+      throw new TypeError('Object.assign target cannot be null or undefined');
+    }
+    var to = Object(target);
+    var hasOwnProperty = Object.prototype.hasOwnProperty;
+    for (var nextIndex = 1; nextIndex < arguments.length; nextIndex++) {
+      var nextSource = arguments[nextIndex];
+      if (nextSource == null) {
+        continue;
+      }
+      var from = Object(nextSource);
+      for (var key in from) {
+        if (hasOwnProperty.call(from, key)) {
+          to[key] = from[key];
+        }
+      }
+    }
+    return to;
+  }
+  module.exports = assign;
   global.define = __define;
   return module.exports;
 });
@@ -11228,21 +11334,653 @@ System.registerDynamic("npm:fbjs@0.6.1/lib/warning", ["npm:fbjs@0.6.1/lib/emptyF
   return module.exports;
 });
 
-System.registerDynamic("npm:fbjs@0.6.1/lib/ExecutionEnvironment", [], true, function($__require, exports, module) {
+System.registerDynamic("npm:react@0.14.6/lib/deprecated", ["npm:react@0.14.6/lib/Object.assign", "npm:fbjs@0.6.1/lib/warning", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var assign = $__require('npm:react@0.14.6/lib/Object.assign');
+    var warning = $__require('npm:fbjs@0.6.1/lib/warning');
+    function deprecated(fnName, newModule, newPackage, ctx, fn) {
+      var warned = false;
+      if (process.env.NODE_ENV !== 'production') {
+        var newFn = function() {
+          process.env.NODE_ENV !== 'production' ? warning(warned, 'React.%s is deprecated. Please use %s.%s from require' + '(\'%s\') ' + 'instead.', fnName, newModule, fnName, newPackage) : undefined;
+          warned = true;
+          return fn.apply(ctx, arguments);
+        };
+        return assign(newFn, fn);
+      }
+      return fn;
+    }
+    module.exports = deprecated;
+  })($__require('github:jspm/nodelibs-process@0.1.2'));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/lib/React", ["npm:react@0.14.6/lib/ReactDOM", "npm:react@0.14.6/lib/ReactDOMServer", "npm:react@0.14.6/lib/ReactIsomorphic", "npm:react@0.14.6/lib/Object.assign", "npm:react@0.14.6/lib/deprecated"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
-  var ExecutionEnvironment = {
-    canUseDOM: canUseDOM,
-    canUseWorkers: typeof Worker !== 'undefined',
-    canUseEventListeners: canUseDOM && !!(window.addEventListener || window.attachEvent),
-    canUseViewport: canUseDOM && !!window.screen,
-    isInWorker: !canUseDOM
+  var ReactDOM = $__require('npm:react@0.14.6/lib/ReactDOM');
+  var ReactDOMServer = $__require('npm:react@0.14.6/lib/ReactDOMServer');
+  var ReactIsomorphic = $__require('npm:react@0.14.6/lib/ReactIsomorphic');
+  var assign = $__require('npm:react@0.14.6/lib/Object.assign');
+  var deprecated = $__require('npm:react@0.14.6/lib/deprecated');
+  var React = {};
+  assign(React, ReactIsomorphic);
+  assign(React, {
+    findDOMNode: deprecated('findDOMNode', 'ReactDOM', 'react-dom', ReactDOM, ReactDOM.findDOMNode),
+    render: deprecated('render', 'ReactDOM', 'react-dom', ReactDOM, ReactDOM.render),
+    unmountComponentAtNode: deprecated('unmountComponentAtNode', 'ReactDOM', 'react-dom', ReactDOM, ReactDOM.unmountComponentAtNode),
+    renderToString: deprecated('renderToString', 'ReactDOMServer', 'react-dom/server', ReactDOMServer, ReactDOMServer.renderToString),
+    renderToStaticMarkup: deprecated('renderToStaticMarkup', 'ReactDOMServer', 'react-dom/server', ReactDOMServer, ReactDOMServer.renderToStaticMarkup)
+  });
+  React.__SECRET_DOM_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactDOM;
+  React.__SECRET_DOM_SERVER_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactDOMServer;
+  module.exports = React;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6/react", ["npm:react@0.14.6/lib/React"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = $__require('npm:react@0.14.6/lib/React');
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react@0.14.6", ["npm:react@0.14.6/react"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = $__require('npm:react@0.14.6/react');
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react-redux@4.0.6/lib/utils/storeShape", ["npm:react@0.14.6"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var _require = $__require('npm:react@0.14.6');
+  var PropTypes = _require.PropTypes;
+  var storeShape = PropTypes.shape({
+    subscribe: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    getState: PropTypes.func.isRequired
+  });
+  module.exports = storeShape;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react-redux@4.0.6/lib/utils/shallowEqual", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  function shallowEqual(objA, objB) {
+    if (objA === objB) {
+      return true;
+    }
+    var keysA = Object.keys(objA);
+    var keysB = Object.keys(objB);
+    if (keysA.length !== keysB.length) {
+      return false;
+    }
+    var hasOwn = Object.prototype.hasOwnProperty;
+    for (var i = 0; i < keysA.length; i++) {
+      if (!hasOwn.call(objB, keysA[i]) || objA[keysA[i]] !== objB[keysA[i]]) {
+        return false;
+      }
+    }
+    return true;
+  }
+  module.exports = shallowEqual;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react-redux@4.0.6/lib/utils/isPlainObject", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  function _typeof(obj) {
+    return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj;
+  }
+  var fnToString = function fnToString(fn) {
+    return Function.prototype.toString.call(fn);
   };
-  module.exports = ExecutionEnvironment;
+  function isPlainObject(obj) {
+    if (!obj || (typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) !== 'object') {
+      return false;
+    }
+    var proto = typeof obj.constructor === 'function' ? Object.getPrototypeOf(obj) : Object.prototype;
+    if (proto === null) {
+      return true;
+    }
+    var constructor = proto.constructor;
+    return typeof constructor === 'function' && constructor instanceof constructor && fnToString(constructor) === fnToString(Object);
+  }
+  module.exports = isPlainObject;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:redux@3.0.5/lib/createStore", ["npm:redux@3.0.5/lib/utils/isPlainObject"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.__esModule = true;
+  exports['default'] = createStore;
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {'default': obj};
+  }
+  var _utilsIsPlainObject = $__require('npm:redux@3.0.5/lib/utils/isPlainObject');
+  var _utilsIsPlainObject2 = _interopRequireDefault(_utilsIsPlainObject);
+  var ActionTypes = {INIT: '@@redux/INIT'};
+  exports.ActionTypes = ActionTypes;
+  function createStore(reducer, initialState) {
+    if (typeof reducer !== 'function') {
+      throw new Error('Expected the reducer to be a function.');
+    }
+    var currentReducer = reducer;
+    var currentState = initialState;
+    var listeners = [];
+    var isDispatching = false;
+    function getState() {
+      return currentState;
+    }
+    function subscribe(listener) {
+      listeners.push(listener);
+      var isSubscribed = true;
+      return function unsubscribe() {
+        if (!isSubscribed) {
+          return;
+        }
+        isSubscribed = false;
+        var index = listeners.indexOf(listener);
+        listeners.splice(index, 1);
+      };
+    }
+    function dispatch(action) {
+      if (!_utilsIsPlainObject2['default'](action)) {
+        throw new Error('Actions must be plain objects. ' + 'Use custom middleware for async actions.');
+      }
+      if (typeof action.type === 'undefined') {
+        throw new Error('Actions may not have an undefined "type" property. ' + 'Have you misspelled a constant?');
+      }
+      if (isDispatching) {
+        throw new Error('Reducers may not dispatch actions.');
+      }
+      try {
+        isDispatching = true;
+        currentState = currentReducer(currentState, action);
+      } finally {
+        isDispatching = false;
+      }
+      listeners.slice().forEach(function(listener) {
+        return listener();
+      });
+      return action;
+    }
+    function replaceReducer(nextReducer) {
+      currentReducer = nextReducer;
+      dispatch({type: ActionTypes.INIT});
+    }
+    dispatch({type: ActionTypes.INIT});
+    return {
+      dispatch: dispatch,
+      subscribe: subscribe,
+      getState: getState,
+      replaceReducer: replaceReducer
+    };
+  }
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:redux@3.0.5/lib/utils/isPlainObject", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.__esModule = true;
+  exports['default'] = isPlainObject;
+  var fnToString = function fnToString(fn) {
+    return Function.prototype.toString.call(fn);
+  };
+  var objStringValue = fnToString(Object);
+  function isPlainObject(obj) {
+    if (!obj || typeof obj !== 'object') {
+      return false;
+    }
+    var proto = typeof obj.constructor === 'function' ? Object.getPrototypeOf(obj) : Object.prototype;
+    if (proto === null) {
+      return true;
+    }
+    var constructor = proto.constructor;
+    return typeof constructor === 'function' && constructor instanceof constructor && fnToString(constructor) === objStringValue;
+  }
+  module.exports = exports['default'];
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:redux@3.0.5/lib/utils/pick", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.__esModule = true;
+  exports["default"] = pick;
+  function pick(obj, fn) {
+    return Object.keys(obj).reduce(function(result, key) {
+      if (fn(obj[key])) {
+        result[key] = obj[key];
+      }
+      return result;
+    }, {});
+  }
+  module.exports = exports["default"];
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:redux@3.0.5/lib/utils/combineReducers", ["npm:redux@3.0.5/lib/createStore", "npm:redux@3.0.5/lib/utils/isPlainObject", "npm:redux@3.0.5/lib/utils/mapValues", "npm:redux@3.0.5/lib/utils/pick", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    exports.__esModule = true;
+    exports['default'] = combineReducers;
+    function _interopRequireDefault(obj) {
+      return obj && obj.__esModule ? obj : {'default': obj};
+    }
+    var _createStore = $__require('npm:redux@3.0.5/lib/createStore');
+    var _isPlainObject = $__require('npm:redux@3.0.5/lib/utils/isPlainObject');
+    var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
+    var _mapValues = $__require('npm:redux@3.0.5/lib/utils/mapValues');
+    var _mapValues2 = _interopRequireDefault(_mapValues);
+    var _pick = $__require('npm:redux@3.0.5/lib/utils/pick');
+    var _pick2 = _interopRequireDefault(_pick);
+    function getUndefinedStateErrorMessage(key, action) {
+      var actionType = action && action.type;
+      var actionName = actionType && '"' + actionType.toString() + '"' || 'an action';
+      return 'Reducer "' + key + '" returned undefined handling ' + actionName + '. ' + 'To ignore an action, you must explicitly return the previous state.';
+    }
+    function getUnexpectedStateKeyWarningMessage(inputState, outputState, action) {
+      var reducerKeys = Object.keys(outputState);
+      var argumentName = action && action.type === _createStore.ActionTypes.INIT ? 'initialState argument passed to createStore' : 'previous state received by the reducer';
+      if (reducerKeys.length === 0) {
+        return 'Store does not have a valid reducer. Make sure the argument passed ' + 'to combineReducers is an object whose values are reducers.';
+      }
+      if (!_isPlainObject2['default'](inputState)) {
+        return 'The ' + argumentName + ' has unexpected type of "' + ({}).toString.call(inputState).match(/\s([a-z|A-Z]+)/)[1] + '". Expected argument to be an object with the following ' + ('keys: "' + reducerKeys.join('", "') + '"');
+      }
+      var unexpectedKeys = Object.keys(inputState).filter(function(key) {
+        return reducerKeys.indexOf(key) < 0;
+      });
+      if (unexpectedKeys.length > 0) {
+        return 'Unexpected ' + (unexpectedKeys.length > 1 ? 'keys' : 'key') + ' ' + ('"' + unexpectedKeys.join('", "') + '" found in ' + argumentName + '. ') + 'Expected to find one of the known reducer keys instead: ' + ('"' + reducerKeys.join('", "') + '". Unexpected keys will be ignored.');
+      }
+    }
+    function assertReducerSanity(reducers) {
+      Object.keys(reducers).forEach(function(key) {
+        var reducer = reducers[key];
+        var initialState = reducer(undefined, {type: _createStore.ActionTypes.INIT});
+        if (typeof initialState === 'undefined') {
+          throw new Error('Reducer "' + key + '" returned undefined during initialization. ' + 'If the state passed to the reducer is undefined, you must ' + 'explicitly return the initial state. The initial state may ' + 'not be undefined.');
+        }
+        var type = '@@redux/PROBE_UNKNOWN_ACTION_' + Math.random().toString(36).substring(7).split('').join('.');
+        if (typeof reducer(undefined, {type: type}) === 'undefined') {
+          throw new Error('Reducer "' + key + '" returned undefined when probed with a random type. ' + ('Don\'t try to handle ' + _createStore.ActionTypes.INIT + ' or other actions in "redux/*" ') + 'namespace. They are considered private. Instead, you must return the ' + 'current state for any unknown actions, unless it is undefined, ' + 'in which case you must return the initial state, regardless of the ' + 'action type. The initial state may not be undefined.');
+        }
+      });
+    }
+    function combineReducers(reducers) {
+      var finalReducers = _pick2['default'](reducers, function(val) {
+        return typeof val === 'function';
+      });
+      var sanityError;
+      try {
+        assertReducerSanity(finalReducers);
+      } catch (e) {
+        sanityError = e;
+      }
+      var defaultState = _mapValues2['default'](finalReducers, function() {
+        return undefined;
+      });
+      return function combination(state, action) {
+        if (state === undefined)
+          state = defaultState;
+        if (sanityError) {
+          throw sanityError;
+        }
+        var hasChanged = false;
+        var finalState = _mapValues2['default'](finalReducers, function(reducer, key) {
+          var previousStateForKey = state[key];
+          var nextStateForKey = reducer(previousStateForKey, action);
+          if (typeof nextStateForKey === 'undefined') {
+            var errorMessage = getUndefinedStateErrorMessage(key, action);
+            throw new Error(errorMessage);
+          }
+          hasChanged = hasChanged || nextStateForKey !== previousStateForKey;
+          return nextStateForKey;
+        });
+        if (process.env.NODE_ENV !== 'production') {
+          var warningMessage = getUnexpectedStateKeyWarningMessage(state, finalState, action);
+          if (warningMessage) {
+            console.error(warningMessage);
+          }
+        }
+        return hasChanged ? finalState : state;
+      };
+    }
+    module.exports = exports['default'];
+  })($__require('github:jspm/nodelibs-process@0.1.2'));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:redux@3.0.5/lib/utils/mapValues", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.__esModule = true;
+  exports["default"] = mapValues;
+  function mapValues(obj, fn) {
+    return Object.keys(obj).reduce(function(result, key) {
+      result[key] = fn(obj[key], key);
+      return result;
+    }, {});
+  }
+  module.exports = exports["default"];
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:redux@3.0.5/lib/utils/bindActionCreators", ["npm:redux@3.0.5/lib/utils/mapValues"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.__esModule = true;
+  exports['default'] = bindActionCreators;
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {'default': obj};
+  }
+  var _mapValues = $__require('npm:redux@3.0.5/lib/utils/mapValues');
+  var _mapValues2 = _interopRequireDefault(_mapValues);
+  function bindActionCreator(actionCreator, dispatch) {
+    return function() {
+      return dispatch(actionCreator.apply(undefined, arguments));
+    };
+  }
+  function bindActionCreators(actionCreators, dispatch) {
+    if (typeof actionCreators === 'function') {
+      return bindActionCreator(actionCreators, dispatch);
+    }
+    if (typeof actionCreators !== 'object' || actionCreators === null || actionCreators === undefined) {
+      throw new Error('bindActionCreators expected an object or a function, instead received ' + (actionCreators === null ? 'null' : typeof actionCreators) + '. ' + 'Did you write "import ActionCreators from" instead of "import * as ActionCreators from"?');
+    }
+    return _mapValues2['default'](actionCreators, function(actionCreator) {
+      return bindActionCreator(actionCreator, dispatch);
+    });
+  }
+  module.exports = exports['default'];
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:redux@3.0.5/lib/utils/applyMiddleware", ["npm:redux@3.0.5/lib/utils/compose"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.__esModule = true;
+  var _extends = Object.assign || function(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  };
+  exports['default'] = applyMiddleware;
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {'default': obj};
+  }
+  var _compose = $__require('npm:redux@3.0.5/lib/utils/compose');
+  var _compose2 = _interopRequireDefault(_compose);
+  function applyMiddleware() {
+    for (var _len = arguments.length,
+        middlewares = Array(_len),
+        _key = 0; _key < _len; _key++) {
+      middlewares[_key] = arguments[_key];
+    }
+    return function(next) {
+      return function(reducer, initialState) {
+        var store = next(reducer, initialState);
+        var _dispatch = store.dispatch;
+        var chain = [];
+        var middlewareAPI = {
+          getState: store.getState,
+          dispatch: function dispatch(action) {
+            return _dispatch(action);
+          }
+        };
+        chain = middlewares.map(function(middleware) {
+          return middleware(middlewareAPI);
+        });
+        _dispatch = _compose2['default'].apply(undefined, chain)(store.dispatch);
+        return _extends({}, store, {dispatch: _dispatch});
+      };
+    };
+  }
+  module.exports = exports['default'];
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:redux@3.0.5/lib/utils/compose", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.__esModule = true;
+  exports["default"] = compose;
+  function compose() {
+    for (var _len = arguments.length,
+        funcs = Array(_len),
+        _key = 0; _key < _len; _key++) {
+      funcs[_key] = arguments[_key];
+    }
+    return function(arg) {
+      return funcs.reduceRight(function(composed, f) {
+        return f(composed);
+      }, arg);
+    };
+  }
+  module.exports = exports["default"];
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:redux@3.0.5/lib/index", ["npm:redux@3.0.5/lib/createStore", "npm:redux@3.0.5/lib/utils/combineReducers", "npm:redux@3.0.5/lib/utils/bindActionCreators", "npm:redux@3.0.5/lib/utils/applyMiddleware", "npm:redux@3.0.5/lib/utils/compose"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  exports.__esModule = true;
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {'default': obj};
+  }
+  var _createStore = $__require('npm:redux@3.0.5/lib/createStore');
+  var _createStore2 = _interopRequireDefault(_createStore);
+  var _utilsCombineReducers = $__require('npm:redux@3.0.5/lib/utils/combineReducers');
+  var _utilsCombineReducers2 = _interopRequireDefault(_utilsCombineReducers);
+  var _utilsBindActionCreators = $__require('npm:redux@3.0.5/lib/utils/bindActionCreators');
+  var _utilsBindActionCreators2 = _interopRequireDefault(_utilsBindActionCreators);
+  var _utilsApplyMiddleware = $__require('npm:redux@3.0.5/lib/utils/applyMiddleware');
+  var _utilsApplyMiddleware2 = _interopRequireDefault(_utilsApplyMiddleware);
+  var _utilsCompose = $__require('npm:redux@3.0.5/lib/utils/compose');
+  var _utilsCompose2 = _interopRequireDefault(_utilsCompose);
+  exports.createStore = _createStore2['default'];
+  exports.combineReducers = _utilsCombineReducers2['default'];
+  exports.bindActionCreators = _utilsBindActionCreators2['default'];
+  exports.applyMiddleware = _utilsApplyMiddleware2['default'];
+  exports.compose = _utilsCompose2['default'];
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:redux@3.0.5", ["npm:redux@3.0.5/lib/index"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = $__require('npm:redux@3.0.5/lib/index');
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:react-redux@4.0.6/lib/utils/wrapActionCreators", ["npm:redux@3.0.5"], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var _redux = $__require('npm:redux@3.0.5');
+  function wrapActionCreators(actionCreators) {
+    return function(dispatch) {
+      return (0, _redux.bindActionCreators)(actionCreators, dispatch);
+    };
+  }
+  module.exports = wrapActionCreators;
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:hoist-non-react-statics@1.0.3/index", [], true, function($__require, exports, module) {
+  "use strict";
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  var REACT_STATICS = {
+    childContextTypes: true,
+    contextTypes: true,
+    defaultProps: true,
+    displayName: true,
+    getDefaultProps: true,
+    mixins: true,
+    propTypes: true,
+    type: true
+  };
+  var KNOWN_STATICS = {
+    name: true,
+    length: true,
+    prototype: true,
+    caller: true,
+    arguments: true,
+    arity: true
+  };
+  module.exports = function hoistNonReactStatics(targetComponent, sourceComponent) {
+    var keys = Object.getOwnPropertyNames(sourceComponent);
+    for (var i = 0; i < keys.length; ++i) {
+      if (!REACT_STATICS[keys[i]] && !KNOWN_STATICS[keys[i]]) {
+        targetComponent[keys[i]] = sourceComponent[keys[i]];
+      }
+    }
+    return targetComponent;
+  };
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:hoist-non-react-statics@1.0.3", ["npm:hoist-non-react-statics@1.0.3/index"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = $__require('npm:hoist-non-react-statics@1.0.3/index');
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:invariant@2.2.0/browser", ["github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  (function(process) {
+    'use strict';
+    var invariant = function(condition, format, a, b, c, d, e, f) {
+      if (process.env.NODE_ENV !== 'production') {
+        if (format === undefined) {
+          throw new Error('invariant requires an error message argument');
+        }
+      }
+      if (!condition) {
+        var error;
+        if (format === undefined) {
+          error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
+        } else {
+          var args = [a, b, c, d, e, f];
+          var argIndex = 0;
+          error = new Error(format.replace(/%s/g, function() {
+            return args[argIndex++];
+          }));
+          error.name = 'Invariant Violation';
+        }
+        error.framesToPop = 1;
+        throw error;
+      }
+    };
+    module.exports = invariant;
+  })($__require('github:jspm/nodelibs-process@0.1.2'));
+  global.define = __define;
+  return module.exports;
+});
+
+System.registerDynamic("npm:invariant@2.2.0", ["npm:invariant@2.2.0/browser"], true, function($__require, exports, module) {
+  ;
+  var global = this,
+      __define = global.define;
+  global.define = undefined;
+  module.exports = $__require('npm:invariant@2.2.0/browser');
   global.define = __define;
   return module.exports;
 });
@@ -11369,91 +12107,3650 @@ System.registerDynamic("github:jspm/nodelibs-process@0.1.2", ["github:jspm/nodel
   return module.exports;
 });
 
-System.registerDynamic("npm:react@0.14.6/lib/ReactDOM", ["npm:react@0.14.6/lib/ReactCurrentOwner", "npm:react@0.14.6/lib/ReactDOMTextComponent", "npm:react@0.14.6/lib/ReactDefaultInjection", "npm:react@0.14.6/lib/ReactInstanceHandles", "npm:react@0.14.6/lib/ReactMount", "npm:react@0.14.6/lib/ReactPerf", "npm:react@0.14.6/lib/ReactReconciler", "npm:react@0.14.6/lib/ReactUpdates", "npm:react@0.14.6/lib/ReactVersion", "npm:react@0.14.6/lib/findDOMNode", "npm:react@0.14.6/lib/renderSubtreeIntoContainer", "npm:fbjs@0.6.1/lib/warning", "npm:fbjs@0.6.1/lib/ExecutionEnvironment", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+System.registerDynamic("npm:react-redux@4.0.6/lib/components/connect", ["npm:react@0.14.6", "npm:react-redux@4.0.6/lib/utils/storeShape", "npm:react-redux@4.0.6/lib/utils/shallowEqual", "npm:react-redux@4.0.6/lib/utils/isPlainObject", "npm:react-redux@4.0.6/lib/utils/wrapActionCreators", "npm:hoist-non-react-statics@1.0.3", "npm:invariant@2.2.0", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
   (function(process) {
     'use strict';
-    var ReactCurrentOwner = $__require('npm:react@0.14.6/lib/ReactCurrentOwner');
-    var ReactDOMTextComponent = $__require('npm:react@0.14.6/lib/ReactDOMTextComponent');
-    var ReactDefaultInjection = $__require('npm:react@0.14.6/lib/ReactDefaultInjection');
-    var ReactInstanceHandles = $__require('npm:react@0.14.6/lib/ReactInstanceHandles');
-    var ReactMount = $__require('npm:react@0.14.6/lib/ReactMount');
-    var ReactPerf = $__require('npm:react@0.14.6/lib/ReactPerf');
-    var ReactReconciler = $__require('npm:react@0.14.6/lib/ReactReconciler');
-    var ReactUpdates = $__require('npm:react@0.14.6/lib/ReactUpdates');
-    var ReactVersion = $__require('npm:react@0.14.6/lib/ReactVersion');
-    var findDOMNode = $__require('npm:react@0.14.6/lib/findDOMNode');
-    var renderSubtreeIntoContainer = $__require('npm:react@0.14.6/lib/renderSubtreeIntoContainer');
-    var warning = $__require('npm:fbjs@0.6.1/lib/warning');
-    ReactDefaultInjection.inject();
-    var render = ReactPerf.measure('React', 'render', ReactMount.render);
-    var React = {
-      findDOMNode: findDOMNode,
-      render: render,
-      unmountComponentAtNode: ReactMount.unmountComponentAtNode,
-      version: ReactVersion,
-      unstable_batchedUpdates: ReactUpdates.batchedUpdates,
-      unstable_renderSubtreeIntoContainer: renderSubtreeIntoContainer
-    };
-    if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ !== 'undefined' && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.inject === 'function') {
-      __REACT_DEVTOOLS_GLOBAL_HOOK__.inject({
-        CurrentOwner: ReactCurrentOwner,
-        InstanceHandles: ReactInstanceHandles,
-        Mount: ReactMount,
-        Reconciler: ReactReconciler,
-        TextComponent: ReactDOMTextComponent
-      });
-    }
-    if (process.env.NODE_ENV !== 'production') {
-      var ExecutionEnvironment = $__require('npm:fbjs@0.6.1/lib/ExecutionEnvironment');
-      if (ExecutionEnvironment.canUseDOM && window.top === window.self) {
-        if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ === 'undefined') {
-          if (navigator.userAgent.indexOf('Chrome') > -1 && navigator.userAgent.indexOf('Edge') === -1 || navigator.userAgent.indexOf('Firefox') > -1) {
-            console.debug('Download the React DevTools for a better development experience: ' + 'https://fb.me/react-devtools');
-          }
-        }
-        var ieCompatibilityMode = document.documentMode && document.documentMode < 8;
-        process.env.NODE_ENV !== 'production' ? warning(!ieCompatibilityMode, 'Internet Explorer is running in compatibility mode; please add the ' + 'following tag to your HTML to prevent this from happening: ' + '<meta http-equiv="X-UA-Compatible" content="IE=edge" />') : undefined;
-        var expectedFeatures = [Array.isArray, Array.prototype.every, Array.prototype.forEach, Array.prototype.indexOf, Array.prototype.map, Date.now, Function.prototype.bind, Object.keys, String.prototype.split, String.prototype.trim, Object.create, Object.freeze];
-        for (var i = 0; i < expectedFeatures.length; i++) {
-          if (!expectedFeatures[i]) {
-            console.error('One or more ES5 shim/shams expected by React are not available: ' + 'https://fb.me/react-warning-polyfills');
-            break;
+    var _extends = Object.assign || function(target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
           }
         }
       }
+      return target;
+    };
+    function _classCallCheck(instance, Constructor) {
+      if (!(instance instanceof Constructor)) {
+        throw new TypeError("Cannot call a class as a function");
+      }
     }
-    module.exports = React;
+    function _possibleConstructorReturn(self, call) {
+      if (!self) {
+        throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+      }
+      return call && (typeof call === "object" || typeof call === "function") ? call : self;
+    }
+    function _inherits(subClass, superClass) {
+      if (typeof superClass !== "function" && superClass !== null) {
+        throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+      }
+      subClass.prototype = Object.create(superClass && superClass.prototype, {constructor: {
+          value: subClass,
+          enumerable: false,
+          writable: true,
+          configurable: true
+        }});
+      if (superClass)
+        Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+    }
+    var _require = $__require('npm:react@0.14.6');
+    var Component = _require.Component;
+    var createElement = _require.createElement;
+    var storeShape = $__require('npm:react-redux@4.0.6/lib/utils/storeShape');
+    var shallowEqual = $__require('npm:react-redux@4.0.6/lib/utils/shallowEqual');
+    var isPlainObject = $__require('npm:react-redux@4.0.6/lib/utils/isPlainObject');
+    var wrapActionCreators = $__require('npm:react-redux@4.0.6/lib/utils/wrapActionCreators');
+    var hoistStatics = $__require('npm:hoist-non-react-statics@1.0.3');
+    var invariant = $__require('npm:invariant@2.2.0');
+    var defaultMapStateToProps = function defaultMapStateToProps(state) {
+      return {};
+    };
+    var defaultMapDispatchToProps = function defaultMapDispatchToProps(dispatch) {
+      return {dispatch: dispatch};
+    };
+    var defaultMergeProps = function defaultMergeProps(stateProps, dispatchProps, parentProps) {
+      return _extends({}, parentProps, stateProps, dispatchProps);
+    };
+    function getDisplayName(WrappedComponent) {
+      return WrappedComponent.displayName || WrappedComponent.name || 'Component';
+    }
+    var nextVersion = 0;
+    function connect(mapStateToProps, mapDispatchToProps, mergeProps) {
+      var options = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
+      var shouldSubscribe = Boolean(mapStateToProps);
+      var finalMapStateToProps = mapStateToProps || defaultMapStateToProps;
+      var finalMapDispatchToProps = isPlainObject(mapDispatchToProps) ? wrapActionCreators(mapDispatchToProps) : mapDispatchToProps || defaultMapDispatchToProps;
+      var finalMergeProps = mergeProps || defaultMergeProps;
+      var doStatePropsDependOnOwnProps = finalMapStateToProps.length !== 1;
+      var doDispatchPropsDependOnOwnProps = finalMapDispatchToProps.length !== 1;
+      var _options$pure = options.pure;
+      var pure = _options$pure === undefined ? true : _options$pure;
+      var _options$withRef = options.withRef;
+      var withRef = _options$withRef === undefined ? false : _options$withRef;
+      var version = nextVersion++;
+      function computeStateProps(store, props) {
+        var state = store.getState();
+        var stateProps = doStatePropsDependOnOwnProps ? finalMapStateToProps(state, props) : finalMapStateToProps(state);
+        invariant(isPlainObject(stateProps), '`mapStateToProps` must return an object. Instead received %s.', stateProps);
+        return stateProps;
+      }
+      function computeDispatchProps(store, props) {
+        var dispatch = store.dispatch;
+        var dispatchProps = doDispatchPropsDependOnOwnProps ? finalMapDispatchToProps(dispatch, props) : finalMapDispatchToProps(dispatch);
+        invariant(isPlainObject(dispatchProps), '`mapDispatchToProps` must return an object. Instead received %s.', dispatchProps);
+        return dispatchProps;
+      }
+      function computeMergedProps(stateProps, dispatchProps, parentProps) {
+        var mergedProps = finalMergeProps(stateProps, dispatchProps, parentProps);
+        invariant(isPlainObject(mergedProps), '`mergeProps` must return an object. Instead received %s.', mergedProps);
+        return mergedProps;
+      }
+      return function wrapWithConnect(WrappedComponent) {
+        var Connect = (function(_Component) {
+          _inherits(Connect, _Component);
+          Connect.prototype.shouldComponentUpdate = function shouldComponentUpdate() {
+            return !pure || this.haveOwnPropsChanged || this.hasStoreStateChanged;
+          };
+          function Connect(props, context) {
+            _classCallCheck(this, Connect);
+            var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
+            _this.version = version;
+            _this.store = props.store || context.store;
+            invariant(_this.store, 'Could not find "store" in either the context or ' + ('props of "' + _this.constructor.displayName + '". ') + 'Either wrap the root component in a <Provider>, ' + ('or explicitly pass "store" as a prop to "' + _this.constructor.displayName + '".'));
+            var storeState = _this.store.getState();
+            _this.state = {storeState: storeState};
+            _this.clearCache();
+            return _this;
+          }
+          Connect.prototype.updateStatePropsIfNeeded = function updateStatePropsIfNeeded() {
+            var nextStateProps = computeStateProps(this.store, this.props);
+            if (this.stateProps && shallowEqual(nextStateProps, this.stateProps)) {
+              return false;
+            }
+            this.stateProps = nextStateProps;
+            return true;
+          };
+          Connect.prototype.updateDispatchPropsIfNeeded = function updateDispatchPropsIfNeeded() {
+            var nextDispatchProps = computeDispatchProps(this.store, this.props);
+            if (this.dispatchProps && shallowEqual(nextDispatchProps, this.dispatchProps)) {
+              return false;
+            }
+            this.dispatchProps = nextDispatchProps;
+            return true;
+          };
+          Connect.prototype.updateMergedProps = function updateMergedProps() {
+            this.mergedProps = computeMergedProps(this.stateProps, this.dispatchProps, this.props);
+          };
+          Connect.prototype.isSubscribed = function isSubscribed() {
+            return typeof this.unsubscribe === 'function';
+          };
+          Connect.prototype.trySubscribe = function trySubscribe() {
+            if (shouldSubscribe && !this.unsubscribe) {
+              this.unsubscribe = this.store.subscribe(this.handleChange.bind(this));
+              this.handleChange();
+            }
+          };
+          Connect.prototype.tryUnsubscribe = function tryUnsubscribe() {
+            if (this.unsubscribe) {
+              this.unsubscribe();
+              this.unsubscribe = null;
+            }
+          };
+          Connect.prototype.componentDidMount = function componentDidMount() {
+            this.trySubscribe();
+          };
+          Connect.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+            if (!pure || !shallowEqual(nextProps, this.props)) {
+              this.haveOwnPropsChanged = true;
+            }
+          };
+          Connect.prototype.componentWillUnmount = function componentWillUnmount() {
+            this.tryUnsubscribe();
+            this.clearCache();
+          };
+          Connect.prototype.clearCache = function clearCache() {
+            this.dispatchProps = null;
+            this.stateProps = null;
+            this.mergedProps = null;
+            this.haveOwnPropsChanged = true;
+            this.hasStoreStateChanged = true;
+            this.renderedElement = null;
+          };
+          Connect.prototype.handleChange = function handleChange() {
+            if (!this.unsubscribe) {
+              return;
+            }
+            var prevStoreState = this.state.storeState;
+            var storeState = this.store.getState();
+            if (!pure || prevStoreState !== storeState) {
+              this.hasStoreStateChanged = true;
+              this.setState({storeState: storeState});
+            }
+          };
+          Connect.prototype.getWrappedInstance = function getWrappedInstance() {
+            invariant(withRef, 'To access the wrapped instance, you need to specify ' + '{ withRef: true } as the fourth argument of the connect() call.');
+            return this.refs.wrappedInstance;
+          };
+          Connect.prototype.render = function render() {
+            var haveOwnPropsChanged = this.haveOwnPropsChanged;
+            var hasStoreStateChanged = this.hasStoreStateChanged;
+            var renderedElement = this.renderedElement;
+            this.haveOwnPropsChanged = false;
+            this.hasStoreStateChanged = false;
+            var shouldUpdateStateProps = true;
+            var shouldUpdateDispatchProps = true;
+            if (pure && renderedElement) {
+              shouldUpdateStateProps = hasStoreStateChanged || haveOwnPropsChanged && doStatePropsDependOnOwnProps;
+              shouldUpdateDispatchProps = haveOwnPropsChanged && doDispatchPropsDependOnOwnProps;
+            }
+            var haveStatePropsChanged = false;
+            var haveDispatchPropsChanged = false;
+            if (shouldUpdateStateProps) {
+              haveStatePropsChanged = this.updateStatePropsIfNeeded();
+            }
+            if (shouldUpdateDispatchProps) {
+              haveDispatchPropsChanged = this.updateDispatchPropsIfNeeded();
+            }
+            var haveMergedPropsChanged = true;
+            if (haveStatePropsChanged || haveDispatchPropsChanged || haveOwnPropsChanged) {
+              this.updateMergedProps();
+            } else {
+              haveMergedPropsChanged = false;
+            }
+            if (!haveMergedPropsChanged && renderedElement) {
+              return renderedElement;
+            }
+            if (withRef) {
+              this.renderedElement = createElement(WrappedComponent, _extends({}, this.mergedProps, {ref: 'wrappedInstance'}));
+            } else {
+              this.renderedElement = createElement(WrappedComponent, this.mergedProps);
+            }
+            return this.renderedElement;
+          };
+          return Connect;
+        })(Component);
+        Connect.displayName = 'Connect(' + getDisplayName(WrappedComponent) + ')';
+        Connect.WrappedComponent = WrappedComponent;
+        Connect.contextTypes = {store: storeShape};
+        Connect.propTypes = {store: storeShape};
+        if (process.env.NODE_ENV !== 'production') {
+          Connect.prototype.componentWillUpdate = function componentWillUpdate() {
+            if (this.version === version) {
+              return;
+            }
+            this.version = version;
+            this.trySubscribe();
+            this.clearCache();
+          };
+        }
+        return hoistStatics(Connect, WrappedComponent);
+      };
+    }
+    module.exports = connect;
   })($__require('github:jspm/nodelibs-process@0.1.2'));
   global.define = __define;
   return module.exports;
 });
 
-System.registerDynamic("npm:react-dom@0.14.6/index", ["npm:react@0.14.6/lib/ReactDOM"], true, function($__require, exports, module) {
+System.registerDynamic("npm:react-redux@4.0.6/lib/index", ["npm:react-redux@4.0.6/lib/components/Provider", "npm:react-redux@4.0.6/lib/components/connect"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = $__require('npm:react@0.14.6/lib/ReactDOM');
+  var Provider = $__require('npm:react-redux@4.0.6/lib/components/Provider');
+  var connect = $__require('npm:react-redux@4.0.6/lib/components/connect');
+  module.exports = {
+    Provider: Provider,
+    connect: connect
+  };
   global.define = __define;
   return module.exports;
 });
 
-System.registerDynamic("npm:react-dom@0.14.6", ["npm:react-dom@0.14.6/index"], true, function($__require, exports, module) {
+System.registerDynamic("npm:react-redux@4.0.6", ["npm:react-redux@4.0.6/lib/index"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = $__require('npm:react-dom@0.14.6/index');
+  module.exports = $__require('npm:react-redux@4.0.6/lib/index');
   global.define = __define;
   return module.exports;
 });
 
-System.register("src/deps.js", ["npm:react@0.14.6", "npm:react-dom@0.14.6"], function(exports_1) {
+(function() {
+var _removeDefine = System.get("@@amd-helpers").createDefine();
+(function(root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    define("github:es-shims/es6-shim@0.34.1/es6-shim", [], factory);
+  } else if (typeof exports === 'object') {
+    module.exports = factory();
+  } else {
+    root.returnExports = factory();
+  }
+}(this, function() {
+  'use strict';
+  var _apply = Function.call.bind(Function.apply);
+  var _call = Function.call.bind(Function.call);
+  var isArray = Array.isArray;
+  var keys = Object.keys;
+  var not = function notThunker(func) {
+    return function notThunk() {
+      return !_apply(func, this, arguments);
+    };
+  };
+  var throwsError = function(func) {
+    try {
+      func();
+      return false;
+    } catch (e) {
+      return true;
+    }
+  };
+  var valueOrFalseIfThrows = function valueOrFalseIfThrows(func) {
+    try {
+      return func();
+    } catch (e) {
+      return false;
+    }
+  };
+  var isCallableWithoutNew = not(throwsError);
+  var arePropertyDescriptorsSupported = function() {
+    return !throwsError(function() {
+      Object.defineProperty({}, 'x', {get: function() {}});
+    });
+  };
+  var supportsDescriptors = !!Object.defineProperty && arePropertyDescriptorsSupported();
+  var functionsHaveNames = (function foo() {}).name === 'foo';
+  var _forEach = Function.call.bind(Array.prototype.forEach);
+  var _reduce = Function.call.bind(Array.prototype.reduce);
+  var _filter = Function.call.bind(Array.prototype.filter);
+  var _some = Function.call.bind(Array.prototype.some);
+  var defineProperty = function(object, name, value, force) {
+    if (!force && name in object) {
+      return;
+    }
+    if (supportsDescriptors) {
+      Object.defineProperty(object, name, {
+        configurable: true,
+        enumerable: false,
+        writable: true,
+        value: value
+      });
+    } else {
+      object[name] = value;
+    }
+  };
+  var defineProperties = function(object, map, forceOverride) {
+    _forEach(keys(map), function(name) {
+      var method = map[name];
+      defineProperty(object, name, method, !!forceOverride);
+    });
+  };
+  var _toString = Function.call.bind(Object.prototype.toString);
+  var isCallable = typeof/abc/ === 'function' ? function IsCallableSlow(x) {
+    return typeof x === 'function' && _toString(x) === '[object Function]';
+  } : function IsCallableFast(x) {
+    return typeof x === 'function';
+  };
+  var Value = {
+    getter: function(object, name, getter) {
+      if (!supportsDescriptors) {
+        throw new TypeError('getters require true ES5 support');
+      }
+      Object.defineProperty(object, name, {
+        configurable: true,
+        enumerable: false,
+        get: getter
+      });
+    },
+    proxy: function(originalObject, key, targetObject) {
+      if (!supportsDescriptors) {
+        throw new TypeError('getters require true ES5 support');
+      }
+      var originalDescriptor = Object.getOwnPropertyDescriptor(originalObject, key);
+      Object.defineProperty(targetObject, key, {
+        configurable: originalDescriptor.configurable,
+        enumerable: originalDescriptor.enumerable,
+        get: function getKey() {
+          return originalObject[key];
+        },
+        set: function setKey(value) {
+          originalObject[key] = value;
+        }
+      });
+    },
+    redefine: function(object, property, newValue) {
+      if (supportsDescriptors) {
+        var descriptor = Object.getOwnPropertyDescriptor(object, property);
+        descriptor.value = newValue;
+        Object.defineProperty(object, property, descriptor);
+      } else {
+        object[property] = newValue;
+      }
+    },
+    defineByDescriptor: function(object, property, descriptor) {
+      if (supportsDescriptors) {
+        Object.defineProperty(object, property, descriptor);
+      } else if ('value' in descriptor) {
+        object[property] = descriptor.value;
+      }
+    },
+    preserveToString: function(target, source) {
+      if (source && isCallable(source.toString)) {
+        defineProperty(target, 'toString', source.toString.bind(source), true);
+      }
+    }
+  };
+  var create = Object.create || function(prototype, properties) {
+    var Prototype = function Prototype() {};
+    Prototype.prototype = prototype;
+    var object = new Prototype();
+    if (typeof properties !== 'undefined') {
+      keys(properties).forEach(function(key) {
+        Value.defineByDescriptor(object, key, properties[key]);
+      });
+    }
+    return object;
+  };
+  var supportsSubclassing = function(C, f) {
+    if (!Object.setPrototypeOf) {
+      return false;
+    }
+    return valueOrFalseIfThrows(function() {
+      var Sub = function Subclass(arg) {
+        var o = new C(arg);
+        Object.setPrototypeOf(o, Subclass.prototype);
+        return o;
+      };
+      Object.setPrototypeOf(Sub, C);
+      Sub.prototype = create(C.prototype, {constructor: {value: Sub}});
+      return f(Sub);
+    });
+  };
+  var getGlobal = function() {
+    if (typeof self !== 'undefined') {
+      return self;
+    }
+    if (typeof window !== 'undefined') {
+      return window;
+    }
+    if (typeof global !== 'undefined') {
+      return global;
+    }
+    throw new Error('unable to locate global object');
+  };
+  var globals = getGlobal();
+  var globalIsFinite = globals.isFinite;
+  var _indexOf = Function.call.bind(String.prototype.indexOf);
+  var _concat = Function.call.bind(Array.prototype.concat);
+  var _sort = Function.call.bind(Array.prototype.sort);
+  var _strSlice = Function.call.bind(String.prototype.slice);
+  var _push = Function.call.bind(Array.prototype.push);
+  var _pushApply = Function.apply.bind(Array.prototype.push);
+  var _shift = Function.call.bind(Array.prototype.shift);
+  var _max = Math.max;
+  var _min = Math.min;
+  var _floor = Math.floor;
+  var _abs = Math.abs;
+  var _log = Math.log;
+  var _sqrt = Math.sqrt;
+  var _hasOwnProperty = Function.call.bind(Object.prototype.hasOwnProperty);
+  var ArrayIterator;
+  var noop = function() {};
+  var Symbol = globals.Symbol || {};
+  var symbolSpecies = Symbol.species || '@@species';
+  var numberIsNaN = Number.isNaN || function isNaN(value) {
+    return value !== value;
+  };
+  var numberIsFinite = Number.isFinite || function isFinite(value) {
+    return typeof value === 'number' && globalIsFinite(value);
+  };
+  var isStandardArguments = function isArguments(value) {
+    return _toString(value) === '[object Arguments]';
+  };
+  var isLegacyArguments = function isArguments(value) {
+    return value !== null && typeof value === 'object' && typeof value.length === 'number' && value.length >= 0 && _toString(value) !== '[object Array]' && _toString(value.callee) === '[object Function]';
+  };
+  var isArguments = isStandardArguments(arguments) ? isStandardArguments : isLegacyArguments;
+  var Type = {
+    primitive: function(x) {
+      return x === null || (typeof x !== 'function' && typeof x !== 'object');
+    },
+    object: function(x) {
+      return x !== null && typeof x === 'object';
+    },
+    string: function(x) {
+      return _toString(x) === '[object String]';
+    },
+    regex: function(x) {
+      return _toString(x) === '[object RegExp]';
+    },
+    symbol: function(x) {
+      return typeof globals.Symbol === 'function' && typeof x === 'symbol';
+    }
+  };
+  var overrideNative = function overrideNative(object, property, replacement) {
+    var original = object[property];
+    defineProperty(object, property, replacement, true);
+    Value.preserveToString(object[property], original);
+  };
+  var hasSymbols = typeof Symbol === 'function' && typeof Symbol['for'] === 'function' && Type.symbol(Symbol());
+  var $iterator$ = Type.symbol(Symbol.iterator) ? Symbol.iterator : '_es6-shim iterator_';
+  if (globals.Set && typeof new globals.Set()['@@iterator'] === 'function') {
+    $iterator$ = '@@iterator';
+  }
+  if (!globals.Reflect) {
+    defineProperty(globals, 'Reflect', {});
+  }
+  var Reflect = globals.Reflect;
+  var $String = String;
+  var ES = {
+    Call: function Call(F, V) {
+      var args = arguments.length > 2 ? arguments[2] : [];
+      if (!ES.IsCallable(F)) {
+        throw new TypeError(F + ' is not a function');
+      }
+      return _apply(F, V, args);
+    },
+    RequireObjectCoercible: function(x, optMessage) {
+      if (x == null) {
+        throw new TypeError(optMessage || 'Cannot call method on ' + x);
+      }
+      return x;
+    },
+    TypeIsObject: function(x) {
+      if (x === void 0 || x === null || x === true || x === false) {
+        return false;
+      }
+      return typeof x === 'function' || typeof x === 'object';
+    },
+    ToObject: function(o, optMessage) {
+      return Object(ES.RequireObjectCoercible(o, optMessage));
+    },
+    IsCallable: isCallable,
+    IsConstructor: function(x) {
+      return ES.IsCallable(x);
+    },
+    ToInt32: function(x) {
+      return ES.ToNumber(x) >> 0;
+    },
+    ToUint32: function(x) {
+      return ES.ToNumber(x) >>> 0;
+    },
+    ToNumber: function(value) {
+      if (_toString(value) === '[object Symbol]') {
+        throw new TypeError('Cannot convert a Symbol value to a number');
+      }
+      return +value;
+    },
+    ToInteger: function(value) {
+      var number = ES.ToNumber(value);
+      if (numberIsNaN(number)) {
+        return 0;
+      }
+      if (number === 0 || !numberIsFinite(number)) {
+        return number;
+      }
+      return (number > 0 ? 1 : -1) * _floor(_abs(number));
+    },
+    ToLength: function(value) {
+      var len = ES.ToInteger(value);
+      if (len <= 0) {
+        return 0;
+      }
+      if (len > Number.MAX_SAFE_INTEGER) {
+        return Number.MAX_SAFE_INTEGER;
+      }
+      return len;
+    },
+    SameValue: function(a, b) {
+      if (a === b) {
+        if (a === 0) {
+          return 1 / a === 1 / b;
+        }
+        return true;
+      }
+      return numberIsNaN(a) && numberIsNaN(b);
+    },
+    SameValueZero: function(a, b) {
+      return (a === b) || (numberIsNaN(a) && numberIsNaN(b));
+    },
+    IsIterable: function(o) {
+      return ES.TypeIsObject(o) && (typeof o[$iterator$] !== 'undefined' || isArguments(o));
+    },
+    GetIterator: function(o) {
+      if (isArguments(o)) {
+        return new ArrayIterator(o, 'value');
+      }
+      var itFn = ES.GetMethod(o, $iterator$);
+      if (!ES.IsCallable(itFn)) {
+        throw new TypeError('value is not an iterable');
+      }
+      var it = ES.Call(itFn, o);
+      if (!ES.TypeIsObject(it)) {
+        throw new TypeError('bad iterator');
+      }
+      return it;
+    },
+    GetMethod: function(o, p) {
+      var func = ES.ToObject(o)[p];
+      if (func === void 0 || func === null) {
+        return void 0;
+      }
+      if (!ES.IsCallable(func)) {
+        throw new TypeError('Method not callable: ' + p);
+      }
+      return func;
+    },
+    IteratorComplete: function(iterResult) {
+      return !!(iterResult.done);
+    },
+    IteratorClose: function(iterator, completionIsThrow) {
+      var returnMethod = ES.GetMethod(iterator, 'return');
+      if (returnMethod === void 0) {
+        return;
+      }
+      var innerResult,
+          innerException;
+      try {
+        innerResult = ES.Call(returnMethod, iterator);
+      } catch (e) {
+        innerException = e;
+      }
+      if (completionIsThrow) {
+        return;
+      }
+      if (innerException) {
+        throw innerException;
+      }
+      if (!ES.TypeIsObject(innerResult)) {
+        throw new TypeError("Iterator's return method returned a non-object.");
+      }
+    },
+    IteratorNext: function(it) {
+      var result = arguments.length > 1 ? it.next(arguments[1]) : it.next();
+      if (!ES.TypeIsObject(result)) {
+        throw new TypeError('bad iterator');
+      }
+      return result;
+    },
+    IteratorStep: function(it) {
+      var result = ES.IteratorNext(it);
+      var done = ES.IteratorComplete(result);
+      return done ? false : result;
+    },
+    Construct: function(C, args, newTarget, isES6internal) {
+      var target = typeof newTarget === 'undefined' ? C : newTarget;
+      if (!isES6internal && Reflect.construct) {
+        return Reflect.construct(C, args, target);
+      }
+      var proto = target.prototype;
+      if (!ES.TypeIsObject(proto)) {
+        proto = Object.prototype;
+      }
+      var obj = create(proto);
+      var result = ES.Call(C, obj, args);
+      return ES.TypeIsObject(result) ? result : obj;
+    },
+    SpeciesConstructor: function(O, defaultConstructor) {
+      var C = O.constructor;
+      if (C === void 0) {
+        return defaultConstructor;
+      }
+      if (!ES.TypeIsObject(C)) {
+        throw new TypeError('Bad constructor');
+      }
+      var S = C[symbolSpecies];
+      if (S === void 0 || S === null) {
+        return defaultConstructor;
+      }
+      if (!ES.IsConstructor(S)) {
+        throw new TypeError('Bad @@species');
+      }
+      return S;
+    },
+    CreateHTML: function(string, tag, attribute, value) {
+      var S = ES.ToString(string);
+      var p1 = '<' + tag;
+      if (attribute !== '') {
+        var V = ES.ToString(value);
+        var escapedV = V.replace(/"/g, '&quot;');
+        p1 += ' ' + attribute + '="' + escapedV + '"';
+      }
+      var p2 = p1 + '>';
+      var p3 = p2 + S;
+      return p3 + '</' + tag + '>';
+    },
+    IsRegExp: function IsRegExp(argument) {
+      if (!ES.TypeIsObject(argument)) {
+        return false;
+      }
+      var isRegExp = argument[Symbol.match];
+      if (typeof isRegExp !== 'undefined') {
+        return !!isRegExp;
+      }
+      return Type.regex(argument);
+    },
+    ToString: function ToString(string) {
+      return $String(string);
+    }
+  };
+  if (supportsDescriptors && hasSymbols) {
+    var defineWellKnownSymbol = function defineWellKnownSymbol(name) {
+      if (Type.symbol(Symbol[name])) {
+        return Symbol[name];
+      }
+      var sym = Symbol['for']('Symbol.' + name);
+      Object.defineProperty(Symbol, name, {
+        configurable: false,
+        enumerable: false,
+        writable: false,
+        value: sym
+      });
+      return sym;
+    };
+    if (!Type.symbol(Symbol.search)) {
+      var symbolSearch = defineWellKnownSymbol('search');
+      var originalSearch = String.prototype.search;
+      defineProperty(RegExp.prototype, symbolSearch, function search(string) {
+        return ES.Call(originalSearch, string, [this]);
+      });
+      var searchShim = function search(regexp) {
+        var O = ES.RequireObjectCoercible(this);
+        if (regexp !== null && typeof regexp !== 'undefined') {
+          var searcher = ES.GetMethod(regexp, symbolSearch);
+          if (typeof searcher !== 'undefined') {
+            return ES.Call(searcher, regexp, [O]);
+          }
+        }
+        return ES.Call(originalSearch, O, [ES.ToString(regexp)]);
+      };
+      overrideNative(String.prototype, 'search', searchShim);
+    }
+    if (!Type.symbol(Symbol.replace)) {
+      var symbolReplace = defineWellKnownSymbol('replace');
+      var originalReplace = String.prototype.replace;
+      defineProperty(RegExp.prototype, symbolReplace, function replace(string, replaceValue) {
+        return ES.Call(originalReplace, string, [this, replaceValue]);
+      });
+      var replaceShim = function replace(searchValue, replaceValue) {
+        var O = ES.RequireObjectCoercible(this);
+        if (searchValue !== null && typeof searchValue !== 'undefined') {
+          var replacer = ES.GetMethod(searchValue, symbolReplace);
+          if (typeof replacer !== 'undefined') {
+            return ES.Call(replacer, searchValue, [O, replaceValue]);
+          }
+        }
+        return ES.Call(originalReplace, O, [ES.ToString(searchValue), replaceValue]);
+      };
+      overrideNative(String.prototype, 'replace', replaceShim);
+    }
+    if (!Type.symbol(Symbol.split)) {
+      var symbolSplit = defineWellKnownSymbol('split');
+      var originalSplit = String.prototype.split;
+      defineProperty(RegExp.prototype, symbolSplit, function split(string, limit) {
+        return ES.Call(originalSplit, string, [this, limit]);
+      });
+      var splitShim = function split(separator, limit) {
+        var O = ES.RequireObjectCoercible(this);
+        if (separator !== null && typeof separator !== 'undefined') {
+          var splitter = ES.GetMethod(separator, symbolSplit);
+          if (typeof splitter !== 'undefined') {
+            return ES.Call(splitter, separator, [O, limit]);
+          }
+        }
+        return ES.Call(originalSplit, O, [ES.ToString(separator), limit]);
+      };
+      overrideNative(String.prototype, 'split', splitShim);
+    }
+    var symbolMatchExists = Type.symbol(Symbol.match);
+    var stringMatchIgnoresSymbolMatch = symbolMatchExists && (function() {
+      var o = {};
+      o[Symbol.match] = function() {
+        return 42;
+      };
+      return 'a'.match(o) !== 42;
+    }());
+    if (!symbolMatchExists || stringMatchIgnoresSymbolMatch) {
+      var symbolMatch = defineWellKnownSymbol('match');
+      var originalMatch = String.prototype.match;
+      defineProperty(RegExp.prototype, symbolMatch, function match(string) {
+        return ES.Call(originalMatch, string, [this]);
+      });
+      var matchShim = function match(regexp) {
+        var O = ES.RequireObjectCoercible(this);
+        if (regexp !== null && typeof regexp !== 'undefined') {
+          var matcher = ES.GetMethod(regexp, symbolMatch);
+          if (typeof matcher !== 'undefined') {
+            return ES.Call(matcher, regexp, [O]);
+          }
+        }
+        return ES.Call(originalMatch, O, [ES.ToString(regexp)]);
+      };
+      overrideNative(String.prototype, 'match', matchShim);
+    }
+  }
+  var wrapConstructor = function wrapConstructor(original, replacement, keysToSkip) {
+    Value.preserveToString(replacement, original);
+    if (Object.setPrototypeOf) {
+      Object.setPrototypeOf(original, replacement);
+    }
+    if (supportsDescriptors) {
+      _forEach(Object.getOwnPropertyNames(original), function(key) {
+        if (key in noop || keysToSkip[key]) {
+          return;
+        }
+        Value.proxy(original, key, replacement);
+      });
+    } else {
+      _forEach(Object.keys(original), function(key) {
+        if (key in noop || keysToSkip[key]) {
+          return;
+        }
+        replacement[key] = original[key];
+      });
+    }
+    replacement.prototype = original.prototype;
+    Value.redefine(original.prototype, 'constructor', replacement);
+  };
+  var defaultSpeciesGetter = function() {
+    return this;
+  };
+  var addDefaultSpecies = function(C) {
+    if (supportsDescriptors && !_hasOwnProperty(C, symbolSpecies)) {
+      Value.getter(C, symbolSpecies, defaultSpeciesGetter);
+    }
+  };
+  var addIterator = function(prototype, impl) {
+    var implementation = impl || function iterator() {
+      return this;
+    };
+    defineProperty(prototype, $iterator$, implementation);
+    if (!prototype[$iterator$] && Type.symbol($iterator$)) {
+      prototype[$iterator$] = implementation;
+    }
+  };
+  var createDataProperty = function createDataProperty(object, name, value) {
+    if (supportsDescriptors) {
+      Object.defineProperty(object, name, {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        value: value
+      });
+    } else {
+      object[name] = value;
+    }
+  };
+  var createDataPropertyOrThrow = function createDataPropertyOrThrow(object, name, value) {
+    createDataProperty(object, name, value);
+    if (!ES.SameValue(object[name], value)) {
+      throw new TypeError('property is nonconfigurable');
+    }
+  };
+  var emulateES6construct = function(o, defaultNewTarget, defaultProto, slots) {
+    if (!ES.TypeIsObject(o)) {
+      throw new TypeError('Constructor requires `new`: ' + defaultNewTarget.name);
+    }
+    var proto = defaultNewTarget.prototype;
+    if (!ES.TypeIsObject(proto)) {
+      proto = defaultProto;
+    }
+    var obj = create(proto);
+    for (var name in slots) {
+      if (_hasOwnProperty(slots, name)) {
+        var value = slots[name];
+        defineProperty(obj, name, value, true);
+      }
+    }
+    return obj;
+  };
+  if (String.fromCodePoint && String.fromCodePoint.length !== 1) {
+    var originalFromCodePoint = String.fromCodePoint;
+    overrideNative(String, 'fromCodePoint', function fromCodePoint(codePoints) {
+      return ES.Call(originalFromCodePoint, this, arguments);
+    });
+  }
+  var StringShims = {
+    fromCodePoint: function fromCodePoint(codePoints) {
+      var result = [];
+      var next;
+      for (var i = 0,
+          length = arguments.length; i < length; i++) {
+        next = Number(arguments[i]);
+        if (!ES.SameValue(next, ES.ToInteger(next)) || next < 0 || next > 0x10FFFF) {
+          throw new RangeError('Invalid code point ' + next);
+        }
+        if (next < 0x10000) {
+          _push(result, String.fromCharCode(next));
+        } else {
+          next -= 0x10000;
+          _push(result, String.fromCharCode((next >> 10) + 0xD800));
+          _push(result, String.fromCharCode((next % 0x400) + 0xDC00));
+        }
+      }
+      return result.join('');
+    },
+    raw: function raw(callSite) {
+      var cooked = ES.ToObject(callSite, 'bad callSite');
+      var rawString = ES.ToObject(cooked.raw, 'bad raw value');
+      var len = rawString.length;
+      var literalsegments = ES.ToLength(len);
+      if (literalsegments <= 0) {
+        return '';
+      }
+      var stringElements = [];
+      var nextIndex = 0;
+      var nextKey,
+          next,
+          nextSeg,
+          nextSub;
+      while (nextIndex < literalsegments) {
+        nextKey = ES.ToString(nextIndex);
+        nextSeg = ES.ToString(rawString[nextKey]);
+        _push(stringElements, nextSeg);
+        if (nextIndex + 1 >= literalsegments) {
+          break;
+        }
+        next = nextIndex + 1 < arguments.length ? arguments[nextIndex + 1] : '';
+        nextSub = ES.ToString(next);
+        _push(stringElements, nextSub);
+        nextIndex += 1;
+      }
+      return stringElements.join('');
+    }
+  };
+  if (String.raw && String.raw({raw: {
+      0: 'x',
+      1: 'y',
+      length: 2
+    }}) !== 'xy') {
+    overrideNative(String, 'raw', StringShims.raw);
+  }
+  defineProperties(String, StringShims);
+  var stringRepeat = function repeat(s, times) {
+    if (times < 1) {
+      return '';
+    }
+    if (times % 2) {
+      return repeat(s, times - 1) + s;
+    }
+    var half = repeat(s, times / 2);
+    return half + half;
+  };
+  var stringMaxLength = Infinity;
+  var StringPrototypeShims = {
+    repeat: function repeat(times) {
+      var thisStr = ES.ToString(ES.RequireObjectCoercible(this));
+      var numTimes = ES.ToInteger(times);
+      if (numTimes < 0 || numTimes >= stringMaxLength) {
+        throw new RangeError('repeat count must be less than infinity and not overflow maximum string size');
+      }
+      return stringRepeat(thisStr, numTimes);
+    },
+    startsWith: function startsWith(searchString) {
+      var S = ES.ToString(ES.RequireObjectCoercible(this));
+      if (ES.IsRegExp(searchString)) {
+        throw new TypeError('Cannot call method "startsWith" with a regex');
+      }
+      var searchStr = ES.ToString(searchString);
+      var position;
+      if (arguments.length > 1) {
+        position = arguments[1];
+      }
+      var start = _max(ES.ToInteger(position), 0);
+      return _strSlice(S, start, start + searchStr.length) === searchStr;
+    },
+    endsWith: function endsWith(searchString) {
+      var S = ES.ToString(ES.RequireObjectCoercible(this));
+      if (ES.IsRegExp(searchString)) {
+        throw new TypeError('Cannot call method "endsWith" with a regex');
+      }
+      var searchStr = ES.ToString(searchString);
+      var len = S.length;
+      var endPosition;
+      if (arguments.length > 1) {
+        endPosition = arguments[1];
+      }
+      var pos = typeof endPosition === 'undefined' ? len : ES.ToInteger(endPosition);
+      var end = _min(_max(pos, 0), len);
+      return _strSlice(S, end - searchStr.length, end) === searchStr;
+    },
+    includes: function includes(searchString) {
+      if (ES.IsRegExp(searchString)) {
+        throw new TypeError('"includes" does not accept a RegExp');
+      }
+      var searchStr = ES.ToString(searchString);
+      var position;
+      if (arguments.length > 1) {
+        position = arguments[1];
+      }
+      return _indexOf(this, searchStr, position) !== -1;
+    },
+    codePointAt: function codePointAt(pos) {
+      var thisStr = ES.ToString(ES.RequireObjectCoercible(this));
+      var position = ES.ToInteger(pos);
+      var length = thisStr.length;
+      if (position >= 0 && position < length) {
+        var first = thisStr.charCodeAt(position);
+        var isEnd = (position + 1 === length);
+        if (first < 0xD800 || first > 0xDBFF || isEnd) {
+          return first;
+        }
+        var second = thisStr.charCodeAt(position + 1);
+        if (second < 0xDC00 || second > 0xDFFF) {
+          return first;
+        }
+        return ((first - 0xD800) * 1024) + (second - 0xDC00) + 0x10000;
+      }
+    }
+  };
+  if (String.prototype.includes && 'a'.includes('a', Infinity) !== false) {
+    overrideNative(String.prototype, 'includes', StringPrototypeShims.includes);
+  }
+  if (String.prototype.startsWith && String.prototype.endsWith) {
+    var startsWithRejectsRegex = throwsError(function() {
+      '/a/'.startsWith(/a/);
+    });
+    var startsWithHandlesInfinity = 'abc'.startsWith('a', Infinity) === false;
+    if (!startsWithRejectsRegex || !startsWithHandlesInfinity) {
+      overrideNative(String.prototype, 'startsWith', StringPrototypeShims.startsWith);
+      overrideNative(String.prototype, 'endsWith', StringPrototypeShims.endsWith);
+    }
+  }
+  if (hasSymbols) {
+    var startsWithSupportsSymbolMatch = valueOrFalseIfThrows(function() {
+      var re = /a/;
+      re[Symbol.match] = false;
+      return '/a/'.startsWith(re);
+    });
+    if (!startsWithSupportsSymbolMatch) {
+      overrideNative(String.prototype, 'startsWith', StringPrototypeShims.startsWith);
+    }
+    var endsWithSupportsSymbolMatch = valueOrFalseIfThrows(function() {
+      var re = /a/;
+      re[Symbol.match] = false;
+      return '/a/'.endsWith(re);
+    });
+    if (!endsWithSupportsSymbolMatch) {
+      overrideNative(String.prototype, 'endsWith', StringPrototypeShims.endsWith);
+    }
+    var includesSupportsSymbolMatch = valueOrFalseIfThrows(function() {
+      var re = /a/;
+      re[Symbol.match] = false;
+      return '/a/'.includes(re);
+    });
+    if (!includesSupportsSymbolMatch) {
+      overrideNative(String.prototype, 'includes', StringPrototypeShims.includes);
+    }
+  }
+  defineProperties(String.prototype, StringPrototypeShims);
+  var ws = ['\x09\x0A\x0B\x0C\x0D\x20\xA0\u1680\u180E\u2000\u2001\u2002\u2003', '\u2004\u2005\u2006\u2007\u2008\u2009\u200A\u202F\u205F\u3000\u2028', '\u2029\uFEFF'].join('');
+  var trimRegexp = new RegExp('(^[' + ws + ']+)|([' + ws + ']+$)', 'g');
+  var trimShim = function trim() {
+    return ES.ToString(ES.RequireObjectCoercible(this)).replace(trimRegexp, '');
+  };
+  var nonWS = ['\u0085', '\u200b', '\ufffe'].join('');
+  var nonWSregex = new RegExp('[' + nonWS + ']', 'g');
+  var isBadHexRegex = /^[\-+]0x[0-9a-f]+$/i;
+  var hasStringTrimBug = nonWS.trim().length !== nonWS.length;
+  defineProperty(String.prototype, 'trim', trimShim, hasStringTrimBug);
+  var StringIterator = function(s) {
+    ES.RequireObjectCoercible(s);
+    this._s = ES.ToString(s);
+    this._i = 0;
+  };
+  StringIterator.prototype.next = function() {
+    var s = this._s,
+        i = this._i;
+    if (typeof s === 'undefined' || i >= s.length) {
+      this._s = void 0;
+      return {
+        value: void 0,
+        done: true
+      };
+    }
+    var first = s.charCodeAt(i),
+        second,
+        len;
+    if (first < 0xD800 || first > 0xDBFF || (i + 1) === s.length) {
+      len = 1;
+    } else {
+      second = s.charCodeAt(i + 1);
+      len = (second < 0xDC00 || second > 0xDFFF) ? 1 : 2;
+    }
+    this._i = i + len;
+    return {
+      value: s.substr(i, len),
+      done: false
+    };
+  };
+  addIterator(StringIterator.prototype);
+  addIterator(String.prototype, function() {
+    return new StringIterator(this);
+  });
+  var ArrayShims = {
+    from: function from(items) {
+      var C = this;
+      var mapFn;
+      if (arguments.length > 1) {
+        mapFn = arguments[1];
+      }
+      var mapping,
+          T;
+      if (typeof mapFn === 'undefined') {
+        mapping = false;
+      } else {
+        if (!ES.IsCallable(mapFn)) {
+          throw new TypeError('Array.from: when provided, the second argument must be a function');
+        }
+        if (arguments.length > 2) {
+          T = arguments[2];
+        }
+        mapping = true;
+      }
+      var usingIterator = typeof(isArguments(items) || ES.GetMethod(items, $iterator$)) !== 'undefined';
+      var length,
+          result,
+          i;
+      if (usingIterator) {
+        result = ES.IsConstructor(C) ? Object(new C()) : [];
+        var iterator = ES.GetIterator(items);
+        var next,
+            nextValue;
+        i = 0;
+        while (true) {
+          next = ES.IteratorStep(iterator);
+          if (next === false) {
+            break;
+          }
+          nextValue = next.value;
+          try {
+            if (mapping) {
+              nextValue = typeof T === 'undefined' ? mapFn(nextValue, i) : _call(mapFn, T, nextValue, i);
+            }
+            result[i] = nextValue;
+          } catch (e) {
+            ES.IteratorClose(iterator, true);
+            throw e;
+          }
+          i += 1;
+        }
+        length = i;
+      } else {
+        var arrayLike = ES.ToObject(items);
+        length = ES.ToLength(arrayLike.length);
+        result = ES.IsConstructor(C) ? Object(new C(length)) : new Array(length);
+        var value;
+        for (i = 0; i < length; ++i) {
+          value = arrayLike[i];
+          if (mapping) {
+            value = typeof T === 'undefined' ? mapFn(value, i) : _call(mapFn, T, value, i);
+          }
+          result[i] = value;
+        }
+      }
+      result.length = length;
+      return result;
+    },
+    of: function of() {
+      var len = arguments.length;
+      var C = this;
+      var A = isArray(C) || !ES.IsCallable(C) ? new Array(len) : ES.Construct(C, [len]);
+      for (var k = 0; k < len; ++k) {
+        createDataPropertyOrThrow(A, k, arguments[k]);
+      }
+      A.length = len;
+      return A;
+    }
+  };
+  defineProperties(Array, ArrayShims);
+  addDefaultSpecies(Array);
+  var iteratorResult = function(x) {
+    return {
+      value: x,
+      done: arguments.length === 0
+    };
+  };
+  ArrayIterator = function(array, kind) {
+    this.i = 0;
+    this.array = array;
+    this.kind = kind;
+  };
+  defineProperties(ArrayIterator.prototype, {next: function() {
+      var i = this.i,
+          array = this.array;
+      if (!(this instanceof ArrayIterator)) {
+        throw new TypeError('Not an ArrayIterator');
+      }
+      if (typeof array !== 'undefined') {
+        var len = ES.ToLength(array.length);
+        for (; i < len; i++) {
+          var kind = this.kind;
+          var retval;
+          if (kind === 'key') {
+            retval = i;
+          } else if (kind === 'value') {
+            retval = array[i];
+          } else if (kind === 'entry') {
+            retval = [i, array[i]];
+          }
+          this.i = i + 1;
+          return {
+            value: retval,
+            done: false
+          };
+        }
+      }
+      this.array = void 0;
+      return {
+        value: void 0,
+        done: true
+      };
+    }});
+  addIterator(ArrayIterator.prototype);
+  var orderKeys = function orderKeys(a, b) {
+    var aNumeric = String(ES.ToInteger(a)) === a;
+    var bNumeric = String(ES.ToInteger(b)) === b;
+    if (aNumeric && bNumeric) {
+      return b - a;
+    } else if (aNumeric && !bNumeric) {
+      return -1;
+    } else if (!aNumeric && bNumeric) {
+      return 1;
+    } else {
+      return a.localeCompare(b);
+    }
+  };
+  var getAllKeys = function getAllKeys(object) {
+    var ownKeys = [];
+    var keys = [];
+    for (var key in object) {
+      _push(_hasOwnProperty(object, key) ? ownKeys : keys, key);
+    }
+    _sort(ownKeys, orderKeys);
+    _sort(keys, orderKeys);
+    return _concat(ownKeys, keys);
+  };
+  var ObjectIterator = function(object, kind) {
+    defineProperties(this, {
+      object: object,
+      array: getAllKeys(object),
+      kind: kind
+    });
+  };
+  defineProperties(ObjectIterator.prototype, {next: function next() {
+      var key;
+      var array = this.array;
+      if (!(this instanceof ObjectIterator)) {
+        throw new TypeError('Not an ObjectIterator');
+      }
+      while (array.length > 0) {
+        key = _shift(array);
+        if (!(key in this.object)) {
+          continue;
+        }
+        if (this.kind === 'key') {
+          return iteratorResult(key);
+        } else if (this.kind === 'value') {
+          return iteratorResult(this.object[key]);
+        } else {
+          return iteratorResult([key, this.object[key]]);
+        }
+      }
+      return iteratorResult();
+    }});
+  addIterator(ObjectIterator.prototype);
+  var arrayOfSupportsSubclassing = Array.of === ArrayShims.of || (function() {
+    var Foo = function Foo(len) {
+      this.length = len;
+    };
+    Foo.prototype = [];
+    var fooArr = Array.of.apply(Foo, [1, 2]);
+    return fooArr instanceof Foo && fooArr.length === 2;
+  }());
+  if (!arrayOfSupportsSubclassing) {
+    overrideNative(Array, 'of', ArrayShims.of);
+  }
+  var ArrayPrototypeShims = {
+    copyWithin: function copyWithin(target, start) {
+      var o = ES.ToObject(this);
+      var len = ES.ToLength(o.length);
+      var relativeTarget = ES.ToInteger(target);
+      var relativeStart = ES.ToInteger(start);
+      var to = relativeTarget < 0 ? _max(len + relativeTarget, 0) : _min(relativeTarget, len);
+      var from = relativeStart < 0 ? _max(len + relativeStart, 0) : _min(relativeStart, len);
+      var end;
+      if (arguments.length > 2) {
+        end = arguments[2];
+      }
+      var relativeEnd = typeof end === 'undefined' ? len : ES.ToInteger(end);
+      var finalItem = relativeEnd < 0 ? _max(len + relativeEnd, 0) : _min(relativeEnd, len);
+      var count = _min(finalItem - from, len - to);
+      var direction = 1;
+      if (from < to && to < (from + count)) {
+        direction = -1;
+        from += count - 1;
+        to += count - 1;
+      }
+      while (count > 0) {
+        if (_hasOwnProperty(o, from)) {
+          o[to] = o[from];
+        } else {
+          delete o[from];
+        }
+        from += direction;
+        to += direction;
+        count -= 1;
+      }
+      return o;
+    },
+    fill: function fill(value) {
+      var start;
+      if (arguments.length > 1) {
+        start = arguments[1];
+      }
+      var end;
+      if (arguments.length > 2) {
+        end = arguments[2];
+      }
+      var O = ES.ToObject(this);
+      var len = ES.ToLength(O.length);
+      start = ES.ToInteger(typeof start === 'undefined' ? 0 : start);
+      end = ES.ToInteger(typeof end === 'undefined' ? len : end);
+      var relativeStart = start < 0 ? _max(len + start, 0) : _min(start, len);
+      var relativeEnd = end < 0 ? len + end : end;
+      for (var i = relativeStart; i < len && i < relativeEnd; ++i) {
+        O[i] = value;
+      }
+      return O;
+    },
+    find: function find(predicate) {
+      var list = ES.ToObject(this);
+      var length = ES.ToLength(list.length);
+      if (!ES.IsCallable(predicate)) {
+        throw new TypeError('Array#find: predicate must be a function');
+      }
+      var thisArg = arguments.length > 1 ? arguments[1] : null;
+      for (var i = 0,
+          value; i < length; i++) {
+        value = list[i];
+        if (thisArg) {
+          if (_call(predicate, thisArg, value, i, list)) {
+            return value;
+          }
+        } else if (predicate(value, i, list)) {
+          return value;
+        }
+      }
+    },
+    findIndex: function findIndex(predicate) {
+      var list = ES.ToObject(this);
+      var length = ES.ToLength(list.length);
+      if (!ES.IsCallable(predicate)) {
+        throw new TypeError('Array#findIndex: predicate must be a function');
+      }
+      var thisArg = arguments.length > 1 ? arguments[1] : null;
+      for (var i = 0; i < length; i++) {
+        if (thisArg) {
+          if (_call(predicate, thisArg, list[i], i, list)) {
+            return i;
+          }
+        } else if (predicate(list[i], i, list)) {
+          return i;
+        }
+      }
+      return -1;
+    },
+    keys: function keys() {
+      return new ArrayIterator(this, 'key');
+    },
+    values: function values() {
+      return new ArrayIterator(this, 'value');
+    },
+    entries: function entries() {
+      return new ArrayIterator(this, 'entry');
+    }
+  };
+  if (Array.prototype.keys && !ES.IsCallable([1].keys().next)) {
+    delete Array.prototype.keys;
+  }
+  if (Array.prototype.entries && !ES.IsCallable([1].entries().next)) {
+    delete Array.prototype.entries;
+  }
+  if (Array.prototype.keys && Array.prototype.entries && !Array.prototype.values && Array.prototype[$iterator$]) {
+    defineProperties(Array.prototype, {values: Array.prototype[$iterator$]});
+    if (Type.symbol(Symbol.unscopables)) {
+      Array.prototype[Symbol.unscopables].values = true;
+    }
+  }
+  if (functionsHaveNames && Array.prototype.values && Array.prototype.values.name !== 'values') {
+    var originalArrayPrototypeValues = Array.prototype.values;
+    overrideNative(Array.prototype, 'values', function values() {
+      return ES.Call(originalArrayPrototypeValues, this, arguments);
+    });
+    defineProperty(Array.prototype, $iterator$, Array.prototype.values, true);
+  }
+  defineProperties(Array.prototype, ArrayPrototypeShims);
+  addIterator(Array.prototype, function() {
+    return this.values();
+  });
+  if (Object.getPrototypeOf) {
+    addIterator(Object.getPrototypeOf([].values()));
+  }
+  var arrayFromSwallowsNegativeLengths = (function() {
+    return valueOrFalseIfThrows(function() {
+      return Array.from({length: -1}).length === 0;
+    });
+  }());
+  var arrayFromHandlesIterables = (function() {
+    var arr = Array.from([0].entries());
+    return arr.length === 1 && isArray(arr[0]) && arr[0][0] === 0 && arr[0][1] === 0;
+  }());
+  if (!arrayFromSwallowsNegativeLengths || !arrayFromHandlesIterables) {
+    overrideNative(Array, 'from', ArrayShims.from);
+  }
+  var arrayFromHandlesUndefinedMapFunction = (function() {
+    return valueOrFalseIfThrows(function() {
+      return Array.from([0], void 0);
+    });
+  }());
+  if (!arrayFromHandlesUndefinedMapFunction) {
+    var origArrayFrom = Array.from;
+    overrideNative(Array, 'from', function from(items) {
+      if (arguments.length > 1 && typeof arguments[1] !== 'undefined') {
+        return ES.Call(origArrayFrom, this, arguments);
+      } else {
+        return _call(origArrayFrom, this, items);
+      }
+    });
+  }
+  var int32sAsOne = -(Math.pow(2, 32) - 1);
+  var toLengthsCorrectly = function(method, reversed) {
+    var obj = {length: int32sAsOne};
+    obj[reversed ? ((obj.length >>> 0) - 1) : 0] = true;
+    return valueOrFalseIfThrows(function() {
+      _call(method, obj, function() {
+        throw new RangeError('should not reach here');
+      }, []);
+      return true;
+    });
+  };
+  if (!toLengthsCorrectly(Array.prototype.forEach)) {
+    var originalForEach = Array.prototype.forEach;
+    overrideNative(Array.prototype, 'forEach', function forEach(callbackFn) {
+      return ES.Call(originalForEach, this.length >= 0 ? this : [], arguments);
+    }, true);
+  }
+  if (!toLengthsCorrectly(Array.prototype.map)) {
+    var originalMap = Array.prototype.map;
+    overrideNative(Array.prototype, 'map', function map(callbackFn) {
+      return ES.Call(originalMap, this.length >= 0 ? this : [], arguments);
+    }, true);
+  }
+  if (!toLengthsCorrectly(Array.prototype.filter)) {
+    var originalFilter = Array.prototype.filter;
+    overrideNative(Array.prototype, 'filter', function filter(callbackFn) {
+      return ES.Call(originalFilter, this.length >= 0 ? this : [], arguments);
+    }, true);
+  }
+  if (!toLengthsCorrectly(Array.prototype.some)) {
+    var originalSome = Array.prototype.some;
+    overrideNative(Array.prototype, 'some', function some(callbackFn) {
+      return ES.Call(originalSome, this.length >= 0 ? this : [], arguments);
+    }, true);
+  }
+  if (!toLengthsCorrectly(Array.prototype.every)) {
+    var originalEvery = Array.prototype.every;
+    overrideNative(Array.prototype, 'every', function every(callbackFn) {
+      return ES.Call(originalEvery, this.length >= 0 ? this : [], arguments);
+    }, true);
+  }
+  if (!toLengthsCorrectly(Array.prototype.reduce)) {
+    var originalReduce = Array.prototype.reduce;
+    overrideNative(Array.prototype, 'reduce', function reduce(callbackFn) {
+      return ES.Call(originalReduce, this.length >= 0 ? this : [], arguments);
+    }, true);
+  }
+  if (!toLengthsCorrectly(Array.prototype.reduceRight, true)) {
+    var originalReduceRight = Array.prototype.reduceRight;
+    overrideNative(Array.prototype, 'reduceRight', function reduceRight(callbackFn) {
+      return ES.Call(originalReduceRight, this.length >= 0 ? this : [], arguments);
+    }, true);
+  }
+  var lacksOctalSupport = Number('0o10') !== 8;
+  var lacksBinarySupport = Number('0b10') !== 2;
+  var trimsNonWhitespace = _some(nonWS, function(c) {
+    return Number(c + 0 + c) === 0;
+  });
+  if (lacksOctalSupport || lacksBinarySupport || trimsNonWhitespace) {
+    var OrigNumber = Number;
+    var binaryRegex = /^0b[01]+$/i;
+    var octalRegex = /^0o[0-7]+$/i;
+    var isBinary = binaryRegex.test.bind(binaryRegex);
+    var isOctal = octalRegex.test.bind(octalRegex);
+    var toPrimitive = function(O) {
+      var result;
+      if (typeof O.valueOf === 'function') {
+        result = O.valueOf();
+        if (Type.primitive(result)) {
+          return result;
+        }
+      }
+      if (typeof O.toString === 'function') {
+        result = O.toString();
+        if (Type.primitive(result)) {
+          return result;
+        }
+      }
+      throw new TypeError('No default value');
+    };
+    var hasNonWS = nonWSregex.test.bind(nonWSregex);
+    var isBadHex = isBadHexRegex.test.bind(isBadHexRegex);
+    var NumberShim = (function() {
+      var NumberShim = function Number(value) {
+        var primValue;
+        if (arguments.length > 0) {
+          primValue = Type.primitive(value) ? value : toPrimitive(value, 'number');
+        } else {
+          primValue = 0;
+        }
+        if (typeof primValue === 'string') {
+          primValue = ES.Call(trimShim, primValue);
+          if (isBinary(primValue)) {
+            primValue = parseInt(_strSlice(primValue, 2), 2);
+          } else if (isOctal(primValue)) {
+            primValue = parseInt(_strSlice(primValue, 2), 8);
+          } else if (hasNonWS(primValue) || isBadHex(primValue)) {
+            primValue = NaN;
+          }
+        }
+        var receiver = this;
+        var valueOfSucceeds = valueOrFalseIfThrows(function() {
+          OrigNumber.prototype.valueOf.call(receiver);
+          return true;
+        });
+        if (receiver instanceof NumberShim && !valueOfSucceeds) {
+          return new OrigNumber(primValue);
+        }
+        return OrigNumber(primValue);
+      };
+      return NumberShim;
+    }());
+    wrapConstructor(OrigNumber, NumberShim, {});
+    Number = NumberShim;
+    Value.redefine(globals, 'Number', NumberShim);
+  }
+  var maxSafeInteger = Math.pow(2, 53) - 1;
+  defineProperties(Number, {
+    MAX_SAFE_INTEGER: maxSafeInteger,
+    MIN_SAFE_INTEGER: -maxSafeInteger,
+    EPSILON: 2.220446049250313e-16,
+    parseInt: globals.parseInt,
+    parseFloat: globals.parseFloat,
+    isFinite: numberIsFinite,
+    isInteger: function isInteger(value) {
+      return numberIsFinite(value) && ES.ToInteger(value) === value;
+    },
+    isSafeInteger: function isSafeInteger(value) {
+      return Number.isInteger(value) && _abs(value) <= Number.MAX_SAFE_INTEGER;
+    },
+    isNaN: numberIsNaN
+  });
+  defineProperty(Number, 'parseInt', globals.parseInt, Number.parseInt !== globals.parseInt);
+  if (![, 1].find(function(item, idx) {
+    return idx === 0;
+  })) {
+    overrideNative(Array.prototype, 'find', ArrayPrototypeShims.find);
+  }
+  if ([, 1].findIndex(function(item, idx) {
+    return idx === 0;
+  }) !== 0) {
+    overrideNative(Array.prototype, 'findIndex', ArrayPrototypeShims.findIndex);
+  }
+  var isEnumerableOn = Function.bind.call(Function.bind, Object.prototype.propertyIsEnumerable);
+  var ensureEnumerable = function ensureEnumerable(obj, prop) {
+    if (supportsDescriptors && isEnumerableOn(obj, prop)) {
+      Object.defineProperty(obj, prop, {enumerable: false});
+    }
+  };
+  var sliceArgs = function sliceArgs() {
+    var initial = Number(this);
+    var len = arguments.length;
+    var desiredArgCount = len - initial;
+    var args = new Array(desiredArgCount < 0 ? 0 : desiredArgCount);
+    for (var i = initial; i < len; ++i) {
+      args[i - initial] = arguments[i];
+    }
+    return args;
+  };
+  var assignTo = function assignTo(source) {
+    return function assignToSource(target, key) {
+      target[key] = source[key];
+      return target;
+    };
+  };
+  var assignReducer = function(target, source) {
+    var sourceKeys = keys(Object(source));
+    var symbols;
+    if (ES.IsCallable(Object.getOwnPropertySymbols)) {
+      symbols = _filter(Object.getOwnPropertySymbols(Object(source)), isEnumerableOn(source));
+    }
+    return _reduce(_concat(sourceKeys, symbols || []), assignTo(source), target);
+  };
+  var ObjectShims = {
+    assign: function(target, source) {
+      var to = ES.ToObject(target, 'Cannot convert undefined or null to object');
+      return _reduce(ES.Call(sliceArgs, 1, arguments), assignReducer, to);
+    },
+    is: function is(a, b) {
+      return ES.SameValue(a, b);
+    }
+  };
+  var assignHasPendingExceptions = Object.assign && Object.preventExtensions && (function() {
+    var thrower = Object.preventExtensions({1: 2});
+    try {
+      Object.assign(thrower, 'xy');
+    } catch (e) {
+      return thrower[1] === 'y';
+    }
+  }());
+  if (assignHasPendingExceptions) {
+    overrideNative(Object, 'assign', ObjectShims.assign);
+  }
+  defineProperties(Object, ObjectShims);
+  if (supportsDescriptors) {
+    var ES5ObjectShims = {setPrototypeOf: (function(Object, magic) {
+        var set;
+        var checkArgs = function(O, proto) {
+          if (!ES.TypeIsObject(O)) {
+            throw new TypeError('cannot set prototype on a non-object');
+          }
+          if (!(proto === null || ES.TypeIsObject(proto))) {
+            throw new TypeError('can only set prototype to an object or null' + proto);
+          }
+        };
+        var setPrototypeOf = function(O, proto) {
+          checkArgs(O, proto);
+          _call(set, O, proto);
+          return O;
+        };
+        try {
+          set = Object.getOwnPropertyDescriptor(Object.prototype, magic).set;
+          _call(set, {}, null);
+        } catch (e) {
+          if (Object.prototype !== {}[magic]) {
+            return;
+          }
+          set = function(proto) {
+            this[magic] = proto;
+          };
+          setPrototypeOf.polyfill = setPrototypeOf(setPrototypeOf({}, null), Object.prototype) instanceof Object;
+        }
+        return setPrototypeOf;
+      }(Object, '__proto__'))};
+    defineProperties(Object, ES5ObjectShims);
+  }
+  if (Object.setPrototypeOf && Object.getPrototypeOf && Object.getPrototypeOf(Object.setPrototypeOf({}, null)) !== null && Object.getPrototypeOf(Object.create(null)) === null) {
+    (function() {
+      var FAKENULL = Object.create(null);
+      var gpo = Object.getPrototypeOf,
+          spo = Object.setPrototypeOf;
+      Object.getPrototypeOf = function(o) {
+        var result = gpo(o);
+        return result === FAKENULL ? null : result;
+      };
+      Object.setPrototypeOf = function(o, p) {
+        var proto = p === null ? FAKENULL : p;
+        return spo(o, proto);
+      };
+      Object.setPrototypeOf.polyfill = false;
+    }());
+  }
+  var objectKeysAcceptsPrimitives = !throwsError(function() {
+    Object.keys('foo');
+  });
+  if (!objectKeysAcceptsPrimitives) {
+    var originalObjectKeys = Object.keys;
+    overrideNative(Object, 'keys', function keys(value) {
+      return originalObjectKeys(ES.ToObject(value));
+    });
+    keys = Object.keys;
+  }
+  if (Object.getOwnPropertyNames) {
+    var objectGOPNAcceptsPrimitives = !throwsError(function() {
+      Object.getOwnPropertyNames('foo');
+    });
+    if (!objectGOPNAcceptsPrimitives) {
+      var cachedWindowNames = typeof window === 'object' ? Object.getOwnPropertyNames(window) : [];
+      var originalObjectGetOwnPropertyNames = Object.getOwnPropertyNames;
+      overrideNative(Object, 'getOwnPropertyNames', function getOwnPropertyNames(value) {
+        var val = ES.ToObject(value);
+        if (_toString(val) === '[object Window]') {
+          try {
+            return originalObjectGetOwnPropertyNames(val);
+          } catch (e) {
+            return _concat([], cachedWindowNames);
+          }
+        }
+        return originalObjectGetOwnPropertyNames(val);
+      });
+    }
+  }
+  if (Object.getOwnPropertyDescriptor) {
+    var objectGOPDAcceptsPrimitives = !throwsError(function() {
+      Object.getOwnPropertyDescriptor('foo', 'bar');
+    });
+    if (!objectGOPDAcceptsPrimitives) {
+      var originalObjectGetOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+      overrideNative(Object, 'getOwnPropertyDescriptor', function getOwnPropertyDescriptor(value, property) {
+        return originalObjectGetOwnPropertyDescriptor(ES.ToObject(value), property);
+      });
+    }
+  }
+  if (Object.seal) {
+    var objectSealAcceptsPrimitives = !throwsError(function() {
+      Object.seal('foo');
+    });
+    if (!objectSealAcceptsPrimitives) {
+      var originalObjectSeal = Object.seal;
+      overrideNative(Object, 'seal', function seal(value) {
+        if (!Type.object(value)) {
+          return value;
+        }
+        return originalObjectSeal(value);
+      });
+    }
+  }
+  if (Object.isSealed) {
+    var objectIsSealedAcceptsPrimitives = !throwsError(function() {
+      Object.isSealed('foo');
+    });
+    if (!objectIsSealedAcceptsPrimitives) {
+      var originalObjectIsSealed = Object.isSealed;
+      overrideNative(Object, 'isSealed', function isSealed(value) {
+        if (!Type.object(value)) {
+          return true;
+        }
+        return originalObjectIsSealed(value);
+      });
+    }
+  }
+  if (Object.freeze) {
+    var objectFreezeAcceptsPrimitives = !throwsError(function() {
+      Object.freeze('foo');
+    });
+    if (!objectFreezeAcceptsPrimitives) {
+      var originalObjectFreeze = Object.freeze;
+      overrideNative(Object, 'freeze', function freeze(value) {
+        if (!Type.object(value)) {
+          return value;
+        }
+        return originalObjectFreeze(value);
+      });
+    }
+  }
+  if (Object.isFrozen) {
+    var objectIsFrozenAcceptsPrimitives = !throwsError(function() {
+      Object.isFrozen('foo');
+    });
+    if (!objectIsFrozenAcceptsPrimitives) {
+      var originalObjectIsFrozen = Object.isFrozen;
+      overrideNative(Object, 'isFrozen', function isFrozen(value) {
+        if (!Type.object(value)) {
+          return true;
+        }
+        return originalObjectIsFrozen(value);
+      });
+    }
+  }
+  if (Object.preventExtensions) {
+    var objectPreventExtensionsAcceptsPrimitives = !throwsError(function() {
+      Object.preventExtensions('foo');
+    });
+    if (!objectPreventExtensionsAcceptsPrimitives) {
+      var originalObjectPreventExtensions = Object.preventExtensions;
+      overrideNative(Object, 'preventExtensions', function preventExtensions(value) {
+        if (!Type.object(value)) {
+          return value;
+        }
+        return originalObjectPreventExtensions(value);
+      });
+    }
+  }
+  if (Object.isExtensible) {
+    var objectIsExtensibleAcceptsPrimitives = !throwsError(function() {
+      Object.isExtensible('foo');
+    });
+    if (!objectIsExtensibleAcceptsPrimitives) {
+      var originalObjectIsExtensible = Object.isExtensible;
+      overrideNative(Object, 'isExtensible', function isExtensible(value) {
+        if (!Type.object(value)) {
+          return false;
+        }
+        return originalObjectIsExtensible(value);
+      });
+    }
+  }
+  if (Object.getPrototypeOf) {
+    var objectGetProtoAcceptsPrimitives = !throwsError(function() {
+      Object.getPrototypeOf('foo');
+    });
+    if (!objectGetProtoAcceptsPrimitives) {
+      var originalGetProto = Object.getPrototypeOf;
+      overrideNative(Object, 'getPrototypeOf', function getPrototypeOf(value) {
+        return originalGetProto(ES.ToObject(value));
+      });
+    }
+  }
+  var hasFlags = supportsDescriptors && (function() {
+    var desc = Object.getOwnPropertyDescriptor(RegExp.prototype, 'flags');
+    return desc && ES.IsCallable(desc.get);
+  }());
+  if (supportsDescriptors && !hasFlags) {
+    var regExpFlagsGetter = function flags() {
+      if (!ES.TypeIsObject(this)) {
+        throw new TypeError('Method called on incompatible type: must be an object.');
+      }
+      var result = '';
+      if (this.global) {
+        result += 'g';
+      }
+      if (this.ignoreCase) {
+        result += 'i';
+      }
+      if (this.multiline) {
+        result += 'm';
+      }
+      if (this.unicode) {
+        result += 'u';
+      }
+      if (this.sticky) {
+        result += 'y';
+      }
+      return result;
+    };
+    Value.getter(RegExp.prototype, 'flags', regExpFlagsGetter);
+  }
+  var regExpSupportsFlagsWithRegex = supportsDescriptors && valueOrFalseIfThrows(function() {
+    return String(new RegExp(/a/g, 'i')) === '/a/i';
+  });
+  var regExpNeedsToSupportSymbolMatch = hasSymbols && supportsDescriptors && (function() {
+    var regex = /./;
+    regex[Symbol.match] = false;
+    return RegExp(regex) === regex;
+  }());
+  if (supportsDescriptors && (!regExpSupportsFlagsWithRegex || regExpNeedsToSupportSymbolMatch)) {
+    var flagsGetter = Object.getOwnPropertyDescriptor(RegExp.prototype, 'flags').get;
+    var sourceDesc = Object.getOwnPropertyDescriptor(RegExp.prototype, 'source') || {};
+    var legacySourceGetter = function() {
+      return this.source;
+    };
+    var sourceGetter = ES.IsCallable(sourceDesc.get) ? sourceDesc.get : legacySourceGetter;
+    var OrigRegExp = RegExp;
+    var RegExpShim = (function() {
+      return function RegExp(pattern, flags) {
+        var patternIsRegExp = ES.IsRegExp(pattern);
+        var calledWithNew = this instanceof RegExp;
+        if (!calledWithNew && patternIsRegExp && typeof flags === 'undefined' && pattern.constructor === RegExp) {
+          return pattern;
+        }
+        var P = pattern;
+        var F = flags;
+        if (Type.regex(pattern)) {
+          P = ES.Call(sourceGetter, pattern);
+          F = typeof flags === 'undefined' ? ES.Call(flagsGetter, pattern) : flags;
+          return new RegExp(P, F);
+        } else if (patternIsRegExp) {
+          P = pattern.source;
+          F = typeof flags === 'undefined' ? pattern.flags : flags;
+        }
+        return new OrigRegExp(pattern, flags);
+      };
+    }());
+    wrapConstructor(OrigRegExp, RegExpShim, {$input: true});
+    RegExp = RegExpShim;
+    Value.redefine(globals, 'RegExp', RegExpShim);
+  }
+  if (supportsDescriptors) {
+    var regexGlobals = {
+      input: '$_',
+      lastMatch: '$&',
+      lastParen: '$+',
+      leftContext: '$`',
+      rightContext: '$\''
+    };
+    _forEach(keys(regexGlobals), function(prop) {
+      if (prop in RegExp && !(regexGlobals[prop] in RegExp)) {
+        Value.getter(RegExp, regexGlobals[prop], function get() {
+          return RegExp[prop];
+        });
+      }
+    });
+  }
+  addDefaultSpecies(RegExp);
+  var inverseEpsilon = 1 / Number.EPSILON;
+  var roundTiesToEven = function roundTiesToEven(n) {
+    return (n + inverseEpsilon) - inverseEpsilon;
+  };
+  var BINARY_32_EPSILON = Math.pow(2, -23);
+  var BINARY_32_MAX_VALUE = Math.pow(2, 127) * (2 - BINARY_32_EPSILON);
+  var BINARY_32_MIN_VALUE = Math.pow(2, -126);
+  var numberCLZ = Number.prototype.clz;
+  delete Number.prototype.clz;
+  var MathShims = {
+    acosh: function acosh(value) {
+      var x = Number(value);
+      if (Number.isNaN(x) || value < 1) {
+        return NaN;
+      }
+      if (x === 1) {
+        return 0;
+      }
+      if (x === Infinity) {
+        return x;
+      }
+      return _log(x / Math.E + _sqrt(x + 1) * _sqrt(x - 1) / Math.E) + 1;
+    },
+    asinh: function asinh(value) {
+      var x = Number(value);
+      if (x === 0 || !globalIsFinite(x)) {
+        return x;
+      }
+      return x < 0 ? -Math.asinh(-x) : _log(x + _sqrt(x * x + 1));
+    },
+    atanh: function atanh(value) {
+      var x = Number(value);
+      if (Number.isNaN(x) || x < -1 || x > 1) {
+        return NaN;
+      }
+      if (x === -1) {
+        return -Infinity;
+      }
+      if (x === 1) {
+        return Infinity;
+      }
+      if (x === 0) {
+        return x;
+      }
+      return 0.5 * _log((1 + x) / (1 - x));
+    },
+    cbrt: function cbrt(value) {
+      var x = Number(value);
+      if (x === 0) {
+        return x;
+      }
+      var negate = x < 0,
+          result;
+      if (negate) {
+        x = -x;
+      }
+      if (x === Infinity) {
+        result = Infinity;
+      } else {
+        result = Math.exp(_log(x) / 3);
+        result = (x / (result * result) + (2 * result)) / 3;
+      }
+      return negate ? -result : result;
+    },
+    clz32: function clz32(value) {
+      var x = Number(value);
+      var number = ES.ToUint32(x);
+      if (number === 0) {
+        return 32;
+      }
+      return numberCLZ ? ES.Call(numberCLZ, number) : 31 - _floor(_log(number + 0.5) * Math.LOG2E);
+    },
+    cosh: function cosh(value) {
+      var x = Number(value);
+      if (x === 0) {
+        return 1;
+      }
+      if (Number.isNaN(x)) {
+        return NaN;
+      }
+      if (!globalIsFinite(x)) {
+        return Infinity;
+      }
+      if (x < 0) {
+        x = -x;
+      }
+      if (x > 21) {
+        return Math.exp(x) / 2;
+      }
+      return (Math.exp(x) + Math.exp(-x)) / 2;
+    },
+    expm1: function expm1(value) {
+      var x = Number(value);
+      if (x === -Infinity) {
+        return -1;
+      }
+      if (!globalIsFinite(x) || x === 0) {
+        return x;
+      }
+      if (_abs(x) > 0.5) {
+        return Math.exp(x) - 1;
+      }
+      var t = x;
+      var sum = 0;
+      var n = 1;
+      while (sum + t !== sum) {
+        sum += t;
+        n += 1;
+        t *= x / n;
+      }
+      return sum;
+    },
+    hypot: function hypot(x, y) {
+      var result = 0;
+      var largest = 0;
+      for (var i = 0; i < arguments.length; ++i) {
+        var value = _abs(Number(arguments[i]));
+        if (largest < value) {
+          result *= (largest / value) * (largest / value);
+          result += 1;
+          largest = value;
+        } else {
+          result += (value > 0 ? (value / largest) * (value / largest) : value);
+        }
+      }
+      return largest === Infinity ? Infinity : largest * _sqrt(result);
+    },
+    log2: function log2(value) {
+      return _log(value) * Math.LOG2E;
+    },
+    log10: function log10(value) {
+      return _log(value) * Math.LOG10E;
+    },
+    log1p: function log1p(value) {
+      var x = Number(value);
+      if (x < -1 || Number.isNaN(x)) {
+        return NaN;
+      }
+      if (x === 0 || x === Infinity) {
+        return x;
+      }
+      if (x === -1) {
+        return -Infinity;
+      }
+      return (1 + x) - 1 === 0 ? x : x * (_log(1 + x) / ((1 + x) - 1));
+    },
+    sign: function sign(value) {
+      var number = Number(value);
+      if (number === 0) {
+        return number;
+      }
+      if (Number.isNaN(number)) {
+        return number;
+      }
+      return number < 0 ? -1 : 1;
+    },
+    sinh: function sinh(value) {
+      var x = Number(value);
+      if (!globalIsFinite(x) || x === 0) {
+        return x;
+      }
+      if (_abs(x) < 1) {
+        return (Math.expm1(x) - Math.expm1(-x)) / 2;
+      }
+      return (Math.exp(x - 1) - Math.exp(-x - 1)) * Math.E / 2;
+    },
+    tanh: function tanh(value) {
+      var x = Number(value);
+      if (Number.isNaN(x) || x === 0) {
+        return x;
+      }
+      if (x === Infinity) {
+        return 1;
+      }
+      if (x === -Infinity) {
+        return -1;
+      }
+      var a = Math.expm1(x);
+      var b = Math.expm1(-x);
+      if (a === Infinity) {
+        return 1;
+      }
+      if (b === Infinity) {
+        return -1;
+      }
+      return (a - b) / (Math.exp(x) + Math.exp(-x));
+    },
+    trunc: function trunc(value) {
+      var x = Number(value);
+      return x < 0 ? -_floor(-x) : _floor(x);
+    },
+    imul: function imul(x, y) {
+      var a = ES.ToUint32(x);
+      var b = ES.ToUint32(y);
+      var ah = (a >>> 16) & 0xffff;
+      var al = a & 0xffff;
+      var bh = (b >>> 16) & 0xffff;
+      var bl = b & 0xffff;
+      return ((al * bl) + (((ah * bl + al * bh) << 16) >>> 0) | 0);
+    },
+    fround: function fround(x) {
+      var v = Number(x);
+      if (v === 0 || v === Infinity || v === -Infinity || numberIsNaN(v)) {
+        return v;
+      }
+      var sign = Math.sign(v);
+      var abs = _abs(v);
+      if (abs < BINARY_32_MIN_VALUE) {
+        return sign * roundTiesToEven(abs / BINARY_32_MIN_VALUE / BINARY_32_EPSILON) * BINARY_32_MIN_VALUE * BINARY_32_EPSILON;
+      }
+      var a = (1 + BINARY_32_EPSILON / Number.EPSILON) * abs;
+      var result = a - (a - abs);
+      if (result > BINARY_32_MAX_VALUE || numberIsNaN(result)) {
+        return sign * Infinity;
+      }
+      return sign * result;
+    }
+  };
+  defineProperties(Math, MathShims);
+  defineProperty(Math, 'log1p', MathShims.log1p, Math.log1p(-1e-17) !== -1e-17);
+  defineProperty(Math, 'asinh', MathShims.asinh, Math.asinh(-1e7) !== -Math.asinh(1e7));
+  defineProperty(Math, 'tanh', MathShims.tanh, Math.tanh(-2e-17) !== -2e-17);
+  defineProperty(Math, 'acosh', MathShims.acosh, Math.acosh(Number.MAX_VALUE) === Infinity);
+  defineProperty(Math, 'cbrt', MathShims.cbrt, Math.abs(1 - Math.cbrt(1e-300) / 1e-100) / Number.EPSILON > 8);
+  defineProperty(Math, 'sinh', MathShims.sinh, Math.sinh(-2e-17) !== -2e-17);
+  var expm1OfTen = Math.expm1(10);
+  defineProperty(Math, 'expm1', MathShims.expm1, expm1OfTen > 22025.465794806719 || expm1OfTen < 22025.4657948067165168);
+  var origMathRound = Math.round;
+  var roundHandlesBoundaryConditions = Math.round(0.5 - Number.EPSILON / 4) === 0 && Math.round(-0.5 + Number.EPSILON / 3.99) === 1;
+  var smallestPositiveNumberWhereRoundBreaks = inverseEpsilon + 1;
+  var largestPositiveNumberWhereRoundBreaks = 2 * inverseEpsilon - 1;
+  var roundDoesNotIncreaseIntegers = [smallestPositiveNumberWhereRoundBreaks, largestPositiveNumberWhereRoundBreaks].every(function(num) {
+    return Math.round(num) === num;
+  });
+  defineProperty(Math, 'round', function round(x) {
+    var floor = _floor(x);
+    var ceil = floor === -1 ? -0 : floor + 1;
+    return x - floor < 0.5 ? floor : ceil;
+  }, !roundHandlesBoundaryConditions || !roundDoesNotIncreaseIntegers);
+  Value.preserveToString(Math.round, origMathRound);
+  var origImul = Math.imul;
+  if (Math.imul(0xffffffff, 5) !== -5) {
+    Math.imul = MathShims.imul;
+    Value.preserveToString(Math.imul, origImul);
+  }
+  if (Math.imul.length !== 2) {
+    overrideNative(Math, 'imul', function imul(x, y) {
+      return ES.Call(origImul, Math, arguments);
+    });
+  }
+  var PromiseShim = (function() {
+    var setTimeout = globals.setTimeout;
+    if (typeof setTimeout !== 'function' && typeof setTimeout !== 'object') {
+      return;
+    }
+    ES.IsPromise = function(promise) {
+      if (!ES.TypeIsObject(promise)) {
+        return false;
+      }
+      if (typeof promise._promise === 'undefined') {
+        return false;
+      }
+      return true;
+    };
+    var PromiseCapability = function(C) {
+      if (!ES.IsConstructor(C)) {
+        throw new TypeError('Bad promise constructor');
+      }
+      var capability = this;
+      var resolver = function(resolve, reject) {
+        if (capability.resolve !== void 0 || capability.reject !== void 0) {
+          throw new TypeError('Bad Promise implementation!');
+        }
+        capability.resolve = resolve;
+        capability.reject = reject;
+      };
+      capability.resolve = void 0;
+      capability.reject = void 0;
+      capability.promise = new C(resolver);
+      if (!(ES.IsCallable(capability.resolve) && ES.IsCallable(capability.reject))) {
+        throw new TypeError('Bad promise constructor');
+      }
+    };
+    var makeZeroTimeout;
+    if (typeof window !== 'undefined' && ES.IsCallable(window.postMessage)) {
+      makeZeroTimeout = function() {
+        var timeouts = [];
+        var messageName = 'zero-timeout-message';
+        var setZeroTimeout = function(fn) {
+          _push(timeouts, fn);
+          window.postMessage(messageName, '*');
+        };
+        var handleMessage = function(event) {
+          if (event.source === window && event.data === messageName) {
+            event.stopPropagation();
+            if (timeouts.length === 0) {
+              return;
+            }
+            var fn = _shift(timeouts);
+            fn();
+          }
+        };
+        window.addEventListener('message', handleMessage, true);
+        return setZeroTimeout;
+      };
+    }
+    var makePromiseAsap = function() {
+      var P = globals.Promise;
+      var pr = P && P.resolve && P.resolve();
+      return pr && function(task) {
+        return pr.then(task);
+      };
+    };
+    var enqueue = ES.IsCallable(globals.setImmediate) ? globals.setImmediate : typeof process === 'object' && process.nextTick ? process.nextTick : makePromiseAsap() || (ES.IsCallable(makeZeroTimeout) ? makeZeroTimeout() : function(task) {
+      setTimeout(task, 0);
+    });
+    var PROMISE_IDENTITY = function(x) {
+      return x;
+    };
+    var PROMISE_THROWER = function(e) {
+      throw e;
+    };
+    var PROMISE_PENDING = 0;
+    var PROMISE_FULFILLED = 1;
+    var PROMISE_REJECTED = 2;
+    var PROMISE_FULFILL_OFFSET = 0;
+    var PROMISE_REJECT_OFFSET = 1;
+    var PROMISE_CAPABILITY_OFFSET = 2;
+    var PROMISE_FAKE_CAPABILITY = {};
+    var enqueuePromiseReactionJob = function(handler, capability, argument) {
+      enqueue(function() {
+        promiseReactionJob(handler, capability, argument);
+      });
+    };
+    var promiseReactionJob = function(handler, promiseCapability, argument) {
+      var handlerResult,
+          f;
+      if (promiseCapability === PROMISE_FAKE_CAPABILITY) {
+        return handler(argument);
+      }
+      try {
+        handlerResult = handler(argument);
+        f = promiseCapability.resolve;
+      } catch (e) {
+        handlerResult = e;
+        f = promiseCapability.reject;
+      }
+      f(handlerResult);
+    };
+    var fulfillPromise = function(promise, value) {
+      var _promise = promise._promise;
+      var length = _promise.reactionLength;
+      if (length > 0) {
+        enqueuePromiseReactionJob(_promise.fulfillReactionHandler0, _promise.reactionCapability0, value);
+        _promise.fulfillReactionHandler0 = void 0;
+        _promise.rejectReactions0 = void 0;
+        _promise.reactionCapability0 = void 0;
+        if (length > 1) {
+          for (var i = 1,
+              idx = 0; i < length; i++, idx += 3) {
+            enqueuePromiseReactionJob(_promise[idx + PROMISE_FULFILL_OFFSET], _promise[idx + PROMISE_CAPABILITY_OFFSET], value);
+            promise[idx + PROMISE_FULFILL_OFFSET] = void 0;
+            promise[idx + PROMISE_REJECT_OFFSET] = void 0;
+            promise[idx + PROMISE_CAPABILITY_OFFSET] = void 0;
+          }
+        }
+      }
+      _promise.result = value;
+      _promise.state = PROMISE_FULFILLED;
+      _promise.reactionLength = 0;
+    };
+    var rejectPromise = function(promise, reason) {
+      var _promise = promise._promise;
+      var length = _promise.reactionLength;
+      if (length > 0) {
+        enqueuePromiseReactionJob(_promise.rejectReactionHandler0, _promise.reactionCapability0, reason);
+        _promise.fulfillReactionHandler0 = void 0;
+        _promise.rejectReactions0 = void 0;
+        _promise.reactionCapability0 = void 0;
+        if (length > 1) {
+          for (var i = 1,
+              idx = 0; i < length; i++, idx += 3) {
+            enqueuePromiseReactionJob(_promise[idx + PROMISE_REJECT_OFFSET], _promise[idx + PROMISE_CAPABILITY_OFFSET], reason);
+            promise[idx + PROMISE_FULFILL_OFFSET] = void 0;
+            promise[idx + PROMISE_REJECT_OFFSET] = void 0;
+            promise[idx + PROMISE_CAPABILITY_OFFSET] = void 0;
+          }
+        }
+      }
+      _promise.result = reason;
+      _promise.state = PROMISE_REJECTED;
+      _promise.reactionLength = 0;
+    };
+    var createResolvingFunctions = function(promise) {
+      var alreadyResolved = false;
+      var resolve = function(resolution) {
+        var then;
+        if (alreadyResolved) {
+          return;
+        }
+        alreadyResolved = true;
+        if (resolution === promise) {
+          return rejectPromise(promise, new TypeError('Self resolution'));
+        }
+        if (!ES.TypeIsObject(resolution)) {
+          return fulfillPromise(promise, resolution);
+        }
+        try {
+          then = resolution.then;
+        } catch (e) {
+          return rejectPromise(promise, e);
+        }
+        if (!ES.IsCallable(then)) {
+          return fulfillPromise(promise, resolution);
+        }
+        enqueue(function() {
+          promiseResolveThenableJob(promise, resolution, then);
+        });
+      };
+      var reject = function(reason) {
+        if (alreadyResolved) {
+          return;
+        }
+        alreadyResolved = true;
+        return rejectPromise(promise, reason);
+      };
+      return {
+        resolve: resolve,
+        reject: reject
+      };
+    };
+    var optimizedThen = function(then, thenable, resolve, reject) {
+      if (then === Promise$prototype$then) {
+        _call(then, thenable, resolve, reject, PROMISE_FAKE_CAPABILITY);
+      } else {
+        _call(then, thenable, resolve, reject);
+      }
+    };
+    var promiseResolveThenableJob = function(promise, thenable, then) {
+      var resolvingFunctions = createResolvingFunctions(promise);
+      var resolve = resolvingFunctions.resolve;
+      var reject = resolvingFunctions.reject;
+      try {
+        optimizedThen(then, thenable, resolve, reject);
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var Promise$prototype,
+        Promise$prototype$then;
+    var Promise = (function() {
+      var PromiseShim = function Promise(resolver) {
+        if (!(this instanceof PromiseShim)) {
+          throw new TypeError('Constructor Promise requires "new"');
+        }
+        if (this && this._promise) {
+          throw new TypeError('Bad construction');
+        }
+        if (!ES.IsCallable(resolver)) {
+          throw new TypeError('not a valid resolver');
+        }
+        var promise = emulateES6construct(this, PromiseShim, Promise$prototype, {_promise: {
+            result: void 0,
+            state: PROMISE_PENDING,
+            reactionLength: 0,
+            fulfillReactionHandler0: void 0,
+            rejectReactionHandler0: void 0,
+            reactionCapability0: void 0
+          }});
+        var resolvingFunctions = createResolvingFunctions(promise);
+        var reject = resolvingFunctions.reject;
+        try {
+          resolver(resolvingFunctions.resolve, reject);
+        } catch (e) {
+          reject(e);
+        }
+        return promise;
+      };
+      return PromiseShim;
+    }());
+    Promise$prototype = Promise.prototype;
+    var _promiseAllResolver = function(index, values, capability, remaining) {
+      var alreadyCalled = false;
+      return function(x) {
+        if (alreadyCalled) {
+          return;
+        }
+        alreadyCalled = true;
+        values[index] = x;
+        if ((--remaining.count) === 0) {
+          var resolve = capability.resolve;
+          resolve(values);
+        }
+      };
+    };
+    var performPromiseAll = function(iteratorRecord, C, resultCapability) {
+      var it = iteratorRecord.iterator;
+      var values = [],
+          remaining = {count: 1},
+          next,
+          nextValue;
+      var index = 0;
+      while (true) {
+        try {
+          next = ES.IteratorStep(it);
+          if (next === false) {
+            iteratorRecord.done = true;
+            break;
+          }
+          nextValue = next.value;
+        } catch (e) {
+          iteratorRecord.done = true;
+          throw e;
+        }
+        values[index] = void 0;
+        var nextPromise = C.resolve(nextValue);
+        var resolveElement = _promiseAllResolver(index, values, resultCapability, remaining);
+        remaining.count += 1;
+        optimizedThen(nextPromise.then, nextPromise, resolveElement, resultCapability.reject);
+        index += 1;
+      }
+      if ((--remaining.count) === 0) {
+        var resolve = resultCapability.resolve;
+        resolve(values);
+      }
+      return resultCapability.promise;
+    };
+    var performPromiseRace = function(iteratorRecord, C, resultCapability) {
+      var it = iteratorRecord.iterator,
+          next,
+          nextValue,
+          nextPromise;
+      while (true) {
+        try {
+          next = ES.IteratorStep(it);
+          if (next === false) {
+            iteratorRecord.done = true;
+            break;
+          }
+          nextValue = next.value;
+        } catch (e) {
+          iteratorRecord.done = true;
+          throw e;
+        }
+        nextPromise = C.resolve(nextValue);
+        optimizedThen(nextPromise.then, nextPromise, resultCapability.resolve, resultCapability.reject);
+      }
+      return resultCapability.promise;
+    };
+    defineProperties(Promise, {
+      all: function all(iterable) {
+        var C = this;
+        if (!ES.TypeIsObject(C)) {
+          throw new TypeError('Promise is not object');
+        }
+        var capability = new PromiseCapability(C);
+        var iterator,
+            iteratorRecord;
+        try {
+          iterator = ES.GetIterator(iterable);
+          iteratorRecord = {
+            iterator: iterator,
+            done: false
+          };
+          return performPromiseAll(iteratorRecord, C, capability);
+        } catch (e) {
+          var exception = e;
+          if (iteratorRecord && !iteratorRecord.done) {
+            try {
+              ES.IteratorClose(iterator, true);
+            } catch (ee) {
+              exception = ee;
+            }
+          }
+          var reject = capability.reject;
+          reject(exception);
+          return capability.promise;
+        }
+      },
+      race: function race(iterable) {
+        var C = this;
+        if (!ES.TypeIsObject(C)) {
+          throw new TypeError('Promise is not object');
+        }
+        var capability = new PromiseCapability(C);
+        var iterator,
+            iteratorRecord;
+        try {
+          iterator = ES.GetIterator(iterable);
+          iteratorRecord = {
+            iterator: iterator,
+            done: false
+          };
+          return performPromiseRace(iteratorRecord, C, capability);
+        } catch (e) {
+          var exception = e;
+          if (iteratorRecord && !iteratorRecord.done) {
+            try {
+              ES.IteratorClose(iterator, true);
+            } catch (ee) {
+              exception = ee;
+            }
+          }
+          var reject = capability.reject;
+          reject(exception);
+          return capability.promise;
+        }
+      },
+      reject: function reject(reason) {
+        var C = this;
+        if (!ES.TypeIsObject(C)) {
+          throw new TypeError('Bad promise constructor');
+        }
+        var capability = new PromiseCapability(C);
+        var rejectFunc = capability.reject;
+        rejectFunc(reason);
+        return capability.promise;
+      },
+      resolve: function resolve(v) {
+        var C = this;
+        if (!ES.TypeIsObject(C)) {
+          throw new TypeError('Bad promise constructor');
+        }
+        if (ES.IsPromise(v)) {
+          var constructor = v.constructor;
+          if (constructor === C) {
+            return v;
+          }
+        }
+        var capability = new PromiseCapability(C);
+        var resolveFunc = capability.resolve;
+        resolveFunc(v);
+        return capability.promise;
+      }
+    });
+    defineProperties(Promise$prototype, {
+      'catch': function(onRejected) {
+        return this.then(null, onRejected);
+      },
+      then: function then(onFulfilled, onRejected) {
+        var promise = this;
+        if (!ES.IsPromise(promise)) {
+          throw new TypeError('not a promise');
+        }
+        var C = ES.SpeciesConstructor(promise, Promise);
+        var resultCapability;
+        var returnValueIsIgnored = arguments.length > 2 && arguments[2] === PROMISE_FAKE_CAPABILITY;
+        if (returnValueIsIgnored && C === Promise) {
+          resultCapability = PROMISE_FAKE_CAPABILITY;
+        } else {
+          resultCapability = new PromiseCapability(C);
+        }
+        var fulfillReactionHandler = ES.IsCallable(onFulfilled) ? onFulfilled : PROMISE_IDENTITY;
+        var rejectReactionHandler = ES.IsCallable(onRejected) ? onRejected : PROMISE_THROWER;
+        var _promise = promise._promise;
+        var value;
+        if (_promise.state === PROMISE_PENDING) {
+          if (_promise.reactionLength === 0) {
+            _promise.fulfillReactionHandler0 = fulfillReactionHandler;
+            _promise.rejectReactionHandler0 = rejectReactionHandler;
+            _promise.reactionCapability0 = resultCapability;
+          } else {
+            var idx = 3 * (_promise.reactionLength - 1);
+            _promise[idx + PROMISE_FULFILL_OFFSET] = fulfillReactionHandler;
+            _promise[idx + PROMISE_REJECT_OFFSET] = rejectReactionHandler;
+            _promise[idx + PROMISE_CAPABILITY_OFFSET] = resultCapability;
+          }
+          _promise.reactionLength += 1;
+        } else if (_promise.state === PROMISE_FULFILLED) {
+          value = _promise.result;
+          enqueuePromiseReactionJob(fulfillReactionHandler, resultCapability, value);
+        } else if (_promise.state === PROMISE_REJECTED) {
+          value = _promise.result;
+          enqueuePromiseReactionJob(rejectReactionHandler, resultCapability, value);
+        } else {
+          throw new TypeError('unexpected Promise state');
+        }
+        return resultCapability.promise;
+      }
+    });
+    PROMISE_FAKE_CAPABILITY = new PromiseCapability(Promise);
+    Promise$prototype$then = Promise$prototype.then;
+    return Promise;
+  }());
+  if (globals.Promise) {
+    delete globals.Promise.accept;
+    delete globals.Promise.defer;
+    delete globals.Promise.prototype.chain;
+  }
+  if (typeof PromiseShim === 'function') {
+    defineProperties(globals, {Promise: PromiseShim});
+    var promiseSupportsSubclassing = supportsSubclassing(globals.Promise, function(S) {
+      return S.resolve(42).then(function() {}) instanceof S;
+    });
+    var promiseIgnoresNonFunctionThenCallbacks = !throwsError(function() {
+      globals.Promise.reject(42).then(null, 5).then(null, noop);
+    });
+    var promiseRequiresObjectContext = throwsError(function() {
+      globals.Promise.call(3, noop);
+    });
+    var promiseResolveBroken = (function(Promise) {
+      var p = Promise.resolve(5);
+      p.constructor = {};
+      var p2 = Promise.resolve(p);
+      return (p === p2);
+    }(globals.Promise));
+    var getsThenSynchronously = supportsDescriptors && (function() {
+      var count = 0;
+      var thenable = Object.defineProperty({}, 'then', {get: function() {
+          count += 1;
+        }});
+      Promise.resolve(thenable);
+      return count === 1;
+    }());
+    var BadResolverPromise = function BadResolverPromise(executor) {
+      var p = new Promise(executor);
+      executor(3, function() {});
+      this.then = p.then;
+      this.constructor = BadResolverPromise;
+    };
+    BadResolverPromise.prototype = Promise.prototype;
+    BadResolverPromise.all = Promise.all;
+    var hasBadResolverPromise = valueOrFalseIfThrows(function() {
+      return !!BadResolverPromise.all([1, 2]);
+    });
+    if (!promiseSupportsSubclassing || !promiseIgnoresNonFunctionThenCallbacks || !promiseRequiresObjectContext || promiseResolveBroken || !getsThenSynchronously || hasBadResolverPromise) {
+      Promise = PromiseShim;
+      overrideNative(globals, 'Promise', PromiseShim);
+    }
+    if (Promise.all.length !== 1) {
+      var origAll = Promise.all;
+      overrideNative(Promise, 'all', function all(iterable) {
+        return ES.Call(origAll, this, arguments);
+      });
+    }
+    if (Promise.race.length !== 1) {
+      var origRace = Promise.race;
+      overrideNative(Promise, 'race', function race(iterable) {
+        return ES.Call(origRace, this, arguments);
+      });
+    }
+    if (Promise.resolve.length !== 1) {
+      var origResolve = Promise.resolve;
+      overrideNative(Promise, 'resolve', function resolve(x) {
+        return ES.Call(origResolve, this, arguments);
+      });
+    }
+    if (Promise.reject.length !== 1) {
+      var origReject = Promise.reject;
+      overrideNative(Promise, 'reject', function reject(r) {
+        return ES.Call(origReject, this, arguments);
+      });
+    }
+    ensureEnumerable(Promise, 'all');
+    ensureEnumerable(Promise, 'race');
+    ensureEnumerable(Promise, 'resolve');
+    ensureEnumerable(Promise, 'reject');
+    addDefaultSpecies(Promise);
+  }
+  var testOrder = function(a) {
+    var b = keys(_reduce(a, function(o, k) {
+      o[k] = true;
+      return o;
+    }, {}));
+    return a.join(':') === b.join(':');
+  };
+  var preservesInsertionOrder = testOrder(['z', 'a', 'bb']);
+  var preservesNumericInsertionOrder = testOrder(['z', 1, 'a', '3', 2]);
+  if (supportsDescriptors) {
+    var fastkey = function fastkey(key) {
+      if (!preservesInsertionOrder) {
+        return null;
+      }
+      var type = typeof key;
+      if (type === 'undefined' || key === null) {
+        return '^' + ES.ToString(key);
+      } else if (type === 'string') {
+        return '$' + key;
+      } else if (type === 'number') {
+        if (!preservesNumericInsertionOrder) {
+          return 'n' + key;
+        }
+        return key;
+      } else if (type === 'boolean') {
+        return 'b' + key;
+      }
+      return null;
+    };
+    var emptyObject = function emptyObject() {
+      return Object.create ? Object.create(null) : {};
+    };
+    var addIterableToMap = function addIterableToMap(MapConstructor, map, iterable) {
+      if (isArray(iterable) || Type.string(iterable)) {
+        _forEach(iterable, function(entry) {
+          if (!ES.TypeIsObject(entry)) {
+            throw new TypeError('Iterator value ' + entry + ' is not an entry object');
+          }
+          map.set(entry[0], entry[1]);
+        });
+      } else if (iterable instanceof MapConstructor) {
+        _call(MapConstructor.prototype.forEach, iterable, function(value, key) {
+          map.set(key, value);
+        });
+      } else {
+        var iter,
+            adder;
+        if (iterable !== null && typeof iterable !== 'undefined') {
+          adder = map.set;
+          if (!ES.IsCallable(adder)) {
+            throw new TypeError('bad map');
+          }
+          iter = ES.GetIterator(iterable);
+        }
+        if (typeof iter !== 'undefined') {
+          while (true) {
+            var next = ES.IteratorStep(iter);
+            if (next === false) {
+              break;
+            }
+            var nextItem = next.value;
+            try {
+              if (!ES.TypeIsObject(nextItem)) {
+                throw new TypeError('Iterator value ' + nextItem + ' is not an entry object');
+              }
+              _call(adder, map, nextItem[0], nextItem[1]);
+            } catch (e) {
+              ES.IteratorClose(iter, true);
+              throw e;
+            }
+          }
+        }
+      }
+    };
+    var addIterableToSet = function addIterableToSet(SetConstructor, set, iterable) {
+      if (isArray(iterable) || Type.string(iterable)) {
+        _forEach(iterable, function(value) {
+          set.add(value);
+        });
+      } else if (iterable instanceof SetConstructor) {
+        _call(SetConstructor.prototype.forEach, iterable, function(value) {
+          set.add(value);
+        });
+      } else {
+        var iter,
+            adder;
+        if (iterable !== null && typeof iterable !== 'undefined') {
+          adder = set.add;
+          if (!ES.IsCallable(adder)) {
+            throw new TypeError('bad set');
+          }
+          iter = ES.GetIterator(iterable);
+        }
+        if (typeof iter !== 'undefined') {
+          while (true) {
+            var next = ES.IteratorStep(iter);
+            if (next === false) {
+              break;
+            }
+            var nextValue = next.value;
+            try {
+              _call(adder, set, nextValue);
+            } catch (e) {
+              ES.IteratorClose(iter, true);
+              throw e;
+            }
+          }
+        }
+      }
+    };
+    var collectionShims = {
+      Map: (function() {
+        var empty = {};
+        var MapEntry = function MapEntry(key, value) {
+          this.key = key;
+          this.value = value;
+          this.next = null;
+          this.prev = null;
+        };
+        MapEntry.prototype.isRemoved = function isRemoved() {
+          return this.key === empty;
+        };
+        var isMap = function isMap(map) {
+          return !!map._es6map;
+        };
+        var requireMapSlot = function requireMapSlot(map, method) {
+          if (!ES.TypeIsObject(map) || !isMap(map)) {
+            throw new TypeError('Method Map.prototype.' + method + ' called on incompatible receiver ' + ES.ToString(map));
+          }
+        };
+        var MapIterator = function MapIterator(map, kind) {
+          requireMapSlot(map, '[[MapIterator]]');
+          this.head = map._head;
+          this.i = this.head;
+          this.kind = kind;
+        };
+        MapIterator.prototype = {next: function next() {
+            var i = this.i,
+                kind = this.kind,
+                head = this.head,
+                result;
+            if (typeof this.i === 'undefined') {
+              return {
+                value: void 0,
+                done: true
+              };
+            }
+            while (i.isRemoved() && i !== head) {
+              i = i.prev;
+            }
+            while (i.next !== head) {
+              i = i.next;
+              if (!i.isRemoved()) {
+                if (kind === 'key') {
+                  result = i.key;
+                } else if (kind === 'value') {
+                  result = i.value;
+                } else {
+                  result = [i.key, i.value];
+                }
+                this.i = i;
+                return {
+                  value: result,
+                  done: false
+                };
+              }
+            }
+            this.i = void 0;
+            return {
+              value: void 0,
+              done: true
+            };
+          }};
+        addIterator(MapIterator.prototype);
+        var Map$prototype;
+        var MapShim = function Map() {
+          if (!(this instanceof Map)) {
+            throw new TypeError('Constructor Map requires "new"');
+          }
+          if (this && this._es6map) {
+            throw new TypeError('Bad construction');
+          }
+          var map = emulateES6construct(this, Map, Map$prototype, {
+            _es6map: true,
+            _head: null,
+            _storage: emptyObject(),
+            _size: 0
+          });
+          var head = new MapEntry(null, null);
+          head.next = head.prev = head;
+          map._head = head;
+          if (arguments.length > 0) {
+            addIterableToMap(Map, map, arguments[0]);
+          }
+          return map;
+        };
+        Map$prototype = MapShim.prototype;
+        Value.getter(Map$prototype, 'size', function() {
+          if (typeof this._size === 'undefined') {
+            throw new TypeError('size method called on incompatible Map');
+          }
+          return this._size;
+        });
+        defineProperties(Map$prototype, {
+          get: function get(key) {
+            requireMapSlot(this, 'get');
+            var fkey = fastkey(key);
+            if (fkey !== null) {
+              var entry = this._storage[fkey];
+              if (entry) {
+                return entry.value;
+              } else {
+                return;
+              }
+            }
+            var head = this._head,
+                i = head;
+            while ((i = i.next) !== head) {
+              if (ES.SameValueZero(i.key, key)) {
+                return i.value;
+              }
+            }
+          },
+          has: function has(key) {
+            requireMapSlot(this, 'has');
+            var fkey = fastkey(key);
+            if (fkey !== null) {
+              return typeof this._storage[fkey] !== 'undefined';
+            }
+            var head = this._head,
+                i = head;
+            while ((i = i.next) !== head) {
+              if (ES.SameValueZero(i.key, key)) {
+                return true;
+              }
+            }
+            return false;
+          },
+          set: function set(key, value) {
+            requireMapSlot(this, 'set');
+            var head = this._head,
+                i = head,
+                entry;
+            var fkey = fastkey(key);
+            if (fkey !== null) {
+              if (typeof this._storage[fkey] !== 'undefined') {
+                this._storage[fkey].value = value;
+                return this;
+              } else {
+                entry = this._storage[fkey] = new MapEntry(key, value);
+                i = head.prev;
+              }
+            }
+            while ((i = i.next) !== head) {
+              if (ES.SameValueZero(i.key, key)) {
+                i.value = value;
+                return this;
+              }
+            }
+            entry = entry || new MapEntry(key, value);
+            if (ES.SameValue(-0, key)) {
+              entry.key = +0;
+            }
+            entry.next = this._head;
+            entry.prev = this._head.prev;
+            entry.prev.next = entry;
+            entry.next.prev = entry;
+            this._size += 1;
+            return this;
+          },
+          'delete': function(key) {
+            requireMapSlot(this, 'delete');
+            var head = this._head,
+                i = head;
+            var fkey = fastkey(key);
+            if (fkey !== null) {
+              if (typeof this._storage[fkey] === 'undefined') {
+                return false;
+              }
+              i = this._storage[fkey].prev;
+              delete this._storage[fkey];
+            }
+            while ((i = i.next) !== head) {
+              if (ES.SameValueZero(i.key, key)) {
+                i.key = i.value = empty;
+                i.prev.next = i.next;
+                i.next.prev = i.prev;
+                this._size -= 1;
+                return true;
+              }
+            }
+            return false;
+          },
+          clear: function clear() {
+            requireMapSlot(this, 'clear');
+            this._size = 0;
+            this._storage = emptyObject();
+            var head = this._head,
+                i = head,
+                p = i.next;
+            while ((i = p) !== head) {
+              i.key = i.value = empty;
+              p = i.next;
+              i.next = i.prev = head;
+            }
+            head.next = head.prev = head;
+          },
+          keys: function keys() {
+            requireMapSlot(this, 'keys');
+            return new MapIterator(this, 'key');
+          },
+          values: function values() {
+            requireMapSlot(this, 'values');
+            return new MapIterator(this, 'value');
+          },
+          entries: function entries() {
+            requireMapSlot(this, 'entries');
+            return new MapIterator(this, 'key+value');
+          },
+          forEach: function forEach(callback) {
+            requireMapSlot(this, 'forEach');
+            var context = arguments.length > 1 ? arguments[1] : null;
+            var it = this.entries();
+            for (var entry = it.next(); !entry.done; entry = it.next()) {
+              if (context) {
+                _call(callback, context, entry.value[1], entry.value[0], this);
+              } else {
+                callback(entry.value[1], entry.value[0], this);
+              }
+            }
+          }
+        });
+        addIterator(Map$prototype, Map$prototype.entries);
+        return MapShim;
+      }()),
+      Set: (function() {
+        var isSet = function isSet(set) {
+          return set._es6set && typeof set._storage !== 'undefined';
+        };
+        var requireSetSlot = function requireSetSlot(set, method) {
+          if (!ES.TypeIsObject(set) || !isSet(set)) {
+            throw new TypeError('Set.prototype.' + method + ' called on incompatible receiver ' + ES.ToString(set));
+          }
+        };
+        var Set$prototype;
+        var SetShim = function Set() {
+          if (!(this instanceof Set)) {
+            throw new TypeError('Constructor Set requires "new"');
+          }
+          if (this && this._es6set) {
+            throw new TypeError('Bad construction');
+          }
+          var set = emulateES6construct(this, Set, Set$prototype, {
+            _es6set: true,
+            '[[SetData]]': null,
+            _storage: emptyObject()
+          });
+          if (!set._es6set) {
+            throw new TypeError('bad set');
+          }
+          if (arguments.length > 0) {
+            addIterableToSet(Set, set, arguments[0]);
+          }
+          return set;
+        };
+        Set$prototype = SetShim.prototype;
+        var decodeKey = function(key) {
+          var k = key;
+          if (k === '^null') {
+            return null;
+          } else if (k === '^undefined') {
+            return void 0;
+          } else {
+            var first = k.charAt(0);
+            if (first === '$') {
+              return _strSlice(k, 1);
+            } else if (first === 'n') {
+              return +_strSlice(k, 1);
+            } else if (first === 'b') {
+              return k === 'btrue';
+            }
+          }
+          return +k;
+        };
+        var ensureMap = function ensureMap(set) {
+          if (!set['[[SetData]]']) {
+            var m = set['[[SetData]]'] = new collectionShims.Map();
+            _forEach(keys(set._storage), function(key) {
+              var k = decodeKey(key);
+              m.set(k, k);
+            });
+            set['[[SetData]]'] = m;
+          }
+          set._storage = null;
+        };
+        Value.getter(SetShim.prototype, 'size', function() {
+          requireSetSlot(this, 'size');
+          if (this._storage) {
+            return keys(this._storage).length;
+          }
+          ensureMap(this);
+          return this['[[SetData]]'].size;
+        });
+        defineProperties(SetShim.prototype, {
+          has: function has(key) {
+            requireSetSlot(this, 'has');
+            var fkey;
+            if (this._storage && (fkey = fastkey(key)) !== null) {
+              return !!this._storage[fkey];
+            }
+            ensureMap(this);
+            return this['[[SetData]]'].has(key);
+          },
+          add: function add(key) {
+            requireSetSlot(this, 'add');
+            var fkey;
+            if (this._storage && (fkey = fastkey(key)) !== null) {
+              this._storage[fkey] = true;
+              return this;
+            }
+            ensureMap(this);
+            this['[[SetData]]'].set(key, key);
+            return this;
+          },
+          'delete': function(key) {
+            requireSetSlot(this, 'delete');
+            var fkey;
+            if (this._storage && (fkey = fastkey(key)) !== null) {
+              var hasFKey = _hasOwnProperty(this._storage, fkey);
+              return (delete this._storage[fkey]) && hasFKey;
+            }
+            ensureMap(this);
+            return this['[[SetData]]']['delete'](key);
+          },
+          clear: function clear() {
+            requireSetSlot(this, 'clear');
+            if (this._storage) {
+              this._storage = emptyObject();
+            }
+            if (this['[[SetData]]']) {
+              this['[[SetData]]'].clear();
+            }
+          },
+          values: function values() {
+            requireSetSlot(this, 'values');
+            ensureMap(this);
+            return this['[[SetData]]'].values();
+          },
+          entries: function entries() {
+            requireSetSlot(this, 'entries');
+            ensureMap(this);
+            return this['[[SetData]]'].entries();
+          },
+          forEach: function forEach(callback) {
+            requireSetSlot(this, 'forEach');
+            var context = arguments.length > 1 ? arguments[1] : null;
+            var entireSet = this;
+            ensureMap(entireSet);
+            this['[[SetData]]'].forEach(function(value, key) {
+              if (context) {
+                _call(callback, context, key, key, entireSet);
+              } else {
+                callback(key, key, entireSet);
+              }
+            });
+          }
+        });
+        defineProperty(SetShim.prototype, 'keys', SetShim.prototype.values, true);
+        addIterator(SetShim.prototype, SetShim.prototype.values);
+        return SetShim;
+      }())
+    };
+    if (globals.Map || globals.Set) {
+      var mapAcceptsArguments = valueOrFalseIfThrows(function() {
+        return new Map([[1, 2]]).get(1) === 2;
+      });
+      if (!mapAcceptsArguments) {
+        var OrigMapNoArgs = globals.Map;
+        globals.Map = function Map() {
+          if (!(this instanceof Map)) {
+            throw new TypeError('Constructor Map requires "new"');
+          }
+          var m = new OrigMapNoArgs();
+          if (arguments.length > 0) {
+            addIterableToMap(Map, m, arguments[0]);
+          }
+          delete m.constructor;
+          Object.setPrototypeOf(m, globals.Map.prototype);
+          return m;
+        };
+        globals.Map.prototype = create(OrigMapNoArgs.prototype);
+        defineProperty(globals.Map.prototype, 'constructor', globals.Map, true);
+        Value.preserveToString(globals.Map, OrigMapNoArgs);
+      }
+      var testMap = new Map();
+      var mapUsesSameValueZero = (function() {
+        var m = new Map([[1, 0], [2, 0], [3, 0], [4, 0]]);
+        m.set(-0, m);
+        return m.get(0) === m && m.get(-0) === m && m.has(0) && m.has(-0);
+      }());
+      var mapSupportsChaining = testMap.set(1, 2) === testMap;
+      if (!mapUsesSameValueZero || !mapSupportsChaining) {
+        var origMapSet = Map.prototype.set;
+        overrideNative(Map.prototype, 'set', function set(k, v) {
+          _call(origMapSet, this, k === 0 ? 0 : k, v);
+          return this;
+        });
+      }
+      if (!mapUsesSameValueZero) {
+        var origMapGet = Map.prototype.get;
+        var origMapHas = Map.prototype.has;
+        defineProperties(Map.prototype, {
+          get: function get(k) {
+            return _call(origMapGet, this, k === 0 ? 0 : k);
+          },
+          has: function has(k) {
+            return _call(origMapHas, this, k === 0 ? 0 : k);
+          }
+        }, true);
+        Value.preserveToString(Map.prototype.get, origMapGet);
+        Value.preserveToString(Map.prototype.has, origMapHas);
+      }
+      var testSet = new Set();
+      var setUsesSameValueZero = (function(s) {
+        s['delete'](0);
+        s.add(-0);
+        return !s.has(0);
+      }(testSet));
+      var setSupportsChaining = testSet.add(1) === testSet;
+      if (!setUsesSameValueZero || !setSupportsChaining) {
+        var origSetAdd = Set.prototype.add;
+        Set.prototype.add = function add(v) {
+          _call(origSetAdd, this, v === 0 ? 0 : v);
+          return this;
+        };
+        Value.preserveToString(Set.prototype.add, origSetAdd);
+      }
+      if (!setUsesSameValueZero) {
+        var origSetHas = Set.prototype.has;
+        Set.prototype.has = function has(v) {
+          return _call(origSetHas, this, v === 0 ? 0 : v);
+        };
+        Value.preserveToString(Set.prototype.has, origSetHas);
+        var origSetDel = Set.prototype['delete'];
+        Set.prototype['delete'] = function SetDelete(v) {
+          return _call(origSetDel, this, v === 0 ? 0 : v);
+        };
+        Value.preserveToString(Set.prototype['delete'], origSetDel);
+      }
+      var mapSupportsSubclassing = supportsSubclassing(globals.Map, function(M) {
+        var m = new M([]);
+        m.set(42, 42);
+        return m instanceof M;
+      });
+      var mapFailsToSupportSubclassing = Object.setPrototypeOf && !mapSupportsSubclassing;
+      var mapRequiresNew = (function() {
+        try {
+          return !(globals.Map() instanceof globals.Map);
+        } catch (e) {
+          return e instanceof TypeError;
+        }
+      }());
+      if (globals.Map.length !== 0 || mapFailsToSupportSubclassing || !mapRequiresNew) {
+        var OrigMap = globals.Map;
+        globals.Map = function Map() {
+          if (!(this instanceof Map)) {
+            throw new TypeError('Constructor Map requires "new"');
+          }
+          var m = new OrigMap();
+          if (arguments.length > 0) {
+            addIterableToMap(Map, m, arguments[0]);
+          }
+          delete m.constructor;
+          Object.setPrototypeOf(m, Map.prototype);
+          return m;
+        };
+        globals.Map.prototype = OrigMap.prototype;
+        defineProperty(globals.Map.prototype, 'constructor', globals.Map, true);
+        Value.preserveToString(globals.Map, OrigMap);
+      }
+      var setSupportsSubclassing = supportsSubclassing(globals.Set, function(S) {
+        var s = new S([]);
+        s.add(42, 42);
+        return s instanceof S;
+      });
+      var setFailsToSupportSubclassing = Object.setPrototypeOf && !setSupportsSubclassing;
+      var setRequiresNew = (function() {
+        try {
+          return !(globals.Set() instanceof globals.Set);
+        } catch (e) {
+          return e instanceof TypeError;
+        }
+      }());
+      if (globals.Set.length !== 0 || setFailsToSupportSubclassing || !setRequiresNew) {
+        var OrigSet = globals.Set;
+        globals.Set = function Set() {
+          if (!(this instanceof Set)) {
+            throw new TypeError('Constructor Set requires "new"');
+          }
+          var s = new OrigSet();
+          if (arguments.length > 0) {
+            addIterableToSet(Set, s, arguments[0]);
+          }
+          delete s.constructor;
+          Object.setPrototypeOf(s, Set.prototype);
+          return s;
+        };
+        globals.Set.prototype = OrigSet.prototype;
+        defineProperty(globals.Set.prototype, 'constructor', globals.Set, true);
+        Value.preserveToString(globals.Set, OrigSet);
+      }
+      var mapIterationThrowsStopIterator = !valueOrFalseIfThrows(function() {
+        return (new Map()).keys().next().done;
+      });
+      if (typeof globals.Map.prototype.clear !== 'function' || new globals.Set().size !== 0 || new globals.Map().size !== 0 || typeof globals.Map.prototype.keys !== 'function' || typeof globals.Set.prototype.keys !== 'function' || typeof globals.Map.prototype.forEach !== 'function' || typeof globals.Set.prototype.forEach !== 'function' || isCallableWithoutNew(globals.Map) || isCallableWithoutNew(globals.Set) || typeof(new globals.Map().keys().next) !== 'function' || mapIterationThrowsStopIterator || !mapSupportsSubclassing) {
+        defineProperties(globals, {
+          Map: collectionShims.Map,
+          Set: collectionShims.Set
+        }, true);
+      }
+      if (globals.Set.prototype.keys !== globals.Set.prototype.values) {
+        defineProperty(globals.Set.prototype, 'keys', globals.Set.prototype.values, true);
+      }
+      addIterator(Object.getPrototypeOf((new globals.Map()).keys()));
+      addIterator(Object.getPrototypeOf((new globals.Set()).keys()));
+      if (functionsHaveNames && globals.Set.prototype.has.name !== 'has') {
+        var anonymousSetHas = globals.Set.prototype.has;
+        overrideNative(globals.Set.prototype, 'has', function has(key) {
+          return _call(anonymousSetHas, this, key);
+        });
+      }
+    }
+    defineProperties(globals, collectionShims);
+    addDefaultSpecies(globals.Map);
+    addDefaultSpecies(globals.Set);
+  }
+  var throwUnlessTargetIsObject = function throwUnlessTargetIsObject(target) {
+    if (!ES.TypeIsObject(target)) {
+      throw new TypeError('target must be an object');
+    }
+  };
+  var ReflectShims = {
+    apply: function apply() {
+      return ES.Call(ES.Call, null, arguments);
+    },
+    construct: function construct(constructor, args) {
+      if (!ES.IsConstructor(constructor)) {
+        throw new TypeError('First argument must be a constructor.');
+      }
+      var newTarget = arguments.length > 2 ? arguments[2] : constructor;
+      if (!ES.IsConstructor(newTarget)) {
+        throw new TypeError('new.target must be a constructor.');
+      }
+      return ES.Construct(constructor, args, newTarget, 'internal');
+    },
+    deleteProperty: function deleteProperty(target, key) {
+      throwUnlessTargetIsObject(target);
+      if (supportsDescriptors) {
+        var desc = Object.getOwnPropertyDescriptor(target, key);
+        if (desc && !desc.configurable) {
+          return false;
+        }
+      }
+      return delete target[key];
+    },
+    enumerate: function enumerate(target) {
+      throwUnlessTargetIsObject(target);
+      return new ObjectIterator(target, 'key');
+    },
+    has: function has(target, key) {
+      throwUnlessTargetIsObject(target);
+      return key in target;
+    }
+  };
+  if (Object.getOwnPropertyNames) {
+    Object.assign(ReflectShims, {ownKeys: function ownKeys(target) {
+        throwUnlessTargetIsObject(target);
+        var keys = Object.getOwnPropertyNames(target);
+        if (ES.IsCallable(Object.getOwnPropertySymbols)) {
+          _pushApply(keys, Object.getOwnPropertySymbols(target));
+        }
+        return keys;
+      }});
+  }
+  var callAndCatchException = function ConvertExceptionToBoolean(func) {
+    return !throwsError(func);
+  };
+  if (Object.preventExtensions) {
+    Object.assign(ReflectShims, {
+      isExtensible: function isExtensible(target) {
+        throwUnlessTargetIsObject(target);
+        return Object.isExtensible(target);
+      },
+      preventExtensions: function preventExtensions(target) {
+        throwUnlessTargetIsObject(target);
+        return callAndCatchException(function() {
+          Object.preventExtensions(target);
+        });
+      }
+    });
+  }
+  if (supportsDescriptors) {
+    var internalGet = function get(target, key, receiver) {
+      var desc = Object.getOwnPropertyDescriptor(target, key);
+      if (!desc) {
+        var parent = Object.getPrototypeOf(target);
+        if (parent === null) {
+          return void 0;
+        }
+        return internalGet(parent, key, receiver);
+      }
+      if ('value' in desc) {
+        return desc.value;
+      }
+      if (desc.get) {
+        return ES.Call(desc.get, receiver);
+      }
+      return void 0;
+    };
+    var internalSet = function set(target, key, value, receiver) {
+      var desc = Object.getOwnPropertyDescriptor(target, key);
+      if (!desc) {
+        var parent = Object.getPrototypeOf(target);
+        if (parent !== null) {
+          return internalSet(parent, key, value, receiver);
+        }
+        desc = {
+          value: void 0,
+          writable: true,
+          enumerable: true,
+          configurable: true
+        };
+      }
+      if ('value' in desc) {
+        if (!desc.writable) {
+          return false;
+        }
+        if (!ES.TypeIsObject(receiver)) {
+          return false;
+        }
+        var existingDesc = Object.getOwnPropertyDescriptor(receiver, key);
+        if (existingDesc) {
+          return Reflect.defineProperty(receiver, key, {value: value});
+        } else {
+          return Reflect.defineProperty(receiver, key, {
+            value: value,
+            writable: true,
+            enumerable: true,
+            configurable: true
+          });
+        }
+      }
+      if (desc.set) {
+        _call(desc.set, receiver, value);
+        return true;
+      }
+      return false;
+    };
+    Object.assign(ReflectShims, {
+      defineProperty: function defineProperty(target, propertyKey, attributes) {
+        throwUnlessTargetIsObject(target);
+        return callAndCatchException(function() {
+          Object.defineProperty(target, propertyKey, attributes);
+        });
+      },
+      getOwnPropertyDescriptor: function getOwnPropertyDescriptor(target, propertyKey) {
+        throwUnlessTargetIsObject(target);
+        return Object.getOwnPropertyDescriptor(target, propertyKey);
+      },
+      get: function get(target, key) {
+        throwUnlessTargetIsObject(target);
+        var receiver = arguments.length > 2 ? arguments[2] : target;
+        return internalGet(target, key, receiver);
+      },
+      set: function set(target, key, value) {
+        throwUnlessTargetIsObject(target);
+        var receiver = arguments.length > 3 ? arguments[3] : target;
+        return internalSet(target, key, value, receiver);
+      }
+    });
+  }
+  if (Object.getPrototypeOf) {
+    var objectDotGetPrototypeOf = Object.getPrototypeOf;
+    ReflectShims.getPrototypeOf = function getPrototypeOf(target) {
+      throwUnlessTargetIsObject(target);
+      return objectDotGetPrototypeOf(target);
+    };
+  }
+  if (Object.setPrototypeOf && ReflectShims.getPrototypeOf) {
+    var willCreateCircularPrototype = function(object, lastProto) {
+      var proto = lastProto;
+      while (proto) {
+        if (object === proto) {
+          return true;
+        }
+        proto = ReflectShims.getPrototypeOf(proto);
+      }
+      return false;
+    };
+    Object.assign(ReflectShims, {setPrototypeOf: function setPrototypeOf(object, proto) {
+        throwUnlessTargetIsObject(object);
+        if (proto !== null && !ES.TypeIsObject(proto)) {
+          throw new TypeError('proto must be an object or null');
+        }
+        if (proto === Reflect.getPrototypeOf(object)) {
+          return true;
+        }
+        if (Reflect.isExtensible && !Reflect.isExtensible(object)) {
+          return false;
+        }
+        if (willCreateCircularPrototype(object, proto)) {
+          return false;
+        }
+        Object.setPrototypeOf(object, proto);
+        return true;
+      }});
+  }
+  var defineOrOverrideReflectProperty = function(key, shim) {
+    if (!ES.IsCallable(globals.Reflect[key])) {
+      defineProperty(globals.Reflect, key, shim);
+    } else {
+      var acceptsPrimitives = valueOrFalseIfThrows(function() {
+        globals.Reflect[key](1);
+        globals.Reflect[key](NaN);
+        globals.Reflect[key](true);
+        return true;
+      });
+      if (acceptsPrimitives) {
+        overrideNative(globals.Reflect, key, shim);
+      }
+    }
+  };
+  Object.keys(ReflectShims).forEach(function(key) {
+    defineOrOverrideReflectProperty(key, ReflectShims[key]);
+  });
+  if (functionsHaveNames && globals.Reflect.getPrototypeOf.name !== 'getPrototypeOf') {
+    var originalReflectGetProto = globals.Reflect.getPrototypeOf;
+    overrideNative(globals.Reflect, 'getPrototypeOf', function getPrototypeOf(target) {
+      return _call(originalReflectGetProto, globals.Reflect, target);
+    });
+  }
+  if (globals.Reflect.setPrototypeOf) {
+    if (valueOrFalseIfThrows(function() {
+      globals.Reflect.setPrototypeOf(1, {});
+      return true;
+    })) {
+      overrideNative(globals.Reflect, 'setPrototypeOf', ReflectShims.setPrototypeOf);
+    }
+  }
+  if (globals.Reflect.defineProperty) {
+    if (!valueOrFalseIfThrows(function() {
+      var basic = !globals.Reflect.defineProperty(1, 'test', {value: 1});
+      var extensible = typeof Object.preventExtensions !== 'function' || !globals.Reflect.defineProperty(Object.preventExtensions({}), 'test', {});
+      return basic && extensible;
+    })) {
+      overrideNative(globals.Reflect, 'defineProperty', ReflectShims.defineProperty);
+    }
+  }
+  if (globals.Reflect.construct) {
+    if (!valueOrFalseIfThrows(function() {
+      var F = function F() {};
+      return globals.Reflect.construct(function() {}, [], F) instanceof F;
+    })) {
+      overrideNative(globals.Reflect, 'construct', ReflectShims.construct);
+    }
+  }
+  if (String(new Date(NaN)) !== 'Invalid Date') {
+    var dateToString = Date.prototype.toString;
+    var shimmedDateToString = function toString() {
+      var valueOf = +this;
+      if (valueOf !== valueOf) {
+        return 'Invalid Date';
+      }
+      return ES.Call(dateToString, this);
+    };
+    overrideNative(Date.prototype, 'toString', shimmedDateToString);
+  }
+  var stringHTMLshims = {
+    anchor: function anchor(name) {
+      return ES.CreateHTML(this, 'a', 'name', name);
+    },
+    big: function big() {
+      return ES.CreateHTML(this, 'big', '', '');
+    },
+    blink: function blink() {
+      return ES.CreateHTML(this, 'blink', '', '');
+    },
+    bold: function bold() {
+      return ES.CreateHTML(this, 'b', '', '');
+    },
+    fixed: function fixed() {
+      return ES.CreateHTML(this, 'tt', '', '');
+    },
+    fontcolor: function fontcolor(color) {
+      return ES.CreateHTML(this, 'font', 'color', color);
+    },
+    fontsize: function fontsize(size) {
+      return ES.CreateHTML(this, 'font', 'size', size);
+    },
+    italics: function italics() {
+      return ES.CreateHTML(this, 'i', '', '');
+    },
+    link: function link(url) {
+      return ES.CreateHTML(this, 'a', 'href', url);
+    },
+    small: function small() {
+      return ES.CreateHTML(this, 'small', '', '');
+    },
+    strike: function strike() {
+      return ES.CreateHTML(this, 'strike', '', '');
+    },
+    sub: function sub() {
+      return ES.CreateHTML(this, 'sub', '', '');
+    },
+    sup: function sub() {
+      return ES.CreateHTML(this, 'sup', '', '');
+    }
+  };
+  _forEach(Object.keys(stringHTMLshims), function(key) {
+    var method = String.prototype[key];
+    var shouldOverwrite = false;
+    if (ES.IsCallable(method)) {
+      var output = _call(method, '', ' " ');
+      var quotesCount = _concat([], output.match(/"/g)).length;
+      shouldOverwrite = output !== output.toLowerCase() || quotesCount > 2;
+    } else {
+      shouldOverwrite = true;
+    }
+    if (shouldOverwrite) {
+      overrideNative(String.prototype, key, stringHTMLshims[key]);
+    }
+  });
+  var JSONstringifiesSymbols = (function() {
+    if (!hasSymbols) {
+      return false;
+    }
+    var stringify = typeof JSON === 'object' && typeof JSON.stringify === 'function' ? JSON.stringify : null;
+    if (!stringify) {
+      return false;
+    }
+    if (typeof stringify(Symbol()) !== 'undefined') {
+      return true;
+    }
+    if (stringify([Symbol()]) !== '[null]') {
+      return true;
+    }
+    var obj = {a: Symbol()};
+    obj[Symbol()] = true;
+    if (stringify(obj) !== '{}') {
+      return true;
+    }
+    return false;
+  }());
+  var JSONstringifyAcceptsObjectSymbol = valueOrFalseIfThrows(function() {
+    if (!hasSymbols) {
+      return true;
+    }
+    return JSON.stringify(Object(Symbol())) === '{}' && JSON.stringify([Object(Symbol())]) === '[{}]';
+  });
+  if (JSONstringifiesSymbols || !JSONstringifyAcceptsObjectSymbol) {
+    var origStringify = JSON.stringify;
+    overrideNative(JSON, 'stringify', function stringify(value) {
+      if (typeof value === 'symbol') {
+        return;
+      }
+      var replacer;
+      if (arguments.length > 1) {
+        replacer = arguments[1];
+      }
+      var args = [value];
+      if (!isArray(replacer)) {
+        var replaceFn = ES.IsCallable(replacer) ? replacer : null;
+        var wrappedReplacer = function(key, val) {
+          var parsedValue = replacer ? _call(replacer, this, key, val) : val;
+          if (typeof parsedValue !== 'symbol') {
+            if (Type.symbol(parsedValue)) {
+              return assignTo({})(parsedValue);
+            } else {
+              return parsedValue;
+            }
+          }
+        };
+        args.push(wrappedReplacer);
+      } else {
+        args.push(replacer);
+      }
+      if (arguments.length > 2) {
+        args.push(arguments[2]);
+      }
+      return origStringify.apply(this, args);
+    });
+  }
+  return globals;
+}));
+
+_removeDefine();
+})();
+(function() {
+var _removeDefine = System.get("@@amd-helpers").createDefine();
+define("github:es-shims/es6-shim@0.34.1", ["github:es-shims/es6-shim@0.34.1/es6-shim"], function(main) {
+  return main;
+});
+
+_removeDefine();
+})();
+System.register("src/deps.js", ["npm:react@0.14.6", "npm:react-dom@0.14.6", "npm:redux@3.0.5", "npm:react-redux@4.0.6", "github:es-shims/es6-shim@0.34.1"], function(exports_1) {
   var __extends = (this && this.__extends) || function(d, b) {
     for (var p in b)
       if (b.hasOwnProperty(p))
@@ -11464,16 +15761,32 @@ System.register("src/deps.js", ["npm:react@0.14.6", "npm:react-dom@0.14.6"], fun
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
   };
   var React,
-      react_dom_1;
-  var Deps,
+      react_dom_1,
+      redux_1,
+      react_redux_1,
+      ES6;
+  var a,
+      store,
+      Deps,
+      DepsRedux,
       ignore;
   return {
     setters: [function(React_1) {
       React = React_1;
     }, function(react_dom_1_1) {
       react_dom_1 = react_dom_1_1;
+    }, function(redux_1_1) {
+      redux_1 = redux_1_1;
+    }, function(react_redux_1_1) {
+      react_redux_1 = react_redux_1_1;
+    }, function(ES6_1) {
+      ES6 = ES6_1;
     }],
     execute: function() {
+      a = ES6.Object.assign({});
+      store = redux_1.createStore(function(state, action) {
+        return state;
+      }, {});
       Deps = (function(_super) {
         __extends(Deps, _super);
         function Deps() {
@@ -11484,6 +15797,11 @@ System.register("src/deps.js", ["npm:react@0.14.6", "npm:react-dom@0.14.6"], fun
         };
         return Deps;
       })(React.Component);
+      DepsRedux = react_redux_1.connect(function(state) {
+        return ({});
+      }, function(dispatch) {
+        return ({});
+      })(Deps);
       ignore = function() {
         return react_dom_1.render(React.createElement(Deps, null), document.body);
       };
