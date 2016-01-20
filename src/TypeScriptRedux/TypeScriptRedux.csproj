@@ -77,6 +77,7 @@
     <Content Include="src\example05\default.htm" />
     <Content Include="src\example06\default.htm" />
     <Content Include="src\example07\default.htm" />
+    <Content Include="src\example08\default.htm" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -99,6 +100,13 @@
     <TypeScriptCompile Include="src\example07\ColorPicker.tsx" />
     <TypeScriptCompile Include="src\example07\Counter.tsx" />
     <TypeScriptCompile Include="src\example07\Shapes.tsx" />
+    <TypeScriptCompile Include="src\example08\app.tsx" />
+    <TypeScriptCompile Include="src\example08\ColorPicker.tsx" />
+    <TypeScriptCompile Include="src\example08\core.ts" />
+    <TypeScriptCompile Include="src\example08\Counter.tsx" />
+    <TypeScriptCompile Include="src\example08\reducers.ts" />
+    <TypeScriptCompile Include="src\example08\reducers\shapeReducers.ts" />
+    <TypeScriptCompile Include="src\example08\Shapes.tsx" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
