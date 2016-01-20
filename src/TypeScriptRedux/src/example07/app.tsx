@@ -11,7 +11,7 @@ import { ColorPicker } from './ColorPicker';
 import { ShapeMaker, ShapeViewer } from './Shapes';
 
 var actions = [];
-var defaultState = { nextShapeId:0, width: 100, height: 100, color:"#336699", shapes:[] };
+var defaultState = { nextShapeId:0, width: 100, height: 100, color:"#000000", shapes:[] };
 
 let store = createStore(
     (state, action) => {

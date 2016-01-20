@@ -33,7 +33,7 @@ System.register(['react', 'react-dom', 'redux', 'react-redux', './Counter', './C
             }],
         execute: function() {
             actions = [];
-            defaultState = { nextShapeId: 0, width: 100, height: 100, color: "#336699", shapes: [] };
+            defaultState = { nextShapeId: 0, width: 100, height: 100, color: "#000000", shapes: [] };
             store = redux_1.createStore(function (state, action) {
                 actions.push(action);
                 switch (action.type) {
