@@ -1,4 +1,4 @@
-﻿/// <reference path='typings/tsd.d.ts'/>
+﻿/// <reference path='../typings/tsd.d.ts'/>
 
 //build bumdle with: jspm bundle src/deps deps.lib.js
 

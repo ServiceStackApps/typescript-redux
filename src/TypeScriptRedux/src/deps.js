@@ -1,4 +1,4 @@
-/// <reference path='typings/tsd.d.ts'/>
+/// <reference path='../typings/tsd.d.ts'/>
 System.register(['react', 'react-dom'], function(exports_1) {
     var __extends = (this && this.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
