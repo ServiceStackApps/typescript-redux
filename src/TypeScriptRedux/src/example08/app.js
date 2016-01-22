@@ -1,5 +1,4 @@
 /// <reference path='../../typings/tsd.d.ts'/>
-/// <reference path='../../typings/es6-shim/es6-shim.d.ts'/>
 System.register(['react', 'react-dom', 'redux', 'react-redux', './reducers', './Counter', './ColorPicker', './Shapes', './core'], function(exports_1) {
     var __extends = (this && this.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];

@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 
-import { Store, createStore } from 'redux';
+import { createStore } from 'redux';
 
 let store = createStore(
     (state, action) => {

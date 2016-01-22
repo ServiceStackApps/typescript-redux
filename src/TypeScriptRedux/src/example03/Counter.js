@@ -26,7 +26,6 @@ System.register(['react'], function(exports_1) {
                 Counter.prototype.incr = function (by) {
                     this.setState({ counter: this.state.counter + by });
                 };
-                ;
                 return Counter;
             })(React.Component);
             exports_1("default", Counter);

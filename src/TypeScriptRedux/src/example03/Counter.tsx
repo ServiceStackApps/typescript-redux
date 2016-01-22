@@ -24,6 +24,6 @@ export default class Counter extends React.Component<any, any> {
 
     incr(by:number) {
         this.setState({ counter: this.state.counter + by });
-    };
+    }
 }
 

@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Store, createStore } from 'redux';
+import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
 import Counter from './Counter';

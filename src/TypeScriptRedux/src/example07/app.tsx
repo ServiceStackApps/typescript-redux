@@ -1,9 +1,8 @@
 /// <reference path='../../typings/tsd.d.ts'/>
-/// <reference path='../../typings/es6-shim/es6-shim.d.ts'/>
 
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Store, createStore } from 'redux';
+import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 
 import Counter from './Counter';
