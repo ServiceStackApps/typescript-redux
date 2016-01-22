@@ -3,13 +3,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-interface IHelloWorldProps {
-    counter?: number;
-    incr?: Function;
-    decr?: Function;
-}
-
-class Counter extends React.Component<IHelloWorldProps, any> {
+class Counter extends React.Component<any, any> {
     render() {
         return (
             <div>
@@ -25,9 +19,9 @@ class Counter extends React.Component<IHelloWorldProps, any> {
     }
 }
 
-const mapStateToProps = (state): IHelloWorldProps => state;
+const mapStateToProps = (state) => state;
 
-const mapDispatchToProps = (dispatch): IHelloWorldProps => ({
+const mapDispatchToProps = (dispatch) => ({
     incr: () => {
         dispatch({ type: 'INCR', by: 1 });
     },
