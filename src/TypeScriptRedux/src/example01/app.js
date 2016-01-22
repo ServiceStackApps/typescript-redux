@@ -22,7 +22,7 @@ System.register(['react', 'react-dom'], function(exports_1) {
                     _super.apply(this, arguments);
                 }
                 HelloWorld.prototype.render = function () {
-                    return (React.createElement("div", null, "Hello, World!"));
+                    return React.createElement("div", null, "Hello, World!");
                 };
                 return HelloWorld;
             })(React.Component);

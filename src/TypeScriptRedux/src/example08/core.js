@@ -24,6 +24,55 @@ System.register(['react-redux'], function(exports_1) {
         };
     }
     exports_1("listenTo", listenTo);
+    function bindAll() {
+        return function (target) {
+            function F() {
+                for (var k in target.prototype) {
+                    var fn = target.prototype[k];
+                    if (typeof fn !== 'function' || !target.prototype.hasOwnProperty(k))
+                        continue;
+                    this[k] = fn.bind(this);
+                }
+                target.apply(this, arguments);
+            }
+            F.prototype = target.prototype;
+            var a = target; //Hack to get araound TypeScript build error
+            a = F;
+            return a;
+        };
+    }
+    exports_1("bindAll", bindAll);
+    function pureRender() {
+        var _this = this;
+        return function (target) {
+            target.prototype.shouldComponentUpdate = function (nextProps, nextState) {
+                return !shallowEqual(_this.props, nextProps) ||
+                    !shallowEqual(_this.state, nextState);
+            };
+        };
+    }
+    exports_1("pureRender", pureRender);
+    function shallowEqual(objA, objB) {
+        if (objA === objB) {
+            return true;
+        }
+        if (typeof objA !== 'object' || objA === null ||
+            typeof objB !== 'object' || objB === null) {
+            return false;
+        }
+        var keysA = Object.keys(objA);
+        var keysB = Object.keys(objB);
+        if (keysA.length !== keysB.length) {
+            return false;
+        }
+        var bHasOwnProperty = Object.prototype.hasOwnProperty.bind(objB);
+        for (var i = 0; i < keysA.length; i++) {
+            if (!bHasOwnProperty(keysA[i]) || objA[keysA[i]] !== objB[keysA[i]]) {
+                return false;
+            }
+        }
+        return true;
+    }
     return {
         setters:[
             function (react_redux_1_1) {

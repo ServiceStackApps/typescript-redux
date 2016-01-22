@@ -5,14 +5,8 @@ import * as ReactDOM from 'react-dom';
 
 class HelloWorld extends React.Component<any, any> {
     render() {
-        return (
-            <div>Hello, World!</div>
-        );
+        return <div>Hello, World!</div>;
     }
 }
 
-ReactDOM.render(
-    <HelloWorld/>,
-    document.getElementById("content"));
-
- 
+ReactDOM.render(<HelloWorld/>, document.getElementById("content"));

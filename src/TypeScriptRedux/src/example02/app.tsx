@@ -5,8 +5,6 @@ import * as ReactDOM from 'react-dom';
 
 import HelloWorld from './HelloWorld';
 
-ReactDOM.render(
-    <HelloWorld/>,
-    document.getElementById("content"));
+ReactDOM.render(<HelloWorld/>, document.getElementById("content"));
 
  
