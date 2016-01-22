@@ -3,15 +3,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-interface IHelloWorldProps {
-    field: string;
-    step?: number;
-    counter?: number;
-    incr?: Function;
-    decr?: Function;
-}
-
-class Counter extends React.Component<IHelloWorldProps, any> {
+class Counter extends React.Component<any, any> {
     render() {
         var field = this.props.field, step = this.props.step || 1;
         return (

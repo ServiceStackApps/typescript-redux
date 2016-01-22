@@ -2,13 +2,7 @@
 
 import * as React from 'react';
 
-export interface INumberProps {
-    name: string;
-    value: number;
-    onChange: (n:number) => void;
-}
-
-export class NumberPicker extends React.Component<INumberProps, any> {
+export class NumberPicker extends React.Component<any, any> {
     render() {
         return (
             <p>
@@ -25,12 +19,7 @@ export class NumberPicker extends React.Component<INumberProps, any> {
     }
 }
 
-export interface IColorPickerProps {
-    color: string;
-    onChange: (hexColor:string) => void;
-}
-
-export class ColorPicker extends React.Component<IColorPickerProps, any> {
+export class ColorPicker extends React.Component<any, any> {
     render() {
         const color = this.props.color;
         const rgb = hexToRgb(color);
