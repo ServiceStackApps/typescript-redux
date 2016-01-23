@@ -9,7 +9,6 @@ class ShapeMaker extends React.Component<any, any> {
         super(props, context);
         this.state = { top: props.top, left: props.left };
     }
-
     render() {
         var width = this.props.width, height = this.props.height, background = this.props.color;
         const color = isDark(background) ? '#fff' : '#000';
@@ -37,13 +36,11 @@ class ShapeMaker extends React.Component<any, any> {
             </div>
         );
     }
-
     handleTop(e) {
         var top = parseInt(e.target.value);
         if (!isNaN(top))
             this.setState({ top });
     }
-
     handleLeft(e) {
         var left = parseInt(e.target.value);
         if (!isNaN(left))

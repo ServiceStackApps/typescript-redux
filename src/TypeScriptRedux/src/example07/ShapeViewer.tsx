@@ -9,7 +9,6 @@ class ShapeViewer extends React.Component<any, any> {
         super(props, context);
         this.state = { isDragging: false};
     }
-
     render() {
         return (
             <div className="noselect" style={{ position: "relative", border: "solid 1px #ccc", width: 900, height: 600 }}>
@@ -29,7 +28,6 @@ class ShapeViewer extends React.Component<any, any> {
             </div>
         );
     }
-
     handleDragInit(e) {
         var el = e.target as HTMLElement;
         while (el.nodeName !== 'DIV')
@@ -38,7 +36,6 @@ class ShapeViewer extends React.Component<any, any> {
         var left = parseInt(el.style.left) || 0;
         this.setState({ isDragging: true, orig: { x: e.pageX - left, y: e.pageY - top} });
     }
-
     handleDrag(id, height, width, e) {
         if (this.state.isDragging) {
             this.props.updateShape(id, e.pageY - this.state.orig.y, e.pageX - this.state.orig.x);

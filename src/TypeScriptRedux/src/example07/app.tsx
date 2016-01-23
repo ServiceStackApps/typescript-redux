@@ -38,7 +38,6 @@ let store = createStore(
     },
     defaultState);
 
-
 class ColorWrapperBase extends React.Component<any,any> {
     render() {
         return <ColorPicker color={this.props.color} onChange={this.props.setColor} />;

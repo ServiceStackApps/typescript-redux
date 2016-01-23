@@ -36,22 +36,18 @@ export class ColorPicker extends React.Component<any, any> {
             </div>
         );
     }
-
     updateRed(n: number) {
         const rgb = hexToRgb(this.props.color);
         this.changeColor(rgbToHex(n, rgb.g, rgb.b));
     }
-
     updateGreen(n: number) {
         const rgb = hexToRgb(this.props.color);
         this.changeColor(rgbToHex(rgb.r, n, rgb.b));
     }
-
     updateBlue(n: number) {
         const rgb = hexToRgb(this.props.color);
         this.changeColor(rgbToHex(rgb.r, rgb.g, n));
     }
-
     changeColor(color: string) {
         this.props.onChange(color);  
     }
