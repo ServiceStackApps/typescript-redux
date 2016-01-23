@@ -99,7 +99,8 @@
     <TypeScriptCompile Include="src\example07\app.tsx" />
     <TypeScriptCompile Include="src\example07\ColorPicker.tsx" />
     <TypeScriptCompile Include="src\example07\Counter.tsx" />
-    <TypeScriptCompile Include="src\example07\Shapes.tsx" />
+    <TypeScriptCompile Include="src\example07\ShapeViewer.tsx" />
+    <TypeScriptCompile Include="src\example07\ShapeMaker.tsx" />
     <TypeScriptCompile Include="src\example08\app.tsx" />
     <TypeScriptCompile Include="src\example08\ColorPicker.tsx" />
     <TypeScriptCompile Include="src\example08\core.ts" />

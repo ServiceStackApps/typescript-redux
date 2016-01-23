@@ -6,8 +6,10 @@ import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 
 import Counter from './Counter';
+import ActionPlayer from './ActionPlayer';
+import ShapeMaker from './ShapeMaker';
+import ShapeViewer from './ShapeViewer';
 import { ColorPicker } from './ColorPicker';
-import { ShapeMaker, ShapeViewer } from './Shapes';
 
 var actions = [];
 var defaultState = { nextShapeId:0, width: 100, height: 100, color:"#000000", shapes:[] };
@@ -36,57 +38,10 @@ let store = createStore(
     },
     defaultState);
 
-const replayActions = () => {
-   var clone = actions.slice(0);
-   store.dispatch({ type: 'LOAD', state: defaultState });
-    actions = [];
-
-    for (var i=0; i<clone.length; i++) {
-        (index => {
-            setTimeout(() => {
-                store.dispatch(clone[index]);
-            }, 10 * index);
-        })(i);
-    }
-};
-
-const clearActions = () => {
-    store.dispatch({ type: 'LOAD', state: defaultState });
-    actions = [];
-};
-
-const undoAction = () => {
-    var clone = actions.slice(0, actions.length - 1);
-    store.dispatch({ type: 'LOAD', state: defaultState });
-    actions = [];
-    clone.forEach(action => store.dispatch(action));
-};
-
-class ActionPlayer extends React.Component<any, any> {
-    private unsubscribe: Function;
-    componentDidMount() {
-        this.unsubscribe = store.subscribe(() => this.forceUpdate());
-    }
-    componentWillUnmount(){
-        this.unsubscribe();
-    }
-    render() {
-        return (
-            <div>
-                <button onClick={replayActions}>replay</button>
-                <p>
-                    <b>{actions.length}</b> actions
-                </p>
-                <button onClick={undoAction}>undo</button> <span></span>
-                <button onClick={clearActions}>clear</button>
-            </div>
-        );
-    }
-}
 
 class ColorWrapperBase extends React.Component<any,any> {
     render() {
-        return <ColorPicker color={this.props.color} onChange={c => this.props.setColor(c)} />;
+        return <ColorPicker color={this.props.color} onChange={this.props.setColor} />;
     }
 }
 
@@ -105,12 +60,12 @@ ReactDOM.render(
                     <Counter field="height" step={10} />
                     <ColorWrapper />
                 </td>
-                <td style={{verticalAlign:"top",textAlign:"center", width:500}}>
+                <td style={{verticalAlign:"top", textAlign:"center", width:500}}>
                     <h2>Preview</h2>
                     <ShapeMaker />
                 </td>
                 <td style={{ verticalAlign: 'bottom' }}>
-                    <ActionPlayer />
+                    <ActionPlayer store={store} actions={actions} defaultState={defaultState} />
                 </td>
             </tr>
             <tr>
