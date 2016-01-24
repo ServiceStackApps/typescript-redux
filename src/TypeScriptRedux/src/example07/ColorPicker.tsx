@@ -30,7 +30,10 @@ export class ColorPicker extends React.Component<any, any> {
                 <NumberPicker name="Red" value={rgb.r} onChange={n => this.updateRed(n)} />
                 <NumberPicker name="Green" value={rgb.g} onChange={n => this.updateGreen(n) } />
                 <NumberPicker name="Blue" value={rgb.b} onChange={n => this.updateBlue(n) } />
-                <div style={{ background: color, width: 200, height: 40, lineHeight: "40px", textAlign: "center", color: textColor }}>
+                <div style={{
+                    background: color, width: "100%", height: 40, lineHeight: "40px",
+                    textAlign: "center", color: textColor
+                }}>
                     {color}
                 </div>
             </div>

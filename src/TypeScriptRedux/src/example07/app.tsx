@@ -54,7 +54,7 @@ ReactDOM.render(
         <table>
             <tbody>
             <tr>
-                <td>
+                <td style={{ width: 220 }}>
                     <Counter field="width" step={10} />
                     <Counter field="height" step={10} />
                     <ColorWrapper />

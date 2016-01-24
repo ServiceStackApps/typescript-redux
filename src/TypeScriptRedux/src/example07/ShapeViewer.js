@@ -27,7 +27,7 @@ System.register(['react', 'react-redux', './ColorPicker'], function(exports_1) {
                 }
                 ShapeViewer.prototype.render = function () {
                     var _this = this;
-                    return (React.createElement("div", {"className": "noselect", "style": { position: "relative", border: "solid 1px #ccc", width: 900, height: 600 }}, this.props.shapes.map(function (s) { return (React.createElement("div", {"key": s.id, "style": {
+                    return (React.createElement("div", {"className": "noselect", "style": { position: "relative", border: "solid 1px #ccc", width: 860, height: 500 }}, this.props.shapes.map(function (s) { return (React.createElement("div", {"key": s.id, "style": {
                         position: "absolute", top: s.top, left: s.left, color: ColorPicker_1.isDark(s.color) ? '#fff' : '#000',
                         background: s.color, width: s.width, height: s.height,
                         lineHeight: s.height + 'px', textAlign: "center",
