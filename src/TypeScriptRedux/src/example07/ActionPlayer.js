@@ -16,26 +16,7 @@ System.register(['react'], function(exports_1) {
             ActionPlayer = (function (_super) {
                 __extends(ActionPlayer, _super);
                 function ActionPlayer() {
-                    var _this = this;
                     _super.apply(this, arguments);
-                    this.resetState = function () {
-                        _this.props.store.dispatch({ type: 'LOAD', state: _this.props.defaultState });
-                        _this.props.actions.length = 0;
-                    };
-                    this.replayActions = function () {
-                        var store = _this.props.store, actions = _this.props.actions;
-                        var snapshot = actions.slice(0);
-                        _this.resetState();
-                        snapshot.forEach(function (action, i) {
-                            return setTimeout(function () { return store.dispatch(action); }, 10 * i);
-                        });
-                    };
-                    this.undoAction = function () {
-                        var store = _this.props.store, actions = _this.props.actions;
-                        var snapshot = actions.slice(0, actions.length - 1);
-                        _this.resetState();
-                        snapshot.forEach(function (action) { return store.dispatch(action); });
-                    };
                 }
                 ActionPlayer.prototype.componentDidMount = function () {
                     var _this = this;
@@ -45,7 +26,26 @@ System.register(['react'], function(exports_1) {
                     this.unsubscribe();
                 };
                 ActionPlayer.prototype.render = function () {
-                    return (React.createElement("div", null, React.createElement("button", {"onClick": this.replayActions}, "replay"), React.createElement("p", null, React.createElement("b", null, this.props.actions.length), " actions"), React.createElement("button", {"onClick": this.undoAction}, "undo"), " ", React.createElement("span", null), React.createElement("button", {"onClick": this.resetState}, "clear")));
+                    var _this = this;
+                    return (React.createElement("div", null, React.createElement("button", {"onClick": function (e) { return _this.replayActions(); }}, "replay"), React.createElement("p", null, React.createElement("b", null, this.props.actions.length), " actions"), React.createElement("button", {"onClick": function (e) { return _this.undoAction(); }}, "undo"), " ", React.createElement("span", null), React.createElement("button", {"onClick": function (e) { return _this.resetState(); }}, "clear")));
+                };
+                ActionPlayer.prototype.resetState = function () {
+                    this.props.store.dispatch({ type: 'LOAD', state: this.props.defaultState });
+                    this.props.actions.length = 0;
+                };
+                ActionPlayer.prototype.replayActions = function () {
+                    var _this = this;
+                    var snapshot = this.props.actions.slice(0);
+                    this.resetState();
+                    snapshot.forEach(function (action, i) {
+                        return setTimeout(function () { return _this.props.store.dispatch(action); }, 10 * i);
+                    });
+                };
+                ActionPlayer.prototype.undoAction = function () {
+                    var _this = this;
+                    var snapshot = this.props.actions.slice(0, this.props.actions.length - 1);
+                    this.resetState();
+                    snapshot.forEach(function (action) { return _this.props.store.dispatch(action); });
                 };
                 return ActionPlayer;
             })(React.Component);
