@@ -14,9 +14,9 @@ export default class ActionPlayer extends React.Component<any, any> {
                 <p>
                     <b>{this.props.history.actions.length}</b> actions
                 </p>
-                <button onClick={this.prevState} disabled={this.props.history.canPrev()}>undo</button>
+                <button onClick={this.prevState} disabled={this.props.history.canPrev()}>prev</button>
                 <span> </span>
-                <button onClick={this.nextState} disabled={this.props.history.canNext() }>redo</button>
+                <button onClick={this.nextState} disabled={this.props.history.canNext() }>next</button>
                 <p>
                     <b>{this.props.history.stateIndex}</b> position
                 </p>

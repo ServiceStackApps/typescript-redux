@@ -13,7 +13,7 @@ interface IHelloWorldProps {
 }
 
 @reduxify(
-    (state, props) => ({ counter: state[props.field] || 0 }),
+    (state, props) => ({ counter: (state[props.field] || 0) }),
     (dispatch) => ({
         incr: (field, step) => {
             dispatch({ type: 'COUNTER_CHANGE', field, by: step });
@@ -29,12 +29,11 @@ export default class Counter extends React.Component<IHelloWorldProps, any> {
         return (
             <div>
                 <p>
-                <label>{field}: </label>
-                <b>{this.props.counter}</b>
+                    <label>{field}: </label>
+                    <b>{this.props.counter}</b>
                 </p>
-                <button style={{ width:30, margin:2 }} onClick={e => this.props.incr(field, step) }>+</button>
                 <button style={{ width:30, margin:2 }} onClick={e => this.props.decr(field, step) }>-</button>
-                <span style={{ padding: "0 5px" }} />
+                <button style={{ width: 30, margin: 2 }} onClick={e => this.props.incr(field, step) }>+</button>
             </div>
         );
     }
