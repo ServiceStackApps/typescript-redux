@@ -51,7 +51,10 @@ System.register(['react'], function(exports_1) {
                     var color = this.props.color;
                     var rgb = hexToRgb(color);
                     var textColor = isDark(color) ? '#fff' : '#000';
-                    return (React.createElement("div", null, React.createElement(NumberPicker, {"name": "Red", "value": rgb.r, "onChange": this.updateRed}), React.createElement(NumberPicker, {"name": "Green", "value": rgb.g, "onChange": this.updateGreen}), React.createElement(NumberPicker, {"name": "Blue", "value": rgb.b, "onChange": this.updateBlue}), React.createElement("div", {"style": { background: color, width: 200, height: 40, lineHeight: "40px", textAlign: "center", color: textColor }}, color)));
+                    return (React.createElement("div", null, React.createElement(NumberPicker, {"name": "Red", "value": rgb.r, "onChange": this.updateRed}), React.createElement(NumberPicker, {"name": "Green", "value": rgb.g, "onChange": this.updateGreen}), React.createElement(NumberPicker, {"name": "Blue", "value": rgb.b, "onChange": this.updateBlue}), React.createElement("div", {"style": {
+                        background: color, width: "100%", height: 40, lineHeight: "40px",
+                        textAlign: "center", color: textColor
+                    }}, color)));
                 };
                 ColorPicker.prototype.changeColor = function (color) {
                     this.props.onChange(color);
@@ -63,7 +66,9 @@ System.register(['react'], function(exports_1) {
                 var hex = c.toString(16);
                 return hex.length == 1 ? "0" + hex : hex;
             };
-            rgbToHex = function (r, g, b) { return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b); };
+            rgbToHex = function (r, g, b) {
+                return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+            };
             hexToRgb = function (hex) {
                 var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
                 return result ? {

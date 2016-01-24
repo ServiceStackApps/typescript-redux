@@ -97,17 +97,20 @@
     <TypeScriptCompile Include="src\example06\app.tsx" />
     <TypeScriptCompile Include="src\example06\Counter.tsx" />
     <TypeScriptCompile Include="src\example07\app.tsx" />
+    <TypeScriptCompile Include="src\example07\ActionPlayer.tsx" />
     <TypeScriptCompile Include="src\example07\ColorPicker.tsx" />
     <TypeScriptCompile Include="src\example07\Counter.tsx" />
     <TypeScriptCompile Include="src\example07\ShapeViewer.tsx" />
     <TypeScriptCompile Include="src\example07\ShapeMaker.tsx" />
+    <TypeScriptCompile Include="src\example08\ActionPlayer.tsx" />
     <TypeScriptCompile Include="src\example08\app.tsx" />
     <TypeScriptCompile Include="src\example08\ColorPicker.tsx" />
     <TypeScriptCompile Include="src\example08\core.ts" />
     <TypeScriptCompile Include="src\example08\Counter.tsx" />
     <TypeScriptCompile Include="src\example08\reducers.ts" />
     <TypeScriptCompile Include="src\example08\reducers\shapeReducers.ts" />
-    <TypeScriptCompile Include="src\example08\Shapes.tsx" />
+    <TypeScriptCompile Include="src\example08\ShapeMaker.tsx" />
+    <TypeScriptCompile Include="src\example08\ShapeViewer.tsx" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

@@ -41,23 +41,23 @@ export class ColorPicker extends React.Component<IColorPickerProps, any> {
                 <NumberPicker name="Red" value={rgb.r} onChange={this.updateRed} />
                 <NumberPicker name="Green" value={rgb.g} onChange={this.updateGreen} />
                 <NumberPicker name="Blue" value={rgb.b} onChange={this.updateBlue} />
-                <div style={{ background: color, width: 200, height: 40, lineHeight: "40px", textAlign: "center", color: textColor }}>
+                <div style={{
+                    background: color, width: "100%", height: 40, lineHeight: "40px",
+                    textAlign: "center", color: textColor
+                }}>
                     {color}
                 </div>
             </div>
         );
     }
-
     updateRed = (n: number) => {
         const rgb = hexToRgb(this.props.color);
         this.changeColor(rgbToHex(n, rgb.g, rgb.b));
     }
-
     updateGreen = (n: number) => {
         const rgb = hexToRgb(this.props.color);
         this.changeColor(rgbToHex(rgb.r, n, rgb.b));
     }
-
     updateBlue = (n: number) => {
         const rgb = hexToRgb(this.props.color);
         this.changeColor(rgbToHex(rgb.r, rgb.g, n));
@@ -68,12 +68,13 @@ export class ColorPicker extends React.Component<IColorPickerProps, any> {
     }
 }
 
-const componentToHex = (c) => {
+const componentToHex = (c: number) => {
     const hex = c.toString(16);
-    return hex.length == 1 ? "0" + hex : hex;
+    return hex.length == 1 ? `0${hex}` : hex;
 };
 
-const rgbToHex = (r, g, b) => "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+const rgbToHex = (r: number, g: number, b: number) =>
+    "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 
 const hexToRgb = (hex: string): { r: number; g: number; b: number; } => {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);

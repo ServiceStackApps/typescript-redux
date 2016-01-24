@@ -6,15 +6,37 @@ import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 
 import reducers from './reducers';
+import History from './History';
 import Counter from './Counter';
 import { ColorPicker } from './ColorPicker';
-import { ShapeMaker, ShapeViewer } from './Shapes';
-import { reduxify, listenTo } from './core';
+import ShapeMaker from './ShapeMaker';
+import ShapeViewer from './ShapeViewer';
+import { reduxify } from './core';
 
-var actions = [], states = [], stateIndex = 0;
 var defaultState = { nextShapeId: 0, width: 100, height: 100, color: "#000000", shapes: [] };
 
 //Proper Undo: http://rackt.org/redux/docs/recipes/ImplementingUndoHistory.html
+var history = {
+    actions: [],
+    states: [],
+    stateIndex: 0,
+    reset() {
+        this.actions = [];
+        this.states = [];
+        this.stateIndex = 0;
+    },
+    prev() { return this.states[--this.stateIndex]; },
+    next() { return this.states[++this.stateIndex]; },
+    goTo(index) { return this.states[this.stateIndex=index]; },
+    canPrev() { return this.stateIndex <= 0; },
+    canNext() { return this.stateIndex >= this.states.length - 1; },
+    add(action, nextState) {
+        this.actions.push(action);
+        this.states.push(nextState);
+        this.stateIndex = this.states.length - 1;
+    }
+};
+
 let store = createStore(
     (state, action) => {
         var reducer = reducers[action.type];
@@ -22,61 +44,12 @@ let store = createStore(
             ? reducer(state, action)
             : state;
 
-        if (action.type !== 'LOAD') {
-            actions.push(action);
-            states.push(nextState);
-            stateIndex = states.length - 1;
-        }
+        if (action.type !== 'LOAD')
+            history.add(action, nextState);
 
         return nextState;
     },
     defaultState);
-
-const replayActions = () => {
-   var clone = actions.slice(0);
-   store.dispatch({ type: 'LOAD', state: defaultState });
-    actions = [];
-
-    for (var i=0; i<clone.length; i++) {
-        (index => {
-            setTimeout(() => {
-                store.dispatch(clone[index]);
-            }, 10 * index);
-        })(i);
-    }
-};
-
-const clearActions = () => {
-    store.dispatch({ type: 'LOAD', state: defaultState });
-    actions = [], states = [], stateIndex = 0;
-};
-
-const undoAction = () => {
-    store.dispatch({ type: 'LOAD', state: states[--stateIndex] });
-};
-
-const redoAction = () => {
-    store.dispatch({ type: 'LOAD', state: states[++stateIndex] });
-};
-
-@listenTo(store)
-class ActionPlayer extends React.Component<any, any> {
-    render() {
-        return (
-            <div>
-                <button onClick={replayActions}>replay</button>
-                <span> </span>
-                <button onClick={clearActions}>clear</button>
-                <p>
-                    <b>{actions.length}</b> actions
-                </p>
-                <button onClick={undoAction} disabled={stateIndex <= 0}>undo</button>
-                <span> </span>
-                <button onClick={redoAction} disabled={stateIndex >= states.length - 1}>redo</button>
-            </div>
-        );
-    }
-}
 
 @reduxify(
     (state) => ({ color: state.color }),
@@ -93,7 +66,7 @@ ReactDOM.render(
         <table>
             <tbody>
             <tr>
-                <td>
+                <td style={{width:220}}>
                     <Counter field="width" step={10} />
                     <Counter field="height" step={10} />
                     <ColorWrapper />
@@ -102,8 +75,9 @@ ReactDOM.render(
                     <h2>Preview</h2>
                     <ShapeMaker />
                 </td>
-                <td style={{ verticalAlign: 'bottom' }}>
-                    <ActionPlayer />
+                <td style={{verticalAlign:"top"}}>
+                    <h2>History</h2>
+                    <History store={store} history={history} defaultState={defaultState} />
                 </td>
             </tr>
             <tr>

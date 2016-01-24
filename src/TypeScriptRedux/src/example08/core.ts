@@ -1,5 +1,4 @@
 ﻿/// <reference path='../../typings/tsd.d.ts'/>
-/// <reference path='../../typings/react-redux/react-redux.d.ts'/>
 
 import { Store, Dispatch, ActionCreator } from 'redux';
 import { Provider, connect } from 'react-redux';
@@ -21,13 +20,13 @@ export function reduxify(mapStateToProps?: MapStateToProps,
     return target => connect(mapStateToProps, mapDispatchToProps)(target);
 }
 
-export function listenTo(store:Store) {
+export function subscribeToStore() {
     return target => {
         var didMount = target.prototype.componentDidMount;
         target.prototype.componentDidMount = function() {
             if (didMount != null)
                 didMount.call(this);
-            this.unsubscribe = store.subscribe(() => this.forceUpdate());
+            this.unsubscribe = this.props.store.subscribe(() => this.forceUpdate());
         };
 
         var willUnmount = target.prototype.componentWillUnmount;
@@ -57,39 +56,4 @@ export function bindAll() {
         a = F;
         return a;
     };
-}
-
-export function pureRender() {
-    return target => {
-        target.prototype.shouldComponentUpdate = (nextProps, nextState) =>
-            !shallowEqual(this.props, nextProps) ||
-            !shallowEqual(this.state, nextState);
-    };
-}
-
-function shallowEqual(objA, objB) {
-    if (objA === objB) {
-        return true;
-    }
-
-    if (typeof objA !== 'object' || objA === null ||
-        typeof objB !== 'object' || objB === null) {
-        return false;
-    }
-
-    var keysA = Object.keys(objA);
-    var keysB = Object.keys(objB);
-
-    if (keysA.length !== keysB.length) {
-        return false;
-    }
-
-    var bHasOwnProperty = Object.prototype.hasOwnProperty.bind(objB);
-    for (var i = 0; i < keysA.length; i++) {
-        if (!bHasOwnProperty(keysA[i]) || objA[keysA[i]] !== objB[keysA[i]]) {
-            return false;
-        }
-    }
-
-    return true;
 }
