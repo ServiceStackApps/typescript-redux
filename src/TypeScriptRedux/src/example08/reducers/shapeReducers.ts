@@ -7,6 +7,7 @@ export const addShape = (state, action) => {
 };
 
 export const changeShape = (state, action) => {
-    var shape = Object.assign({}, state.shapes.filter(x => x.id === action.id)[0], { top: action.top, left: action.left });
+    var shape = Object.assign({}, state.shapes.filter(x => x.id === action.id)[0],
+        { top: action.top, left: action.left });
     return Object.assign({}, state, { shapes: [...state.shapes.filter(x => x.id !== action.id), shape] });
 };

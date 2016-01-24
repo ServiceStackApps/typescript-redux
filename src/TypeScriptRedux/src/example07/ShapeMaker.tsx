@@ -24,12 +24,11 @@ class ShapeMaker extends React.Component<any, any> {
                 <div>
                     <p>
                         <label>position: </label>
-                        <input style={{ width: 30 }} defaultValue={this.props.top} onChange={e => this.handleTop(e) } />
+                        <input style={{width:30}} defaultValue={this.props.top} onChange={e => this.handleTop(e)} />
                         <span>,</span>
-                        <input style={{ width: 30 }} defaultValue={this.props.left} onChange={e => this.handleLeft(e) } />
+                        <input style={{width:30}} defaultValue={this.props.left} onChange={e => this.handleLeft(e)} />
                     </p>
-
-                    <button onClick={e => this.props.addShape(background, height, width, this.state.top, this.state.left) }>
+                    <button onClick={e => this.props.addShape(background,height,width,this.state.top,this.state.left) }>
                         Add Shape
                     </button>
                 </div>
