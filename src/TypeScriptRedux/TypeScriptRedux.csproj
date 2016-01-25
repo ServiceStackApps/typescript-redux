@@ -70,14 +70,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="default.htm" />
-    <Content Include="src\example01\default.htm" />
-    <Content Include="src\example02\default.htm" />
-    <Content Include="src\example03\default.htm" />
-    <Content Include="src\example04\default.htm" />
-    <Content Include="src\example05\default.htm" />
-    <Content Include="src\example06\default.htm" />
-    <Content Include="src\example07\default.htm" />
-    <Content Include="src\example08\default.htm" />
+    <Content Include="src\example01\index.html" />
+    <Content Include="src\example02\index.html" />
+    <Content Include="src\example03\index.html" />
+    <Content Include="src\example04\index.html" />
+    <Content Include="src\example05\index.html" />
+    <Content Include="src\example06\index.html" />
+    <Content Include="src\example07\index.html" />
+    <Content Include="src\example08\index.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -102,7 +102,7 @@
     <TypeScriptCompile Include="src\example07\Counter.tsx" />
     <TypeScriptCompile Include="src\example07\ShapeViewer.tsx" />
     <TypeScriptCompile Include="src\example07\ShapeMaker.tsx" />
-    <TypeScriptCompile Include="src\example08\ActionPlayer.tsx" />
+    <TypeScriptCompile Include="src\example08\History.tsx" />
     <TypeScriptCompile Include="src\example08\app.tsx" />
     <TypeScriptCompile Include="src\example08\ColorPicker.tsx" />
     <TypeScriptCompile Include="src\example08\core.ts" />
