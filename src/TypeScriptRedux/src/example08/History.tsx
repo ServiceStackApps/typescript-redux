@@ -16,11 +16,12 @@ export default class History extends React.Component<any, any> {
                 </p>
                 <button onClick={this.prevState} disabled={this.props.history.canPrev()}>prev</button>
                 <span> </span>
-                <button onClick={this.nextState} disabled={this.props.history.canNext() }>next</button>
+                <button onClick={this.nextState} disabled={this.props.history.canNext()}>next</button>
                 <p>
                     <b>{this.props.history.stateIndex + 1}</b> position
                 </p>
                 <input type="range" min="0" max={this.props.history.states.length - 1}
+                    disabled={this.props.history.states.length === 0}
                     value={this.props.history.stateIndex} onChange={this.goToState} />
             </div>
         );
@@ -42,7 +43,6 @@ export default class History extends React.Component<any, any> {
         this.props.store.dispatch({ type: 'LOAD', state: this.props.history.next() });
     }
     goToState = (event) => {
-        if (this.props.history.states.length === 0) return;
         const e = event.target as HTMLInputElement;
         this.props.store.dispatch({ type: 'LOAD', state: this.props.history.goTo(parseInt(e.value)) });
     }
