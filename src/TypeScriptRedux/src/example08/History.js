@@ -32,8 +32,7 @@ System.register(['react', './core'], function(exports_1) {
                         _this.props.history.reset();
                     };
                     this.replayStates = function () {
-                        var snapshot = _this.props.history.states.slice(0);
-                        snapshot.forEach(function (state, i) {
+                        _this.props.history.states.forEach(function (state, i) {
                             return setTimeout(function () { return _this.props.store.dispatch({ type: 'LOAD', state: state }); }, 10 * i);
                         });
                     };

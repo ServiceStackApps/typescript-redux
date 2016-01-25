@@ -31,9 +31,7 @@ export default class History extends React.Component<any, any> {
         this.props.history.reset();
     }
     replayStates = () => {
-        var snapshot = this.props.history.states.slice(0);
-
-        snapshot.forEach((state, i) =>
+        this.props.history.states.forEach((state, i) =>
             setTimeout(() => this.props.store.dispatch({ type: 'LOAD', state }), 10 * i));
     }
     prevState = () => {
