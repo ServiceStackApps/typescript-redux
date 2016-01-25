@@ -4,7 +4,7 @@ import * as React from 'react';
 import { subscribeToStore } from './core';
 
 @subscribeToStore()
-export default class ActionPlayer extends React.Component<any, any> {
+export default class History extends React.Component<any, any> {
     render() {
         return (
             <div>

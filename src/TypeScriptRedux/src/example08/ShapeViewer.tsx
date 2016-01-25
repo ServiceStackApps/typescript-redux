@@ -19,21 +19,21 @@ export default class ShapeViewer extends React.Component<any, any> {
     render() {
         return (
             <div className="noselect" style={{position:"relative",border:"solid 1px #ccc",width:860,height:500}}>
-                { this.props.shapes.map(s => (
-                    <div key={s.id} style={{
-                        position: "absolute", top: s.top, left: s.left, color: isDark(s.color) ? '#fff' : '#000',
-                        background: s.color, width: s.width, height: s.height,
-                        lineHeight: s.height + 'px', textAlign: "center",
-                        cursor: 'move'
-                    }}
-                        onMouseDown={this.handleDragInit}
-                        onMouseUp={e => this.setState({ isDragging: false }) }
-                        onMouseOut={e => this.setState({ isDragging: false }) }
-                        onMouseMove={e => this.handleDrag(s.id, s.height, s.width, e) }>
-                        ({s.top}, {s.left})
-                        </div>)
-                ) }
-                </div>
+            { this.props.shapes.map(s => (
+                <div key={s.id} style={{
+                    position: "absolute", top: s.top, left: s.left, color: isDark(s.color) ? '#fff' : '#000',
+                    background: s.color, width: s.width, height: s.height,
+                    lineHeight: s.height + 'px', textAlign: "center",
+                    cursor: 'move'
+                }}
+                    onMouseDown={this.handleDragInit}
+                    onMouseUp={e => this.setState({ isDragging: false }) }
+                    onMouseOut={e => this.setState({ isDragging: false }) }
+                    onMouseMove={e => this.handleDrag(s.id, s.height, s.width, e) }>
+                    ({s.top}, {s.left})
+                    </div>)
+            )}
+            </div>
         );
     }
     handleDragInit = (e) => {

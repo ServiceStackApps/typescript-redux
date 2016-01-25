@@ -12,10 +12,10 @@ export class NumberPicker extends React.Component<INumberProps, any> {
     render() {
         return (
             <p>
-                <input type="range" value={this.props.value.toString() } min="0" max="255"
+                <input type="range" value={this.props.value.toString()} min="0" max="255"
                     onChange={this.handleChange} />
                 <label> {this.props.name}: </label>
-                <b>{ this.props.value }</b>
+                <b>{this.props.value}</b>
             </p>
         );
     }
@@ -62,7 +62,6 @@ export class ColorPicker extends React.Component<IColorPickerProps, any> {
         const rgb = hexToRgb(this.props.color);
         this.changeColor(rgbToHex(rgb.r, rgb.g, n));
     }
-
     changeColor(color: string) {
         this.props.onChange(color);  
     }

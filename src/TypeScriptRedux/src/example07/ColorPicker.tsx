@@ -6,10 +6,10 @@ export class NumberPicker extends React.Component<any, any> {
     render() {
         return (
             <p>
-                <input type="range" value={this.props.value.toString() } min="0" max="255"
-                    onChange={e => this.handleChange(e) } />
+                <input type="range" value={this.props.value.toString()} min="0" max="255"
+                    onChange={e => this.handleChange(e)} />
                 <label> {this.props.name}: </label>
-                <b>{ this.props.value }</b>
+                <b>{this.props.value}</b>
             </p>
         );
     }

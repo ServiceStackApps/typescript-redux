@@ -12,7 +12,7 @@ System.register(['react', './core'], function(exports_1) {
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var React, core_1;
-    var ActionPlayer;
+    var History;
     return {
         setters:[
             function (React_1) {
@@ -22,9 +22,9 @@ System.register(['react', './core'], function(exports_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
-            ActionPlayer = (function (_super) {
-                __extends(ActionPlayer, _super);
-                function ActionPlayer() {
+            History = (function (_super) {
+                __extends(History, _super);
+                function History() {
                     var _this = this;
                     _super.apply(this, arguments);
                     this.resetState = function () {
@@ -49,15 +49,15 @@ System.register(['react', './core'], function(exports_1) {
                         _this.props.store.dispatch({ type: 'LOAD', state: _this.props.history.goTo(parseInt(e.value)) });
                     };
                 }
-                ActionPlayer.prototype.render = function () {
+                History.prototype.render = function () {
                     return (React.createElement("div", null, React.createElement("button", {"onClick": this.replayActions}, "replay"), React.createElement("span", null, " "), React.createElement("button", {"onClick": this.resetState}, "clear"), React.createElement("p", null, React.createElement("b", null, this.props.history.actions.length), " actions"), React.createElement("button", {"onClick": this.prevState, "disabled": this.props.history.canPrev()}, "prev"), React.createElement("span", null, " "), React.createElement("button", {"onClick": this.nextState, "disabled": this.props.history.canNext()}, "next"), React.createElement("p", null, React.createElement("b", null, this.props.history.stateIndex), " position"), React.createElement("input", {"type": "range", "min": "0", "max": this.props.history.states.length - 1, "value": this.props.history.stateIndex, "onChange": this.goToState})));
                 };
-                ActionPlayer = __decorate([
+                History = __decorate([
                     core_1.subscribeToStore()
-                ], ActionPlayer);
-                return ActionPlayer;
+                ], History);
+                return History;
             })(React.Component);
-            exports_1("default", ActionPlayer);
+            exports_1("default", History);
         }
     }
 });
