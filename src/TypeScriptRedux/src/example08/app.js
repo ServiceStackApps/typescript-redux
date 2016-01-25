@@ -50,23 +50,19 @@ System.register(['react', 'react-dom', 'redux', 'react-redux', './reducers', './
             }],
         execute: function() {
             defaultState = { nextShapeId: 0, width: 100, height: 100, color: "#000000", shapes: [] };
-            //Proper Undo: http://rackt.org/redux/docs/recipes/ImplementingUndoHistory.html
             history = {
-                actions: [],
                 states: [],
                 stateIndex: 0,
                 reset: function () {
-                    this.actions = [];
                     this.states = [];
-                    this.stateIndex = 0;
+                    this.stateIndex = -1;
                 },
                 prev: function () { return this.states[--this.stateIndex]; },
                 next: function () { return this.states[++this.stateIndex]; },
                 goTo: function (index) { return this.states[this.stateIndex = index]; },
                 canPrev: function () { return this.stateIndex <= 0; },
                 canNext: function () { return this.stateIndex >= this.states.length - 1; },
-                add: function (action, nextState) {
-                    this.actions.push(action);
+                pushState: function (nextState) {
                     this.states.push(nextState);
                     this.stateIndex = this.states.length - 1;
                 }
@@ -77,7 +73,7 @@ System.register(['react', 'react-dom', 'redux', 'react-redux', './reducers', './
                     ? reducer(state, action)
                     : state;
                 if (action.type !== 'LOAD')
-                    history.add(action, nextState);
+                    history.pushState(nextState);
                 return nextState;
             }, defaultState);
             ColorWrapper = (function (_super) {

@@ -31,11 +31,10 @@ System.register(['react', './core'], function(exports_1) {
                         _this.props.store.dispatch({ type: 'LOAD', state: _this.props.defaultState });
                         _this.props.history.reset();
                     };
-                    this.replayActions = function () {
-                        var snapshot = _this.props.history.actions.slice(0);
-                        _this.resetState();
-                        snapshot.forEach(function (action, i) {
-                            return setTimeout(function () { return _this.props.store.dispatch(action); }, 10 * i);
+                    this.replayStates = function () {
+                        var snapshot = _this.props.history.states.slice(0);
+                        snapshot.forEach(function (state, i) {
+                            return setTimeout(function () { return _this.props.store.dispatch({ type: 'LOAD', state: state }); }, 10 * i);
                         });
                     };
                     this.prevState = function () {
@@ -45,12 +44,14 @@ System.register(['react', './core'], function(exports_1) {
                         _this.props.store.dispatch({ type: 'LOAD', state: _this.props.history.next() });
                     };
                     this.goToState = function (event) {
+                        if (_this.props.history.states.length === 0)
+                            return;
                         var e = event.target;
                         _this.props.store.dispatch({ type: 'LOAD', state: _this.props.history.goTo(parseInt(e.value)) });
                     };
                 }
                 History.prototype.render = function () {
-                    return (React.createElement("div", null, React.createElement("button", {"onClick": this.replayActions}, "replay"), React.createElement("span", null, " "), React.createElement("button", {"onClick": this.resetState}, "clear"), React.createElement("p", null, React.createElement("b", null, this.props.history.actions.length), " actions"), React.createElement("button", {"onClick": this.prevState, "disabled": this.props.history.canPrev()}, "prev"), React.createElement("span", null, " "), React.createElement("button", {"onClick": this.nextState, "disabled": this.props.history.canNext()}, "next"), React.createElement("p", null, React.createElement("b", null, this.props.history.stateIndex), " position"), React.createElement("input", {"type": "range", "min": "0", "max": this.props.history.states.length - 1, "value": this.props.history.stateIndex, "onChange": this.goToState})));
+                    return (React.createElement("div", null, React.createElement("button", {"onClick": this.replayStates}, "replay"), React.createElement("span", null, " "), React.createElement("button", {"onClick": this.resetState}, "clear"), React.createElement("p", null, React.createElement("b", null, this.props.history.states.length), " states"), React.createElement("button", {"onClick": this.prevState, "disabled": this.props.history.canPrev()}, "prev"), React.createElement("span", null, " "), React.createElement("button", {"onClick": this.nextState, "disabled": this.props.history.canNext()}, "next"), React.createElement("p", null, React.createElement("b", null, this.props.history.stateIndex + 1), " position"), React.createElement("input", {"type": "range", "min": "0", "max": this.props.history.states.length - 1, "value": this.props.history.stateIndex, "onChange": this.goToState})));
                 };
                 History = __decorate([
                     core_1.subscribeToStore()

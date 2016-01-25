@@ -15,23 +15,19 @@ import { reduxify } from './core';
 
 var defaultState = { nextShapeId: 0, width: 100, height: 100, color: "#000000", shapes: [] };
 
-//Proper Undo: http://rackt.org/redux/docs/recipes/ImplementingUndoHistory.html
 var history = {
-    actions: [],
     states: [],
     stateIndex: 0,
     reset() {
-        this.actions = [];
         this.states = [];
-        this.stateIndex = 0;
+        this.stateIndex = -1;
     },
     prev() { return this.states[--this.stateIndex]; },
     next() { return this.states[++this.stateIndex]; },
     goTo(index) { return this.states[this.stateIndex=index]; },
     canPrev() { return this.stateIndex <= 0; },
     canNext() { return this.stateIndex >= this.states.length - 1; },
-    add(action, nextState) {
-        this.actions.push(action);
+    pushState(nextState) {
         this.states.push(nextState);
         this.stateIndex = this.states.length - 1;
     }
@@ -45,7 +41,7 @@ let store = createStore(
             : state;
 
         if (action.type !== 'LOAD')
-            history.add(action, nextState);
+            history.pushState(nextState);
 
         return nextState;
     },

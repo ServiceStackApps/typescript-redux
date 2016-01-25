@@ -8,17 +8,17 @@ export default class History extends React.Component<any, any> {
     render() {
         return (
             <div>
-                <button onClick={this.replayActions}>replay</button>
+                <button onClick={this.replayStates}>replay</button>
                 <span> </span>
                 <button onClick={this.resetState}>clear</button>
                 <p>
-                    <b>{this.props.history.actions.length}</b> actions
+                    <b>{this.props.history.states.length}</b> states
                 </p>
                 <button onClick={this.prevState} disabled={this.props.history.canPrev()}>prev</button>
                 <span> </span>
                 <button onClick={this.nextState} disabled={this.props.history.canNext() }>next</button>
                 <p>
-                    <b>{this.props.history.stateIndex}</b> position
+                    <b>{this.props.history.stateIndex + 1}</b> position
                 </p>
                 <input type="range" min="0" max={this.props.history.states.length - 1}
                     value={this.props.history.stateIndex} onChange={this.goToState} />
@@ -29,12 +29,11 @@ export default class History extends React.Component<any, any> {
         this.props.store.dispatch({ type: 'LOAD', state: this.props.defaultState });
         this.props.history.reset();
     }
-    replayActions = () => {
-        var snapshot = this.props.history.actions.slice(0);
-        this.resetState();
+    replayStates = () => {
+        var snapshot = this.props.history.states.slice(0);
 
-        snapshot.forEach((action, i) =>
-            setTimeout(() => this.props.store.dispatch(action), 10 * i));
+        snapshot.forEach((state, i) =>
+            setTimeout(() => this.props.store.dispatch({ type: 'LOAD', state }), 10 * i));
     }
     prevState = () => {
         this.props.store.dispatch({ type: 'LOAD', state: this.props.history.prev() });
@@ -43,6 +42,7 @@ export default class History extends React.Component<any, any> {
         this.props.store.dispatch({ type: 'LOAD', state: this.props.history.next() });
     }
     goToState = (event) => {
+        if (this.props.history.states.length === 0) return;
         const e = event.target as HTMLInputElement;
         this.props.store.dispatch({ type: 'LOAD', state: this.props.history.goTo(parseInt(e.value)) });
     }
