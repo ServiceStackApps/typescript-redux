@@ -19,6 +19,21 @@ If you haven't already download and install the latest version from
  - [VS.NET 2015](https://www.microsoft.com/en-us/download/details.aspx?id=48593)
  - [VS.NET 2013](https://www.microsoft.com/en-us/download/details.aspx?id=48739)
 
+### [VS.NET 2015 Install Package](https://visualstudiogallery.msdn.microsoft.com/753b9720-1638-4f9a-ad8d-2c45a410fd74)
+
+Visual Studio 2015 also has a 
+[Package Installer](https://visualstudiogallery.msdn.microsoft.com/753b9720-1638-4f9a-ad8d-2c45a410fd74) 
+add-on providing an Integrated UI for installing npm and JSPM packages as well as TSD Type Definitions:
+
+[![](https://raw.githubusercontent.com/ServiceStackApps/typescript-redux/master/img/vs-install-jspm-package.png)](https://visualstudiogallery.msdn.microsoft.com/753b9720-1638-4f9a-ad8d-2c45a410fd74) 
+
+It's autocomplete feature is particularly useful for quickly finding packages you don't know the exact name of:
+
+[![](https://raw.githubusercontent.com/ServiceStackApps/typescript-redux/master/img/vs-jspm-autocomplete.png)](https://visualstudiogallery.msdn.microsoft.com/753b9720-1638-4f9a-ad8d-2c45a410fd74) 
+
+Although for this guide we'll install JavaScript packages using the command-line which offers better visibility 
+of how external packages integrates with your project and all fits together.
+
 ## Create an Empty ASP.NET Web Project
 
 Whilst installing the TypeScript VS.NET Extension provides a new **HTML Application with TypeScript** project
