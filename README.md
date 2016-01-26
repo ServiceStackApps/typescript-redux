@@ -23,7 +23,7 @@ If you haven't already download and install the latest version from
 
 Whilst installing the TypeScript VS.NET Extension provides a new **HTML Application with TypeScript** project
 template, you're better off starting from an **Empty ASP.NET Web Application** project then configuring 
-it with TypeScript - saving time to convert it into an ASP.NET Web Application later.
+it with TypeScript - saving the time to convert it into an ASP.NET Web Application later.
 
 ![](https://raw.githubusercontent.com/ServiceStackApps/typescript-redux/master/img/01-empty-web-project.png)
 
@@ -47,16 +47,16 @@ Click **No** to skip opening a NuGet dialog as you'll instead be sourcing your T
 
 ### Configure TypeScript
 
-After TypeScript's enabled you'll see an extra section added to the bottom of your **Project Properties** 
+After TypeScript is enabled you'll see an extra section added to the bottom of your **Project Properties** 
 dialog (select project and hit `Alt + Enter`):
 
 ![](https://raw.githubusercontent.com/ServiceStackApps/typescript-redux/master/img/05-configure-typescript-vs.png)
 
-In other Text Editors and development environments TypeScript's configuration would be maintained in a separate
+In other Text Editors and development environments TypeScripts configuration would be maintained in a separate
 `tsconfig.json` file, however VS.NET instead stores its TypeScript configuration within the `.csproj` itself, 
 where its preferences are saved. 
 
-In TypeScript preferences enable JSX support by changing **JSX compliation in TSX files** to **React**. 
+In TypeScript preferences enable JSX support by changing **JSX compilation in TSX files** to **React**. 
 You'll also want TypeScript to generate SystemJS modules by selecting the **System** radiobox under **Module system**.
 
 ## Install JSPM
@@ -83,7 +83,7 @@ and run through a few questions that will be used to create JSPM `config.js` fil
 
 ![](https://raw.githubusercontent.com/ServiceStackApps/typescript-redux/master/img/07-jspm-init.png)
 
-The only question you **don't** want to go with the defaults with and enter **no** for is:
+The only question you **won't** want to go with the defaults on and enter **no** for is:
 
 > Do you wish to use a transpiler? [yes]:**no**
 
@@ -125,7 +125,7 @@ The `--save` flag instructs **tsd** to add the reference to the common `typings/
 /// <reference path="react/react-dom.d.ts" />
 ```
 
-This is convenient as it means we only need to reference the one file in our souce code to import the 
+This is convenient as it means we only need to reference the one file in our source code to import the 
 Type Definitions for all our dependencies:
 
 ```typescript
@@ -135,12 +135,12 @@ Type Definitions for all our dependencies:
 ## Start TypeScript'ing
 
 Eureka! if you've reached this far we finally have a working development environment and can start putting 
-TypeScript and React to work for us. Lets start by creating a `src/` folder where we'll keep all our 
+TypeScript and React to work for us. Let's start by creating a `src/` folder where we'll keep all our 
 TypeScript source code. We'll start with the simplest of React examples:
 
-## [Example 01 - HelloWorld](https://github.com/ServiceStackApps/typescript-redux/tree/master/src/TypeScriptRedux/src/example01)
+## [Example 1 - HelloWorld](https://github.com/ServiceStackApps/typescript-redux/tree/master/src/TypeScriptRedux/src/example01)
 
-In this first example we'll go for the simplest working App. 
+In this first example we're aiming to create the simplest working App. 
 Create an `example01/` folder and add our first TypeScript file: 
 
 #### [app.tsx](https://github.com/ServiceStackApps/typescript-redux/blob/master/src/TypeScriptRedux/src/example01/app.tsx)
@@ -160,30 +160,32 @@ class HelloWorld extends React.Component<any, any> {
 ReactDOM.render(<HelloWorld/>, document.getElementById("content"));
 ```
 
-I'll walk through this as there's a few things going on here, in the first line:
+I'll walk through this as there's a few things going on here, the first line:
 
 ```typescript
 /// <reference path='../../typings/tsd.d.ts'/>
 ```
 
-We're using a [Reference Tag](http://blogs.msdn.com/b/webdev/archive/2007/11/06/jscript-intellisense-a-reference-for-the-reference-tag.aspx)
+Uses a [Reference Tag](http://blogs.msdn.com/b/webdev/archive/2007/11/06/jscript-intellisense-a-reference-for-the-reference-tag.aspx)
 to reference all the [Definitely Typed](https://github.com/DefinitelyTyped/DefinitelyTyped) Type Definitions
-installed by **tsd**. The following import statements:
+installed by **tsd**. 
+
+The import statements:
 
 ```typescript
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 ```
 
-Import the JavaScript modules installed by **jspm**. The `*` wildcard above imports the entire module, 
+Imports the JavaScript modules installed by **jspm**. The `*` wildcard above imports the entire module, 
 an alternative syntax is to import only what you need:
 
 ```typescript
 import { render } from 'react-dom';
 ```
 
-The exception to this is in `.tsx` as it requires **React** to be imported with a wildcard import otherwise JSX 
-fragments results in build errors:
+The exception to this is inside `.tsx` where it requires **React** to be imported with a wildcard import 
+otherwise JSX fragments will result in build errors:
 
     return <div>Hello, World!</div>; //compile error: Cannot find name React
 
@@ -237,14 +239,14 @@ Now all that's left is to build a HTML page to house our newly minted React Comp
 > **index.html** is a pre-defined default document in ASP.NET which lets us view our app by visiting the 
 directory, e.g `/example01/`
 
-Since we're using JSPM we need to import `system.js` module loader and our JSPM `config.js`:
+Since we're using JSPM we need to import the `system.js` module loader and our JSPM `config.js`:
 
 ```html
     <script src="/jspm_packages/system.js"></script>
     <script src="/config.js"></script>
 ```
 
-But then we only need a single import for our app.tsx:
+But from then on we only need a single import for our **app.tsx**:
 
 ```html
     <script>
@@ -253,14 +255,14 @@ But then we only need a single import for our app.tsx:
 ```
 
 Since we didn't configure JSPM to use a transpiler JSPM is only loading our pre-generated `*.js` files which 
-thanks to TypeScript's integration in VS.NET is generated everytime we hit save. This is ideal as it's 
-typically generated in-between the time we flip over to the browser to view our App and doesn't require any 
-manual build steps or managing an external process to monitor our source files for changes. 
+thanks to VS.NET's TypeScript integration is generated every time we hit save. This is ideal as it's 
+typically generated in-between the time we flip over to the browser to view our App, doesn't require any 
+manual post build steps or a separate external process monitoring our source files for changes. 
 
 The nice thing about using a module loader like JSPM is that we no longer need to manage static imports of
-3rd party dependencies since JSPM manages all this behind the scenes for us.
+3rd party dependencies ourselves since JSPM does all this for us behind the scenes.
 
-The final key element is an empty `<div/>` tag which is where we've instructed React to render our Component in:
+The final key element is an empty `<div/>` tag which is where we've instructed React to render our Component:
 
 ```html
     <div id="content"></div>
@@ -275,12 +277,12 @@ a working React App!
 
 ## Preloading Dependencies
 
-Although the excitement only lasts as long until you witness a noticeable delay in rendering Hello World? 
+Although the excitement only lasts a short while until you witness a noticeable delay in rendering Hello World? 
 Checking the network requests tab shows the root cause: **170 requests** to render the simplest React App!
 
-Since we don't have the luxury of HTTP2's multiplexed requests in VS.NET's WebDev server, we need to find a
-way to get the network requests count down. The common solution for this is to create an interim bundle with
-your 3rd party dependencies as they wont change frequently. We can do this by creating a simple `.tsx` file
+Since we don't have the luxury of HTTP 2's multiplexed requests in VS.NET's WebDev server, we need to find a
+way to get the network requests countdown. The common solution for this is to create an interim bundle with
+your 3rd party dependencies which change infrequently. We can do this by creating a simple `.tsx` file
 that just references all the 3rd party dependencies you want in the bundle, e.g:
 
 ### [deps.tsx](https://github.com/ServiceStackApps/typescript-redux/blob/8fbf5e4d2ed9bddc0ac73a17e3dbb954ffad13b3/src/TypeScriptRedux/src/deps.tsx)
@@ -314,16 +316,16 @@ That we then include in our
     </script>
 ```
 
-This has the nice effect of pre-loading all referenced 3rd party modules in a single HTTP Request so by the 
+This has the nice effect of preloading all referenced 3rd party modules in a single HTTP Request so by the 
 time our App requests use of a 3rd party module, it's already loaded.
 
 ### Enable debugging in Browsers
 
 Another nice feature of TypeScript we've yet to explore is its generation of source maps which lets us debug 
-our original TypeScript sources directly in Chrome. However to enable this we need to first register our 
-TypeScript file extensions with **Web.config** so they're downloadable. It just so happens that `.ts` is 
-already pre-registered with the `video/vnd.dlna.mpeg-tts` mime-type so as a matter of good taste we want to 
-replace that whilst adding a new mapping for `.tsx` files:
+our original TypeScript sources directly from within Chrome. However to enable this we need to first register 
+our TypeScript file extensions with **Web.config** so they're downloadable. It just so happens that `.ts` is 
+already pre-registered with the `video/vnd.dlna.mpeg-tts` mime-type that as a matter of good taste we'd want 
+to replace whilst adding a new mimeType mapping for `.tsx` files:
 
 ```xml
 <system.webServer>
@@ -358,9 +360,9 @@ export default class HelloWorld extends React.Component<any, any> {
 
 To make the HelloWorld component available we need to use the `export` keyword. We can also use the `default` 
 keyword to define a **default export** which makes it a little nicer to import as consumers can assign it to
-their preferred name when they import it.
+their preferred name when importing it.
 
-Now remove the HelloWorld implementation from `app.tsx` and import the exported component instead:
+Then remove the existing HelloWorld implementation from **app.tsx** and import the exported component instead:
 
 ### [app.tsx](https://github.com/ServiceStackApps/typescript-redux/blob/master/src/TypeScriptRedux/src/example02/app.tsx)
 
@@ -384,12 +386,12 @@ With this simple change lets check that our App still works:
 [![](https://raw.githubusercontent.com/ServiceStackApps/typescript-redux/master/img/preview-02.png)](http://servicestackapps.github.io/typescript-redux/example02/)
 > Demo: [/typescript-redux/example02/](http://servicestackapps.github.io/typescript-redux/example02/)
 
-## [Example 3 - Creating a stateful component]()
+## [Example 3 - Creating a stateful Component]()
 
-Now that we've mastered HelloWorld lets up our game and create a more advanced compenent with state.
+Now that we've mastered HelloWorld we'll up our game and create a more advanced component with some state.
 
-About the simplest example we could do is a Counter. For this rename `HelloWorld` to `Counter` and add the 
-following component:
+About the simplest example we could do for this is a Counter. For this rename `HelloWorld` to `Counter` and 
+add the following Component:
 
 #### [Counter.tsx](https://github.com/ServiceStackApps/typescript-redux/blob/master/src/TypeScriptRedux/src/example03/Counter.tsx)
 
@@ -419,15 +421,15 @@ export default class Counter extends React.Component<any, any> {
 }
 ```
 
-Nothing surprising here, we're just displaying a Counter in a HTML label with buttons to increment / decrement 
-the counter using React's built-in `setState()`:
+Nothing surprising here, we're displaying a Counter in a HTML label with buttons to increment / decrement the 
+counter using React's built-in `setState()`:
 
 [![](https://raw.githubusercontent.com/ServiceStackApps/typescript-redux/master/img/preview-03.png)](http://servicestackapps.github.io/typescript-redux/example03/) 
 > Demo: [/typescript-redux/example03/](http://servicestackapps.github.io/typescript-redux/example03/)
 
 ### Convert Counter to use Redux
 
-Using `setState()` was the old-school way of modifying state in Components, the new hawtness is to use 
+Using `setState()` is the old-school way of modifying state in Components, the new hawtness is to use 
 [Redux](https://github.com/rackt/redux). For this we need to fetch it from JSPM:
 
     C:\proj> jspm install redux
@@ -444,14 +446,14 @@ If you're not familiar with Redux it's a good time to head over to the
 [@dan_abramov](https://twitter.com/dan_abramov) provides a great way to get up to speed quickly.
 
 Redux is just a small library to manage your App's state which should be maintained in a single Redux store 
-that is accessible at anytime with `store.getState()`. The Redux store allows multiple subscribers to 
-register for state changes which must be initiated by dispatching an action. An action is just a plain 
+that's accessible at anytime with `store.getState()`. The Redux store allows for multiple subscribers to 
+subscribe to state changes which must be initiated by dispatching an action. An action being just a plain 
 JavaScript object with a `type` string property identifying the action. To change state you implement a 
 [reducer](http://rackt.org/redux/docs/basics/Reducers.html) function that takes the **current state** and 
-an **action** and whose sole job is to return the **next state**. The one caveat is for states to be 
+an **action** and whose sole purpose is to return the **next state**. The one caveat is for states to be 
 immutable so your reducer will need to return a new object instead of modifying any existing state.
 
-Now we know what Redux is, lets update our Counter to use it:
+Now we know what Redux is, let's update our Counter to use it:
 
 #### [Counter.tsx](https://github.com/ServiceStackApps/typescript-redux/blob/master/src/TypeScriptRedux/src/example04/Counter.tsx)
 
@@ -496,8 +498,8 @@ export default class Counter extends React.Component<any, any> {
 
 ### Creating a Redux Store
 
-Creating a Redux store just requires calling `createStore` from the **redux** module passing in our Apps 
-reducer function and the default state:
+Creating a Redux store is done by calling `createStore` from the **redux** module passing in our Apps reducer 
+function and the default state:
 
 ```typescript
 import { createStore } from 'redux';
@@ -514,11 +516,11 @@ let store = createStore(
     { counter: 0 });
 ```
 
-Since our Counter only has 1 action our reducer implementation is trivial - returns a new JavaScript 
-object with an updated Counter.
+Since our Counter only has 1 action our reducer implementation becomes trivial - returning a new object with 
+an updated Counter.
 
-Another thing to know about Redux is that it's completely independent from React so unlike the built-in 
-`setState()` React doesn't know when the state in your Redux store has changed which it needs in order to
+Another thing to know about Redux is that it's completely independent from React which unlike the built-in 
+`setState()` React doesn't know when the state in your Redux store has changed - needed in order to
 know when to re-render your Component. For this we need to register a listener so we can force the Component
 to re-render itself when the store's state changes:
 
@@ -534,7 +536,7 @@ to re-render itself when the store's state changes:
 ```
 
 We also need to change the component to read its state from `store.getState()` and instead of modifying the
-state with `setState()` we dispatch an action to get our reducer to do it:
+Components internal state with `setState()` we dispatch an action and get our reducer to update the App's state:
 
 ```typescript
     render() {
@@ -551,7 +553,7 @@ state with `setState()` we dispatch an action to get our reducer to do it:
     }
 ```
 
-With our Counter now reduxified, running it again will retain the same behavior as before:
+With our Counter now reduxified, running it again retains the same behavior as before:
 
 [![](https://raw.githubusercontent.com/ServiceStackApps/typescript-redux/master/img/preview-04.png)](http://servicestackapps.github.io/typescript-redux/example04/)
 > Demo: [/typescript-redux/example04/](http://servicestackapps.github.io/typescript-redux/example04/)
@@ -562,18 +564,18 @@ Something that stands out in the previous example is creating the Redux store in
 Since your App should only have 1 store, this isn't the right place for it. We can remedy this situation 
 with a bit of help from Redux's React helper library.
 
-The Redux bindings for React are maintained in a separate `react-redux` package that we can call on our old 
-friend JSPM to fetch for us:
+The Redux bindings for React are maintained in a separate `react-redux` package that we can call upon **JSPM** 
+to fetch for us:
 
     C:\proj> jspm install react-redux
 
-Like most popular libraries, there's typically a Type Definition for it:
+Like most popular libraries, there's also a Type Definition for it:
 
     C:\proj> tsd install react-redux --save
 
 ## [Example 5 - Use Provider to inject store in child Context](https://github.com/ServiceStackApps/typescript-redux/tree/master/src/TypeScriptRedux/src/example05)
 
-For this example, we'll move the Redux store into the top-level `app.tsx` class like so:
+For this example, we'll move the Redux store into the top-level **app.tsx** file like so:
 
 #### [app.tsx](https://github.com/ServiceStackApps/typescript-redux/blob/master/src/TypeScriptRedux/src/example05/app.tsx)
 
@@ -604,10 +606,10 @@ ReactDOM.render(
 ```
 
 To pass the store down to our components we're going to use 
-[React's child context](https://facebook.github.io/react/docs/context.html) feature which react-redux nicely
-packages for us in its `<Provider/>` component.
+[React's child context](https://facebook.github.io/react/docs/context.html) feature which is nicely packaged 
+for us with **react-redux** `<Provider/>` Component.
 
-To let React know we want the store injected into our `Counter` component we also need to define a static
+To let React know we want the store injected into our `Counter` Component we also need to define a static
 `contextTypes` property specifying the context it needs:
 
 #### [Counter.tsx](https://github.com/ServiceStackApps/typescript-redux/blob/master/src/TypeScriptRedux/src/example05/Counter.tsx)
@@ -650,12 +652,12 @@ This is another transparent change so our App should continue working:
 
 ## [Example 6 - Use connect() to make Components stateless](https://github.com/ServiceStackApps/typescript-redux/tree/master/src/TypeScriptRedux/src/example06)
 
-We've added a bit of boilerplate to get to where we are but it's now time to pull some back. Whilst the above
-example shows how we can use the Provider class to pass state down into our child components, **react-redux** 
-has another utility that can abstract the rest away.
+We've added a bit of boilerplate to get to where we are but it's now time to pull some of it back. The above 
+example shows how we can use the `Provider` Component to pass state down into our child components, 
+**react-redux** also has another utility that can abstract the rest away.
 
-Redux's `connect()` function returns a higher-level Component which can make your component stateless by 
-decoupling it from the Redux store by having its state and callbacks mapped to a Components properties:
+Redux's `connect()` function returns a higher-level Component which can make Components stateless, decoupling 
+it from the Redux store by mapping its state and callbacks to a Component's properties:
 
 #### [Counter.tsx](https://github.com/ServiceStackApps/typescript-redux/blob/master/src/TypeScriptRedux/src/example06/Counter.tsx)
 
@@ -694,14 +696,13 @@ export default connect(mapStateToProps, mapDispatchToProps)(Counter);
 ```
 
 To enable this we pass in a **mapStateToProps** function that returns an object containing all the state our 
-component needs. As our Component makes state changes we also need a **mapDispatchToProps** function that
-returns an object with all the callouts it needs to make that we translate into dispatching the 
-appropriate action. 
+component needs. As our Component also makes state changes we'll need a **mapDispatchToProps** function 
+as well, returning an object with all its callouts translated into dispatching the appropriate Redux action. 
 
-Redux `connect()` then uses these functions to return a new Component that subscribes to the Redux store 
-changes, re-rendering the (now child) `Counter` component with the updated state via properties.
+Redux `connect()` then combines these functions into a new higher-level Component that subscribes to the Redux 
+store changes, re-rendering its (now child) `Counter` component with updated state via Component properties.
 
-This change is also transparent so re-running the App should retain the existing behavior:
+This change is also transparent so re-running the App retains the existing behavior:
 
 [![](https://raw.githubusercontent.com/ServiceStackApps/typescript-redux/master/img/preview-06.png)](http://servicestackapps.github.io/typescript-redux/example06/)
 > Demo: [/typescript-redux/example06/](http://servicestackapps.github.io/typescript-redux/example06/)
@@ -709,13 +710,14 @@ This change is also transparent so re-running the App should retain the existing
 ## Install es6-shim
 
 Now that we've worked ourselves towards the ideal way to build a Redux-connected component, it's time to kick 
-it into high gear and build something more useful. Ultimately we're going to want to support more state and 
-more actions that requires going back to expand our reducer function. 
+it into high gear and build something more useful. Ultimately we're going to want to expand our reducer function
+to handle more state, actions and their state transitions. 
 
-More state quickly leads to needing help to create immutable objects. TypeScript already supports ES6's 
+Since we're going to be supporting more actions we're going to quickly want better tools for creating 
+immutable objects. TypeScript already supports ES6's 
 [spread operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator)
 which helps with creating new arrays but it doesn't yet support the 
-[object spread operator proposal](https://github.com/sebmarkbage/ecmascript-rest-spread) which is 
+[object spread operator proposal](https://github.com/sebmarkbage/ecmascript-rest-spread) - 
 something we're going to be doing a lot of. 
 
 Instead we'll enlist the help of ES6's 
@@ -725,12 +727,12 @@ appear with our good friend **JSPM**:
 
     C:\proj> jspm install es6-shim
 
-Then use **tsd** to fetch ES6 Type Definitions:
+Then use **tsd** to fetch ES6's Type Definitions:
 
     C:\proj> tsd install es6-shim --save
 
-Since it's been a while since our last interim build, now's a good time to cut another. First we'll expand
-`deps.tsx` to reference a little bit from every dependency:
+Since it's been awhile since our last interim build, now's a good time to cut another. First we'll expand 
+**deps.tsx** to reference a bit from every dependency:
 
 #### [deps.tsx](https://github.com/ServiceStackApps/typescript-redux/blob/master/src/TypeScriptRedux/src/deps.tsx) 
 
@@ -768,12 +770,12 @@ Shape Creator App instead.
 
 ### [Counter.tsx](https://github.com/ServiceStackApps/typescript-redux/blob/master/src/TypeScriptRedux/src/example07/Counter.tsx)
 
-We'll start by creating controls for specifying Width and Height, to do this we need to refactor our Counter 
+We'll start by creating controls for specifying Width and Height, to do this we need to refactor our `Counter` 
 into a reusable Component starting with a custom `field` property to specify the state it should manage. 
 We'll also add a `step` property enabling further customization to be able to increment by a custom value.
 
 Since we're going to be sending multiple actions I'll also adopt a semantic naming convention for action types 
-going forward using the format `{Type}_{Event}`, which for a Counter would be `COUNTER_CHANGE`:
+going forward using the format `{Type}_{Event}`, which for a Counter update becomes `COUNTER_CHANGE`:
 
 ```typescript
 import * as React from 'react';
@@ -809,7 +811,7 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(Counter);
 ```
 
-Now that it's reusable we can create multiple instances to control the Width and Height of our Shape with:
+Now that it's reusable we can create multiple instances to control the Width and Height of our Shape:
 
 ```html
 <Counter field="width" step={10} />
@@ -824,11 +826,11 @@ Which gets rendered as:
 
 The next Component our Shape Creator needs are controls to pick a color. The **range** INPUT control is ideal
 for this as it lets us quickly change the intensity of each color using a slider. We'll need a slider for each
-basic color as well as a preview area to display the color. The only unusual thing is a function to calculate
-the colors luminance which is used to determine whether to show black or white contrasting text.
+basic color as well as a preview area displaying the color. The only unusual thing is a function to calculate
+the colors luminance, used to determine whether to show black or white contrasting text.
 
 Otherwise `<ColorPicker />` is a pure React component without any dependencies on Redux, for that we'll 
-wrap it with another high-level component later in app.tsx:
+wrap it within another higher-level Component later on:
 
 ```typescript
 import * as React from 'react';
@@ -919,8 +921,8 @@ Which gets rendered as:
 
 Our Shape Creator is nearly there, to introduce some more state we'll also capture the **top** and 
 **left** positions indicating where to place it as well as a preview area showing the color and size 
-of the shape, embedded with the coordinates of where it will be placed. Finally we'll add a button to 
-add the Shape to our App: 
+of the shape, embedding the coordinates of where it will be placed. We'll also need to add the all important 
+**Add Shape** button to add the Shape to our App: 
 
 ```typescript
 import * as React from 'react';
@@ -997,7 +999,7 @@ access to the Apps functionality which thanks to its message-based design
 [offers a number of advantages](https://github.com/ServiceStack/ServiceStack/wiki/Advantages-of-message-based-web-services#advantages-of-message-based-designs)
 over opaque function calls, e.g. since they're just plain JavaScript objects we could easily create and 
 serialize 100 `SHAPE_ADD` actions and save them into localStorage for ourselves to restore later or even send 
-to someone else who could apply locally with minimal effort. 
+to someone else who could generically apply them locally with minimal effort. 
 
 ### [ShapeViewer.tsx](https://github.com/ServiceStackApps/typescript-redux/blob/master/src/TypeScriptRedux/src/example07/ShapeViewer.tsx)
 
@@ -1056,24 +1058,27 @@ export default connect(
 )(ShapeViewer);
 ```
 
-When Shapes have been added, ShapeViewer will render them into an empty div container: 
+When Shapes have been added, ShapeViewer renders them into an empty div container: 
 
 ![](https://raw.githubusercontent.com/ServiceStackApps/typescript-redux/master/img/shapes-viewer.png)
 
 ### Dragging shapes to generate actions
 
-In addition to viewing all shapes ShapeViewer also includes support for moving and updating a shapes postion 
+In addition to viewing all shapes ShapeViewer also includes support for moving and updating a shape's position 
 as it's a fast way to generate a lot of Actions quickly that ends up being a great way to visualize and replay 
-a series of state transitions.
+a series of state transitions. 
+
+> For simplicity we're using mouseover events instead of the proper drag and drop API's for this so you'll 
+need to start off dragging slowly, making the shape bigger also helps increases the target area.
 
 ### [ActionPlayer.tsx](https://github.com/ServiceStackApps/typescript-redux/blob/master/src/TypeScriptRedux/src/example07/ActionPlayer.tsx)
 
-Now that we've effectively covered all our Apps functionality it's time to get our hands dirty with Redux. 
+Now that we've effectively covered all our Apps functionality we can start flexing some Redux muscles. 
 
 #### replayActions
 
 If we've built our App correctly we should in theory be able to replay our entire App session by resetting our 
-Redux store back to its default state and replaying each action sent which is exactly what `replayActions` 
+Redux store back to its default state and replaying each action sent, which is exactly what `replayActions` 
 does, albeit slowly, with each action replayed 10ms apart to give the illusion of time:
 
 ```typescript
@@ -1118,25 +1123,25 @@ export default class ActionPlayer extends React.Component<any, any> {
 }
 ```
 
-ActionPlayer also displays the number of Actions that have been sent:
+ActionPlayer also displays the number of Actions sent:
 
 ![](https://raw.githubusercontent.com/ServiceStackApps/typescript-redux/master/img/shapes-actions.png)
 
 #### resetState
 
-Clearing our App back to its original state doesn't get any easier, just load the apps `defaultState` and
+Clearing our App back to its original state doesn't get much easier, just load the apps `defaultState` and
 clear the saved actions. 
 
 #### undoAction
 
-If the only thing our App captures are actions sent then we'll need to resort to an inefficient poor mans 
-version Undo of just replaying back every action except the last one. Fortunately thanks to the JavaScript VM 
+If the only thing our App captured were actions sent then we'll need to resort to an inefficient poor man's 
+Undo of just replaying back every action except the last one. Fortunately thanks to the JavaScript VM 
 performance wars this work is usually instant - making it look like we've implemented it properly :)
 
 ### [app.tsx](https://github.com/ServiceStackApps/typescript-redux/blob/master/src/TypeScriptRedux/src/example07/app.tsx)
 
 After having implemented all the modules that make up our App, the only things left is the parent Container 
-glue holding all parts together and our Redux reducer function, implementing all action's state transitions.
+glue hosting all parts together and our Redux reducer function, implementing all action state transitions.
 
 ### Application Reducers
 
@@ -1249,7 +1254,7 @@ And with that we have a working Shape Creator in its entirety:
 > Demo: [/typescript-redux/example07/](http://servicestackapps.github.io/typescript-redux/example07/)
 
 One point worth highlighting is that our top-level App is only ever rendered once as it's not contained
-within a high-level component changing state with `setState()` triggering re-rendering. As a result we need
+within a parent component using `setState()` to modify state and trigger re-rendering. As a result we need
 to wrap our ColorPicker into a Redux-aware ColorWrapper which also maps our Redux state to its Component 
 properties as well as translating the `onChange` callback into dispatching the appropriate Redux action.
 
@@ -1257,7 +1262,7 @@ properties as well as translating the `onChange` callback into dispatching the a
 
 There are a few areas in the classic Redux implementation above I believe we can improve upon with some 
 light refactoring and use of TypeScript's advanced language features. First thing on the refactor list is the
-giant `switch` statement whose tight coupling and multiple exit points need eliminating:
+large `switch` statement whose tight coupling and multiple exit points need eliminating:
 
 ```typescript
 let store = createStore(
@@ -1290,7 +1295,8 @@ let store = createStore(
 Instead of using Redux built-in 
 [combineReducers](http://rackt.org/redux/docs/api/combineReducers.html) for helping with modularity,
 my preference is to instead use a dictionary of action functions which I believe is the more readable and 
-flexible option. In the refactor I've also extracted reducers into a separate module, decoupling it from `app.tsx`:
+flexible option. In the refactor I've also extracted reducers into a separate module, decoupling it from 
+**app.tsx**:
 
 ```typescript
 import reducers from './reducers';
@@ -1372,14 +1378,14 @@ const ColorWrapper = connect(
 ```
 
 I dislike how implementations are disconnected from the Component's class declaration it applies to, 
-how it needs to be defined after the class declaration instead of above, conceptually matching how it works. 
+how it needs to be defined after the class declaration instead of above to match how it conceptually works. 
 
 If we instead extracted the implementations into separate `mapStateToProps` and `mapDispatchToProps` named 
 functions it adds readability but then creates even more moving parts and naming clashes making it harder 
-to reuse the same recipie for creating other Redux Components in the same file.
+to reuse the same recipe for creating other Redux Components in the same file.
 
 The `connect()` method is also an imperatively unnatural way to define a new Component which otherwise uses 
-class declarations. It's also less readable where the source code now reads: 
+class declarations. It's also less readable where the source code reads as: 
 
 > Use connect() to return a Factory constructor function that needs to be immediately invoked with your base 
 Component to return a new Component that replaces your existing Component which is now an interim artifact 
@@ -1434,9 +1440,10 @@ Incidentally this is something that Redux `connect()` provides automatically tha
 able to do a shallow and faster object reference comparison to determine if state has changed and a Component 
 needs updating.
 
-Something that can break identity comparisions are function callbacks in ES6 classes as in order to retain
-lexical `this` binding needs to use the 
-[fat arrow syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions):
+Something that can break identity comparisons are function callbacks in ES6 classes as in order to retain
+lexical `this` binding, we'd need to use the 
+[fat arrow syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
+at the call-site:
 
 ```typescript
 export class NumberPicker extends React.Component<any, any> {
@@ -1459,7 +1466,7 @@ export class NumberPicker extends React.Component<any, any> {
 
 The problem with this is that a new 
 [function identity](https://medium.com/@esamatti/react-js-pure-render-performance-anti-pattern-fb88c101332f#9bed)
-is created each time invalidating property comparisions and potential Pure Render optimizations. 
+is created each time invalidating property comparisons and potential Pure Render optimizations. 
 
 An easy workaround is to use the fat arrow syntax when defining your methods:
 
@@ -1482,13 +1489,13 @@ export class NumberPicker extends React.Component<INumberProps, any> {
 }
 ```
 
-Which now retains lexical `this` allowing the same instance to be safely used.
+`handleChange` now retains lexical `this` references allowing the same instance to be safely used.
 
 ## [Example 8 - Time Travelling using State Snapshots](https://github.com/ServiceStackApps/typescript-redux/tree/master/src/TypeScriptRedux/src/example08)
 
 In this example we'll replace `ActionPlayer` with a more complete implementation using App state snapshots. 
 By using state we can implement richer History functionality complete with back, forward and any point in time 
-navigation that we can fluently control with a slider enabling a "Time Travelling" experience to simulate 
+navigation that we can fluently control with a slider enabling a "Time Travelling" experience to simulate
 going back and forward throughout an App's users session.
 
 To make it more reusable the history state management is encapsulated behind a formal API with basic operations
@@ -1533,8 +1540,7 @@ let store = createStore(
 #### [History.tsx](https://github.com/ServiceStackApps/typescript-redux/blob/master/src/TypeScriptRedux/src/example08/History.tsx)
 
 By saving and restoring entire state snapshots the implementation for our History control becomes surprisingly 
-straight-forward, essentially it comes down to selecting which state we want to view which we do by 
-dispatching a **LOAD** action with the desired state:
+straight-forward, essentially it comes down to dispatching a **LOAD** action with the desired state:
 
 ```typescript
 @subscribeToStore()
@@ -1599,3 +1605,6 @@ We hope you've found ths guide useful and it helps spur some ideas of what you c
 and powerful technologies in your next App. We welcome any enhancements via pull-requests, otherwise feel free
 to drop feedback to [@demisbellot](https://twitter.com/demisbellot). If there's enough interest we'll also
 look at expanding the examples to explore more benefits of Redux within a network connected application in future.
+
+
+
