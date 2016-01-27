@@ -106,7 +106,7 @@ As we'll instead be using the TypeScript support in Visual Studio to do our tran
     
 ### Install React
 
-With JSPM all setup we can go shopping for JS packages - the first we'll need is React:
+With JSPM all setup we can go shopping for JS packages - the first one we'll need is React:
 
     C:\proj> jspm install react
 
