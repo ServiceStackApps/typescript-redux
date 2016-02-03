@@ -401,7 +401,7 @@ With this simple change lets check that our App still works:
 [![](https://raw.githubusercontent.com/ServiceStackApps/typescript-redux/master/img/preview-02.png)](http://servicestackapps.github.io/typescript-redux/example02/)
 > Demo: [/typescript-redux/example02/](http://servicestackapps.github.io/typescript-redux/example02/)
 
-## [Example 3 - Creating a stateful Component]()
+## [Example 3 - Creating a stateful Component](https://github.com/ServiceStackApps/typescript-redux/tree/master/src/TypeScriptRedux/src/example03)
 
 Now that we've mastered HelloWorld we'll up our game and create a more advanced component with some state.
 
