@@ -27,7 +27,9 @@ export default class Users extends React.Component<any, any> {
                 },
                 onJoin: () => this.refreshUsers(),
                 onLeave: () => this.refreshUsers(),
-                onUpdate: (user) => console.log('onUpdate',user),
+                onUpdate: (user) => this.setState({
+                     users: this.state.users.map(x => x.userId === user.userId ? user : x)
+                }), 
                 onState: (json, e) => {
                     this.props.store.dispatch({ type: 'LOAD', state: JSON.parse(json) });
                 },

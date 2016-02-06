@@ -35,7 +35,9 @@ System.register(['react', 'jquery', 'ss-utils'], function(exports_1) {
                             },
                             onJoin: function () { return _this.refreshUsers(); },
                             onLeave: function () { return _this.refreshUsers(); },
-                            onUpdate: function (user) { return console.log('onUpdate', user); },
+                            onUpdate: function (user) { return _this.setState({
+                                users: _this.state.users.map(function (x) { return x.userId === user.userId ? user : x; })
+                            }); },
                             onState: function (json, e) {
                                 _this.props.store.dispatch({ type: 'LOAD', state: JSON.parse(json) });
                             },
