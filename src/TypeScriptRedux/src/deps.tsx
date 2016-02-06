@@ -8,6 +8,9 @@ import { createStore } from 'redux';
 import { connect } from 'react-redux';
 import * as ES6 from 'es6-shim';
 
+import * as $ from 'jquery';
+import * as ssutils from 'ss-utils';
+
 var a = ES6.Object.assign({});
 var store = createStore((state, action) => state, {});
 
