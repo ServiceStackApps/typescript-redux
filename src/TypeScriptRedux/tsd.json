@@ -6,19 +6,25 @@
   "bundle": "typings/tsd.d.ts",
   "installed": {
     "react/react.d.ts": {
-      "commit": "2e7a477ac2b6471055aa6e0e56b333e8f327d6b7"
+      "commit": "4ec3c5bf291bc02f49eb30c1077340b235165c67"
     },
     "react/react-dom.d.ts": {
-      "commit": "6659791e2e8b77cf81a8d0cca3512fba7c818f9b"
+      "commit": "4ec3c5bf291bc02f49eb30c1077340b235165c67"
     },
     "redux/redux.d.ts": {
-      "commit": "2e7a477ac2b6471055aa6e0e56b333e8f327d6b7"
+      "commit": "4ec3c5bf291bc02f49eb30c1077340b235165c67"
     },
     "react-redux/react-redux.d.ts": {
-      "commit": "2e7a477ac2b6471055aa6e0e56b333e8f327d6b7"
+      "commit": "4ec3c5bf291bc02f49eb30c1077340b235165c67"
     },
     "es6-shim/es6-shim.d.ts": {
-      "commit": "2e7a477ac2b6471055aa6e0e56b333e8f327d6b7"
+      "commit": "4ec3c5bf291bc02f49eb30c1077340b235165c67"
+    },
+    "jquery/jquery.d.ts": {
+      "commit": "4ec3c5bf291bc02f49eb30c1077340b235165c67"
+    },
+    "ss-utils/ss-utils.d.ts": {
+      "commit": "4ec3c5bf291bc02f49eb30c1077340b235165c67"
     }
   }
 }
