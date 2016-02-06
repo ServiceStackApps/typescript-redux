@@ -8,11 +8,18 @@ System.config({
   },
 
   map: {
-    "es6-shim": "github:es-shims/es6-shim@0.34.1",
-    "react": "npm:react@0.14.6",
-    "react-dom": "npm:react-dom@0.14.6",
-    "react-redux": "npm:react-redux@4.0.6",
-    "redux": "npm:redux@3.0.5",
+    "es6-shim": "github:es-shims/es6-shim@0.34.2",
+    "jquery": "npm:jquery@2.2.0",
+    "jquery-validation-unobtrusive": "github:aspnet/jquery-validation-unobtrusive@3.2.5",
+    "react": "npm:react@0.14.7",
+    "react-dom": "npm:react-dom@0.14.7",
+    "react-redux": "npm:react-redux@4.4.0",
+    "redux": "npm:redux@3.3.0",
+    "servicestack/ss-utils": "github:servicestack/ss-utils@0.0.3",
+    "ss-utils": "npm:ss-utils@0.0.6",
+    "github:aspnet/jquery-validation-unobtrusive@3.2.5": {
+      "jquery-validation": "github:jzaefferer/jquery-validation@1.14.0"
+    },
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },
@@ -30,6 +37,9 @@ System.config({
     },
     "github:jspm/nodelibs-util@0.1.0": {
       "util": "npm:util@0.10.3"
+    },
+    "github:jzaefferer/jquery-validation@1.14.0": {
+      "jquery": "npm:jquery@2.2.0"
     },
     "npm:assert@1.3.0": {
       "util": "npm:util@0.10.3"
@@ -55,6 +65,9 @@ System.config({
       "loose-envify": "npm:loose-envify@1.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
+    "npm:lodash@4.2.1": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
     "npm:loose-envify@1.1.0": {
       "js-tokens": "npm:js-tokens@1.0.2",
       "process": "github:jspm/nodelibs-process@0.1.2",
@@ -64,17 +77,19 @@ System.config({
     "npm:process@0.11.2": {
       "assert": "github:jspm/nodelibs-assert@0.1.0"
     },
-    "npm:react-dom@0.14.6": {
-      "react": "npm:react@0.14.6"
+    "npm:react-dom@0.14.7": {
+      "react": "npm:react@0.14.7"
     },
-    "npm:react-redux@4.0.6": {
-      "hoist-non-react-statics": "npm:hoist-non-react-statics@1.0.3",
+    "npm:react-redux@4.4.0": {
+      "hoist-non-react-statics": "npm:hoist-non-react-statics@1.0.5",
       "invariant": "npm:invariant@2.2.0",
+      "lodash": "npm:lodash@4.2.1",
+      "loose-envify": "npm:loose-envify@1.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2",
-      "react": "npm:react@0.14.6",
-      "redux": "npm:redux@3.0.5"
+      "react": "npm:react@0.14.7",
+      "redux": "npm:redux@3.3.0"
     },
-    "npm:react@0.14.6": {
+    "npm:react@0.14.7": {
       "fbjs": "npm:fbjs@0.6.1",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
@@ -88,8 +103,13 @@ System.config({
       "stream-browserify": "npm:stream-browserify@1.0.0",
       "string_decoder": "npm:string_decoder@0.10.31"
     },
-    "npm:redux@3.0.5": {
+    "npm:redux@3.3.0": {
+      "lodash": "npm:lodash@4.2.1",
+      "loose-envify": "npm:loose-envify@1.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:ss-utils@0.0.6": {
+      "jquery": "npm:jquery@2.2.0"
     },
     "npm:stream-browserify@1.0.0": {
       "events": "github:jspm/nodelibs-events@0.1.1",

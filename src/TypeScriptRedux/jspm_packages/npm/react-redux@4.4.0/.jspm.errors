@@ -1,0 +1,93 @@
+MultipleErrors: C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:1:21: Unexpected reserved word import
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:1:28: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:1:62: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:2:1: Unexpected reserved word import
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:2:8: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:2:19: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:2:24: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:3:1: Unexpected reserved word import
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:3:8: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:3:21: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:3:26: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:4:1: Unexpected reserved word import
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:4:8: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:4:27: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:4:32: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:5:1: Unexpected reserved word import
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:5:8: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:5:22: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:5:27: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:6:1: Unexpected reserved word import
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:6:8: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:6:21: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:6:26: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:7:1: Unexpected reserved word import
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:7:8: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:7:18: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:7:23: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:12:3: Unexpected token ...
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:13:16: Unexpected token ,
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:13:3: Unexpected token ...
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:14:3: Unexpected token ...
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:14:6: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:34:1: Unexpected reserved word export
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:34:8: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:34:8: Unexpected reserved word default
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:34:16: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:274:13: Unexpected token ...
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:274:16: Unexpected token this
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:275:16: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:275:16: Unexpected token :
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:275:18: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:276:12: Unexpected token )
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:277:16: Unexpected token {
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:278:11: Unexpected token this
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:278:15: Unexpected token .
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:283:16: Unexpected token this
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:283:20: Unexpected token .
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:283:21: Unexpected token renderedElement
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/connect.js:313:1: Unexpected token }
+
+MultipleErrors: C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/utils/shallowEqual.js:1:1: Unexpected reserved word export
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/utils/shallowEqual.js:1:8: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/utils/shallowEqual.js:1:8: Unexpected reserved word default
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/utils/shallowEqual.js:1:16: Semi-colon expected
+
+MultipleErrors: C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/Provider.js:1:21: Unexpected reserved word import
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/Provider.js:1:28: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/Provider.js:1:68: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/Provider.js:2:1: Unexpected reserved word import
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/Provider.js:2:8: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/Provider.js:2:19: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/Provider.js:2:24: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/Provider.js:24:1: Unexpected reserved word export
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/Provider.js:24:8: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/Provider.js:24:8: Unexpected reserved word default
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/components/Provider.js:24:16: Semi-colon expected
+
+MultipleErrors: C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/utils/storeShape.js:1:1: Unexpected reserved word import
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/utils/storeShape.js:1:8: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/utils/storeShape.js:1:27: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/utils/storeShape.js:3:1: Unexpected reserved word export
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/utils/storeShape.js:3:8: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/utils/storeShape.js:3:8: Unexpected reserved word default
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/utils/storeShape.js:3:16: Semi-colon expected
+
+MultipleErrors: C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/utils/wrapActionCreators.js:1:1: Unexpected reserved word import
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/utils/wrapActionCreators.js:1:8: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/utils/wrapActionCreators.js:1:36: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/utils/wrapActionCreators.js:3:1: Unexpected reserved word export
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/utils/wrapActionCreators.js:3:8: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/utils/wrapActionCreators.js:3:8: Unexpected reserved word default
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/utils/wrapActionCreators.js:3:16: Semi-colon expected
+
+MultipleErrors: C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/index.js:1:1: Unexpected reserved word import
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/index.js:1:8: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/index.js:1:17: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/index.js:1:22: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/index.js:2:1: Unexpected reserved word import
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/index.js:2:8: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/index.js:2:16: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/index.js:2:21: Semi-colon expected
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/index.js:4:1: Unexpected reserved word export
+C:/Users/mythz/AppData/Local/.jspm/packages/npm/react-redux@4.4.0/src/index.js:4:8: Semi-colon expected
