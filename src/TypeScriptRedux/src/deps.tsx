@@ -8,8 +8,8 @@ import { createStore } from 'redux';
 import { connect } from 'react-redux';
 import * as ES6 from 'es6-shim';
 
-import * as $ from 'jquery';
-import * as ssutils from 'ss-utils';
+import 'jquery';
+import 'ss-utils';
 
 var a = ES6.Object.assign({});
 var store = createStore((state, action) => state, {});
@@ -23,3 +23,4 @@ class Deps extends React.Component<any, any> {
 var DepsRedux = connect((state) => ({}), (dispatch) => ({}))(Deps);
 
 const ignore = () => render(<Deps/>, document.body);
+

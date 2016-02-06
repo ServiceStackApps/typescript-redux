@@ -1,5 +1,5 @@
 /// <reference path='../typings/tsd.d.ts'/>
-System.register(['react', 'react-dom', 'redux', 'react-redux', 'es6-shim'], function(exports_1) {
+System.register(['react', 'react-dom', 'redux', 'react-redux', 'es6-shim', 'jquery', 'ss-utils'], function(exports_1) {
     var __extends = (this && this.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
@@ -23,7 +23,9 @@ System.register(['react', 'react-dom', 'redux', 'react-redux', 'es6-shim'], func
             },
             function (ES6_1) {
                 ES6 = ES6_1;
-            }],
+            },
+            function (_1) {},
+            function (_2) {}],
         execute: function() {
             a = ES6.Object.assign({});
             store = redux_1.createStore(function (state, action) { return state; }, {});
