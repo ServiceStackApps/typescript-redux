@@ -77,10 +77,9 @@ System.register(['react', 'react-dom', 'redux', 'react-redux', './reducers', './
             updateHistory = function (store) { return function (next) { return function (action) {
                 var result = next(action);
                 if (action.type !== 'LOAD') {
-                    var publishAction = Object.assign({ stateIndex: history.stateIndex }, action);
                     history.pushState(store.getState());
-                    $.ss.postJSON("/publish-channel/" + currentUser.usersChannel + "?selector=cmd.publishAction", publishAction);
                 }
+                $.ss.postJSON("/publish-channel/" + currentUser.usersChannel + "?selector=cmd.publishAction", action);
                 return result;
             }; }; };
             store = redux_1.createStore(function (state, action) {
