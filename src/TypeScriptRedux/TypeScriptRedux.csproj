@@ -78,9 +78,14 @@
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app.js" />
+    <Content Include="config.js" />
     <Content Include="deps.lib.js" />
     <Content Include="Global.asax" />
+    <Content Include="index.html" />
+    <Content Include="jspm_packages\system.js" />
     <Content Include="packages.config" />
+    <None Include="Properties\PublishProfiles\TypeScriptRedux.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -89,7 +94,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="default.htm" />
     <Content Include="src\example01\index.html" />
     <Content Include="src\example02\index.html" />
     <Content Include="src\example03\index.html" />
