@@ -31,7 +31,7 @@ export default class Users extends React.Component<any, any> {
                      users: this.state.users.map(x => x.userId === user.userId ? user : x)
                 }), 
                 onState: (json, e) => {
-                    this.props.store.dispatch({ type: 'LOAD', state: JSON.parse(json) });
+                    this.props.store.dispatch({ type: 'LOAD', state: json ? JSON.parse(json) : this.props.defaultState });
                 },
                 getState: (json, e) => {
                     var o = JSON.parse(json);

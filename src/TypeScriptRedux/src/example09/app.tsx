@@ -84,7 +84,7 @@ ReactDOM.render(
                     <Counter field="height" step={10} />
                     <ColorWrapper />
                 </td>
-                <td style={{verticalAlign:"top",textAlign:"center", width:500}}>
+                <td style={{verticalAlign:"top",textAlign:"center", width:400}}>
                     <h2>Preview</h2>
                     <ShapeMaker />
                 </td>
@@ -99,8 +99,8 @@ ReactDOM.render(
                     <ShapeViewer />
                 </td>
                 <td style={{verticalAlign:"top"}}>
-                    <h3 style={{ margin: 5, textAlign: 'center' }}>Users</h3>
-                    <Users store={store} history={history} onConnect={onConnect} />
+                    <h3 style={{ margin: 5, textAlign: 'center' }}>Connect</h3>
+                    <Users store={store} history={history} onConnect={onConnect} defaultState={defaultState} />
                 </td>
             </tr>
             </tbody>

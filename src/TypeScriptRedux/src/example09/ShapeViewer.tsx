@@ -18,7 +18,7 @@ export default class ShapeViewer extends React.Component<any, any> {
     }
     render() {
         return (
-            <div className="noselect" style={{position:"relative",border:"solid 1px #ccc",width:750,height:500}}>
+            <div className="noselect" style={{position:"relative",border:"solid 1px #ccc",width:650,height:400}}>
             { this.props.shapes.map(s => (
                 <div key={s.id} style={{
                     position: "absolute", top: s.top, left: s.left, color: isDark(s.color) ? '#fff' : '#000',

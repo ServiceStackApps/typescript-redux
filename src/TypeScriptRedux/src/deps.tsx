@@ -1,6 +1,6 @@
 ﻿/// <reference path='../typings/tsd.d.ts'/>
 
-//build bumdle with: jspm bundle src/deps deps.lib.js
+//build bundle with: jspm bundle src/deps deps.lib.js
 
 import * as React from 'react';
 import { render } from 'react-dom';

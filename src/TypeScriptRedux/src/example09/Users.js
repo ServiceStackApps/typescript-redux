@@ -39,7 +39,7 @@ System.register(['react', 'jquery', 'ss-utils'], function(exports_1) {
                                 users: _this.state.users.map(function (x) { return x.userId === user.userId ? user : x; })
                             }); },
                             onState: function (json, e) {
-                                _this.props.store.dispatch({ type: 'LOAD', state: JSON.parse(json) });
+                                _this.props.store.dispatch({ type: 'LOAD', state: json ? JSON.parse(json) : _this.props.defaultState });
                             },
                             getState: function (json, e) {
                                 var o = JSON.parse(json);
