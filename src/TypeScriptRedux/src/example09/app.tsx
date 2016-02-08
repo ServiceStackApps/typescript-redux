@@ -12,7 +12,7 @@ import { ColorPicker } from './ColorPicker';
 import ShapeMaker from './ShapeMaker';
 import ShapeViewer from './ShapeViewer';
 import { reduxify } from './core';
-import Users from './Users';
+import Connect from './Connect';
 
 var defaultState = {
     nextShapeId: 0, width: 100, height: 100, color: "#000000", shapes: [],
@@ -100,7 +100,7 @@ ReactDOM.render(
                 </td>
                 <td style={{verticalAlign:"top"}}>
                     <h3 style={{ margin: 5, textAlign: 'center' }}>Connect</h3>
-                    <Users store={store} history={history} onConnect={onConnect} defaultState={defaultState} />
+                    <Connect store={store} history={history} onConnect={onConnect} defaultState={defaultState} />
                 </td>
             </tr>
             </tbody>

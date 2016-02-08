@@ -1,5 +1,5 @@
 /// <reference path='../../typings/tsd.d.ts'/>
-System.register(['react', 'react-dom', 'redux', 'react-redux', './reducers', './History', './Counter', './ColorPicker', './ShapeMaker', './ShapeViewer', './core', './Users'], function(exports_1) {
+System.register(['react', 'react-dom', 'redux', 'react-redux', './reducers', './History', './Counter', './ColorPicker', './ShapeMaker', './ShapeViewer', './core', './Connect'], function(exports_1) {
     var __extends = (this && this.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
@@ -11,7 +11,7 @@ System.register(['react', 'react-dom', 'redux', 'react-redux', './reducers', './
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var React, ReactDOM, redux_1, react_redux_1, reducers_1, History_1, Counter_1, ColorPicker_1, ShapeMaker_1, ShapeViewer_1, core_1, Users_1;
+    var React, ReactDOM, redux_1, react_redux_1, reducers_1, History_1, Counter_1, ColorPicker_1, ShapeMaker_1, ShapeViewer_1, core_1, Connect_1;
     var defaultState, history, currentUser, onConnect, updateHistory, store, ColorWrapper;
     return {
         setters:[
@@ -48,8 +48,8 @@ System.register(['react', 'react-dom', 'redux', 'react-redux', './reducers', './
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (Users_1_1) {
-                Users_1 = Users_1_1;
+            function (Connect_1_1) {
+                Connect_1 = Connect_1_1;
             }],
         execute: function() {
             defaultState = {
@@ -102,7 +102,7 @@ System.register(['react', 'react-dom', 'redux', 'react-redux', './reducers', './
                 ], ColorWrapper);
                 return ColorWrapper;
             })(React.Component);
-            ReactDOM.render(React.createElement(react_redux_1.Provider, {"store": store}, React.createElement("table", null, React.createElement("tbody", null, React.createElement("tr", null, React.createElement("td", {"style": { width: 220 }}, React.createElement(Counter_1.default, {"field": "width", "step": 10}), React.createElement(Counter_1.default, {"field": "height", "step": 10}), React.createElement(ColorWrapper, null)), React.createElement("td", {"style": { verticalAlign: "top", textAlign: "center", width: 400 }}, React.createElement("h2", null, "Preview"), React.createElement(ShapeMaker_1.default, null)), React.createElement("td", {"style": { verticalAlign: "top" }}, React.createElement("h2", null, "History"), React.createElement(History_1.default, {"store": store, "history": history, "defaultState": defaultState}))), React.createElement("tr", null, React.createElement("td", {"colSpan": 2}, React.createElement("h3", {"style": { margin: 5, textAlign: 'center' }}, "Shapes"), React.createElement(ShapeViewer_1.default, null)), React.createElement("td", {"style": { verticalAlign: "top" }}, React.createElement("h3", {"style": { margin: 5, textAlign: 'center' }}, "Connect"), React.createElement(Users_1.default, {"store": store, "history": history, "onConnect": onConnect, "defaultState": defaultState})))))), document.getElementById("content"));
+            ReactDOM.render(React.createElement(react_redux_1.Provider, {"store": store}, React.createElement("table", null, React.createElement("tbody", null, React.createElement("tr", null, React.createElement("td", {"style": { width: 220 }}, React.createElement(Counter_1.default, {"field": "width", "step": 10}), React.createElement(Counter_1.default, {"field": "height", "step": 10}), React.createElement(ColorWrapper, null)), React.createElement("td", {"style": { verticalAlign: "top", textAlign: "center", width: 400 }}, React.createElement("h2", null, "Preview"), React.createElement(ShapeMaker_1.default, null)), React.createElement("td", {"style": { verticalAlign: "top" }}, React.createElement("h2", null, "History"), React.createElement(History_1.default, {"store": store, "history": history, "defaultState": defaultState}))), React.createElement("tr", null, React.createElement("td", {"colSpan": 2}, React.createElement("h3", {"style": { margin: 5, textAlign: 'center' }}, "Shapes"), React.createElement(ShapeViewer_1.default, null)), React.createElement("td", {"style": { verticalAlign: "top" }}, React.createElement("h3", {"style": { margin: 5, textAlign: 'center' }}, "Connect"), React.createElement(Connect_1.default, {"store": store, "history": history, "onConnect": onConnect, "defaultState": defaultState})))))), document.getElementById("content"));
         }
     }
 });

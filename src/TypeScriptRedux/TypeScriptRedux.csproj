@@ -138,7 +138,7 @@
     <TypeScriptCompile Include="src\example09\reducers.ts" />
     <TypeScriptCompile Include="src\example09\reducers\shapeReducers.ts" />
     <TypeScriptCompile Include="src\example09\ShapeMaker.tsx" />
-    <TypeScriptCompile Include="src\example09\Users.tsx" />
+    <TypeScriptCompile Include="src\example09\Connect.tsx" />
     <TypeScriptCompile Include="src\example09\ShapeViewer.tsx" />
     <TypeScriptCompile Include="src\example08\History.tsx" />
     <TypeScriptCompile Include="src\example08\app.tsx" />

@@ -8,7 +8,7 @@ import 'ss-utils';
 
 declare var EventSource:ssutils.IEventSourceStatic;
 
-export default class Users extends React.Component<any, any> {
+export default class Connect extends React.Component<any, any> {
 
     constructor(props?, context?) {
         super(props, context);

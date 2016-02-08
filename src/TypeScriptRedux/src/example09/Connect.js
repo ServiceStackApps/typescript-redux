@@ -6,7 +6,7 @@ System.register(['react', 'jquery', 'ss-utils'], function(exports_1) {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
     var React;
-    var Users, userChannel, serverEventsUrl, filterUsers;
+    var Connect, userChannel, serverEventsUrl, filterUsers;
     return {
         setters:[
             function (React_1) {
@@ -15,9 +15,9 @@ System.register(['react', 'jquery', 'ss-utils'], function(exports_1) {
             function (_1) {},
             function (_2) {}],
         execute: function() {
-            Users = (function (_super) {
-                __extends(Users, _super);
-                function Users(props, context) {
+            Connect = (function (_super) {
+                __extends(Connect, _super);
+                function Connect(props, context) {
                     var _this = this;
                     _super.call(this, props, context);
                     this.state = {
@@ -54,20 +54,20 @@ System.register(['react', 'jquery', 'ss-utils'], function(exports_1) {
                         }
                     });
                 }
-                Users.prototype.render = function () {
+                Connect.prototype.render = function () {
                     var _this = this;
                     if (this.state.currentUser == null)
                         return null;
                     return (React.createElement("div", null, React.createElement("div", {"style": { fontWeight: "bold" }}, this.renderUser(this.state.currentUser)), React.createElement("div", {"style": { padding: "8px 0", textAlign: "center", fontSize: "18px" }}, this.state.users.length, " users online:"), this.state.users.map(function (u) { return _this.renderUser(u); }), React.createElement("div", {"style": { textAlign: "center", padding: "10px 0" }}, this.state.connectedToUserId ? React.createElement("button", {"onClick": function (e) { return _this.disconnect(); }}, "disconnect") : null)));
                 };
-                Users.prototype.renderUser = function (u) {
+                Connect.prototype.renderUser = function (u) {
                     var _this = this;
                     return (React.createElement("div", {"key": u.userId, "onClick": function (e) { return _this.connectToUser(u.userId); }, "style": {
                         cursor: "pointer", padding: "4px",
                         background: u.userId === this.state.connectedToUserId ? "#ffc" : ""
                     }}, React.createElement("img", {"src": u.profileUrl, "style": { height: 24, verticalAlign: "middle" }}), React.createElement("span", {"style": { padding: "2px 5px" }}, u.displayName, " ", u.userId === this.state.currentUser.userId ? " (me)" : "")));
                 };
-                Users.prototype.connectToUser = function (userId) {
+                Connect.prototype.connectToUser = function (userId) {
                     var _this = this;
                     if (userId === this.state.currentUser.userId)
                         return;
@@ -83,22 +83,22 @@ System.register(['react', 'jquery', 'ss-utils'], function(exports_1) {
                         });
                     });
                 };
-                Users.prototype.disconnect = function () {
+                Connect.prototype.disconnect = function () {
                     $.ss.unsubscribeFromChannels([userChannel(this.state.connectedToUserId)]);
                     this.setState({ connectedToUserId: null });
                 };
-                Users.prototype.requestUsersState = function (userId) {
+                Connect.prototype.requestUsersState = function (userId) {
                     return $.ss.postJSON("/send-user/" + userId + "?selector=cmd.getState", { replyTo: this.state.currentUser.userId });
                 };
-                Users.prototype.refreshUsers = function () {
+                Connect.prototype.refreshUsers = function () {
                     var _this = this;
                     $.getJSON("/event-subscribers?channels=home", function (users) {
                         _this.setState({ users: filterUsers(users, _this.state.currentUser.userId) });
                     });
                 };
-                return Users;
+                return Connect;
             })(React.Component);
-            exports_1("default", Users);
+            exports_1("default", Connect);
             userChannel = function (userId) { return "u_" + userId; };
             serverEventsUrl = function (channels) {
                 if (channels === void 0) { channels = ["home"]; }
@@ -110,4 +110,4 @@ System.register(['react', 'jquery', 'ss-utils'], function(exports_1) {
         }
     }
 });
-//# sourceMappingURL=Users.js.map
+//# sourceMappingURL=Connect.js.map
