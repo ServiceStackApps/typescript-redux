@@ -90,14 +90,9 @@
   "npm:react-dom@0.14.7": {
     "react": "npm:react@^0.14.7"
   },
-  "github:servicestack/ss-utils@0.0.3": {},
   "npm:hoist-non-react-statics@1.0.5": {},
-  "github:es-shims/es6-shim@0.34.2": {},
   "npm:react@0.14.7": {
     "fbjs": "npm:fbjs@^0.6.1",
-    "process": "github:jspm/nodelibs-process@^0.1.0"
-  },
-  "npm:lodash@4.2.1": {
     "process": "github:jspm/nodelibs-process@^0.1.0"
   },
   "npm:react-redux@4.4.0": {
@@ -109,12 +104,19 @@
     "redux": "npm:redux@^3.0.0",
     "process": "github:jspm/nodelibs-process@^0.1.0"
   },
-  "npm:redux@3.3.0": {
-    "lodash": "npm:lodash@^4.2.0",
+  "github:es-shims/es6-shim@0.34.4": {},
+  "npm:redux@3.3.1": {
+    "lodash": "npm:lodash@^4.2.1",
+    "lodash-es": "npm:lodash-es@^4.2.1",
     "loose-envify": "npm:loose-envify@^1.1.0",
     "process": "github:jspm/nodelibs-process@^0.1.0"
   },
-  "npm:ss-utils@0.0.6": {
+  "npm:lodash-es@4.3.0": {},
+  "npm:lodash@4.3.0": {
+    "process": "github:jspm/nodelibs-process@^0.1.0",
+    "buffer": "github:jspm/nodelibs-buffer@^0.1.0"
+  },
+  "npm:ss-utils@0.0.8": {
     "jquery": "npm:jquery"
   }
 }
