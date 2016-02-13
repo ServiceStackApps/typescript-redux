@@ -23,7 +23,6 @@ export default class Connect extends React.Component<any, any> {
                     currentUser.usersChannel = userChannel(currentUser.userId);
                     this.setState({ currentUser, users: filterUsers(this.state.users, currentUser.userId) });
                     this.props.onConnect(currentUser);
-                    console.log(currentUser);
                 },
                 onJoin: () => this.refreshUsers(),
                 onLeave: () => this.refreshUsers(),
@@ -89,9 +88,9 @@ export default class Connect extends React.Component<any, any> {
         $.ss.updateSubscriber({
             SubscribeChannels: userChannel(userId), 
             UnsubscribeChannels: connectedChannels.join(',')
-        }, user => {
+        }, r => {
             this.setState({
-                channels:user.channels.split(','), 
+                channels:r.channels, 
                 connectedToUserId: userId
             });
         });

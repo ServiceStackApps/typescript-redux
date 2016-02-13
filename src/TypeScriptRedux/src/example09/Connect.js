@@ -31,7 +31,6 @@ System.register(['react', 'jquery', 'ss-utils'], function(exports_1) {
                                 currentUser.usersChannel = userChannel(currentUser.userId);
                                 _this.setState({ currentUser: currentUser, users: filterUsers(_this.state.users, currentUser.userId) });
                                 _this.props.onConnect(currentUser);
-                                console.log(currentUser);
                             },
                             onJoin: function () { return _this.refreshUsers(); },
                             onLeave: function () { return _this.refreshUsers(); },
@@ -76,9 +75,9 @@ System.register(['react', 'jquery', 'ss-utils'], function(exports_1) {
                     $.ss.updateSubscriber({
                         SubscribeChannels: userChannel(userId),
                         UnsubscribeChannels: connectedChannels.join(',')
-                    }, function (user) {
+                    }, function (r) {
                         _this.setState({
-                            channels: user.channels.split(','),
+                            channels: r.channels,
                             connectedToUserId: userId
                         });
                     });
