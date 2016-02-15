@@ -1,7 +1,7 @@
 {
   "name": "ss-utils",
   "title": "ServiceStack JavaScript Utils",
-  "version": "0.0.8",
+  "version": "0.1.0",
   "description": "ServiceStack's JavaScript library providing a number of convenience utilities in developing javascript web apps. Integrates with ServiceStack's Server features including Error Handling, Validation and Server Events",
   "homepage": "https://github.com/ServiceStack/ss-utils",
   "bugs": "https://github.com/ServiceStack/Issues",

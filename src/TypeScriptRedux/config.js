@@ -15,7 +15,7 @@ System.config({
     "react-dom": "npm:react-dom@0.14.7",
     "react-redux": "npm:react-redux@4.4.0",
     "redux": "npm:redux@3.3.1",
-    "ss-utils": "npm:ss-utils@0.0.8",
+    "ss-utils": "npm:ss-utils@0.1.0",
     "github:aspnet/jquery-validation-unobtrusive@3.2.5": {
       "jquery-validation": "github:jzaefferer/jquery-validation@1.14.0"
     },
@@ -109,7 +109,7 @@ System.config({
       "loose-envify": "npm:loose-envify@1.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
-    "npm:ss-utils@0.0.8": {
+    "npm:ss-utils@0.1.0": {
       "jquery": "npm:jquery@2.2.0"
     },
     "npm:stream-browserify@1.0.0": {

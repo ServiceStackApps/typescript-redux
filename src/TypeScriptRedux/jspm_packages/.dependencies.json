@@ -116,7 +116,7 @@
     "process": "github:jspm/nodelibs-process@^0.1.0",
     "buffer": "github:jspm/nodelibs-buffer@^0.1.0"
   },
-  "npm:ss-utils@0.0.8": {
+  "npm:ss-utils@0.1.0": {
     "jquery": "npm:jquery"
   }
 }
