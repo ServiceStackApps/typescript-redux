@@ -64,10 +64,10 @@ Click **No** to skip opening a NuGet dialog as you'll instead be sourcing your T
 
 ### Configure TypeScript
 
-Once TypeScript is enabled you want to configure it within your project. Prior to TypeScript 1.8 the 
-configuration properties for the TypeScript Compiler was embedded in the VS **.csproj** file which you 
+Once TypeScript is enabled you want to configure it within your project. Prior to TypeScript 1.8 on VS.NET 2015
+the configuration properties for the TypeScript Compiler was embedded in the VS **.csproj** file which you 
 could manage from the [TypeScript Properties Page](https://raw.githubusercontent.com/ServiceStackApps/typescript-redux/master/img/05-configure-typescript-vs.png)
-in **Project Properties**. 
+in **Project Properties**.
 
 However our preference is to instead manage the TypeScript options in a plain-text `tsconfig.json` file 
 which offers more flexibility and matches how every other IDE/text-editor maintains TypeScript configuration
@@ -113,6 +113,9 @@ Changes from the default basic `tsconfig.json` template include:
  - `jsx:react` - so JSX in `.tsx` files are transpiled into React's JavaScript syntax
  - `experimentalDecorators:true` - to enable proposed ES7 decorators support (used later)
  - `exclude:jspm_packages` - to ignore any TypeScript source files in JSPM packages folder
+
+> [VS 2013 doesn't support tsconfig.json](https://github.com/Microsoft/TypeScript/issues/6782#issuecomment-187820198)
+so you'll need to use .csproj configuration managed from TypeScript Project properties page
 
 ## Install JSPM
 
