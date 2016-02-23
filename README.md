@@ -62,6 +62,26 @@ Click **No** to skip opening a NuGet dialog as you'll instead be sourcing your T
 
 ### Configure TypeScript
 
+```json
+{
+  "compileOnSave":  true,
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "target": "es5",
+    "module": "system",
+    "jsx": "react"
+  },
+  "exclude": [
+    "node_modules",
+    "jspm_packages",
+    "wwwroot"
+  ]
+}
+```
+
 After TypeScript is enabled you'll see an extra section added to the bottom of your **Project Properties** 
 dialog (select project and hit `Alt + Enter`):
 
