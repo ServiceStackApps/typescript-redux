@@ -1,4 +1,4 @@
-﻿/// <reference path='../typings/tsd.d.ts'/>
+﻿/// <reference path='../typings/main.d.ts'/>
 
 //build bundle with: jspm bundle src/deps deps.lib.js
 

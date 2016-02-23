@@ -1,5 +1,7 @@
-/// <reference path='../../typings/tsd.d.ts'/>
-System.register(['react', 'react-dom', './Counter'], function(exports_1) {
+/// <reference path='../../typings/main.d.ts'/>
+System.register(['react', 'react-dom', './Counter'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var React, ReactDOM, Counter_1;
     return {
         setters:[

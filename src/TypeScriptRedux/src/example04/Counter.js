@@ -1,5 +1,7 @@
-/// <reference path='../../typings/tsd.d.ts'/>
-System.register(['react', 'redux'], function(exports_1) {
+/// <reference path='../../typings/main.d.ts'/>
+System.register(['react', 'redux'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __extends = (this && this.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
@@ -37,10 +39,10 @@ System.register(['react', 'redux'], function(exports_1) {
                     this.unsubscribe();
                 };
                 Counter.prototype.render = function () {
-                    return (React.createElement("div", null, React.createElement("p", null, React.createElement("label", null, "Counter: "), React.createElement("b", null, "#", store.getState().counter)), React.createElement("button", {"onClick": function (e) { return store.dispatch({ type: 'INCR', by: 1 }); }}, "INCREMENT"), React.createElement("span", {"style": { padding: "0 5px" }}), React.createElement("button", {"onClick": function (e) { return store.dispatch({ type: 'INCR', by: -1 }); }}, "DECREMENT")));
+                    return (React.createElement("div", null, React.createElement("p", null, React.createElement("label", null, "Counter: "), React.createElement("b", null, "#", store.getState().counter)), React.createElement("button", {onClick: function (e) { return store.dispatch({ type: 'INCR', by: 1 }); }}, "INCREMENT"), React.createElement("span", {style: { padding: "0 5px" }}), React.createElement("button", {onClick: function (e) { return store.dispatch({ type: 'INCR', by: -1 }); }}, "DECREMENT")));
                 };
                 return Counter;
-            })(React.Component);
+            }(React.Component));
             exports_1("default", Counter);
         }
     }

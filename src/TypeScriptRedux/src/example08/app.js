@@ -1,5 +1,7 @@
-/// <reference path='../../typings/tsd.d.ts'/>
-System.register(['react', 'react-dom', 'redux', 'react-redux', './reducers', './History', './Counter', './ColorPicker', './ShapeMaker', './ShapeViewer', './core'], function(exports_1) {
+/// <reference path='../../typings/main.d.ts'/>
+System.register(['react', 'react-dom', 'redux', 'react-redux', './reducers', './History', './Counter', './ColorPicker', './ShapeMaker', './ShapeViewer', './core'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __extends = (this && this.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
@@ -82,14 +84,14 @@ System.register(['react', 'react-dom', 'redux', 'react-redux', './reducers', './
                     _super.apply(this, arguments);
                 }
                 ColorWrapper.prototype.render = function () {
-                    return React.createElement(ColorPicker_1.ColorPicker, {"color": this.props.color, "onChange": this.props.setColor});
+                    return React.createElement(ColorPicker_1.ColorPicker, {color: this.props.color, onChange: this.props.setColor});
                 };
                 ColorWrapper = __decorate([
                     core_1.reduxify(function (state) { return ({ color: state.color }); }, function (dispatch) { return ({ setColor: function (color) { return dispatch({ type: 'COLOR_CHANGE', color: color }); } }); })
                 ], ColorWrapper);
                 return ColorWrapper;
-            })(React.Component);
-            ReactDOM.render(React.createElement(react_redux_1.Provider, {"store": store}, React.createElement("table", null, React.createElement("tbody", null, React.createElement("tr", null, React.createElement("td", {"style": { width: 220 }}, React.createElement(Counter_1.default, {"field": "width", "step": 10}), React.createElement(Counter_1.default, {"field": "height", "step": 10}), React.createElement(ColorWrapper, null)), React.createElement("td", {"style": { verticalAlign: "top", textAlign: "center", width: 500 }}, React.createElement("h2", null, "Preview"), React.createElement(ShapeMaker_1.default, null)), React.createElement("td", {"style": { verticalAlign: "top" }}, React.createElement("h2", null, "History"), React.createElement(History_1.default, {"store": store, "history": history, "defaultState": defaultState}))), React.createElement("tr", null, React.createElement("td", {"colSpan": 3}, React.createElement("h2", {"style": { margin: 5, textAlign: 'center' }}, "Shapes"), React.createElement(ShapeViewer_1.default, null)))))), document.getElementById("content"));
+            }(React.Component));
+            ReactDOM.render(React.createElement(react_redux_1.Provider, {store: store}, React.createElement("table", null, React.createElement("tbody", null, React.createElement("tr", null, React.createElement("td", {style: { width: 220 }}, React.createElement(Counter_1.default, {field: "width", step: 10}), React.createElement(Counter_1.default, {field: "height", step: 10}), React.createElement(ColorWrapper, null)), React.createElement("td", {style: { verticalAlign: "top", textAlign: "center", width: 500 }}, React.createElement("h2", null, "Preview"), React.createElement(ShapeMaker_1.default, null)), React.createElement("td", {style: { verticalAlign: "top" }}, React.createElement("h2", null, "History"), React.createElement(History_1.default, {store: store, history: history, defaultState: defaultState}))), React.createElement("tr", null, React.createElement("td", {colSpan: 3}, React.createElement("h2", {style: { margin: 5, textAlign: 'center' }}, "Shapes"), React.createElement(ShapeViewer_1.default, null)))))), document.getElementById("content"));
         }
     }
 });

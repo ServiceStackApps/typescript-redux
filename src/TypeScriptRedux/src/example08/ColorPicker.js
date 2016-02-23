@@ -1,5 +1,7 @@
-/// <reference path='../../typings/tsd.d.ts'/>
-System.register(['react'], function(exports_1) {
+/// <reference path='../../typings/main.d.ts'/>
+System.register(['react'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __extends = (this && this.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
@@ -24,10 +26,10 @@ System.register(['react'], function(exports_1) {
                     };
                 }
                 NumberPicker.prototype.render = function () {
-                    return (React.createElement("p", null, React.createElement("input", {"type": "range", "value": this.props.value.toString(), "min": "0", "max": "255", "onChange": this.handleChange}), React.createElement("label", null, " ", this.props.name, ": "), React.createElement("b", null, this.props.value)));
+                    return (React.createElement("p", null, React.createElement("input", {type: "range", value: this.props.value.toString(), min: "0", max: "255", onChange: this.handleChange}), React.createElement("label", null, " ", this.props.name, ": "), React.createElement("b", null, this.props.value)));
                 };
                 return NumberPicker;
-            })(React.Component);
+            }(React.Component));
             exports_1("NumberPicker", NumberPicker);
             ColorPicker = (function (_super) {
                 __extends(ColorPicker, _super);
@@ -51,7 +53,7 @@ System.register(['react'], function(exports_1) {
                     var color = this.props.color;
                     var rgb = hexToRgb(color);
                     var textColor = isDark(color) ? '#fff' : '#000';
-                    return (React.createElement("div", null, React.createElement(NumberPicker, {"name": "Red", "value": rgb.r, "onChange": this.updateRed}), React.createElement(NumberPicker, {"name": "Green", "value": rgb.g, "onChange": this.updateGreen}), React.createElement(NumberPicker, {"name": "Blue", "value": rgb.b, "onChange": this.updateBlue}), React.createElement("div", {"style": {
+                    return (React.createElement("div", null, React.createElement(NumberPicker, {name: "Red", value: rgb.r, onChange: this.updateRed}), React.createElement(NumberPicker, {name: "Green", value: rgb.g, onChange: this.updateGreen}), React.createElement(NumberPicker, {name: "Blue", value: rgb.b, onChange: this.updateBlue}), React.createElement("div", {style: {
                         background: color, width: "100%", height: 40, lineHeight: "40px",
                         textAlign: "center", color: textColor
                     }}, color)));
@@ -60,7 +62,7 @@ System.register(['react'], function(exports_1) {
                     this.props.onChange(color);
                 };
                 return ColorPicker;
-            })(React.Component);
+            }(React.Component));
             exports_1("ColorPicker", ColorPicker);
             componentToHex = function (c) {
                 var hex = c.toString(16);

@@ -1,5 +1,7 @@
-/// <reference path='../../typings/tsd.d.ts'/>
-System.register(['react', 'react-dom'], function(exports_1) {
+/// <reference path='../../typings/main.d.ts'/>
+System.register(['react', 'react-dom'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __extends = (this && this.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
@@ -25,7 +27,7 @@ System.register(['react', 'react-dom'], function(exports_1) {
                     return React.createElement("div", null, "Hello, World!");
                 };
                 return HelloWorld;
-            })(React.Component);
+            }(React.Component));
             ReactDOM.render(React.createElement(HelloWorld, null), document.getElementById("content"));
         }
     }

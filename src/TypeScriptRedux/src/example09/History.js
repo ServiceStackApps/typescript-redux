@@ -1,5 +1,7 @@
-/// <reference path='../../typings/tsd.d.ts'/>
-System.register(['react', './core'], function(exports_1) {
+/// <reference path='../../typings/main.d.ts'/>
+System.register(['react', './core'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __extends = (this && this.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
@@ -48,13 +50,13 @@ System.register(['react', './core'], function(exports_1) {
                     };
                 }
                 History.prototype.render = function () {
-                    return (React.createElement("div", null, React.createElement("button", {"onClick": this.replayStates}, "replay"), React.createElement("span", null, " "), React.createElement("button", {"onClick": this.resetState}, "clear"), React.createElement("p", null, React.createElement("b", null, this.props.history.states.length), " states"), React.createElement("button", {"onClick": this.prevState, "disabled": this.props.history.canPrev()}, "prev"), React.createElement("span", null, " "), React.createElement("button", {"onClick": this.nextState, "disabled": this.props.history.canNext()}, "next"), React.createElement("p", null, React.createElement("b", null, this.props.history.stateIndex + 1), " position"), React.createElement("input", {"type": "range", "min": "0", "max": this.props.history.states.length - 1, "disabled": this.props.history.states.length === 0, "value": this.props.history.stateIndex, "onChange": this.goToState})));
+                    return (React.createElement("div", null, React.createElement("button", {onClick: this.replayStates}, "replay"), React.createElement("span", null, " "), React.createElement("button", {onClick: this.resetState}, "clear"), React.createElement("p", null, React.createElement("b", null, this.props.history.states.length), " states"), React.createElement("button", {onClick: this.prevState, disabled: this.props.history.canPrev()}, "prev"), React.createElement("span", null, " "), React.createElement("button", {onClick: this.nextState, disabled: this.props.history.canNext()}, "next"), React.createElement("p", null, React.createElement("b", null, this.props.history.stateIndex + 1), " position"), React.createElement("input", {type: "range", min: "0", max: this.props.history.states.length - 1, disabled: this.props.history.states.length === 0, value: this.props.history.stateIndex, onChange: this.goToState})));
                 };
                 History = __decorate([
                     core_1.subscribeToStore()
                 ], History);
                 return History;
-            })(React.Component);
+            }(React.Component));
             exports_1("default", History);
         }
     }

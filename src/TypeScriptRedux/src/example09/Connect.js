@@ -1,5 +1,7 @@
-/// <reference path='../../typings/tsd.d.ts'/>
-System.register(['react', 'jquery', 'ss-utils'], function(exports_1) {
+/// <reference path='../../typings/main.d.ts'/>
+System.register(['react', 'jquery', 'ss-utils'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __extends = (this && this.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
@@ -57,14 +59,14 @@ System.register(['react', 'jquery', 'ss-utils'], function(exports_1) {
                     var _this = this;
                     if (this.state.currentUser == null)
                         return null;
-                    return (React.createElement("div", null, React.createElement("div", {"style": { fontWeight: "bold" }}, this.renderUser(this.state.currentUser)), React.createElement("div", {"style": { padding: "8px 0", textAlign: "center", fontSize: "18px" }}, this.state.users.length, " users online:"), this.state.users.map(function (u) { return _this.renderUser(u); }), React.createElement("div", {"style": { textAlign: "center", padding: "10px 0" }}, this.state.connectedToUserId ? React.createElement("button", {"onClick": function (e) { return _this.disconnect(); }}, "disconnect") : null)));
+                    return (React.createElement("div", null, React.createElement("div", {style: { fontWeight: "bold" }}, this.renderUser(this.state.currentUser)), React.createElement("div", {style: { padding: "8px 0", textAlign: "center", fontSize: "18px" }}, this.state.users.length, " users online:"), this.state.users.map(function (u) { return _this.renderUser(u); }), React.createElement("div", {style: { textAlign: "center", padding: "10px 0" }}, this.state.connectedToUserId ? React.createElement("button", {onClick: function (e) { return _this.disconnect(); }}, "disconnect") : null)));
                 };
                 Connect.prototype.renderUser = function (u) {
                     var _this = this;
-                    return (React.createElement("div", {"key": u.userId, "onClick": function (e) { return _this.connectToUser(u.userId); }, "style": {
+                    return (React.createElement("div", {key: u.userId, onClick: function (e) { return _this.connectToUser(u.userId); }, style: {
                         cursor: "pointer", padding: "4px",
                         background: u.userId === this.state.connectedToUserId ? "#ffc" : ""
-                    }}, React.createElement("img", {"src": u.profileUrl, "style": { height: 24, verticalAlign: "middle" }}), React.createElement("span", {"style": { padding: "2px 5px" }}, u.displayName, " ", u.userId === this.state.currentUser.userId ? " (me)" : "")));
+                    }}, React.createElement("img", {src: u.profileUrl, style: { height: 24, verticalAlign: "middle" }}), React.createElement("span", {style: { padding: "2px 5px" }}, u.displayName, " ", u.userId === this.state.currentUser.userId ? " (me)" : "")));
                 };
                 Connect.prototype.connectToUser = function (userId) {
                     var _this = this;
@@ -96,7 +98,7 @@ System.register(['react', 'jquery', 'ss-utils'], function(exports_1) {
                     });
                 };
                 return Connect;
-            })(React.Component);
+            }(React.Component));
             exports_1("default", Connect);
             userChannel = function (userId) { return "u_" + userId; };
             serverEventsUrl = function (channels) {

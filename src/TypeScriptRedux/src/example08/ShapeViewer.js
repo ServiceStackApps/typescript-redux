@@ -1,5 +1,7 @@
-/// <reference path='../../typings/tsd.d.ts'/>
-System.register(['react', './ColorPicker', './core'], function(exports_1) {
+/// <reference path='../../typings/main.d.ts'/>
+System.register(['react', './ColorPicker', './core'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __extends = (this && this.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
@@ -42,12 +44,12 @@ System.register(['react', './ColorPicker', './core'], function(exports_1) {
                 }
                 ShapeViewer.prototype.render = function () {
                     var _this = this;
-                    return (React.createElement("div", {"className": "noselect", "style": { position: "relative", border: "solid 1px #ccc", width: 860, height: 500 }}, this.props.shapes.map(function (s) { return (React.createElement("div", {"key": s.id, "style": {
+                    return (React.createElement("div", {className: "noselect", style: { position: "relative", border: "solid 1px #ccc", width: 860, height: 500 }}, this.props.shapes.map(function (s) { return (React.createElement("div", {key: s.id, style: {
                         position: "absolute", top: s.top, left: s.left, color: ColorPicker_1.isDark(s.color) ? '#fff' : '#000',
                         background: s.color, width: s.width, height: s.height,
                         lineHeight: s.height + 'px', textAlign: "center",
                         cursor: 'move'
-                    }, "onMouseDown": _this.handleDragInit, "onMouseUp": function (e) { return _this.setState({ isDragging: false }); }, "onMouseOut": function (e) { return _this.setState({ isDragging: false }); }, "onMouseMove": function (e) { return _this.handleDrag(s.id, s.height, s.width, e); }}, "(", s.top, ", ", s.left, ")")); })));
+                    }, onMouseDown: _this.handleDragInit, onMouseUp: function (e) { return _this.setState({ isDragging: false }); }, onMouseOut: function (e) { return _this.setState({ isDragging: false }); }, onMouseMove: function (e) { return _this.handleDrag(s.id, s.height, s.width, e); }}, "(", s.top, ", ", s.left, ")")); })));
                 };
                 ShapeViewer.prototype.handleDrag = function (id, height, width, e) {
                     if (this.state.isDragging) {
@@ -60,7 +62,7 @@ System.register(['react', './ColorPicker', './core'], function(exports_1) {
                     }); })
                 ], ShapeViewer);
                 return ShapeViewer;
-            })(React.Component);
+            }(React.Component));
             exports_1("default", ShapeViewer);
         }
     }

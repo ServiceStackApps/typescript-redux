@@ -4,7 +4,7 @@ This guide goes through setting up, running and exploring the ultimate JavaScrip
 
   - [TypeScript](http://www.typescriptlang.org/) - Superset of JavaScript with optional typing, advanced language features and down-level ES5 support
   - [JSPM](http://jspm.io/) - JavaScript Package Manager supporting SystemJS modules and multiple npm and GitHub repositories 
-  - [TSD](https://github.com/DefinitelyTyped/tsd) - Package manager to search and install TypeScript definition files
+  - [typings](https://github.com/typings/typings) - Package manager to search and install TypeScript definition files
   - [React](https://facebook.github.io/react/) - Simple, high-performance JavaScript UI Framework utilizing a Virtual DOM and Reactive Data flows
   - [Redux](https://github.com/rackt/redux) - Predictable state manager for JavaScript Apps
   
@@ -19,11 +19,13 @@ If you haven't already download and install the latest version from
  - [VS.NET 2015](https://www.microsoft.com/en-us/download/details.aspx?id=48593)
  - [VS.NET 2013](https://www.microsoft.com/en-us/download/details.aspx?id=48739)
 
+> This guide assumes you've installed TypeScript v1.8 or higher
+
 ### [VS.NET 2015 Install Package](https://visualstudiogallery.msdn.microsoft.com/753b9720-1638-4f9a-ad8d-2c45a410fd74)
 
 Visual Studio 2015 also has a 
 [Package Installer](https://visualstudiogallery.msdn.microsoft.com/753b9720-1638-4f9a-ad8d-2c45a410fd74) 
-add-on providing an Integrated UI for installing npm and JSPM packages as well as TSD Type Definitions:
+add-on providing an Integrated UI for installing npm and JSPM packages as well as typings Type Definitions:
 
 [![](https://raw.githubusercontent.com/ServiceStackApps/typescript-redux/master/img/vs-install-jspm-package.png)](https://visualstudiogallery.msdn.microsoft.com/753b9720-1638-4f9a-ad8d-2c45a410fd74) 
 
@@ -58,10 +60,29 @@ As confirmed by the subsequent prompt:
 ![](https://raw.githubusercontent.com/ServiceStackApps/typescript-redux/master/img/04-typescript-confirmation-dialog.png)
 
 Click **No** to skip opening a NuGet dialog as you'll instead be sourcing your TypeScript definitions from the 
-[TSD Package Manager](https://github.com/DefinitelyTyped/tsd) we'll install later.
+[typings Package Manager](https://github.com/typings/typings) we'll install later.
 
 ### Configure TypeScript
 
+Once TypeScript is enabled you want to configure it within your project. Prior to TypeScript 1.8 the 
+configuration properties for the TypeScript Compiler was embedded in the VS **.csproj** file which you 
+could manage from the [TypeScript Properties Page](https://raw.githubusercontent.com/ServiceStackApps/typescript-redux/master/img/05-configure-typescript-vs.png)
+in **Project Properties**. 
+
+However our preference is to instead manage the TypeScript options in a plain-text `tsconfig.json` file 
+which offers more flexibility and matches how every other IDE/text-editor maintains TypeScript configuration
+leading to greater knowledge sharing and less issues. 
+
+To add `tsconfig.json` to your project go to `Add > New Item` and search for **typescript** in the search 
+dialog, then select **TypeScript JSON Configuration File** item template: 
+
+![](https://raw.githubusercontent.com/ServiceStackApps/typescript-redux/master/img/05-add-tsconfig.png)
+
+This will add a basic `tsconfig.json` configuration file to your project which VS.NET will use instead of
+.csproj Project variables. 
+
+To get started quickly copy + replace the contents of `tsconfig.json` with the configuration below:
+ 
 ```json
 {
   "compileOnSave":  true,
@@ -72,9 +93,11 @@ Click **No** to skip opening a NuGet dialog as you'll instead be sourcing your T
     "sourceMap": true,
     "target": "es5",
     "module": "system",
-    "jsx": "react"
+    "jsx": "react",
+    "experimentalDecorators": true
   },
   "exclude": [
+    "typings",
     "node_modules",
     "jspm_packages",
     "wwwroot"
@@ -82,17 +105,14 @@ Click **No** to skip opening a NuGet dialog as you'll instead be sourcing your T
 }
 ```
 
-After TypeScript is enabled you'll see an extra section added to the bottom of your **Project Properties** 
-dialog (select project and hit `Alt + Enter`):
+Changes from the default basic `tsconfig.json` template include:
 
-![](https://raw.githubusercontent.com/ServiceStackApps/typescript-redux/master/img/05-configure-typescript-vs.png)
-
-In other Text Editors and development environments TypeScripts configuration would be maintained in a separate
-`tsconfig.json` file, however VS.NET instead stores its TypeScript configuration within the `.csproj` itself, 
-where its preferences are saved. 
-
-In TypeScript preferences enable JSX support by changing **JSX compilation in TSX files** to **React**. 
-You'll also want TypeScript to generate SystemJS modules by selecting the **System** radiobox under **Module system**.
+ - `compileOnSave:true` - to generate TypeScript files on save
+ - `target:es5` - to target ES5 JavaScript
+ - `module:system` - so TypeScript modules are converted into [SystemJS Modules](https://github.com/systemjs/systemjs)
+ - `jsx:react` - so JSX in `.tsx` files are transpiled into React's JavaScript syntax
+ - `experimentalDecorators:true` - to enable proposed ES7 decorators support (used later)
+ - `exclude:jspm_packages` - to ignore any TypeScript source files in JSPM packages folder
 
 ## Install JSPM
 
@@ -134,37 +154,39 @@ Since v0.14 the React support for the DOM is split into a separate package which
 
     C:\proj> jspm install react-dom
 
-### Install TSD - TypeScript Definition Manager
+### Install typings - Manager for TypeScript definitions
 
 To enable auto-completion and type-checking support in TypeScript we'll also want to pull down the 
 Type Definitions for our 3rd Party JavaScript libraries. The best way to do this is to install 
-[TSD](https://github.com/DefinitelyTyped/tsd) 
+[typings](https://github.com/typings/typings) 
 which we also install from npm:
 
-    C:\proj> npm install tsd -g
+    C:\proj> npm install typings -g
 
-We can now use `tsd` to fetch the TypeScript Type Definitions we need.
+We can now use `typings` to fetch the TypeScript Type Definitions we need.
 
 #### Install React Type Definitions
 
-    C:\proj> tsd install react --save
+    C:\proj> typings install react --ambient --save
 
 #### Install React DOM Type Definitions
 
-    C:\proj> tsd install react-dom --save
+    C:\proj> typings install react-dom --ambient --save
 
-The `--save` flag instructs **tsd** to add the reference to the common `typings/tsd.d.ts` file:
+The `--ambient` flag instructs **typings** to look in ambient `.d.ts` TypeScript definitions in 
+[DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) repository whilst the 
+`--save` flag adds a reference to the common `typings/main.d.ts` file:
 
 ```typescript
-/// <reference path="react/react.d.ts" />
-/// <reference path="react/react-dom.d.ts" />
+/// <reference path="main\ambient\react-dom\react-dom.d.ts" />
+/// <reference path="main\ambient\react\react.d.ts" />
 ```
 
 This is convenient as it means we only need to reference the one file in our source code to import the 
 Type Definitions for all our dependencies:
 
 ```typescript
-/// <reference path='../typings/tsd.d.ts'/>
+/// <reference path='../typings/main.d.ts'/>
 ```
 
 ## Start TypeScript'ing
@@ -181,7 +203,7 @@ Create an `example01/` folder and add our first TypeScript file:
 #### [app.tsx](https://github.com/ServiceStackApps/typescript-redux/blob/master/src/TypeScriptRedux/src/example01/app.tsx)
 
 ```typescript
-/// <reference path='../../typings/tsd.d.ts'/>
+/// <reference path='../../typings/main.d.ts'/>
 
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
@@ -198,12 +220,12 @@ ReactDOM.render(<HelloWorld/>, document.getElementById("content"));
 I'll walk through this as there's a few things going on here, the first line:
 
 ```typescript
-/// <reference path='../../typings/tsd.d.ts'/>
+/// <reference path='../../typings/main.d.ts'/>
 ```
 
 Uses a [Reference Tag](http://blogs.msdn.com/b/webdev/archive/2007/11/06/jscript-intellisense-a-reference-for-the-reference-tag.aspx)
 to reference all the [Definitely Typed](https://github.com/DefinitelyTyped/DefinitelyTyped) Type Definitions
-installed by **tsd**. 
+installed by **typings**. 
 
 The import statements:
 
@@ -471,7 +493,7 @@ Using `setState()` is the old-school way of modifying state in Components, the n
 
 as well as its Type Definitions:
 
-    C:\proj> tsd install redux --save
+    C:\proj> typings install redux --ambient --save
 
 ## [Example 4 - Change Counter to use Redux](https://github.com/ServiceStackApps/typescript-redux/tree/master/src/TypeScriptRedux/src/example04)
 
@@ -606,7 +628,7 @@ to fetch for us:
 
 Like most popular libraries, there's also a Type Definition for it:
 
-    C:\proj> tsd install react-redux --save
+    C:\proj> typings install react-redux --ambient --save
 
 ## [Example 5 - Use Provider to inject store in child Context](https://github.com/ServiceStackApps/typescript-redux/tree/master/src/TypeScriptRedux/src/example05)
 
@@ -762,9 +784,9 @@ appear with our good friend **JSPM**:
 
     C:\proj> jspm install es6-shim
 
-Then use **tsd** to fetch ES6's Type Definitions:
+Then use **typings** to fetch ES6's Type Definitions:
 
-    C:\proj> tsd install es6-shim --save
+    C:\proj> typings install es6-shim --ambient --save
 
 Since it's been awhile since our last interim build, now's a good time to cut another. First we'll expand 
 **deps.tsx** to reference a bit from every dependency:

@@ -1,5 +1,7 @@
-/// <reference path='../../typings/tsd.d.ts'/>
-System.register(['react', './core'], function(exports_1) {
+/// <reference path='../../typings/main.d.ts'/>
+System.register(['react', './core'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __extends = (this && this.__extends) || function (d, b) {
         for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
         function __() { this.constructor = d; }
@@ -30,7 +32,7 @@ System.register(['react', './core'], function(exports_1) {
                 Counter.prototype.render = function () {
                     var _this = this;
                     var field = this.props.field, step = this.props.step || 1;
-                    return (React.createElement("div", null, React.createElement("p", null, React.createElement("label", null, field, ": "), React.createElement("b", null, this.props.counter)), React.createElement("button", {"style": { width: 30, margin: 2 }, "onClick": function (e) { return _this.props.decr(field, step); }}, "-"), React.createElement("button", {"style": { width: 30, margin: 2 }, "onClick": function (e) { return _this.props.incr(field, step); }}, "+")));
+                    return (React.createElement("div", null, React.createElement("p", null, React.createElement("label", null, field, ": "), React.createElement("b", null, this.props.counter)), React.createElement("button", {style: { width: 30, margin: 2 }, onClick: function (e) { return _this.props.decr(field, step); }}, "-"), React.createElement("button", {style: { width: 30, margin: 2 }, onClick: function (e) { return _this.props.incr(field, step); }}, "+")));
                 };
                 Counter = __decorate([
                     core_1.reduxify(function (state, props) { return ({ counter: (state[props.field] || 0) }); }, function (dispatch) { return ({
@@ -43,7 +45,7 @@ System.register(['react', './core'], function(exports_1) {
                     }); })
                 ], Counter);
                 return Counter;
-            })(React.Component);
+            }(React.Component));
             exports_1("default", Counter);
         }
     }

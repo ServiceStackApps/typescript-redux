@@ -1,4 +1,6 @@
-System.register(['./reducers/shapeReducers'], function(exports_1) {
+System.register(['./reducers/shapeReducers'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var shapeReducers_1;
     var changeCounter, changeColor;
     return {

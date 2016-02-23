@@ -1,3 +1,5 @@
+// Compiled using typings@0.6.8
+// Source: https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/f407264835650f5f38d4bb2c515a79e7a835916b/react/react.d.ts
 // Type definitions for React v0.14
 // Project: http://facebook.github.io/react/
 // Definitions by: Asana <https://asana.com>, AssureSign <http://www.assuresign.com>, Microsoft <https://microsoft.com>
@@ -516,7 +518,7 @@ declare namespace __React {
         backgroundBlendMode?: any;
 
         backgroundColor?: any;
-        
+
         backgroundComposite?: any;
 
         /**
@@ -685,6 +687,11 @@ declare namespace __React {
          * Sets the width of an element's four borders. This property can have from one to four values. This is a shorthand property for setting values simultaneously for border-top-width, border-right-width, border-bottom-width, and border-left-width.
          */
         borderWidth?: any;
+
+        /**
+         * This property specifies how far an absolutely positioned box's bottom margin edge is offset above the bottom edge of the box's containing block. For relatively positioned boxes, the offset is with respect to the bottom edges of the box itself (i.e., the box is given a position in the normal flow, then offset from that position according to these properties).
+         */
+        bottom?: any;
 
         /**
          * Obsolete.
@@ -1357,7 +1364,7 @@ declare namespace __React {
         textAlignLast?: any;
 
         /**
-         * The text-decoration CSS property is used to set the text formatting to underline, overline, line-through or blink. 
+         * The text-decoration CSS property is used to set the text formatting to underline, overline, line-through or blink.
          * underline and overline decorations are positioned under the text, line-through over it.
          */
         textDecoration?: any;
@@ -1951,6 +1958,7 @@ declare namespace __React {
         h6: HTMLFactory;
         head: HTMLFactory;
         header: HTMLFactory;
+        hgroup: HTMLFactory;
         hr: HTMLFactory;
         html: HTMLFactory;
         i: HTMLFactory;
@@ -2183,6 +2191,7 @@ declare namespace JSX {
         h6: React.HTMLProps<HTMLHeadingElement>;
         head: React.HTMLProps<HTMLHeadElement>;
         header: React.HTMLProps<HTMLElement>;
+        hgroup: React.HTMLProps<HTMLElement>;
         hr: React.HTMLProps<HTMLHRElement>;
         html: React.HTMLProps<HTMLHtmlElement>;
         i: React.HTMLProps<HTMLElement>;

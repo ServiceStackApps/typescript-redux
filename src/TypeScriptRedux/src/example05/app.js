@@ -1,5 +1,7 @@
-/// <reference path='../../typings/tsd.d.ts'/>
-System.register(['react', 'react-dom', 'redux', 'react-redux', './Counter'], function(exports_1) {
+/// <reference path='../../typings/main.d.ts'/>
+System.register(['react', 'react-dom', 'redux', 'react-redux', './Counter'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var React, ReactDOM, redux_1, react_redux_1, Counter_1;
     var store;
     return {
@@ -28,7 +30,7 @@ System.register(['react', 'react-dom', 'redux', 'react-redux', './Counter'], fun
                         return state;
                 }
             }, { counter: 0 });
-            ReactDOM.render(React.createElement(react_redux_1.Provider, {"store": store}, React.createElement(Counter_1.default, null)), document.getElementById("content"));
+            ReactDOM.render(React.createElement(react_redux_1.Provider, {store: store}, React.createElement(Counter_1.default, null)), document.getElementById("content"));
         }
     }
 });

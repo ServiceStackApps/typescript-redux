@@ -1,5 +1,7 @@
-/// <reference path='../../typings/tsd.d.ts'/>
-System.register(['react-redux'], function(exports_1) {
+/// <reference path='../../typings/main.d.ts'/>
+System.register(['react-redux'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var react_redux_1;
     function reduxify(mapStateToProps, mapDispatchToProps) {
         return function (target) { return react_redux_1.connect(mapStateToProps, mapDispatchToProps)(target); };

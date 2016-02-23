@@ -1,4 +1,4 @@
-﻿/// <reference path='../../typings/tsd.d.ts'/>
+﻿/// <reference path='../../typings/main.d.ts'/>
 
 import { Store, Dispatch, ActionCreator } from 'redux';
 import { Provider, connect } from 'react-redux';

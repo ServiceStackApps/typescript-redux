@@ -1,9 +1,10 @@
+// Compiled using typings@0.6.8
+// Source: https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/229cb92825ec05c986dff721018b7130126f09a9/ss-utils/ss-utils.d.ts
 // Type definitions for ServiceStack Utils v0.0.1
 // Project: https://servicestack.net/
 // Definitions by: Demis Bellot <https://github.com/mythz/>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
-/// <reference path="../jquery/jquery.d.ts" />
 
 declare namespace ssutils {
 
