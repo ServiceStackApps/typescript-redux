@@ -81,6 +81,8 @@ dialog, then select **TypeScript JSON Configuration File** item template:
 This will add a basic `tsconfig.json` configuration file to your project which VS.NET will use instead of
 .csproj Project variables. 
 
+### tsconfig for JSPM, React and JSX
+
 To get started quickly copy + replace the contents of `tsconfig.json` with the configuration below:
  
 ```json
