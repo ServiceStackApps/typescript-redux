@@ -1661,12 +1661,452 @@ it to independent parts of your application rather than rolling back your entire
 [redux docs have you covered](http://rackt.org/redux/docs/recipes/ImplementingUndoHistory.html)
 with an example inspired by Elm's [undo-redo package](http://package.elm-lang.org/packages/TheSeamau5/elm-undo-redo/2.0.0).
 
+## [Example 9 - Real-time Networked Time Traveller](https://github.com/ServiceStackApps/typescript-redux/tree/master/src/TypeScriptRedux/src/example09)
+
+Loading Redux Snapshots in the previous example provides a good example of the benefit of the data 
+architecture that Redux promotes utilizing simple actions to transition between immutable states. 
+
+### Saving and Restoring App State
+
+One large benefit of this approach we've yet to explore from both state and actions using plain 
+JavaScript objects is how they're naturally serializable. The obvious benefit is that the entire Application 
+state can be trivially saved and restored from localStorage, maintaining a user's session across multiple
+browser restarts:
+
+```javascript
+//Save App State
+localStorage.setItem("appState", JSON.stringify(store.getState()));
+
+//Restore App State
+let store = createStore(rootReducer, 
+    JSON.parse(localStorage.getItem("appState")) || defaultState);
+```
+
+### Transferring State over a Network
+
+Another example of the benefits is how easy it is to transfer your application state to other users in real-time.
+Actions are very similar to diffs, i.e. minimal instruction capturing change between different states. So
+in theory we could just stream the actions to users over a network and they will be able to see changes we 
+make in real-time. 
+
+Adding support for this ends up being fairly trivial, the main architectural hurdle is how can we communicate
+between users over http in real-time. In desktop apps we can establish a direct network connection, but on a 
+website communications need to go via a central server. There are a few ways to enable real-time communications
+over a website, e.g. polling, web sockets and server sent events. Of these options 
+[Server Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events)
+offers a simple, efficient and natural fit for HTTP which we'll use here.
+
+#### Example Objectives
+
+Our objectives for this example is to provide a list of active users currently viewing the website. 
+We then want to enable users to **Connect** to other users and have them **watch** what they're doing, i.e. 
+similar to Remote Desktop into another computer's screen. Conceptually to make this work we just need to load 
+a user's **initial state** and then **listen** to a **stream of their actions** (generated as they use their app). 
+We also want to allow users to **disconnect** from a user's session and take over from where they left off.
+
+#### Implementation utilizing Server Events
+
+To enable this we'll have every user listen to a common **home** channel that we can query to find active
+users and get notified when new users come or go. We'll then have each user re-publish a stream of their 
+actions on their own **user channel** which multiple users can listen on to receive a stream of their actions.
+To disconnect they can just unsubscribe from the **users channel**. Finally since the user's state is 
+maintained in a Redux store in their browser and not on the server we also need to facilitate communication 
+between users which we enable by sending a **direct message** to users who can **reply** with a direct message 
+back containing their current state.
+
+Surprisingly most of the code to make this happen is encapsulated within the React `<Connect />` component below:
+
+```typescript
+/// <reference path='../../typings/main.d.ts'/>
+
+import * as React from 'react';
+import { connect } from 'react-redux';
+import { reduxify } from './core';
+import 'jquery';
+import 'ss-utils';
+
+declare var EventSource:ssutils.IEventSourceStatic;
+
+export default class Connect extends React.Component<any, any> {
+
+    constructor(props?, context?) {
+        super(props, context);
+        this.state = {
+            channels: ["home"], currentUser: null, users: [], 
+            connectedToUserId: null, connectedUserActions: [], connectedStateIndex: -1
+        };
+        var source = new EventSource(serverEventsUrl());
+        $(source).handleServerEvents({
+            handlers: {
+                onConnect: (currentUser) => {
+                    currentUser.usersChannel = userChannel(currentUser.userId);
+                    this.setState({currentUser, users: filterUsers(this.state.users,currentUser.userId)});
+                    this.props.onConnect(currentUser);
+                },
+                onJoin: () => this.refreshUsers(),
+                onLeave: () => this.refreshUsers(),
+                onUpdate: (user) => this.setState({
+                     users: this.state.users.map(x => x.userId === user.userId ? user : x)
+                }), 
+                getState: (json, e) => {
+                    var o = JSON.parse(json);
+                    var index = o.stateIndex || this.props.history.stateIndex;
+                    var state = this.props.history.states[index];
+                    $.ss.postJSON(`/send-user/${o.replyTo}?selector=cmd.onState`, state);
+                },
+                onState: (json, e) => {
+                    this.props.store.dispatch({ 
+                        type:'LOAD', state:json ? JSON.parse(json) : this.props.defaultState });
+                },
+                publishAction: (json, e) => {
+                    var action = JSON.parse(json);
+                    this.props.store.dispatch(action);
+                }
+            }
+        });
+    }
+
+    render() {
+        if (this.state.currentUser == null) return null;
+        return (
+            <div>
+                <div style={{fontWeight:"bold"}}>
+                    {this.renderUser(this.state.currentUser)}
+                </div>
+                <div style={{padding:"8px 0", textAlign:"center", fontSize:"18px"}}>
+                    {this.state.users.length} users online:
+                </div>
+                
+                { this.state.users.map(u => this.renderUser(u)) }
+
+                <div style={{textAlign:"center", padding:"10px 0"}}>
+                    { this.state.connectedToUserId ? <button onClick={e => this.disconnect()}>disconnect</button> : null}
+                </div>
+            </div>
+        );
+    }
+
+    renderUser(u) {
+        return (
+            <div key={u.userId} onClick={e => this.connectToUser(u.userId)} style={{
+                cursor:"pointer", padding:"4px",
+                background:u.userId === this.state.connectedToUserId ? "#ffc" :  ""
+            }}>
+                <img src={u.profileUrl} style={{height:24,verticalAlign:"middle"}} />
+                <span style={{padding:"2px 5px" }}>
+                    {u.displayName} {u.userId === this.state.currentUser.userId ? " (me)" : ""}
+                </span>
+            </div>
+        );
+    }
+
+    connectToUser(userId) {
+        if (userId === this.state.currentUser.userId) return;
+
+        this.requestUsersState(userId);
+        var connectedChannels = this.state.channels.filter(x => x !== "home");
+        $.ss.updateSubscriber({
+            SubscribeChannels: userChannel(userId), 
+            UnsubscribeChannels: connectedChannels.join(',')
+        }, r => {
+            this.setState({
+                channels:r.channels, 
+                connectedToUserId: userId
+            });
+        });
+    }
+
+    disconnect() {
+        $.ss.unsubscribeFromChannels([userChannel(this.state.connectedToUserId)]);
+        this.setState({ connectedToUserId: null });
+    }
+
+    requestUsersState(userId) {
+        return $.ss.postJSON(`/send-user/${userId}?selector=cmd.getState`,
+            { replyTo: this.state.currentUser.userId });
+    }
+
+    refreshUsers() {
+        $.getJSON("/event-subscribers?channels=home", users => {
+            this.setState({ users:filterUsers(users, this.state.currentUser.userId) });
+        });
+    }
+}
+
+const userChannel = (userId) => "u_" + userId; 
+
+const filterUsers = (users, userId) => 
+    users.filter(x => x.userId !== userId).sort((x,y) => x.userId.localeCompare(y.userId));
+```
+
+We'll go through some of the core parts to explain how this works. For the Server implementation we'll
+use ServiceStack's 
+[Server Events](https://github.com/ServiceStack/ServiceStack/wiki/Server-Events) 
+which includes an easy to use
+[JavaScript Client](https://github.com/ServiceStack/ServiceStack/wiki/JavaScript-Server-Events-Client)
+that simplifies the effort required to process Server Events.
+
+ServiceStack Server Events dones't expose any APIs for publishing messages to users out-of-the-box, instead 
+access need to be controlled by explicit Services. For this example we need a back-end Service that lets users 
+publish their actions to a channel and another Service to send a message to a User. The 
+[entire implementation](https://github.com/ServiceStackApps/typescript-redux/blob/master/src/TypeScriptRedux/Global.asax.cs)
+for both these services are below: 
+
+```csharp
+//Services Contract
+[Route("/publish-channel/{Channel}")]
+public class PublishToChannel : IReturnVoid, IRequiresRequestStream
+{
+    public string Channel { get; set; }
+    public string Selector { get; set; }
+    public Stream RequestStream { get; set; }
+}
+
+[Route("/send-user/{To}")]
+public class SendUser : IReturnVoid, IRequiresRequestStream
+{
+    public string To { get; set; }
+    public string Selector { get; set; }
+    public Stream RequestStream { get; set; }
+}
+
+//Services Implementation
+public class ReduxServices : Service
+{
+    public IServerEvents ServerEvents { get; set; }
+
+    public void Any(PublishToChannel request)
+    {
+        var msg = request.RequestStream.ReadFully().FromUtf8Bytes();
+        ServerEvents.NotifyChannel(request.Channel, request.Selector, msg);
+    }
+
+    public void Any(SendUser request)
+    {
+        var msg = request.RequestStream.ReadFully().FromUtf8Bytes();
+        ServerEvents.NotifyUserId(request.To, request.Selector, msg);
+    }
+}
+```
+
+Essentially just using the `IServerEvents` dependency to forward the JSON Request Body to the specified 
+channel or user.
+
+### Connecting to Server Events
+
+The JavaScript client to connect to Server Events is in the `ss-utils` npm package which we can install with:
+
+    C:\proj> jspm install ss-utils
+
+Then import the type definitions with:
+
+    C:\proj> typings install ss-utils --ambient --save
+
+As there are no built-in type definitions for HTML 5's 
+[EventSource](https://developer.mozilla.org/en-US/docs/Web/API/EventSource) the easiest way to make use of it
+in TypeScript is to use the definition in ss-utils which we declare with:
+
+```typescript
+declare var EventSource:ssutils.IEventSourceStatic;
+```
+
+To make a server connection we configure the `EventSource` object with the url of the server events stream.
+ServiceStack also lets you specify any initial channels you want to connect to with a queryString:
+
+```typescript
+var source = new EventSource("/event-stream?channels=home");
+```
+
+Then we use ss-utils `handleServerEvents` jQuery function to connect to the event stream and handle any events.
+The first 4 events are automatically published by ServiceStack Server Events to notify when:
+
+  - **onConnect** - you've connected to the server event stream
+  - **onJoin** - a user has joined a channel you've subscribed to
+  - **onLeave** - a user has left a channel you've subscribed to
+  - **onUpdate** - an existing user has changed the channels they've subscribed to
+
+The remaining handlers are for application events used in this example to handle when:
+
+  - **getState** - we're requested for our current state
+  - **onState** - the user we've connected to responds with their state
+  - **onState** - the user we're connected to publishes an action
+
+```typescript
+$(source).handleServerEvents({
+    handlers: {
+        //Built-in subscription Life-cycle events
+        onConnect: (currentUser) => {
+            currentUser.usersChannel = userChannel(currentUser.userId);
+            this.setState({currentUser, users: filterUsers(this.state.users,currentUser.userId)});
+            this.props.onConnect(currentUser);
+        },
+        onJoin: () => this.refreshUsers(),
+        onLeave: () => this.refreshUsers(),
+        onUpdate: (user) => this.setState({
+            users: this.state.users.map(x => x.userId === user.userId ? user : x)
+        }),
+
+        //If we receive a request for our state, send a reply with our current state
+        getState: (json, e) => {
+            var o = JSON.parse(json);
+            var index = o.stateIndex || this.props.history.stateIndex;
+            var state = this.props.history.states[index];
+            $.ss.postJSON(`/send-user/${o.replyTo}?selector=cmd.onState`, state);
+        },
+        
+        //When we receive state reply from our connected user, load it         
+        onState: (json, e) => {
+            this.props.store.dispatch({ 
+                type:'LOAD', state:json ? JSON.parse(json) : this.props.defaultState });
+        },
+        
+        //When we receive an action from the connected user, forward it to the redux store
+        publishAction: (json, e) => {
+            var action = JSON.parse(json);
+            this.props.store.dispatch(action);
+        }
+    }
+});
+```
+
+To maintain an active users list, we query the event subscribers that are connected to the **home** channel 
+everyone initially connects to with:
+
+```typescript
+refreshUsers() {
+    $.getJSON("/event-subscribers?channels=home", users => {
+        this.setState({ users:filterUsers(users, this.state.currentUser.userId) });
+    });
+}
+
+//Exclude ourselves from the returned list and order the users by their id
+const filterUsers = (users, userId) => 
+    users.filter(x => x.userId !== userId).sort((x,y) => x.userId.localeCompare(y.userId));
+```
+
+To **connect** to a user, we first request their initial state, then update our current server events 
+subscription to join the new **users channel**. If we we're connected to another user we also want to 
+unsubscribe from their users channel:
+
+```typescript
+connectToUser(userId) {
+    if (userId === this.state.currentUser.userId) return;
+
+    this.requestUsersState(userId);
+    var connectedChannels = this.state.channels.filter(x => x !== "home");
+    $.ss.updateSubscriber({
+        SubscribeChannels: userChannel(userId), 
+        UnsubscribeChannels: connectedChannels.join(',')
+    }, r => {
+        this.setState({
+            channels:r.channels, 
+            connectedToUserId: userId
+        });
+    });
+}
+
+const userChannel = (userId) => "u_" + userId; 
+```
+
+To request a user's state we call the `SendUser` back-end service with the `userId` we want to send to,
+the `getState` handler we want to invoke and add pass our userId in the `replyTo` property of the message
+request body:
+
+```typescript
+requestUsersState(userId) {
+    return $.ss.postJSON(`/send-user/${userId}?selector=cmd.getState`,
+        { replyTo: this.state.currentUser.userId });
+}
+```
+
+The last feature to implement is disconnecting from a user which just involves unsubscribing from their 
+users channel and updating our state:
+
+```typescript
+disconnect() {
+    $.ss.unsubscribeFromChannels([userChannel(this.state.connectedToUserId)]);
+    this.setState({ connectedToUserId: null });
+}
+```
+
+That's it for the core functionality, the only other change needed is to refactor our Redux store to
+publish each action we make to our **users channel** in order to apply the action to all our connected users.
+
+As this is a network side-effect we want to keep it out of our reducer implementation and make it a pure
+function. The recommended way to do this is to use a 
+[Redux middleware](http://redux.js.org/docs/advanced/Middleware.html)
+which lets you generically handle updates to the Redux store:
+
+```typescript
+var currentUser;
+const onConnect = (user) => currentUser = user;
+
+const updateHistory = store => next => action => {
+    var result = next(action);
+
+    if (action.type !== 'LOAD') {
+        history.pushState(store.getState());
+    }
+
+    $.ss.postJSON(`/publish-channel/${currentUser.usersChannel}?selector=cmd.publishAction`, action);
+
+    return result;
+};
+
+let store = createStore(
+    (state, action) => {
+        var reducer = reducers[action.type];
+        var nextState = reducer != null
+            ? reducer(state, action)
+            : state;
+
+        return nextState;
+    },
+    defaultState,
+    applyMiddleware(updateHistory));
+```
+
+And with that we're done, we've now converted Shape Creator into a networked time traveller letting us connect
+to active users and watch their live session in real-time - the time slider is now x Connected Users more fun :)
+
+[![](https://raw.githubusercontent.com/ServiceStackApps/typescript-redux/master/img/preview-09.png)](http://redux.servicestack.net)
+> Demo: [http://redux.servicestack.net](http://redux.servicestack.net)
+
+## JSPM Bundling for Production
+
+One of the nice features of using JSPM is that it's also able to bundle your entire applicaton using your 
+declared module dependencies, saving you having to repeat this information in an external bundler tool. 
+
+To package your App for production run `jspm bundle` on your main app with the `-m` flag to minify your 
+application, e.g we can package our last example with: 
+
+    C:\proj> jspm bundle -m src/example09/app app.js 
+
+JSPM still requires the `system.js` module loader and your local JSPM `config.js` which maintains your 
+installed npm dependencies. The resulting `index.html` now just a container for our compiled application:
+
+```html
+<html>
+<head>
+    <title>TypeScript + JSPM + React + Redux</title>
+    <script src="jspm_packages/system.js"></script>
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+</head>
+<body>
+    <h1>Redux Shape Creator</h1>
+    <div id="content"></div>
+
+    <script>
+        System.import("./src/example09/app");
+    </script>
+</body>
+</html>
+```
+
 ## Feedback
 
-We hope you've found ths guide useful and it helps spur some ideas of what you can create with these simple 
+We hope you've found this guide useful and it helps spur some ideas of what you can create with these simple 
 and powerful technologies in your next App. We welcome any enhancements via pull-requests, otherwise feel free
-to drop feedback to [@demisbellot](https://twitter.com/demisbellot). If there's enough interest we'll also
-look at expanding the examples to explore more benefits of Redux within a network connected application in future.
-
-
+to drop feedback to [@demisbellot](https://twitter.com/demisbellot). 
 
