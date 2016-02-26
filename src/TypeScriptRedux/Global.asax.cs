@@ -29,7 +29,6 @@ namespace TypeScriptRedux
     {
         public string To { get; set; }
         public string Selector { get; set; }
-        public DateTime[] Selectors { get; set; }
         public Stream RequestStream { get; set; }
     }
 
