@@ -8,7 +8,7 @@ System.register(['react', 'jquery', 'ss-utils'], function(exports_1, context_1) 
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
     var React;
-    var Connect, userChannel, serverEventsUrl, filterUsers;
+    var Connect, userChannel, filterUsers;
     return {
         setters:[
             function (React_1) {
@@ -26,7 +26,7 @@ System.register(['react', 'jquery', 'ss-utils'], function(exports_1, context_1) 
                         channels: ["home"], currentUser: null, users: [],
                         connectedToUserId: null, connectedUserActions: [], connectedStateIndex: -1
                     };
-                    var source = new EventSource(serverEventsUrl());
+                    var source = new EventSource("/event-stream?channels=home");
                     $(source).handleServerEvents({
                         handlers: {
                             onConnect: function (currentUser) {
@@ -39,14 +39,16 @@ System.register(['react', 'jquery', 'ss-utils'], function(exports_1, context_1) 
                             onUpdate: function (user) { return _this.setState({
                                 users: _this.state.users.map(function (x) { return x.userId === user.userId ? user : x; })
                             }); },
-                            onState: function (json, e) {
-                                _this.props.store.dispatch({ type: 'LOAD', state: json ? JSON.parse(json) : _this.props.defaultState });
-                            },
                             getState: function (json, e) {
                                 var o = JSON.parse(json);
                                 var index = o.stateIndex || _this.props.history.stateIndex;
                                 var state = _this.props.history.states[index];
                                 $.ss.postJSON("/send-user/" + o.replyTo + "?selector=cmd.onState", state);
+                            },
+                            onState: function (json, e) {
+                                _this.props.store.dispatch({
+                                    type: 'LOAD', state: json ? JSON.parse(json) : _this.props.defaultState
+                                });
                             },
                             publishAction: function (json, e) {
                                 var action = JSON.parse(json);
@@ -101,10 +103,6 @@ System.register(['react', 'jquery', 'ss-utils'], function(exports_1, context_1) 
             }(React.Component));
             exports_1("default", Connect);
             userChannel = function (userId) { return "u_" + userId; };
-            serverEventsUrl = function (channels) {
-                if (channels === void 0) { channels = ["home"]; }
-                return "/event-stream?channel=" + channels.join(',');
-            };
             filterUsers = function (users, userId) {
                 return users.filter(function (x) { return x.userId !== userId; }).sort(function (x, y) { return x.userId.localeCompare(y.userId); });
             };

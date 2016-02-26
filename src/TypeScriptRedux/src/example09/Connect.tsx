@@ -16,7 +16,7 @@ export default class Connect extends React.Component<any, any> {
             channels: ["home"], currentUser: null, users: [], 
             connectedToUserId: null, connectedUserActions: [], connectedStateIndex: -1
         };
-        var source = new EventSource(serverEventsUrl());
+        var source = new EventSource("/event-stream?channels=home");
         $(source).handleServerEvents({
             handlers: {
                 onConnect: (currentUser) => {
@@ -29,14 +29,16 @@ export default class Connect extends React.Component<any, any> {
                 onUpdate: (user) => this.setState({
                      users: this.state.users.map(x => x.userId === user.userId ? user : x)
                 }), 
-                onState: (json, e) => {
-                    this.props.store.dispatch({ type: 'LOAD', state: json ? JSON.parse(json) : this.props.defaultState });
-                },
                 getState: (json, e) => {
                     var o = JSON.parse(json);
                     var index = o.stateIndex || this.props.history.stateIndex;
                     var state = this.props.history.states[index];
                     $.ss.postJSON(`/send-user/${o.replyTo}?selector=cmd.onState`, state);
+                },
+                onState: (json, e) => {
+                    this.props.store.dispatch({
+                         type: 'LOAD', state: json ? JSON.parse(json) : this.props.defaultState
+                    });
                 },
                 publishAction: (json, e) => {
                     var action = JSON.parse(json);
@@ -113,8 +115,6 @@ export default class Connect extends React.Component<any, any> {
 }
 
 const userChannel = (userId) => "u_" + userId; 
-
-const serverEventsUrl = (channels = ["home"]) => "/event-stream?channel=" + channels.join(',');
 
 const filterUsers = (users, userId) => 
     users.filter(x => x.userId !== userId).sort((x,y) => x.userId.localeCompare(y.userId));
