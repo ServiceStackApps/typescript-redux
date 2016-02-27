@@ -79,7 +79,7 @@ ReactDOM.render(
         <table>
             <tbody>
             <tr>
-                <td style={{width:220}}>
+                <td style={{width:225}}>
                     <Counter field="width" step={10} />
                     <Counter field="height" step={10} />
                     <ColorWrapper />
