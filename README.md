@@ -1663,15 +1663,15 @@ with an example inspired by Elm's [undo-redo package](http://package.elm-lang.or
 
 ## [Example 9 - Real-time Networked Time Traveller](https://github.com/ServiceStackApps/typescript-redux/tree/master/src/TypeScriptRedux/src/example09)
 
-Loading Redux Snapshots in the previous example provides a good example of the benefit of the data 
-architecture that Redux promotes utilizing simple actions to transition between immutable states. 
+Loading Redux Snapshots as seen in the previous example illustrates some of the natural capabilities available 
+when adopting a data-flow architecture like Redux - utilizing simple actions for transitioning between 
+immutable states. 
 
 ### Saving and Restoring App State
 
-One large benefit of this approach we've yet to explore from both state and actions using plain 
-JavaScript objects is how they're naturally serializable. The obvious benefit is that the entire Application 
-state can be trivially saved and restored from localStorage, maintaining a user's session across multiple
-browser restarts:
+A major benefit of maintaining both state and actions in plain JavaScript objects we've yet to explore is how 
+they're naturally serializable. The obvious benefit is that the entire Application state can be trivially 
+saved and restored from localStorage, maintaining a user's session across multiple browser restarts:
 
 ```javascript
 //Save App State
@@ -1684,35 +1684,37 @@ let store = createStore(rootReducer,
 
 ### Transferring State over a Network
 
-Another example of the benefits is how easy it is to transfer your application state to other users in real-time.
-Actions are very similar to diffs, i.e. minimal instruction capturing change between different states. So
-in theory we could just stream the actions to users over a network and they will be able to see changes we 
+Another example of the benefits is how easy it would be to transfer your application state to other users over 
+a network. Actions are similar to diffs, i.e. minimal instructions capturing change between different states. 
+So in theory we could just stream the actions to users over a network and they will be able to see changes we 
 make in real-time. 
 
 Adding support for this ends up being fairly trivial, the main architectural hurdle is how can we communicate
-between users over http in real-time. In desktop apps we can establish a direct network connection, but on a 
-website communications need to go via a central server. There are a few ways to enable real-time communications
-over a website, e.g. polling, web sockets and server sent events. Of these options 
+between users over HTTP in real-time. In desktop apps we can establish a direct network connection, but on a 
+website, communications need to go via a central server. There are a few ways to enable real-time communications
+over a website: polling, web sockets and server sent events. Of these options 
 [Server Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events)
-offers a simple, efficient and natural fit for HTTP which we'll use here.
+offers a 
+[simple, efficient and natural fit for HTTP](https://github.com/ServiceStack/ServiceStack/wiki/Server-Events) 
+which we'll utilize here.
 
 #### Example Objectives
 
-Our objectives for this example is to provide a list of active users currently viewing the website. 
-We then want to enable users to **Connect** to other users and have them **watch** what they're doing, i.e. 
-similar to Remote Desktop into another computer's screen. Conceptually to make this work we just need to load 
-a user's **initial state** and then **listen** to a **stream of their actions** (generated as they use their app). 
+Our objectives for this example is to provide a list of active users currently viewing the website that we 
+want to enable other users to be able to **Connect** to and be able to **watch** what they're doing, i.e. 
+similar to Remote Desktop into another computer's screen. Conceptually for this to work we just need to load a 
+user's **initial state** then **listen** to a **stream of their actions** (generated as they're using the app). 
 We also want to allow users to **disconnect** from a user's session and take over from where they left off.
 
 #### Implementation utilizing Server Events
 
 To enable this we'll have every user listen to a common **home** channel that we can query to find active
-users and get notified when new users come or go. We'll then have each user re-publish a stream of their 
+users and get notified as new users come and go. We'll then have each user re-publish a stream of their 
 actions on their own **user channel** which multiple users can listen on to receive a stream of their actions.
 To disconnect they can just unsubscribe from the **users channel**. Finally since the user's state is 
-maintained in a Redux store in their browser and not on the server we also need to facilitate communication 
-between users which we enable by sending a **direct message** to users who can **reply** with a direct message 
-back containing their current state.
+maintained in a Redux store (in their browser and not on the server) we also need to facilitate communication 
+between users which we enable by sending a **direct message** to a user who can **reply** via a direct message 
+back, with their current state.
 
 Surprisingly most of the code to make this happen is encapsulated within the React `<Connect />` component below:
 
@@ -1847,8 +1849,8 @@ which includes an easy to use
 that simplifies the effort required to process Server Events.
 
 ServiceStack Server Events dones't expose any APIs for publishing messages to users out-of-the-box, instead 
-access need to be controlled by explicit Services. For this example we need a back-end Service that lets users 
-publish their actions to a channel and another Service to send a message to a User. The 
+access needs to be controlled by explicit Services. For this example we need a back-end Service that lets users 
+publish their actions to a channel and another Service to send a direct message to a User. The 
 [entire implementation](https://github.com/ServiceStackApps/typescript-redux/blob/master/src/TypeScriptRedux/Global.asax.cs)
 for both these services are below: 
 
@@ -1917,18 +1919,18 @@ ServiceStack also lets you specify any initial channels you want to connect to w
 var source = new EventSource("/event-stream?channels=home");
 ```
 
-Then we use ss-utils `handleServerEvents` jQuery function to connect to the event stream and handle any events.
-The first 4 events are automatically published by ServiceStack Server Events to notify when:
+Then we use ss-utils `handleServerEvents()` jQuery function to connect to the event stream and handle any events.
+The first 4 events are automatically available by ServiceStack, for notifying when:
 
   - **onConnect** - you've connected to the server event stream
-  - **onJoin** - a user has joined a channel you've subscribed to
-  - **onLeave** - a user has left a channel you've subscribed to
+  - **onJoin** - a user has joined a channel you're subscribed to
+  - **onLeave** - a user has left a channel you're subscribed to
   - **onUpdate** - an existing user has changed the channels they've subscribed to
 
 The remaining handlers are for application events used in this example to handle when:
 
   - **getState** - we're requested for our current state
-  - **onState** - the user we've connected to responds with their state
+  - **onState** - the user we're connected to responds with their state
   - **onState** - the user we're connected to publishes an action
 
 ```typescript
@@ -1970,12 +1972,12 @@ $(source).handleServerEvents({
 ```
 
 To maintain an active users list, we query the event subscribers that are connected to the **home** channel 
-everyone initially connects to with:
+(that everyone is initially connected to) with:
 
 ```typescript
 refreshUsers() {
     $.getJSON("/event-subscribers?channels=home", users => {
-        this.setState({ users:filterUsers(users, this.state.currentUser.userId) });
+        this.setState({ users: filterUsers(users, this.state.currentUser.userId) });
     });
 }
 
@@ -1984,9 +1986,9 @@ const filterUsers = (users, userId) =>
     users.filter(x => x.userId !== userId).sort((x,y) => x.userId.localeCompare(y.userId));
 ```
 
-To **connect** to a user, we first request their initial state, then update our current server events 
-subscription to join the new **users channel**. If we we're connected to another user we also want to 
-unsubscribe from their users channel:
+To **connect** to a user, we first request their initial state then update our current server events 
+subscription to join the new **users channel**. If we we're connected to an existing user we also want to 
+unsubscribe from their users channel at the same time:
 
 ```typescript
 connectToUser(userId) {
@@ -2029,11 +2031,11 @@ disconnect() {
 }
 ```
 
-That's it for the core functionality, the only other change needed is to refactor our Redux store to
-publish each action we make to our **users channel** in order to apply the action to all our connected users.
+That's it for the core functionality! The only other change needed is to refactor our Redux store to
+publish each action we create to our **users channel** so it applies the action to all our connected users.
 
 As this is a network side-effect we want to keep it out of our reducer implementation and make it a pure
-function. The recommended way to do this is to use a 
+function. The recommended way to do this is to use 
 [Redux middleware](http://redux.js.org/docs/advanced/Middleware.html)
 which lets you generically handle updates to the Redux store:
 
@@ -2067,7 +2069,7 @@ let store = createStore(
 ```
 
 And with that we're done, we've now converted Shape Creator into a networked time traveller letting us connect
-to active users and watch their live session in real-time - the time slider is now x Connected Users more fun :)
+to active users and watch their live session in real-time - the Time Slider is now x Connected Users more fun :)
 
 [![](https://raw.githubusercontent.com/ServiceStackApps/typescript-redux/master/img/preview-09.png)](http://redux.servicestack.net)
 > Demo: [http://redux.servicestack.net](http://redux.servicestack.net)
@@ -2075,7 +2077,7 @@ to active users and watch their live session in real-time - the time slider is n
 ## JSPM Bundling for Production
 
 One of the nice features of using JSPM is that it's also able to bundle your entire applicaton using your 
-declared module dependencies, saving you having to repeat this information in an external bundler tool. 
+declared module dependencies, saving having to repeat and manage this information in an external bundler tool. 
 
 To package your App for production run `jspm bundle` on your main app with the `-m` flag to minify your 
 application, e.g we can package our last example with: 
@@ -2083,7 +2085,7 @@ application, e.g we can package our last example with:
     C:\proj> jspm bundle -m src/example09/app app.js 
 
 JSPM still requires the `system.js` module loader and your local JSPM `config.js` which maintains your 
-installed npm dependencies. The resulting `index.html` now just a container for our compiled application:
+installed npm dependencies. The resulting `index.html` then becomes a container for our compiled application:
 
 ```html
 <html>
