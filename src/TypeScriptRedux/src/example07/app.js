@@ -1,4 +1,4 @@
-/// <reference path='../../typings/main.d.ts'/>
+/// <reference path='../../typings/browser.d.ts'/>
 System.register(['react', 'react-dom', 'redux', 'react-redux', './Counter', './ActionPlayer', './ShapeMaker', './ShapeViewer', './ColorPicker'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;

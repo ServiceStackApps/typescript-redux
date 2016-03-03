@@ -180,7 +180,7 @@ We can now use `typings` to fetch the TypeScript Type Definitions we need.
 
 The `--ambient` flag instructs **typings** to look in ambient `.d.ts` TypeScript definitions in 
 [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped) repository whilst the 
-`--save` flag adds a reference to the common `typings/main.d.ts` file:
+`--save` flag adds a reference to the common `typings/browser.d.ts` file:
 
 ```typescript
 /// <reference path="main\ambient\react-dom\react-dom.d.ts" />
@@ -191,7 +191,7 @@ This is convenient as it means we only need to reference the one file in our sou
 Type Definitions for all our dependencies:
 
 ```typescript
-/// <reference path='../typings/main.d.ts'/>
+/// <reference path='../typings/browser.d.ts'/>
 ```
 
 ## Start TypeScript'ing
@@ -208,7 +208,7 @@ Create an `example01/` folder and add our first TypeScript file:
 #### [app.tsx](https://github.com/ServiceStackApps/typescript-redux/blob/master/src/TypeScriptRedux/src/example01/app.tsx)
 
 ```typescript
-/// <reference path='../../typings/main.d.ts'/>
+/// <reference path='../../typings/browser.d.ts'/>
 
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
@@ -225,7 +225,7 @@ ReactDOM.render(<HelloWorld/>, document.getElementById("content"));
 I'll walk through this as there's a few things going on here, the first line:
 
 ```typescript
-/// <reference path='../../typings/main.d.ts'/>
+/// <reference path='../../typings/browser.d.ts'/>
 ```
 
 Uses a [Reference Tag](http://blogs.msdn.com/b/webdev/archive/2007/11/06/jscript-intellisense-a-reference-for-the-reference-tag.aspx)
@@ -1719,7 +1719,7 @@ back, with their current state.
 Surprisingly most of the code to make this happen is encapsulated within the React `<Connect />` component below:
 
 ```typescript
-/// <reference path='../../typings/main.d.ts'/>
+/// <reference path='../../typings/browser.d.ts'/>
 
 import * as React from 'react';
 import { connect } from 'react-redux';

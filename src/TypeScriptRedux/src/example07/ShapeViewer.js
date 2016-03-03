@@ -1,4 +1,4 @@
-/// <reference path='../../typings/main.d.ts'/>
+/// <reference path='../../typings/browser.d.ts'/>
 System.register(['react', 'react-redux', './ColorPicker'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;

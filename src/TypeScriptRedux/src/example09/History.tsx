@@ -1,4 +1,4 @@
-﻿/// <reference path='../../typings/main.d.ts'/>
+﻿/// <reference path='../../typings/browser.d.ts'/>
 
 import * as React from 'react';
 import { subscribeToStore } from './core';
