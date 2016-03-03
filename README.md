@@ -159,12 +159,6 @@ Since v0.14 the React support for the DOM is split into a separate package which
 
     C:\proj> jspm install react-dom
 
-There's currently an 
-[outstanding issue](https://github.com/typings/typings/issues/256) with the **react-dom** dependency 
-that until resolved will require the workaround below:
-
-    typings install --ambient --save github:DefinitelyTyped/DefinitelyTyped/react/react-dom.d.ts
-
 ### Install typings - Manager for TypeScript definitions
 
 To enable auto-completion and type-checking support in TypeScript we'll also want to pull down the 
