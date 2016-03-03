@@ -858,8 +858,8 @@ class Counter extends React.Component<any, any> {
                     <label>{field}: </label>
                     <b>{this.props.counter}</b>
                 </p>
-                <button style={{width:30,margin:2}} onClick={e => this.props.decr(field,step)}>-</button>
-                <button style={{width:30,margin:2}} onClick={e => this.props.incr(field,step)}>+</button>
+                <button style={{width:30, margin:2}} onClick={e => this.props.decr(field, step)}>-</button>
+                <button style={{width:30, margin:2}} onClick={e => this.props.incr(field, step)}>+</button>
             </div>
         );
     }
