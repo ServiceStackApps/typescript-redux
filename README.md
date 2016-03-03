@@ -2074,6 +2074,18 @@ let store = createStore(
     applyMiddleware(updateHistory));
 ```
 
+There's currently an [outstanding issue with redux TypeScript definition](https://github.com/reactjs/redux/pull/1413)
+that makes the method signature of `applyMiddleware` incompatible with what `createStore` accepts. Until
+a new TypeScript definition is released you'll need to manually edit `typings/browser/ambient/redux/redux.d.ts`
+and replace the applyMiddleware definition from:
+
+    function applyMiddleware(...middlewares: Middleware[]): Function;
+
+to:
+
+    function applyMiddleware(...middlewares: Middleware[]): () => any;
+
+
 And with that we're done, we've now converted Shape Creator into a networked time traveller letting us connect
 to active users and watch their live session in real-time - the Time Slider is now x Connected Users more fun :)
 
