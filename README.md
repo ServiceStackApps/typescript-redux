@@ -1854,7 +1854,7 @@ which includes an easy to use
 [JavaScript Client](https://github.com/ServiceStack/ServiceStack/wiki/JavaScript-Server-Events-Client)
 that simplifies the effort required to process Server Events.
 
-ServiceStack Server Events dones't expose any APIs for publishing messages to users out-of-the-box, instead 
+ServiceStack Server Events doesn't expose any APIs for publishing messages to users out-of-the-box, instead 
 access needs to be controlled by explicit Services. For this example we need a back-end Service that lets users 
 publish their actions to a channel and another Service to send a direct message to a User. The 
 [entire implementation](https://github.com/ServiceStackApps/typescript-redux/blob/master/src/TypeScriptRedux/Global.asax.cs)
@@ -1937,7 +1937,7 @@ The remaining handlers are for application events used in this example to handle
 
   - **getState** - we're requested for our current state
   - **onState** - the user we're connected to responds with their state
-  - **onState** - the user we're connected to publishes an action
+  - **publishAction** - the user we're connected to publishes an action
 
 ```typescript
 $(source).handleServerEvents({
@@ -2129,4 +2129,3 @@ installed npm dependencies. The resulting `index.html` then becomes a container 
 We hope you've found this guide useful and it helps spur some ideas of what you can create with these simple 
 and powerful technologies in your next App. We welcome any enhancements via pull-requests, otherwise feel free
 to drop feedback to [@demisbellot](https://twitter.com/demisbellot). 
-
