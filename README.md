@@ -2118,6 +2118,15 @@ installed npm dependencies. The resulting `index.html` then becomes a container 
 </html>
 ```
 
+## [ServiceStack TypeScript React VS.NET Template](https://github.com/ServiceStackApps/typescript-react-template/)
+
+As the technologies used in this guide represent todays best-in-class choices for developing rich, complex
+JavaScript Apps within VS.NET, we've encapsulated them together in ServiceStack's new
+[TypeScript React VS.NET Template](https://github.com/ServiceStackApps/typescript-react-template/)
+providing an instant integrated client and .NET server solution where you'll be immediately productive 
+out-of-the-box whilst enabling an optimal iterative development experience with pre-configured Gulp tasks 
+that takes care of effortlessly packaging, bundling and deploying your next App. 
+
 ## Feedback
 
 We hope you've found this guide useful and it helps spur some ideas of what you can create with these simple 
