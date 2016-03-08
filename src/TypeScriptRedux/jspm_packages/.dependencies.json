@@ -80,7 +80,6 @@
   "npm:base64-js@0.0.8": {},
   "github:jspm/nodelibs-fs@0.1.2": {},
   "github:jspm/nodelibs-child_process@0.1.0": {},
-  "npm:jquery@2.2.0": {},
   "github:aspnet/jquery-validation-unobtrusive@3.2.5": {
     "jquery-validation": "github:jzaefferer/jquery-validation@^1.8"
   },
@@ -116,7 +115,8 @@
     "process": "github:jspm/nodelibs-process@^0.1.0",
     "buffer": "github:jspm/nodelibs-buffer@^0.1.0"
   },
-  "npm:ss-utils@0.1.0": {
+  "npm:ss-utils@0.1.3": {
     "jquery": "npm:jquery"
-  }
+  },
+  "npm:jquery@2.2.1": {}
 }

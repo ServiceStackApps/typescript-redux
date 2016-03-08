@@ -11469,7 +11469,7 @@ System.registerDynamic("npm:react-redux@4.4.0/lib/utils/shallowEqual", [], true,
   return module.exports;
 });
 
-System.registerDynamic("npm:redux@3.3.0/lib/createStore", ["npm:lodash@4.2.1/isPlainObject"], true, function($__require, exports, module) {
+System.registerDynamic("npm:redux@3.3.1/lib/createStore", ["npm:lodash@4.3.0/isPlainObject"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -11478,7 +11478,7 @@ System.registerDynamic("npm:redux@3.3.0/lib/createStore", ["npm:lodash@4.2.1/isP
   exports.__esModule = true;
   exports.ActionTypes = undefined;
   exports["default"] = createStore;
-  var _isPlainObject = $__require('npm:lodash@4.2.1/isPlainObject');
+  var _isPlainObject = $__require('npm:lodash@4.3.0/isPlainObject');
   var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {"default": obj};
@@ -11569,7 +11569,7 @@ System.registerDynamic("npm:redux@3.3.0/lib/createStore", ["npm:lodash@4.2.1/isP
   return module.exports;
 });
 
-System.registerDynamic("npm:redux@3.3.0/lib/combineReducers", ["npm:redux@3.3.0/lib/createStore", "npm:lodash@4.2.1/isPlainObject", "npm:redux@3.3.0/lib/utils/warning", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+System.registerDynamic("npm:redux@3.3.1/lib/combineReducers", ["npm:redux@3.3.1/lib/createStore", "npm:lodash@4.3.0/isPlainObject", "npm:redux@3.3.1/lib/utils/warning", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -11578,10 +11578,10 @@ System.registerDynamic("npm:redux@3.3.0/lib/combineReducers", ["npm:redux@3.3.0/
     'use strict';
     exports.__esModule = true;
     exports["default"] = combineReducers;
-    var _createStore = $__require('npm:redux@3.3.0/lib/createStore');
-    var _isPlainObject = $__require('npm:lodash@4.2.1/isPlainObject');
+    var _createStore = $__require('npm:redux@3.3.1/lib/createStore');
+    var _isPlainObject = $__require('npm:lodash@4.3.0/isPlainObject');
     var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
-    var _warning = $__require('npm:redux@3.3.0/lib/utils/warning');
+    var _warning = $__require('npm:redux@3.3.1/lib/utils/warning');
     var _warning2 = _interopRequireDefault(_warning);
     function _interopRequireDefault(obj) {
       return obj && obj.__esModule ? obj : {"default": obj};
@@ -11670,7 +11670,7 @@ System.registerDynamic("npm:redux@3.3.0/lib/combineReducers", ["npm:redux@3.3.0/
   return module.exports;
 });
 
-System.registerDynamic("npm:redux@3.3.0/lib/bindActionCreators", [], true, function($__require, exports, module) {
+System.registerDynamic("npm:redux@3.3.1/lib/bindActionCreators", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -11705,7 +11705,7 @@ System.registerDynamic("npm:redux@3.3.0/lib/bindActionCreators", [], true, funct
   return module.exports;
 });
 
-System.registerDynamic("npm:redux@3.3.0/lib/applyMiddleware", ["npm:redux@3.3.0/lib/compose"], true, function($__require, exports, module) {
+System.registerDynamic("npm:redux@3.3.1/lib/applyMiddleware", ["npm:redux@3.3.1/lib/compose"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -11724,7 +11724,7 @@ System.registerDynamic("npm:redux@3.3.0/lib/applyMiddleware", ["npm:redux@3.3.0/
   };
   exports.__esModule = true;
   exports["default"] = applyMiddleware;
-  var _compose = $__require('npm:redux@3.3.0/lib/compose');
+  var _compose = $__require('npm:redux@3.3.1/lib/compose');
   var _compose2 = _interopRequireDefault(_compose);
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {"default": obj};
@@ -11758,7 +11758,7 @@ System.registerDynamic("npm:redux@3.3.0/lib/applyMiddleware", ["npm:redux@3.3.0/
   return module.exports;
 });
 
-System.registerDynamic("npm:redux@3.3.0/lib/compose", [], true, function($__require, exports, module) {
+System.registerDynamic("npm:redux@3.3.1/lib/compose", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -11787,7 +11787,7 @@ System.registerDynamic("npm:redux@3.3.0/lib/compose", [], true, function($__requ
   return module.exports;
 });
 
-System.registerDynamic("npm:redux@3.3.0/lib/utils/warning", [], true, function($__require, exports, module) {
+System.registerDynamic("npm:redux@3.3.1/lib/utils/warning", [], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -11807,7 +11807,7 @@ System.registerDynamic("npm:redux@3.3.0/lib/utils/warning", [], true, function($
   return module.exports;
 });
 
-System.registerDynamic("npm:redux@3.3.0/lib/index", ["npm:redux@3.3.0/lib/createStore", "npm:redux@3.3.0/lib/combineReducers", "npm:redux@3.3.0/lib/bindActionCreators", "npm:redux@3.3.0/lib/applyMiddleware", "npm:redux@3.3.0/lib/compose", "npm:redux@3.3.0/lib/utils/warning", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+System.registerDynamic("npm:redux@3.3.1/lib/index", ["npm:redux@3.3.1/lib/createStore", "npm:redux@3.3.1/lib/combineReducers", "npm:redux@3.3.1/lib/bindActionCreators", "npm:redux@3.3.1/lib/applyMiddleware", "npm:redux@3.3.1/lib/compose", "npm:redux@3.3.1/lib/utils/warning", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -11816,17 +11816,17 @@ System.registerDynamic("npm:redux@3.3.0/lib/index", ["npm:redux@3.3.0/lib/create
     'use strict';
     exports.__esModule = true;
     exports.compose = exports.applyMiddleware = exports.bindActionCreators = exports.combineReducers = exports.createStore = undefined;
-    var _createStore = $__require('npm:redux@3.3.0/lib/createStore');
+    var _createStore = $__require('npm:redux@3.3.1/lib/createStore');
     var _createStore2 = _interopRequireDefault(_createStore);
-    var _combineReducers = $__require('npm:redux@3.3.0/lib/combineReducers');
+    var _combineReducers = $__require('npm:redux@3.3.1/lib/combineReducers');
     var _combineReducers2 = _interopRequireDefault(_combineReducers);
-    var _bindActionCreators = $__require('npm:redux@3.3.0/lib/bindActionCreators');
+    var _bindActionCreators = $__require('npm:redux@3.3.1/lib/bindActionCreators');
     var _bindActionCreators2 = _interopRequireDefault(_bindActionCreators);
-    var _applyMiddleware = $__require('npm:redux@3.3.0/lib/applyMiddleware');
+    var _applyMiddleware = $__require('npm:redux@3.3.1/lib/applyMiddleware');
     var _applyMiddleware2 = _interopRequireDefault(_applyMiddleware);
-    var _compose = $__require('npm:redux@3.3.0/lib/compose');
+    var _compose = $__require('npm:redux@3.3.1/lib/compose');
     var _compose2 = _interopRequireDefault(_compose);
-    var _warning = $__require('npm:redux@3.3.0/lib/utils/warning');
+    var _warning = $__require('npm:redux@3.3.1/lib/utils/warning');
     var _warning2 = _interopRequireDefault(_warning);
     function _interopRequireDefault(obj) {
       return obj && obj.__esModule ? obj : {"default": obj};
@@ -11845,17 +11845,17 @@ System.registerDynamic("npm:redux@3.3.0/lib/index", ["npm:redux@3.3.0/lib/create
   return module.exports;
 });
 
-System.registerDynamic("npm:redux@3.3.0", ["npm:redux@3.3.0/lib/index"], true, function($__require, exports, module) {
+System.registerDynamic("npm:redux@3.3.1", ["npm:redux@3.3.1/lib/index"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = $__require('npm:redux@3.3.0/lib/index');
+  module.exports = $__require('npm:redux@3.3.1/lib/index');
   global.define = __define;
   return module.exports;
 });
 
-System.registerDynamic("npm:react-redux@4.4.0/lib/utils/wrapActionCreators", ["npm:redux@3.3.0"], true, function($__require, exports, module) {
+System.registerDynamic("npm:react-redux@4.4.0/lib/utils/wrapActionCreators", ["npm:redux@3.3.1"], true, function($__require, exports, module) {
   "use strict";
   ;
   var global = this,
@@ -11863,7 +11863,7 @@ System.registerDynamic("npm:react-redux@4.4.0/lib/utils/wrapActionCreators", ["n
   global.define = undefined;
   exports.__esModule = true;
   exports["default"] = wrapActionCreators;
-  var _redux = $__require('npm:redux@3.3.0');
+  var _redux = $__require('npm:redux@3.3.1');
   function wrapActionCreators(actionCreators) {
     return function(dispatch) {
       return (0, _redux.bindActionCreators)(actionCreators, dispatch);
@@ -11873,7 +11873,7 @@ System.registerDynamic("npm:react-redux@4.4.0/lib/utils/wrapActionCreators", ["n
   return module.exports;
 });
 
-System.registerDynamic("npm:lodash@4.2.1/_isHostObject", [], true, function($__require, exports, module) {
+System.registerDynamic("npm:lodash@4.3.0/_isHostObject", [], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -11892,7 +11892,7 @@ System.registerDynamic("npm:lodash@4.2.1/_isHostObject", [], true, function($__r
   return module.exports;
 });
 
-System.registerDynamic("npm:lodash@4.2.1/isObjectLike", [], true, function($__require, exports, module) {
+System.registerDynamic("npm:lodash@4.3.0/isObjectLike", [], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -11905,13 +11905,13 @@ System.registerDynamic("npm:lodash@4.2.1/isObjectLike", [], true, function($__re
   return module.exports;
 });
 
-System.registerDynamic("npm:lodash@4.2.1/isPlainObject", ["npm:lodash@4.2.1/_isHostObject", "npm:lodash@4.2.1/isObjectLike"], true, function($__require, exports, module) {
+System.registerDynamic("npm:lodash@4.3.0/isPlainObject", ["npm:lodash@4.3.0/_isHostObject", "npm:lodash@4.3.0/isObjectLike"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  var isHostObject = $__require('npm:lodash@4.2.1/_isHostObject'),
-      isObjectLike = $__require('npm:lodash@4.2.1/isObjectLike');
+  var isHostObject = $__require('npm:lodash@4.3.0/_isHostObject'),
+      isObjectLike = $__require('npm:lodash@4.3.0/isObjectLike');
   var objectTag = '[object Object]';
   var objectProto = Object.prototype;
   var funcToString = Function.prototype.toString;
@@ -12153,7 +12153,7 @@ System.registerDynamic("github:jspm/nodelibs-process@0.1.2", ["github:jspm/nodel
   return module.exports;
 });
 
-System.registerDynamic("npm:react-redux@4.4.0/lib/components/connect", ["npm:react@0.14.7", "npm:react-redux@4.4.0/lib/utils/storeShape", "npm:react-redux@4.4.0/lib/utils/shallowEqual", "npm:react-redux@4.4.0/lib/utils/wrapActionCreators", "npm:lodash@4.2.1/isPlainObject", "npm:hoist-non-react-statics@1.0.5", "npm:invariant@2.2.0", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
+System.registerDynamic("npm:react-redux@4.4.0/lib/components/connect", ["npm:react@0.14.7", "npm:react-redux@4.4.0/lib/utils/storeShape", "npm:react-redux@4.4.0/lib/utils/shallowEqual", "npm:react-redux@4.4.0/lib/utils/wrapActionCreators", "npm:lodash@4.3.0/isPlainObject", "npm:hoist-non-react-statics@1.0.5", "npm:invariant@2.2.0", "github:jspm/nodelibs-process@0.1.2"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -12180,7 +12180,7 @@ System.registerDynamic("npm:react-redux@4.4.0/lib/components/connect", ["npm:rea
     var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
     var _wrapActionCreators = $__require('npm:react-redux@4.4.0/lib/utils/wrapActionCreators');
     var _wrapActionCreators2 = _interopRequireDefault(_wrapActionCreators);
-    var _isPlainObject = $__require('npm:lodash@4.2.1/isPlainObject');
+    var _isPlainObject = $__require('npm:lodash@4.3.0/isPlainObject');
     var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
     var _hoistNonReactStatics = $__require('npm:hoist-non-react-statics@1.0.5');
     var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
@@ -12465,7 +12465,7 @@ System.registerDynamic("npm:react-redux@4.4.0", ["npm:react-redux@4.4.0/lib/inde
 var _removeDefine = System.get("@@amd-helpers").createDefine();
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
-    define("github:es-shims/es6-shim@0.34.2/es6-shim", [], factory);
+    define("github:es-shims/es6-shim@0.34.4/es6-shim", [], factory);
   } else if (typeof exports === 'object') {
     module.exports = factory();
   } else {
@@ -13196,7 +13196,9 @@ var _removeDefine = System.get("@@amd-helpers").createDefine();
     var startsWithRejectsRegex = throwsError(function() {
       '/a/'.startsWith(/a/);
     });
-    var startsWithHandlesInfinity = 'abc'.startsWith('a', Infinity) === false;
+    var startsWithHandlesInfinity = valueOrFalseIfThrows(function() {
+      return 'abc'.startsWith('a', Infinity) === false;
+    });
     if (!startsWithRejectsRegex || !startsWithHandlesInfinity) {
       overrideNative(String.prototype, 'startsWith', StringPrototypeShims.startsWith);
       overrideNative(String.prototype, 'endsWith', StringPrototypeShims.endsWith);
@@ -13722,6 +13724,13 @@ var _removeDefine = System.get("@@amd-helpers").createDefine();
       return NumberShim;
     }());
     wrapConstructor(OrigNumber, NumberShim, {});
+    defineProperties(NumberShim, {
+      NaN: OrigNumber.NaN,
+      MAX_VALUE: OrigNumber.MAX_VALUE,
+      MIN_VALUE: OrigNumber.MIN_VALUE,
+      NEGATIVE_INFINITY: OrigNumber.NEGATIVE_INFINITY,
+      POSITIVE_INFINITY: OrigNumber.POSITIVE_INFINITY
+    });
     Number = NumberShim;
     Value.redefine(globals, 'Number', NumberShim);
   }
@@ -14777,7 +14786,12 @@ var _removeDefine = System.get("@@amd-helpers").createDefine();
       var p = Promise.resolve(5);
       p.constructor = {};
       var p2 = Promise.resolve(p);
-      return (p === p2);
+      try {
+        p2.then(null, noop).then(null, noop);
+      } catch (e) {
+        return true;
+      }
+      return p === p2;
     }(globals.Promise));
     var getsThenSynchronously = supportsDescriptors && (function() {
       var count = 0;
@@ -15830,7 +15844,7 @@ _removeDefine();
 })();
 (function() {
 var _removeDefine = System.get("@@amd-helpers").createDefine();
-define("github:es-shims/es6-shim@0.34.2", ["github:es-shims/es6-shim@0.34.2/es6-shim"], function(main) {
+define("github:es-shims/es6-shim@0.34.4", ["github:es-shims/es6-shim@0.34.4/es6-shim"], function(main) {
   return main;
 });
 
@@ -15860,7 +15874,7 @@ var _removeDefine = System.get("@@amd-helpers").createDefine();
   var toString = class2type.toString;
   var hasOwn = class2type.hasOwnProperty;
   var support = {};
-  var version = "2.2.0",
+  var version = "2.2.1",
       jQuery = function(selector, context) {
         return new jQuery.fn.init(selector, context);
       },
@@ -18475,7 +18489,7 @@ var _removeDefine = System.get("@@amd-helpers").createDefine();
     if (fn === false) {
       fn = returnFalse;
     } else if (!fn) {
-      return this;
+      return elem;
     }
     if (one === 1) {
       origFn = fn;
@@ -18912,10 +18926,7 @@ var _removeDefine = System.get("@@amd-helpers").createDefine();
       rscriptTypeMasked = /^true\/(.*)/,
       rcleanScript = /^\s*<!(?:\[CDATA\[|--)|(?:\]\]|--)>\s*$/g;
   function manipulationTarget(elem, content) {
-    if (jQuery.nodeName(elem, "table") && jQuery.nodeName(content.nodeType !== 11 ? content : content.firstChild, "tr")) {
-      return elem.getElementsByTagName("tbody")[0] || elem;
-    }
-    return elem;
+    return jQuery.nodeName(elem, "table") && jQuery.nodeName(content.nodeType !== 11 ? content : content.firstChild, "tr") ? elem.getElementsByTagName("tbody")[0] || elem.appendChild(elem.ownerDocument.createElement("tbody")) : elem;
   }
   function disableScript(elem) {
     elem.type = (elem.getAttribute("type") !== null) + "/" + elem.type;
@@ -19267,7 +19278,7 @@ var _removeDefine = System.get("@@amd-helpers").createDefine();
   var rnumnonpx = new RegExp("^(" + pnum + ")(?!px)[a-z%]+$", "i");
   var getStyles = function(elem) {
     var view = elem.ownerDocument.defaultView;
-    if (!view.opener) {
+    if (!view || !view.opener) {
       view = window;
     }
     return view.getComputedStyle(elem);
@@ -19358,11 +19369,11 @@ var _removeDefine = System.get("@@amd-helpers").createDefine();
         ret,
         style = elem.style;
     computed = computed || getStyles(elem);
+    ret = computed ? computed.getPropertyValue(name) || computed[name] : undefined;
+    if ((ret === "" || ret === undefined) && !jQuery.contains(elem.ownerDocument, elem)) {
+      ret = jQuery.style(elem, name);
+    }
     if (computed) {
-      ret = computed.getPropertyValue(name) || computed[name];
-      if (ret === "" && !jQuery.contains(elem.ownerDocument, elem)) {
-        ret = jQuery.style(elem, name);
-      }
       if (!support.pixelMarginRight() && rnumnonpx.test(ret) && rmargin.test(name)) {
         width = style.width;
         minWidth = style.minWidth;
@@ -21742,8 +21753,8 @@ var _removeDefine = System.get("@@amd-helpers").createDefine();
         if (!jQuery.nodeName(offsetParent[0], "html")) {
           parentOffset = offsetParent.offset();
         }
-        parentOffset.top += jQuery.css(offsetParent[0], "borderTopWidth", true) - offsetParent.scrollTop();
-        parentOffset.left += jQuery.css(offsetParent[0], "borderLeftWidth", true) - offsetParent.scrollLeft();
+        parentOffset.top += jQuery.css(offsetParent[0], "borderTopWidth", true);
+        parentOffset.left += jQuery.css(offsetParent[0], "borderLeftWidth", true);
       }
       return {
         top: offset.top - parentOffset.top - jQuery.css(elem, "marginTop", true),
@@ -21832,7 +21843,7 @@ var _removeDefine = System.get("@@amd-helpers").createDefine();
   });
   jQuery.fn.andSelf = jQuery.fn.addBack;
   if (typeof define === "function" && define.amd) {
-    define("npm:jquery@2.2.0/dist/jquery", [], function() {
+    define("npm:jquery@2.2.1/dist/jquery", [], function() {
       return jQuery;
     });
   }
@@ -21857,13 +21868,13 @@ _removeDefine();
 })();
 (function() {
 var _removeDefine = System.get("@@amd-helpers").createDefine();
-define("npm:jquery@2.2.0", ["npm:jquery@2.2.0/dist/jquery"], function(main) {
+define("npm:jquery@2.2.1", ["npm:jquery@2.2.1/dist/jquery"], function(main) {
   return main;
 });
 
 _removeDefine();
 })();
-System.registerDynamic("npm:ss-utils@0.0.6/ss-utils", ["npm:jquery@2.2.0"], true, function($__require, exports, module) {
+System.registerDynamic("npm:ss-utils@0.1.3/ss-utils", ["npm:jquery@2.2.1"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
@@ -21874,7 +21885,7 @@ System.registerDynamic("npm:ss-utils@0.0.6/ss-utils", ["npm:jquery@2.2.0"], true
     if (typeof define === "function" && define.amd) {
       define(["jquery"], f);
     } else if (typeof exports === "object") {
-      module.exports = f($__require('npm:jquery@2.2.0'));
+      module.exports = f($__require('npm:jquery@2.2.1'));
     } else {
       f(root.jQuery);
     }
@@ -21934,6 +21945,28 @@ System.registerDynamic("npm:ss-utils@0.0.6/ss-utils", ["npm:jquery@2.2.0"], true
     $.ss.getSelection = function() {
       return window.getSelection ? window.getSelection().toString() : document.selection && document.selection.type != "Control" ? document.selection.createRange().text : "";
     };
+    $.ss.combinePaths = function() {
+      var parts = [],
+          i,
+          l;
+      for (i = 0, l = arguments.length; i < l; i++) {
+        var arg = arguments[i];
+        parts = arg.indexOf("://") === -1 ? parts.concat(arg.split("/")) : parts.concat(arg.lastIndexOf("/") === arg.length - 1 ? arg.substring(0, arg.length - 1) : arg);
+      }
+      var paths = [];
+      for (i = 0, l = parts.length; i < l; i++) {
+        var part = parts[i];
+        if (!part || part === ".")
+          continue;
+        if (part === "..")
+          paths.pop();
+        else
+          paths.push(part);
+      }
+      if (parts[0] === "")
+        paths.unshift("");
+      return paths.join("/") || (paths.length ? "/" : ".");
+    };
     $.ss.queryString = function(url) {
       if (!url)
         return {};
@@ -21952,9 +21985,7 @@ System.registerDynamic("npm:ss-utils@0.0.6/ss-utils", ["npm:jquery@2.2.0"], true
       }
       return o;
     };
-    $.ss.createUrl = function(route, args) {
-      if (!args)
-        args = {};
+    $.ss.createPath = function(route, args) {
       var argKeys = {};
       for (var k in args) {
         argKeys[k.toLowerCase()] = k;
@@ -21978,6 +22009,14 @@ System.registerDynamic("npm:ss-utils@0.0.6/ss-utils", ["npm:jquery@2.2.0"], true
       }
       return url;
     };
+    $.ss.createUrl = function(route, args) {
+      var url = $.ss.createPath(route, args);
+      for (var k in args) {
+        url += url.indexOf('?') >= 0 ? '&' : '?';
+        url += k + "=" + encodeURIComponent(args[k]);
+      }
+      return url;
+    };
     function splitCase(t) {
       return typeof t != 'string' ? t : t.replace(/([A-Z]|[0-9]+)/g, ' $1').replace(/_/g, ' ');
     }
@@ -21988,6 +22027,27 @@ System.registerDynamic("npm:ss-utils@0.0.6/ss-utils", ["npm:jquery@2.2.0"], true
     function toCamelCase(key) {
       return !key ? key : key.charAt(0).toLowerCase() + key.substring(1);
     }
+    $.ss.normalizeKey = function(key) {
+      return typeof key == "string" ? key.toLowerCase().replace(/_/g, '') : key;
+    };
+    $.ss.normalize = function(dto, deep) {
+      if ($.isArray(dto)) {
+        if (!deep)
+          return dto;
+        var to = [];
+        for (var i = 0; i < dto.length; i++) {
+          to[i] = $.ss.normalize(dto[i], deep);
+        }
+        return to;
+      }
+      if (typeof dto != "object")
+        return dto;
+      var o = {};
+      for (var k in dto) {
+        o[$.ss.normalizeKey(k)] = deep ? $.ss.normalize(dto[k], deep) : dto[k];
+      }
+      return o;
+    };
     function sanitize(status) {
       if (status["errors"])
         return status;
@@ -22242,6 +22302,8 @@ System.registerDynamic("npm:ss-utils@0.0.6/ss-utils", ["npm:jquery@2.2.0"], true
         }).addClass('active').closest("li").addClass('active');
       });
     };
+    $.ss.eventSourceStop = false;
+    $.ss.eventOptions = {};
     $.ss.eventReceivers = {};
     $.ss.eventChannels = [];
     $.ss.eventSourceUrl = null;
@@ -22252,6 +22314,26 @@ System.registerDynamic("npm:ss-utils@0.0.6/ss-utils", ["npm:jquery@2.2.0"], true
         return;
       var url = $.ss.eventSource.url;
       $.ss.eventSourceUrl = url.substring(0, Math.min(url.indexOf('?'), url.length)) + "?channels=" + channels.join(',');
+    };
+    $.ss.updateSubscriberInfo = function(subscribe, unsubscribe) {
+      var sub = typeof subscribe == "string" ? subscribe.split(',') : subscribe;
+      var unsub = typeof unsubscribe == "string" ? unsubscribe.split(',') : unsubscribe;
+      var channels = [];
+      for (var i in $.ss.eventChannels) {
+        var c = $.ss.eventChannels[i];
+        if (unsub == null || $.inArray(c, unsub) === -1) {
+          channels.push(c);
+        }
+      }
+      if (sub) {
+        for (var i in sub) {
+          var c = sub[i];
+          if ($.inArray(c, channels) === -1) {
+            channels.push(c);
+          }
+        }
+      }
+      $.ss.updateChannels(channels);
     };
     $.ss.subscribeToChannels = function(channels, cb, cbError) {
       return $.ss.updateSubscriber({SubscribeChannels: channels.join(',')}, cb, cbError);
@@ -22268,7 +22350,8 @@ System.registerDynamic("npm:ss-utils@0.0.6/ss-utils", ["npm:jquery@2.2.0"], true
         data: data,
         dataType: "json",
         success: function(r) {
-          $.ss.updateChannels((r.channels || '').split(','));
+          $.ss.updateSubscriberInfo(data.SubscribeChannels, data.UnsubscribeChannels);
+          r.channels = $.ss.eventChannels;
           if (cb != null)
             cb(r);
         },
@@ -22280,6 +22363,8 @@ System.registerDynamic("npm:ss-utils@0.0.6/ss-utils", ["npm:jquery@2.2.0"], true
       });
     };
     $.ss.reconnectServerEvents = function(opt) {
+      if ($.ss.eventSourceStop)
+        return;
       opt = opt || {};
       var hold = $.ss.eventSource;
       var es = new EventSource(opt.url || $.ss.eventSourceUrl || hold.url);
@@ -22302,7 +22387,7 @@ System.registerDynamic("npm:ss-utils@0.0.6/ss-utils", ["npm:jquery@2.2.0"], true
     };
     $.fn.handleServerEvents = function(opt) {
       $.ss.eventSource = this[0];
-      opt = opt || {};
+      $.ss.eventOptions = opt = opt || {};
       if (opt.handlers) {
         $.extend($.ss.handlers, opt.handlers);
       }
@@ -22341,6 +22426,7 @@ System.registerDynamic("npm:ss-utils@0.0.6/ss-utils", ["npm:jquery@2.2.0"], true
                   var stopFn = $.ss.handlers["onStop"];
                   if (stopFn != null)
                     stopFn.apply($.ss.eventSource);
+                  $.ss.reconnectServerEvents({errorArgs: {error: 'CLOSED'}});
                   return;
                 }
                 $.ajax({
@@ -22386,17 +22472,19 @@ System.registerDynamic("npm:ss-utils@0.0.6/ss-utils", ["npm:jquery@2.2.0"], true
   return module.exports;
 });
 
-System.registerDynamic("npm:ss-utils@0.0.6", ["npm:ss-utils@0.0.6/ss-utils"], true, function($__require, exports, module) {
+System.registerDynamic("npm:ss-utils@0.1.3", ["npm:ss-utils@0.1.3/ss-utils"], true, function($__require, exports, module) {
   ;
   var global = this,
       __define = global.define;
   global.define = undefined;
-  module.exports = $__require('npm:ss-utils@0.0.6/ss-utils');
+  module.exports = $__require('npm:ss-utils@0.1.3/ss-utils');
   global.define = __define;
   return module.exports;
 });
 
-System.register("src/deps.js", ["npm:react@0.14.7", "npm:react-dom@0.14.7", "npm:redux@3.3.0", "npm:react-redux@4.4.0", "github:es-shims/es6-shim@0.34.2", "npm:jquery@2.2.0", "npm:ss-utils@0.0.6"], function(exports_1) {
+System.register("src/deps.js", ["npm:react@0.14.7", "npm:react-dom@0.14.7", "npm:redux@3.3.1", "npm:react-redux@4.4.0", "github:es-shims/es6-shim@0.34.4", "npm:jquery@2.2.1", "npm:ss-utils@0.1.3"], function(exports_1, context_1) {
+  "use strict";
+  var __moduleName = context_1 && context_1.id;
   var __extends = (this && this.__extends) || function(d, b) {
     for (var p in b)
       if (b.hasOwnProperty(p))
@@ -22442,7 +22530,7 @@ System.register("src/deps.js", ["npm:react@0.14.7", "npm:react-dom@0.14.7", "npm
           return React.createElement("div", null, "Hello, World!");
         };
         return Deps;
-      })(React.Component);
+      }(React.Component));
       DepsRedux = react_redux_1.connect(function(state) {
         return ({});
       }, function(dispatch) {
