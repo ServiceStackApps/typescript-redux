@@ -1,5 +1,5 @@
 /// <reference path='../../typings/browser.d.ts'/>
-System.register(['react', 'react-dom', 'redux', 'react-redux', './reducers', './History', './Counter', './ColorPicker', './ShapeMaker', './ShapeViewer', './core', './Connect'], function(exports_1, context_1) {
+System.register(['react', 'react-dom', 'redux', 'react-redux', './reducers', './History', './Counter', './ColorPicker', './ShapeMaker', './ShapeViewer', './Connect'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __extends = (this && this.__extends) || function (d, b) {
@@ -13,7 +13,7 @@ System.register(['react', 'react-dom', 'redux', 'react-redux', './reducers', './
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var React, ReactDOM, redux_1, react_redux_1, reducers_1, History_1, Counter_1, ColorPicker_1, ShapeMaker_1, ShapeViewer_1, core_1, Connect_1;
+    var React, ReactDOM, redux_1, react_redux_1, reducers_1, History_1, Counter_1, ColorPicker_1, ShapeMaker_1, ShapeViewer_1, Connect_1;
     var defaultState, history, currentUser, onConnect, updateHistory, store, ColorWrapper;
     return {
         setters:[
@@ -46,9 +46,6 @@ System.register(['react', 'react-dom', 'redux', 'react-redux', './reducers', './
             },
             function (ShapeViewer_1_1) {
                 ShapeViewer_1 = ShapeViewer_1_1;
-            },
-            function (core_1_1) {
-                core_1 = core_1_1;
             },
             function (Connect_1_1) {
                 Connect_1 = Connect_1_1;
@@ -100,7 +97,7 @@ System.register(['react', 'react-dom', 'redux', 'react-redux', './reducers', './
                     return React.createElement(ColorPicker_1.ColorPicker, {color: this.props.color, onChange: this.props.setColor});
                 };
                 ColorWrapper = __decorate([
-                    core_1.reduxify(function (state) { return ({ color: state.color }); }, function (dispatch) { return ({ setColor: function (color) { return dispatch({ type: 'COLOR_CHANGE', color: color }); } }); })
+                    react_redux_1.connect(function (state) { return ({ color: state.color }); }, function (dispatch) { return ({ setColor: function (color) { return dispatch({ type: 'COLOR_CHANGE', color: color }); } }); })
                 ], ColorWrapper);
                 return ColorWrapper;
             }(React.Component));

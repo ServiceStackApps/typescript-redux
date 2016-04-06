@@ -3,9 +3,8 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { isDark } from './ColorPicker';
-import { reduxify } from './core';
 
-@reduxify(
+@connect(
     (state) => ({ shapes: state.shapes }),
     (dispatch) => ({
         updateShape: (id, top, left) => dispatch({ type: 'SHAPE_CHANGE', id, top, left })

@@ -1,25 +1,5 @@
 ﻿/// <reference path='../../typings/browser.d.ts'/>
 
-import { Store, Dispatch, ActionCreator } from 'redux';
-import { Provider, connect } from 'react-redux';
-
-export interface MapStateToProps {
-    (state: any, ownProps?: any): any;
-}
-
-export interface MapDispatchToPropsFunction {
-    (dispatch: Dispatch, ownProps?: any): any;
-}
-
-export interface MapDispatchToPropsObject {
-    [name: string]: ActionCreator;
-}
-
-export function reduxify(mapStateToProps?: MapStateToProps,
-    mapDispatchToProps?: MapDispatchToPropsFunction | MapDispatchToPropsObject) {
-    return target => connect(mapStateToProps, mapDispatchToProps)(target);
-}
-
 export function subscribeToStore() {
     return target => {
         var didMount = target.prototype.componentDidMount;

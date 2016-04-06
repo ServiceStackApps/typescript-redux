@@ -1466,23 +1466,13 @@ and add the option manually:
 ```
 
 When enabled this lets you create and use decorators that despite being simple functions provide an easy way 
-to compose behavior, dramatically reduce repetitive boilerplate and improve readability as seen with the 
-[@reduxify()](https://github.com/ServiceStackApps/typescript-redux/blob/661f9fcc1ce6c4a7b66064ce3511033d37a26d99/src/TypeScriptRedux/src/example08/core.ts#L18)
-decorator which just delegates to Redux connect():
+to compose behavior, dramatically reduce repetitive boilerplate and improve readability where we're able to 
+get the ideal declarative API we want for defining Redux-connected Components in a single cohesive unit, 
+with property mapping functions declared above the class declaration and all interim artifacts abstracted away
+by using Redux's `connect()` as a decorator instead:
 
 ```typescript
-export function reduxify(mapStateToProps?: MapStateToProps,
-    mapDispatchToProps?: MapDispatchToPropsFunction | MapDispatchToPropsObject) {
-    return target => connect(mapStateToProps, mapDispatchToProps)(target);
-}
-```
-
-With just this simple change we get the ideal declarative API we want for defining Redux-connected Components 
-which are now defined in a single unit, with property mapping functions declared above the class declaration 
-and all interim artifacts abstracted away:
-
-```typescript
-@reduxify(
+@connect(
     (state) => ({ color: state.color }),
     (dispatch) => ({ setColor: (color) => dispatch({ type: 'COLOR_CHANGE', color }) })
 )
@@ -1722,8 +1712,6 @@ Surprisingly most of the code to make this happen is encapsulated within the Rea
 /// <reference path='../../typings/browser.d.ts'/>
 
 import * as React from 'react';
-import { connect } from 'react-redux';
-import { reduxify } from './core';
 import 'jquery';
 import 'ss-utils';
 
@@ -1737,12 +1725,12 @@ export default class Connect extends React.Component<any, any> {
             channels: ["home"], currentUser: null, users: [], 
             connectedToUserId: null, connectedUserActions: [], connectedStateIndex: -1
         };
-        var source = new EventSource(serverEventsUrl());
+        var source = new EventSource("/event-stream?channels=home");
         $(source).handleServerEvents({
             handlers: {
                 onConnect: (currentUser) => {
                     currentUser.usersChannel = userChannel(currentUser.userId);
-                    this.setState({currentUser, users: filterUsers(this.state.users,currentUser.userId)});
+                    this.setState({ currentUser, users: filterUsers(this.state.users, currentUser.userId) });
                     this.props.onConnect(currentUser);
                 },
                 onJoin: () => this.refreshUsers(),
@@ -1757,8 +1745,9 @@ export default class Connect extends React.Component<any, any> {
                     $.ss.postJSON(`/send-user/${o.replyTo}?selector=cmd.onState`, state);
                 },
                 onState: (json, e) => {
-                    this.props.store.dispatch({ 
-                        type:'LOAD', state:json ? JSON.parse(json) : this.props.defaultState });
+                    this.props.store.dispatch({
+                         type: 'LOAD', state: json ? JSON.parse(json) : this.props.defaultState
+                    });
                 },
                 publishAction: (json, e) => {
                     var action = JSON.parse(json);

@@ -1,5 +1,5 @@
 /// <reference path='../../typings/browser.d.ts'/>
-System.register(['react', './ColorPicker', './core'], function(exports_1, context_1) {
+System.register(['react', 'react-redux', './ColorPicker'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __extends = (this && this.__extends) || function (d, b) {
@@ -13,18 +13,18 @@ System.register(['react', './ColorPicker', './core'], function(exports_1, contex
         else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
-    var React, ColorPicker_1, core_1;
+    var React, react_redux_1, ColorPicker_1;
     var ShapeMaker;
     return {
         setters:[
             function (React_1) {
                 React = React_1;
             },
+            function (react_redux_1_1) {
+                react_redux_1 = react_redux_1_1;
+            },
             function (ColorPicker_1_1) {
                 ColorPicker_1 = ColorPicker_1_1;
-            },
-            function (core_1_1) {
-                core_1 = core_1_1;
             }],
         execute: function() {
             ShapeMaker = (function (_super) {
@@ -51,7 +51,7 @@ System.register(['react', './ColorPicker', './core'], function(exports_1, contex
                     return (React.createElement("div", null, React.createElement("p", null, React.createElement("label", null, "size: "), React.createElement("b", null, height, "x", width)), React.createElement("div", {style: { height: height, width: width, background: background, color: color, lineHeight: height + "px", margin: "auto" }}, "(", this.state.top, ", ", this.state.left, ")"), React.createElement("div", null, React.createElement("p", null, React.createElement("label", null, "position: "), React.createElement("input", {style: { width: 30 }, defaultValue: this.props.top, onChange: this.handleTop}), React.createElement("span", null, ", "), React.createElement("input", {style: { width: 30 }, defaultValue: this.props.left, onChange: this.handleLeft})), React.createElement("button", {onClick: function (e) { return _this.props.addShape(background, height, width, _this.state.top, _this.state.left); }}, "Add Shape"))));
                 };
                 ShapeMaker = __decorate([
-                    core_1.reduxify(function (state) { return ({
+                    react_redux_1.connect(function (state) { return ({
                         width: state.width, height: state.height, color: state.color,
                         top: state.nextShapeId * 10, left: state.nextShapeId * 10
                     }); }, function (dispatch) { return ({

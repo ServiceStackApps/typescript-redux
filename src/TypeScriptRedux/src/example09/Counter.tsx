@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { reduxify } from './core';
 
 interface IHelloWorldProps {
     field: string;
@@ -12,7 +11,7 @@ interface IHelloWorldProps {
     decr?: Function;
 }
 
-@reduxify(
+@connect(
     (state, props) => ({ counter: (state[props.field] || 0) }),
     (dispatch) => ({
         incr: (field, step) => {

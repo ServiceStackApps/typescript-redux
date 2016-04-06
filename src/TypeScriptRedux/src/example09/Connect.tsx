@@ -1,8 +1,6 @@
 ﻿/// <reference path='../../typings/browser.d.ts'/>
 
 import * as React from 'react';
-import { connect } from 'react-redux';
-import { reduxify } from './core';
 import 'jquery';
 import 'ss-utils';
 

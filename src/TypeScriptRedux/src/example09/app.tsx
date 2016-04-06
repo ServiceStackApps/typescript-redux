@@ -11,7 +11,6 @@ import Counter from './Counter';
 import { ColorPicker } from './ColorPicker';
 import ShapeMaker from './ShapeMaker';
 import ShapeViewer from './ShapeViewer';
-import { reduxify } from './core';
 import Connect from './Connect';
 
 var defaultState = {
@@ -64,7 +63,7 @@ let store = createStore(
     defaultState,
     applyMiddleware(updateHistory));
 
-@reduxify(
+@connect(
     (state) => ({ color: state.color }),
     (dispatch) => ({ setColor: (color) => dispatch({ type: 'COLOR_CHANGE', color }) })
 )
