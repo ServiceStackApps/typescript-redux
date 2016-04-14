@@ -1,11 +1,11 @@
-﻿
+﻿import ES6 from 'es6-shim';
 import { addShape, changeShape } from './reducers/shapeReducers';
 
 const changeCounter = (state, action) =>
-    Object.assign({}, state, { [action.field]: state[action.field] + action.by });
+    ES6.Object.assign({}, state, { [action.field]: state[action.field] + action.by });
 
 const changeColor = (state, action) =>
-    Object.assign({}, state, { color: action.color });
+    ES6.Object.assign({}, state, { color: action.color });
 
 export default {
     COUNTER_CHANGE: changeCounter,

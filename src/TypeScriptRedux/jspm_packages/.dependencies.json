@@ -118,5 +118,6 @@
   "npm:ss-utils@0.1.3": {
     "jquery": "npm:jquery"
   },
-  "npm:jquery@2.2.1": {}
+  "npm:jquery@2.2.1": {},
+  "npm:event-source-polyfill@0.0.7": {}
 }

@@ -83,8 +83,11 @@
     <Content Include="deps.lib.js" />
     <Content Include="Global.asax" />
     <Content Include="index.html" />
+    <Content Include="jspm_packages\npm\event-source-polyfill%400.0.7\eventsource.js" />
+    <Content Include="jspm_packages\system-polyfills.js" />
     <Content Include="jspm_packages\system.js" />
     <Content Include="packages.config" />
+    <Content Include="package.json" />
     <None Include="Properties\PublishProfiles\TypeScriptRedux.pubxml" />
     <Content Include="tsconfig.json" />
     <None Include="Web.Debug.config">

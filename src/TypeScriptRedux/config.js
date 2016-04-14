@@ -9,6 +9,7 @@ System.config({
 
   map: {
     "es6-shim": "github:es-shims/es6-shim@0.34.4",
+    "event-source-polyfill": "npm:event-source-polyfill@0.0.7",
     "jquery": "npm:jquery@2.2.1",
     "jquery-validation-unobtrusive": "github:aspnet/jquery-validation-unobtrusive@3.2.5",
     "react": "npm:react@0.14.7",

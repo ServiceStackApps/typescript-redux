@@ -1,13 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypeScriptRedux", "TypeScriptRedux\TypeScriptRedux.csproj", "{32956B4D-C34B-4D72-A294-226972725CCF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{A34EE97B-1A76-4D6B-AE6C-4245112C4E39}"
 	ProjectSection(SolutionItems) = preProject
 		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B8746B0D-E300-4921-935C-D1DC17660EA6}"
+	ProjectSection(SolutionItems) = preProject
+		fixes.md = fixes.md
+		..\img\missing-eventsource-shim-error.png = ..\img\missing-eventsource-shim-error.png
 	EndProjectSection
 EndProject
 Global
