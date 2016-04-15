@@ -4,6 +4,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
+import ES6 from 'es6-shim';
 
 import Counter from './Counter';
 import ActionPlayer from './ActionPlayer';
@@ -19,18 +20,18 @@ let store = createStore(
         actions.push(action);
         switch (action.type) {
             case 'COUNTER_CHANGE':
-                return Object.assign({}, state, { [action.field]: state[action.field] + action.by });
+                return ES6.Object.assign({}, state, { [action.field]: state[action.field] + action.by });
             case 'COLOR_CHANGE':
-                return Object.assign({}, state, { color: action.color });
+                return ES6.Object.assign({}, state, { color: action.color });
             case 'SHAPE_ADD':
                 var id = state.nextShapeId;
-                var shape = Object.assign({}, { id: id }, action);
+                var shape = ES6.Object.assign({}, { id: id }, action);
                 delete shape['type'];
-                return Object.assign({}, state, { nextShapeId: id + 1, shapes: [...state.shapes, shape] });
+                return ES6.Object.assign({}, state, { nextShapeId: id + 1, shapes: [...state.shapes, shape] });
             case 'SHAPE_CHANGE':
-                var shape = Object.assign({}, state.shapes.filter(x => x.id === action.id)[0],
+                var shape = ES6.Object.assign({}, state.shapes.filter(x => x.id === action.id)[0],
                     { top: action.top, left: action.left });
-                return Object.assign({}, state,
+                return ES6.Object.assign({}, state,
                     { shapes: [...state.shapes.filter(x => x.id !== action.id), shape] });
             case 'LOAD':
                 return action.state;

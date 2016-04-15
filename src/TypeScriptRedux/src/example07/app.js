@@ -1,5 +1,5 @@
 /// <reference path='../../typings/browser.d.ts'/>
-System.register(['react', 'react-dom', 'redux', 'react-redux', './Counter', './ActionPlayer', './ShapeMaker', './ShapeViewer', './ColorPicker'], function(exports_1, context_1) {
+System.register(['react', 'react-dom', 'redux', 'react-redux', 'es6-shim', './Counter', './ActionPlayer', './ShapeMaker', './ShapeViewer', './ColorPicker'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __extends = (this && this.__extends) || function (d, b) {
@@ -7,7 +7,7 @@ System.register(['react', 'react-dom', 'redux', 'react-redux', './Counter', './A
         function __() { this.constructor = d; }
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
-    var React, ReactDOM, redux_1, react_redux_1, Counter_1, ActionPlayer_1, ShapeMaker_1, ShapeViewer_1, ColorPicker_1;
+    var React, ReactDOM, redux_1, react_redux_1, es6_shim_1, Counter_1, ActionPlayer_1, ShapeMaker_1, ShapeViewer_1, ColorPicker_1;
     var actions, defaultState, store, ColorWrapperBase, ColorWrapper;
     return {
         setters:[
@@ -22,6 +22,9 @@ System.register(['react', 'react-dom', 'redux', 'react-redux', './Counter', './A
             },
             function (react_redux_1_1) {
                 react_redux_1 = react_redux_1_1;
+            },
+            function (es6_shim_1_1) {
+                es6_shim_1 = es6_shim_1_1;
             },
             function (Counter_1_1) {
                 Counter_1 = Counter_1_1;
@@ -45,17 +48,17 @@ System.register(['react', 'react-dom', 'redux', 'react-redux', './Counter', './A
                 actions.push(action);
                 switch (action.type) {
                     case 'COUNTER_CHANGE':
-                        return Object.assign({}, state, (_a = {}, _a[action.field] = state[action.field] + action.by, _a));
+                        return es6_shim_1.default.Object.assign({}, state, (_a = {}, _a[action.field] = state[action.field] + action.by, _a));
                     case 'COLOR_CHANGE':
-                        return Object.assign({}, state, { color: action.color });
+                        return es6_shim_1.default.Object.assign({}, state, { color: action.color });
                     case 'SHAPE_ADD':
                         var id = state.nextShapeId;
-                        var shape = Object.assign({}, { id: id }, action);
+                        var shape = es6_shim_1.default.Object.assign({}, { id: id }, action);
                         delete shape['type'];
-                        return Object.assign({}, state, { nextShapeId: id + 1, shapes: state.shapes.concat([shape]) });
+                        return es6_shim_1.default.Object.assign({}, state, { nextShapeId: id + 1, shapes: state.shapes.concat([shape]) });
                     case 'SHAPE_CHANGE':
-                        var shape = Object.assign({}, state.shapes.filter(function (x) { return x.id === action.id; })[0], { top: action.top, left: action.left });
-                        return Object.assign({}, state, { shapes: state.shapes.filter(function (x) { return x.id !== action.id; }).concat([shape]) });
+                        var shape = es6_shim_1.default.Object.assign({}, state.shapes.filter(function (x) { return x.id === action.id; })[0], { top: action.top, left: action.left });
+                        return es6_shim_1.default.Object.assign({}, state, { shapes: state.shapes.filter(function (x) { return x.id !== action.id; }).concat([shape]) });
                     case 'LOAD':
                         return action.state;
                     default:

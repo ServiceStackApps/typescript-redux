@@ -2,6 +2,7 @@
   "jspm": {
     "dependencies": {
       "es6-shim": "github:es-shims/es6-shim@^0.34.1",
+      "event-source-polyfill": "npm:event-source-polyfill@^0.0.7",
       "jquery": "npm:jquery@^2.2.0",
       "react": "npm:react@^0.14.6",
       "react-dom": "npm:react-dom@^0.14.6",
