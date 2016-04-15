@@ -2117,6 +2117,13 @@ It's also provides an optimal iterative development experience with the pre-conf
 effortlessly packaging, bundling and deploying your production-optimized App 
 [directly from VS.NET's Task Runner Explorer](https://github.com/ServiceStackApps/typescript-react-template/#networkedshapecreator-project). 
 
+### Fixes for Internet Explorer and Microsoft Edge
+
+See the [typescript-redux-iefix](https://github.com/riesvriend/typescript-redux-iefix) fork by [@riesvriend](https://github.com/riesvriend)
+for [fixes required to support IE and MS Edge]https://github.com/riesvriend/typescript-redux-iefix/commit/6564f7d6bbbb820a0b865cf837c2300f799159a6)
+browsers buggy behavior of **es6-shim** and non-existing support for [W3C Server Sent Events](https://html.spec.whatwg.org/multipage/comms.html#server-sent-events). 
+You can also vote here to have [SSE natively implemented in Microsoft Browsers](https://wpdev.uservoice.com/forums/257854-microsoft-edge-developer/suggestions/6263825-server-sent-events-eventsource).
+
 ## Feedback
 
 We hope you've found this guide useful and it helps spur some ideas of what you can create with these simple 
