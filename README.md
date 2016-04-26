@@ -2023,6 +2023,8 @@ disconnect() {
 That's it for the core functionality! The only other change needed is to refactor our Redux store to
 publish each action we create to our **users channel** so it applies the action to all our connected users.
 
+### Using middleware for side-effects
+
 As this is a network side-effect we want to keep it out of our reducer implementation and make it a pure
 function. The recommended way to do this is to use 
 [Redux middleware](http://redux.js.org/docs/advanced/Middleware.html)
