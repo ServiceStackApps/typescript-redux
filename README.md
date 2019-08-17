@@ -2074,8 +2074,7 @@ to:
 And with that we're done, we've now converted Shape Creator into a networked time traveller letting us connect
 to active users and watch their live session in real-time - the Time Slider is now x Connected Users more fun :)
 
-[![](https://raw.githubusercontent.com/ServiceStackApps/typescript-redux/master/img/preview-09.png)](http://redux.servicestack.net)
-> Demo: [http://redux.servicestack.net](http://redux.servicestack.net)
+![](https://raw.githubusercontent.com/ServiceStackApps/typescript-redux/master/img/preview-09.png)
 
 ## JSPM Bundling for Production
 
